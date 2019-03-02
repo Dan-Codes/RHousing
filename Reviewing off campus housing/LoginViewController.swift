@@ -17,8 +17,11 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func loginTap(_ sender: UIButton) {
-        
+    
+
+   
+    @IBAction func login(_ sender: UIButton) {
+        print("login")
         let authUI = FUIAuth.defaultAuthUI()
         
         guard authUI != nil else {
@@ -33,29 +36,7 @@ class LoginViewController: UIViewController {
         
         //show
         present(authViewController, animated: true, completion: nil)
-    
     }
-    
-//    @IBAction func Login(_ sender: UIButton) {
-//        let authUI = FUIAuth.defaultAuthUI()
-//
-//        guard authUI != nil else {
-//            return
-//            }
-//
-//        //set ourselves as delegate
-//        authUI?.delegate = self
-//
-//        //get reference to auth UI view controller
-//        let authViewController = authUI!.authViewController()
-//
-//        //show
-//        present(authViewController, animated: true, completion: nil)
-//    }
-    
-
-    
-    
     
     /*
     // MARK: - Navigation

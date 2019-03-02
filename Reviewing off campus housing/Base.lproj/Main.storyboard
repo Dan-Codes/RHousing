@@ -31,6 +31,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBp-FA-5k1">
+                                <rect key="frame" x="164" y="170" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -102,40 +107,16 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="V3q-tn-Die">
             <objects>
-                <viewController id="lSM-uc-KCa" sceneMemberID="viewController">
+                <viewController id="lSM-uc-KCa" customClass="LoginViewController" customModule="Reviewing_off_campus_housing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7b1-bq-0bb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="95" translatesAutoresizingMaskIntoConstraints="NO" id="HIb-j5-af1">
-                                <rect key="frame" x="149.5" y="261" width="76" height="145.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bt-Da-Jal">
-                                        <rect key="frame" x="0.0" y="0.0" width="76" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="5aa-X0-aca">
-                                        <rect key="frame" x="0.0" y="115.5" width="76" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gch-iB-0Rw">
-                                                <rect key="frame" x="19" y="0.0" width="38" height="30"/>
-                                                <state key="normal" title="Login"/>
-                                                <connections>
-                                                    <action selector="loginTap:" destination="jI5-No-xtK" eventType="touchUpInside" id="OaY-Ug-sVK"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="5aa-X0-aca" firstAttribute="centerX" secondItem="HIb-j5-af1" secondAttribute="centerX" id="4k3-KS-2ug"/>
-                                    <constraint firstItem="5aa-X0-aca" firstAttribute="centerY" secondItem="HIb-j5-af1" secondAttribute="centerY" id="5G9-pA-2N0"/>
-                                </constraints>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="bottom" spacing="95" translatesAutoresizingMaskIntoConstraints="NO" id="HIb-j5-af1">
+                                <rect key="frame" x="149.5" y="323.5" width="76" height="20.5"/>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E38-Of-eMz">
                                 <rect key="frame" x="250" y="209" width="76" height="21"/>
@@ -144,15 +125,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cn-DZ-RBp">
-                                <rect key="frame" x="151" y="458" width="74" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login Auth"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="DWX-6N-ng4">
+                                <rect key="frame" x="149.5" y="283.5" width="76" height="100.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bt-Da-Jal">
+                                        <rect key="frame" x="0.0" y="0.0" width="76" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHW-dz-NT4">
+                                        <rect key="frame" x="15" y="70.5" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="login:" destination="lSM-uc-KCa" eventType="touchUpInside" id="mvv-mO-jQP"/>
+                                            <action selector="login:" destination="jI5-No-xtK" eventType="touchUpInside" id="nrY-nl-c76"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="HIb-j5-af1" firstAttribute="centerY" secondItem="7b1-bq-0bb" secondAttribute="centerY" id="bl7-LZ-hca"/>
+                            <constraint firstItem="DWX-6N-ng4" firstAttribute="centerY" secondItem="7b1-bq-0bb" secondAttribute="centerY" id="g4R-ka-kfr"/>
+                            <constraint firstItem="DWX-6N-ng4" firstAttribute="centerX" secondItem="7b1-bq-0bb" secondAttribute="centerX" id="rId-fq-50U"/>
                             <constraint firstItem="HIb-j5-af1" firstAttribute="centerX" secondItem="7b1-bq-0bb" secondAttribute="centerX" id="w7Q-c9-GWA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aOo-Ge-U9D"/>
