@@ -1,0 +1,6 @@
+framework module Pods_Reviewing_off_campus_housing {
+  umbrella header "Pods-Reviewing off campus housing-umbrella.h"
+
+  export *
+  module * { export * }
+}
