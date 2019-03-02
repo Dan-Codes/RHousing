@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 import FirebaseUI
 
 class LoginViewController: UIViewController {
@@ -16,8 +17,6 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    
-    
 
    
     @IBAction func login(_ sender: UIButton) {

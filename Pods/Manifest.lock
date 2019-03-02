@@ -83,7 +83,7 @@ DEPENDENCIES:
   - FirebaseUI/Google
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
