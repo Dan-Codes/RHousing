@@ -79,7 +79,6 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Core
-  - FirebaseAuth
   - FirebaseUI/Auth
   - FirebaseUI/Google
 
@@ -114,6 +113,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
 
-PODFILE CHECKSUM: c62ec9a86057e06e7f670300cba47c7949a057f8
+PODFILE CHECKSUM: 8eb10a73f07565ca6d9cbb73732bad24670032ea
 
 COCOAPODS: 1.6.1

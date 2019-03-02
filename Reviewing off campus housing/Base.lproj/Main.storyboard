@@ -118,13 +118,6 @@
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="bottom" spacing="95" translatesAutoresizingMaskIntoConstraints="NO" id="HIb-j5-af1">
                                 <rect key="frame" x="149.5" y="323.5" width="76" height="20.5"/>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E38-Of-eMz">
-                                <rect key="frame" x="250" y="209" width="76" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="DWX-6N-ng4">
                                 <rect key="frame" x="149.5" y="283.5" width="76" height="100.5"/>
                                 <subviews>
@@ -135,8 +128,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHW-dz-NT4">
-                                        <rect key="frame" x="15" y="70.5" width="46" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                        <rect key="frame" x="19" y="70.5" width="38" height="30"/>
+                                        <state key="normal" title="Login"/>
                                         <connections>
                                             <action selector="login:" destination="lSM-uc-KCa" eventType="touchUpInside" id="mvv-mO-jQP"/>
                                             <action selector="login:" destination="jI5-No-xtK" eventType="touchUpInside" id="nrY-nl-c76"/>

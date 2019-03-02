@@ -8,7 +8,6 @@ target 'Reviewing off campus housing' do
   # Pods for Reviewing off campus housing
 
   pod 'Firebase/Core'
-  pod 'FirebaseAuth'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
 
