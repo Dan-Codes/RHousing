@@ -1,2 +1,2 @@
 # RHousing
-give up
+give up xcode compatibility is a pain
