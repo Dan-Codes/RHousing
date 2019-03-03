@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
 import FirebaseUI
 
@@ -37,26 +38,62 @@ class LoginViewController: UIViewController {
         present(authViewController, animated: true, completion: nil)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+   
+    @IBOutlet weak var emailText: UITextField!
+    @IBOutlet weak var passText: UITextField!
+    @IBOutlet weak var signInSelect: UISegmentedControl!
+    @IBOutlet weak var signInButton: UIButton!
+    var isSignIn:Bool = true
+    
+    @IBAction func signInChange(_ sender: UISegmentedControl) {
+        isSignIn = !isSignIn
+        if isSignIn{
+            signInButton.setTitle("Sign In", for: .normal)
+        }
+        else {
+            signInButton.setTitle("Register", for: .normal)
+        }
     }
-    */
+    @IBAction func signIn(_ sender: UIButton) {
+        //check if signed in or register
+        if isSignIn{
+            //sign in
+            Auth.auth().signIn(withEmail: emailText.text!, password: passText.text!) { [weak self] user, error in
+                //guard let strongSelf = self else { return }
+                if let u = user{
+                self?.performSegue(withIdentifier: "goHome", sender: self)
+                }
+                else{
+                    return;
+                    //error
+                }
+                }
+            
+        }
+        else{
+            //Register
+            Auth.auth().createUser(withEmail: emailText.text!, password: passText.text!) { authResult, error in
+                if let u = authResult{
+                    //go Home
+                    self.performSegue(withIdentifier: "goHome", sender: self)
+                }
+                else{
+                    //error
+                }
+            }        }
+    }
+    
 }
 
 extension LoginViewController: FUIAuthDelegate{
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-        
+
         //check error
         if error != nil {
             //log error
             return
         }
-        
+
         performSegue(withIdentifier: "goHome", sender: self)
     }
 }
