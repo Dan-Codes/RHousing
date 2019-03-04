@@ -18,26 +18,6 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
-   
-    @IBAction func login(_ sender: UIButton) {
-        print("login")
-        let authUI = FUIAuth.defaultAuthUI()
-        
-        guard authUI != nil else {
-            return
-        }
-        
-        //set ourselves as delegate
-        authUI?.delegate = self
-        
-        //get reference to auth UI view controller
-        let authViewController = authUI!.authViewController()
-        
-        //show
-        present(authViewController, animated: true, completion: nil)
-    }
-    
    
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var passText: UITextField!
@@ -60,7 +40,7 @@ class LoginViewController: UIViewController {
             //sign in
             Auth.auth().signIn(withEmail: emailText.text!, password: passText.text!) { [weak self] user, error in
                 //guard let strongSelf = self else { return }
-                if let u = user{
+                if user != nil{
                 self?.performSegue(withIdentifier: "goHome", sender: self)
                 }
                 else{
@@ -73,7 +53,7 @@ class LoginViewController: UIViewController {
         else{
             //Register
             Auth.auth().createUser(withEmail: emailText.text!, password: passText.text!) { authResult, error in
-                if let u = authResult{
+                if authResult != nil{
                     //go Home
                     self.performSegue(withIdentifier: "goHome", sender: self)
                 }
