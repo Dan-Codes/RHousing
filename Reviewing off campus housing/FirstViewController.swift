@@ -11,6 +11,7 @@ import Firebase
 import GoogleMaps
 import GooglePlaces
 
+
 class FirstViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -22,6 +23,11 @@ class FirstViewController: UIViewController {
         let camera = GMSCameraPosition.camera(withLatitude: 43.038710, longitude: -76.134265, zoom: 15)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
+        
+        let docRef = db.collection("listings")
+        var query = docRef.whereField("geopoint", isEqualTo: true)
+        print(query)
+        
     }
     
     

@@ -13,5 +13,6 @@ target 'Reviewing off campus housing' do
 source 'https://github.com/CocoaPods/Specs.git'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'Firebase/Firestore'
 
 end
