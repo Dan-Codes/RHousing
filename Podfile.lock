@@ -135,7 +135,7 @@ DEPENDENCIES:
   - GooglePlaces
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics

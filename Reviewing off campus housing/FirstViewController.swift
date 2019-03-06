@@ -24,10 +24,36 @@ class FirstViewController: UIViewController {
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
         
-        let docRef = db.collection("listings")
-        var query = docRef.whereField("geopoint", isEqualTo: true)
-        print(query)
-        
+        db.collection("listings").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                print("*****")
+                for document in querySnapshot!.documents {
+                    if let coords = document.get("geopoint"){
+                        let point = coords as! GeoPoint
+                        let lat = point.latitude
+                        let long = point.longitude
+                        let address = document.get("address")
+                        
+                        print(lat,long)
+                    
+                        print("**********************")
+                        print("\(document.documentID) => \(document.data())")
+                        
+                        let position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                    
+                        let marker = GMSMarker(position: position)
+                    
+                        marker.title = "Place"
+                        marker.map = mapView
+                        marker.snippet = "Test"
+                        
+                    }
+                }
+                    
+            }
+        }
     }
     
     
