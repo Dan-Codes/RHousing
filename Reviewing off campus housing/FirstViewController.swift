@@ -34,7 +34,7 @@ class FirstViewController: UIViewController {
                         let point = coords as! GeoPoint
                         let lat = point.latitude
                         let long = point.longitude
-                        let address = document.get("address")
+                        let address = document.get("address")!
                         
                         print(lat,long)
                     
@@ -45,9 +45,9 @@ class FirstViewController: UIViewController {
                     
                         let marker = GMSMarker(position: position)
                     
-                        marker.title = "Place"
+                        marker.title = "\(String(describing: address))"
                         marker.map = mapView
-                        marker.snippet = "Test"
+                        marker.snippet = "\(document.data())"
                         
                     }
                 }
