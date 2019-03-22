@@ -56,7 +56,6 @@ class FirstViewController: UIViewController {
         }
     }
     
-    
     @IBAction func logOut(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {

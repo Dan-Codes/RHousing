@@ -34,6 +34,7 @@ class LoginViewController: UIViewController {
             signInButton.setTitle("Register", for: .normal)
         }
     }
+    
     @IBAction func signIn(_ sender: UIButton) {
         //check if signed in or register
         if isSignIn{
@@ -56,6 +57,17 @@ class LoginViewController: UIViewController {
                 if authResult != nil{
                     //go Home
                     self.performSegue(withIdentifier: "goHome", sender: self)
+                    
+                    var ref: DocumentReference? = nil
+                    ref = db.collection("Users").addDocument(data: [
+                        "Email": self.emailText.text!
+                    ]) { err in
+                        if let err = err {
+                            print("Error adding document: \(err)")
+                        } else {
+                            print("Document added with ID: \(ref!.documentID)")
+                        }
+                    }
                 }
                 else{
                     //error
