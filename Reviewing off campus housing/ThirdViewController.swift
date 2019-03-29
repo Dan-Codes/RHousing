@@ -75,6 +75,7 @@ class ThirdViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                     print("Error writing document: \(err)")
                 } else {
                     print("Document successfully written!")
+                    objgVC.viewDidLoad()
                 }
             }
 

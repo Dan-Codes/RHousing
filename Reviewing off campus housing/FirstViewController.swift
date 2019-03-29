@@ -11,6 +11,7 @@ import Firebase
 import GoogleMaps
 import GooglePlaces
 
+var objgVC = FirstViewController()
 
 class FirstViewController: UIViewController {
 
