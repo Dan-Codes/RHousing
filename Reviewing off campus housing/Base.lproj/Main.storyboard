@@ -167,6 +167,7 @@
                         <outlet property="city" destination="LMc-i4-UZA" id="7dR-YP-NqJ"/>
                         <outlet property="state" destination="25e-j1-DfO" id="mNS-h8-0E0"/>
                         <outlet property="zipcd" destination="cUi-tx-jnc" id="KzF-gy-93e"/>
+                        <segue destination="9pv-A4-QxB" kind="showDetail" identifier="goFirst" id="hmC-mN-rqw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YIL-YI-JAj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -314,4 +315,7 @@
         <image name="icon" width="32" height="32"/>
         <image name="settings_black_192x192" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="u7Y-xg-7CH"/>
+    </inferredMetricsTieBreakers>
 </document>
