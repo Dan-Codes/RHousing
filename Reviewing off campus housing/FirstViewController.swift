@@ -13,7 +13,7 @@ import GooglePlaces
 
 var objgVC = FirstViewController()
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController, GMSMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -54,7 +54,7 @@ class FirstViewController: UIViewController {
                         marker.title = "\(String(describing: address))"
                         marker.map = mapView
                         marker.snippet = "\(document.data())"
-                        
+                        mapView.delegate=self
                     }
                 }
                 
@@ -63,6 +63,11 @@ class FirstViewController: UIViewController {
         
     }
     
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        print("test")
+        performSegue(withIdentifier: <#T##String#>, sender: self)
+    }
+   
     
     @IBAction func logOut(_ sender: Any) {
         let firebaseAuth = Auth.auth()
