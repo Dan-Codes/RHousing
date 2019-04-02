@@ -14,17 +14,22 @@ import GooglePlaces
 var objgVC = FirstViewController()
 
 class FirstViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         GMSServices.provideAPIKey("AIzaSyAcN8tyZ3brV52PRFzqbhQd5wuWnWgd_MQ")
         GMSPlacesClient.provideAPIKey("AIzaSyAcN8tyZ3brV52PRFzqbhQd5wuWnWgd_MQ")
     
+        
+        printPin()
+    
+    }
+    
+    func printPin(){
         let camera = GMSCameraPosition.camera(withLatitude: 43.038710, longitude: -76.134265, zoom: 15)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
-        
         db.collection("listings").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -38,24 +43,26 @@ class FirstViewController: UIViewController {
                         let address = document.get("address")!
                         
                         print(lat,long)
-                    
+                        
                         print("**********************")
                         print("\(document.documentID) => \(document.data())")
                         
                         let position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                    
+                        
                         let marker = GMSMarker(position: position)
-                    
+                        
                         marker.title = "\(String(describing: address))"
                         marker.map = mapView
                         marker.snippet = "\(document.data())"
                         
                     }
                 }
-                    
+                
             }
         }
+        
     }
+    
     
     @IBAction func logOut(_ sender: Any) {
         let firebaseAuth = Auth.auth()

@@ -75,8 +75,8 @@ class ThirdViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
                     print("Error writing document: \(err)")
                 } else {
                     print("Document successfully written!")
-                    FirstViewController().viewDidLoad()
-                    self.performSegue(withIdentifier: "goFirst", sender: self)                }
+                    FirstViewController().printPin()
+                    self.performSegue(withIdentifier: "thirdtoTab", sender: self)                }
             }
 
         }

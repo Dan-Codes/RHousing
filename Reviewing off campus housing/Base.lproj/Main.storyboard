@@ -168,6 +168,7 @@
                         <outlet property="state" destination="25e-j1-DfO" id="mNS-h8-0E0"/>
                         <outlet property="zipcd" destination="cUi-tx-jnc" id="KzF-gy-93e"/>
                         <segue destination="9pv-A4-QxB" kind="showDetail" identifier="goFirst" id="hmC-mN-rqw"/>
+                        <segue destination="49e-Tb-3d3" kind="showDetail" identifier="thirdtoTab" id="vjc-PQ-KVe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YIL-YI-JAj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -214,15 +215,15 @@
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="49e-Tb-3d3" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="Mt6-Dc-mjQ" kind="relationship" relationship="viewControllers" id="mn0-Ze-tEj"/>
                     </connections>
                 </tabBarController>
@@ -316,6 +317,7 @@
         <image name="settings_black_192x192" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="vjc-PQ-KVe"/>
         <segue reference="u7Y-xg-7CH"/>
     </inferredMetricsTieBreakers>
 </document>
