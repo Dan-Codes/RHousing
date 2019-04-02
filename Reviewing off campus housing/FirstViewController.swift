@@ -65,7 +65,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         print("test")
-        performSegue(withIdentifier: <#T##String#>, sender: self)
+        performSegue(withIdentifier: "displayListing" , sender: self)
     }
    
     
