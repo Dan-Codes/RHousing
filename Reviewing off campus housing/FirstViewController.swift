@@ -63,20 +63,23 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         
     }
     
+    var mk:String? = nil
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         print("test")
+        mk = marker.title
         performSegue(withIdentifier: "displayListing" , sender: self)
         print(marker.title ?? "No longer valid!")
         
         //addrsId = marker.title
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        //let mk = addrsId
-        if segue.destination is displayListingViewController{
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is displayListingViewController
+        {
             let vc = segue.destination as? displayListingViewController
-            //vc?.info = mk?.title ?? "No"
+            vc?.info = mk!
         }
     }
     

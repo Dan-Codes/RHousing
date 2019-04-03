@@ -10,6 +10,9 @@ import UIKit
 
 class displayListingViewController: UIViewController {
 
+    
+    @IBOutlet weak var label: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,23 +21,24 @@ class displayListingViewController: UIViewController {
         print(info)
         
         
-        let docRef = db.collection("listings").document("house")
+        let docRef = db.collection("listings").document(info)
 
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
+                //print("Document data: \(dataDescription)")
                 let address = document.get("address") ?? ""
                 let rent = (document.get("rent"))
                 let landlordName = document.get("landlordName")
                 let review = document.get("reviews") ?? ""
-                print(review)
+                //print(review)
+                self.label.text = address as! String
                 print(address)
             } else {
                 print("Document does not exist")
             }
         }
-        
+ 
 //        let docRef = db.collection("listings").document("house")
 //
 //        docRef.getDocument { (document, error) in
@@ -53,6 +57,7 @@ class displayListingViewController: UIViewController {
     }
     
     var info:String = ""
+    
 
     /*
     // MARK: - Navigation
