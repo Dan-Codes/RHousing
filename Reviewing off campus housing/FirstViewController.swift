@@ -63,23 +63,23 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         
     }
     
-    
+    var mkTitle:String? = nil
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         print("test")
         performSegue(withIdentifier: "displayListing" , sender: self)
         print(marker.title ?? "No longer valid!")
         
+        mkTitle = marker.title
         //addrsId = marker.title
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        //let mk = addrsId
-        if segue.destination is displayListingViewController{
-            let vc = segue.destination as? displayListingViewController
-            //vc?.info = mk?.title ?? "No"
+    override func prepare (for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "displayListing") {
+            let svc = segue.destination as! displayListingViewController
+            svc.info = "NO"
         }
     }
-    
+
     @IBAction func logOut(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {
