@@ -23,8 +23,8 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
     
         
         printPin()
-    
     }
+    
     
     func printPin(){
         let camera = GMSCameraPosition.camera(withLatitude: 43.038710, longitude: -76.134265, zoom: 15)
@@ -53,7 +53,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                         
                         marker.title = "\(String(describing: address))"
                         marker.map = mapView
-                        marker.snippet = "\(document.data())"
+                        marker.snippet = "\(document.get("address") ?? "")"
                         mapView.delegate=self
                     }
                 }
@@ -63,11 +63,22 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         
     }
     
+    
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         print("test")
         performSegue(withIdentifier: "displayListing" , sender: self)
+        print(marker.title ?? "No longer valid!")
+        
+        //addrsId = marker.title
     }
-   
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        //let mk = addrsId
+        if segue.destination is displayListingViewController{
+            let vc = segue.destination as? displayListingViewController
+            //vc?.info = mk?.title ?? "No"
+        }
+    }
     
     @IBAction func logOut(_ sender: Any) {
         let firebaseAuth = Auth.auth()

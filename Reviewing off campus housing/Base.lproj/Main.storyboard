@@ -54,15 +54,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="25694" selectedImage="25694" id="acW-dT-cKf"/>
+                    <navigationItem key="navigationItem" id="MID-Ab-Gjw"/>
                     <connections>
                         <segue destination="lSM-uc-KCa" kind="show" identifier="logOut" id="EIT-Rl-WiB"/>
-                        <segue destination="cBg-Eb-cFg" kind="presentation" identifier="displayListing" modalTransitionStyle="crossDissolve" id="IOe-RQ-iXs"/>
+                        <segue destination="cBg-Eb-cFg" kind="show" identifier="displayListing" id="HV1-E2-hBp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1229" y="-419"/>
+            <point key="canvasLocation" x="2139.130434782609" y="-419.19642857142856"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="7Gh-nF-eXC">
@@ -137,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qdo-YH-VS6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2124.6376811594205" y="-419.19642857142856"/>
+            <point key="canvasLocation" x="3034.7826086956525" y="-419.19642857142856"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="5mH-0E-sxN">
@@ -152,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfp-89-vVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3001" y="-419"/>
+            <point key="canvasLocation" x="3910.144927536232" y="-419.19642857142856"/>
         </scene>
         <!--Third Scene-->
         <scene sceneID="Q4q-R3-CkY">
@@ -312,7 +312,7 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="1ld-gH-gc1" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="Mt6-Dc-mjQ" kind="relationship" relationship="viewControllers" id="mn0-Ze-tEj"/>
                     </connections>
@@ -330,7 +330,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f1c-5J-rPw">
-                                <rect key="frame" x="144.66666666666666" y="190" width="124.99999999999997" height="29"/>
+                                <rect key="frame" x="144.66666666666666" y="234" width="124.99999999999997" height="29"/>
                                 <segments>
                                     <segment title="Login"/>
                                     <segment title="Sign Up"/>
@@ -340,19 +340,19 @@
                                 </connections>
                             </segmentedControl>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3kh-ve-lEF">
-                                <rect key="frame" x="149" y="246" width="116" height="30"/>
+                                <rect key="frame" x="149" y="290" width="116" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ooj-jg-EwI">
-                                <rect key="frame" x="149" y="303" width="116" height="30"/>
+                                <rect key="frame" x="149" y="347" width="116" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lpi-rL-gOU">
-                                <rect key="frame" x="125" y="371" width="164" height="103"/>
+                                <rect key="frame" x="125" y="415" width="164" height="103"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="103" id="enI-6S-cVT"/>
                                 </constraints>
@@ -362,7 +362,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bt-Da-Jal">
-                                <rect key="frame" x="168" y="139" width="78" height="21"/>
+                                <rect key="frame" x="168" y="183" width="78" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -400,9 +400,28 @@
             </objects>
             <point key="canvasLocation" x="-980" y="315"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="agI-Vx-scd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1ld-gH-gc1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="25694" selectedImage="25694" id="acW-dT-cKf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lfX-9b-c30">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="vbt-ni-LKC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kvV-sc-AYU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1228.985507246377" y="-419.19642857142856"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="25694" width="32" height="32"/>
+        <image name="25694" width="23" height="23"/>
         <image name="icon" width="32" height="32"/>
         <image name="settings_black_192x192" width="32" height="32"/>
     </resources>

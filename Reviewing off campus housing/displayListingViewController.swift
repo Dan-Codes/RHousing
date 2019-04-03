@@ -14,8 +14,12 @@ class displayListingViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        print("displayu")
+        print(info)
+
     }
     
+    var info:String = ""
 
     /*
     // MARK: - Navigation
