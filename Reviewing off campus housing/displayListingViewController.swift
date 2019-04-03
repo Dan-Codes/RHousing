@@ -16,6 +16,39 @@ class displayListingViewController: UIViewController {
         // Do any additional setup after loading the view.
         print("displayu")
         print(info)
+        
+        
+        let docRef = db.collection("listings").document("house")
+
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+                let address = document.get("address") ?? ""
+                let rent = (document.get("rent"))
+                let landlordName = document.get("landlordName")
+                let review = document.get("reviews") ?? ""
+                print(review)
+                print(address)
+            } else {
+                print("Document does not exist")
+            }
+        }
+        
+//        let docRef = db.collection("listings").document("house")
+//
+//        docRef.getDocument { (document, error) in
+//            if let rent = document.flatMap({
+//                $0.data().flatMap({ (data) in
+//                    return rent (dictionary: data)
+//                })
+//            }) {
+//                print("City: \(city)")
+//            } else {
+//                print("Document does not exist")
+//            }
+//        }
+//
 
     }
     
