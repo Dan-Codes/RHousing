@@ -16,7 +16,10 @@ class WriteReviewViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func submit(_ sender: UIButton) {
+        performSegue(withIdentifier: "writeToHome", sender: self)
+    }
+    
     /*
     // MARK: - Navigation
 

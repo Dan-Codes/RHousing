@@ -159,6 +159,9 @@
                                 <rect key="frame" x="185" y="681" width="49" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submit:" destination="f9A-nx-Yau" eventType="touchUpInside" id="AmE-Y7-dza"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-D9-zab">
                                 <rect key="frame" x="186" y="209" width="62" height="21"/>
@@ -225,6 +228,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="mVw-HJ-p89"/>
                     </view>
+                    <connections>
+                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="writeToHome" id="ahG-8u-YDn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cfp-89-vVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -502,6 +508,6 @@
         <image name="settings_black_192x192" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6q9-sl-G8x"/>
+        <segue reference="ahG-8u-YDn"/>
     </inferredMetricsTieBreakers>
 </document>
