@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		035E6C902255573700D067AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 035E6C8F2255573700D067AD /* GoogleService-Info.plist */; };
 		03B918F92242B2DF006AB87D /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B918F82242B2DF006AB87D /* ThirdViewController.swift */; };
 		310DEB88FC129CD8C8D6A54E /* Pods_Reviewing_off_campus_housing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D1C8F91BAC2DF119C51E77 /* Pods_Reviewing_off_campus_housing.framework */; };
+		341DCC2322569DDA00774A19 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 341DCC2222569DDA00774A19 /* GoogleService-Info.plist */; };
+		341DCC2522569E6800774A19 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DCC2422569E6800774A19 /* WriteReviewViewController.swift */; };
 		3452F6982253FB8400BCDF89 /* displayListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3452F6972253FB8400BCDF89 /* displayListingViewController.swift */; };
 		D969AB72222A46CD00CA9773 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D969AB71222A46CD00CA9773 /* LoginViewController.swift */; };
 		E3F21CEC2229DD15005B5D15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F21CEB2229DD15005B5D15 /* AppDelegate.swift */; };
@@ -21,9 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		035E6C8F2255573700D067AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		03B918F82242B2DF006AB87D /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		1382C2AA33F905E1C1AF4BAC /* Pods-Reviewing off campus housing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reviewing off campus housing.debug.xcconfig"; path = "Target Support Files/Pods-Reviewing off campus housing/Pods-Reviewing off campus housing.debug.xcconfig"; sourceTree = "<group>"; };
+		341DCC2222569DDA00774A19 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		341DCC2422569E6800774A19 /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
 		3452F6972253FB8400BCDF89 /* displayListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = displayListingViewController.swift; sourceTree = "<group>"; };
 		5CA0FEBF347C3C0EFE492930 /* Pods-Reviewing off campus housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reviewing off campus housing.release.xcconfig"; path = "Target Support Files/Pods-Reviewing off campus housing/Pods-Reviewing off campus housing.release.xcconfig"; sourceTree = "<group>"; };
 		D969AB71222A46CD00CA9773 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -91,14 +93,15 @@
 				E3F21CEB2229DD15005B5D15 /* AppDelegate.swift */,
 				E3F21CED2229DD15005B5D15 /* FirstViewController.swift */,
 				3452F6972253FB8400BCDF89 /* displayListingViewController.swift */,
+				341DCC2422569E6800774A19 /* WriteReviewViewController.swift */,
 				E3F21CEF2229DD15005B5D15 /* SecondViewController.swift */,
 				E3F21CF12229DD15005B5D15 /* Main.storyboard */,
 				03B918F82242B2DF006AB87D /* ThirdViewController.swift */,
 				D969AB71222A46CD00CA9773 /* LoginViewController.swift */,
 				E3F21CF42229DD16005B5D15 /* Assets.xcassets */,
-				035E6C8F2255573700D067AD /* GoogleService-Info.plist */,
 				E3F21CF62229DD16005B5D15 /* LaunchScreen.storyboard */,
 				E3F21CF92229DD16005B5D15 /* Info.plist */,
+				341DCC2222569DDA00774A19 /* GoogleService-Info.plist */,
 			);
 			path = "Reviewing off campus housing";
 			sourceTree = "<group>";
@@ -165,7 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3F21CF82229DD16005B5D15 /* LaunchScreen.storyboard in Resources */,
-				035E6C902255573700D067AD /* GoogleService-Info.plist in Resources */,
+				341DCC2322569DDA00774A19 /* GoogleService-Info.plist in Resources */,
 				E3F21CF52229DD16005B5D15 /* Assets.xcassets in Resources */,
 				E3F21CF32229DD15005B5D15 /* Main.storyboard in Resources */,
 			);
@@ -274,6 +277,7 @@
 				D969AB72222A46CD00CA9773 /* LoginViewController.swift in Sources */,
 				E3F21CF02229DD15005B5D15 /* SecondViewController.swift in Sources */,
 				3452F6982253FB8400BCDF89 /* displayListingViewController.swift in Sources */,
+				341DCC2522569E6800774A19 /* WriteReviewViewController.swift in Sources */,
 				03B918F92242B2DF006AB87D /* ThirdViewController.swift in Sources */,
 				E3F21CEC2229DD15005B5D15 /* AppDelegate.swift in Sources */,
 				E3F21CEE2229DD15005B5D15 /* FirstViewController.swift in Sources */,
@@ -424,7 +428,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TS4GZ339V3;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Reviewing off campus housing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -443,7 +447,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TS4GZ339V3;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Reviewing off campus housing/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -58,7 +58,10 @@ class displayListingViewController: UIViewController {
     
     var info:String = ""
     
-
+    @IBAction func reviewListing(_ sender: UIButton) {
+        performSegue(withIdentifier: "listingToWrite", sender: self)
+    }
+    
     /*
     // MARK: - Navigation
 
