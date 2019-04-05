@@ -25,6 +25,7 @@ class WriteReviewViewController: UIViewController {
     @IBOutlet weak var comment: UITextField!
     
     
+    
     @IBAction func submit(_ sender: UIButton) {
         performSegue(withIdentifier: "writeToHome", sender: self)
         
@@ -44,15 +45,22 @@ class WriteReviewViewController: UIViewController {
         var docRef = db.collection("listings").document(info)
         docRef.setData([
             "reviews" : [
-              "(Em)" : [
+              "\(Em)" : [
                     "comments" : comment.text!,
                     "isAnonymous" : anonymous.isOn,
                     "isEdited" : false,
-                    "rating" : rating.hashValue,
+                    "rating" : rating.value,
                     "willLiveAgain" : liveAgain.isOn
                     ]
                 ]
-            ], merge: true)
+        ], merge: true)
+            { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
     }
     
     var info:String = ""
