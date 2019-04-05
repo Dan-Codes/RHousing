@@ -52,7 +52,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                         
                         marker.title = "\(String(describing: address))"
                         marker.map = mapView
-                        marker.snippet = "\(document.get("address") ?? "")"
+                        marker.snippet = "Tap to see more details!"
                         mapView.delegate=self
                     }
                 }
