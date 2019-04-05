@@ -14,6 +14,8 @@ class displayListingViewController: UIViewController {
 
     
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var label3: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +32,19 @@ class displayListingViewController: UIViewController {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 //print("Document data: \(dataDescription)")
                 let address = document.get("address") ?? ""
-                let rent = (document.get("rent"))
+                let rent = (document.get("rent")) //?? 0
                 let landlordName = document.get("landlordName")
                 let review = document.get("reviews") ?? ""
-                //print(review)
-                self.label.text = address as! String
-                print(address)
+                print(review)
+                self.label.text = (address as! String)
+                //print(address)
+                
+                self.label2.text = (landlordName as! String)
+                //print(landlordName)
+                
+                //self.label3.text = rent
+                
+                
                 self.mk = address as! String
             } else {
                 print("Document does not exist")
