@@ -23,14 +23,22 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passText: UITextField!
     @IBOutlet weak var signInSelect: UISegmentedControl!
     @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var firstName: UITextField!
+    @IBOutlet weak var lastName: UITextField!
+    
+    
     var isSignIn:Bool = true
     
     @IBAction func signInChange(_ sender: UISegmentedControl) {
         isSignIn = !isSignIn
         if isSignIn{
             signInButton.setTitle("Sign In", for: .normal)
+            firstName.isHidden = true
+            lastName.isHidden = true
         }
         else {
+            firstName.isHidden = false
+            lastName.isHidden = false
             signInButton.setTitle("Register", for: .normal)
         }
     }
@@ -60,7 +68,9 @@ class LoginViewController: UIViewController {
                     
                     var ref: DocumentReference? = nil
                     ref = db.collection("Users").addDocument(data: [
-                        "Email": self.emailText.text!
+                        "Email": self.emailText.text!,
+                        "First Name" : self.firstName.text!,
+                        "Last Name" : self.lastName.text!
                     ]) { err in
                         if let err = err {
                             print("Error adding document: \(err)")

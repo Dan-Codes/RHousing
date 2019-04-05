@@ -438,10 +438,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lpi-rL-gOU">
-                                <rect key="frame" x="125" y="415" width="164" height="103"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="103" id="enI-6S-cVT"/>
-                                </constraints>
+                                <rect key="frame" x="125" y="679" width="164" height="30"/>
                                 <state key="normal" title="Sign In"/>
                                 <connections>
                                     <action selector="signIn:" destination="lSM-uc-KCa" eventType="touchUpInside" id="3lS-s4-RbK"/>
@@ -453,6 +450,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="brM-I2-EXH">
+                                <rect key="frame" x="149" y="410" width="116" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jeZ-UD-4vL">
+                                <rect key="frame" x="149" y="460" width="116" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -463,11 +474,11 @@
                             <constraint firstItem="3kh-ve-lEF" firstAttribute="leading" secondItem="ooj-jg-EwI" secondAttribute="leading" id="KoC-3M-xMM"/>
                             <constraint firstItem="2Bt-Da-Jal" firstAttribute="leading" secondItem="aOo-Ge-U9D" secondAttribute="leading" constant="168" id="QNy-MG-sWS"/>
                             <constraint firstItem="f1c-5J-rPw" firstAttribute="top" secondItem="2Bt-Da-Jal" secondAttribute="bottom" constant="30" id="UDt-JK-b1K"/>
+                            <constraint firstItem="aOo-Ge-U9D" firstAttribute="bottom" secondItem="Lpi-rL-gOU" secondAttribute="bottom" constant="104" id="UE9-sf-r3U"/>
                             <constraint firstItem="Lpi-rL-gOU" firstAttribute="centerX" secondItem="7b1-bq-0bb" secondAttribute="centerX" id="XS7-ix-AuW"/>
                             <constraint firstItem="Lpi-rL-gOU" firstAttribute="leading" secondItem="aOo-Ge-U9D" secondAttribute="leading" constant="125" id="aCz-If-apJ"/>
                             <constraint firstItem="2Bt-Da-Jal" firstAttribute="top" secondItem="aOo-Ge-U9D" secondAttribute="top" constant="95" id="lEs-Gc-JTg"/>
                             <constraint firstItem="f1c-5J-rPw" firstAttribute="centerX" secondItem="7b1-bq-0bb" secondAttribute="centerX" id="llx-Zj-Gp4"/>
-                            <constraint firstItem="Lpi-rL-gOU" firstAttribute="top" secondItem="ooj-jg-EwI" secondAttribute="bottom" constant="38" id="oYs-Ke-jCk"/>
                             <constraint firstItem="ooj-jg-EwI" firstAttribute="centerX" secondItem="7b1-bq-0bb" secondAttribute="centerX" id="s9y-qa-uHD"/>
                             <constraint firstItem="ooj-jg-EwI" firstAttribute="top" secondItem="3kh-ve-lEF" secondAttribute="bottom" constant="27" id="vuM-38-5ql"/>
                             <constraint firstItem="Lpi-rL-gOU" firstAttribute="centerX" secondItem="7b1-bq-0bb" secondAttribute="centerX" id="zm6-Ys-Kkn"/>
@@ -476,6 +487,8 @@
                     </view>
                     <connections>
                         <outlet property="emailText" destination="3kh-ve-lEF" id="gwM-Vu-wfn"/>
+                        <outlet property="firstName" destination="brM-I2-EXH" id="3Q6-N0-onr"/>
+                        <outlet property="lastName" destination="jeZ-UD-4vL" id="f9e-Ie-sIF"/>
                         <outlet property="passText" destination="ooj-jg-EwI" id="qKc-Sd-StL"/>
                         <outlet property="signInButton" destination="Lpi-rL-gOU" id="3lK-OW-WOy"/>
                         <outlet property="signInSelect" destination="f1c-5J-rPw" id="90C-sA-zca"/>
@@ -484,7 +497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUL-j0-I9S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-980" y="315"/>
+            <point key="canvasLocation" x="-981.15942028985512" y="314.73214285714283"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="agI-Vx-scd">
@@ -512,6 +525,6 @@
         <image name="settings_black_192x192" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ahG-8u-YDn"/>
+        <segue reference="6q9-sl-G8x"/>
     </inferredMetricsTieBreakers>
 </document>
