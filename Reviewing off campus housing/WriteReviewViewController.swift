@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class WriteReviewViewController: UIViewController {
 
@@ -16,10 +18,45 @@ class WriteReviewViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    @IBOutlet weak var anonymous: UISwitch!
+    @IBOutlet weak var liveAgain: UISwitch!
+    @IBOutlet weak var rating: UISlider!
+    @IBOutlet weak var comment: UITextField!
+    
+    
     @IBAction func submit(_ sender: UIButton) {
         performSegue(withIdentifier: "writeToHome", sender: self)
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+            // The user's ID, unique to the Firebase project.
+            // Do NOT use this value to authenticate with your backend server,
+            // if you have one. Use getTokenWithCompletion:completion: instead.
+            let email = user.email
+            Em = email!
+            
+            print(Em)
+            // ...
+            
+        }
+        
+        var docRef = db.collection("listings").document(info)
+        docRef.setData([
+            "reviews" : [
+              "(Em)" : [
+                    "comments" : comment.text!,
+                    "isAnonymous" : anonymous.isOn,
+                    "isEdited" : false,
+                    "rating" : rating.hashValue,
+                    "willLiveAgain" : liveAgain.isOn
+                    ]
+                ]
+            ], merge: true)
     }
     
+    var info:String = ""
+    var Em:String = ""
     /*
     // MARK: - Navigation
 

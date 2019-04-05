@@ -160,7 +160,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
-                                    <action selector="submit:" destination="f9A-nx-Yau" eventType="touchUpInside" id="AmE-Y7-dza"/>
+                                    <action selector="submit:" destination="f9A-nx-Yau" eventType="touchUpInside" id="Ozs-Mf-f6F"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-D9-zab">
@@ -198,11 +198,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dcx-OL-6d2">
-                                <rect key="frame" x="333" y="257" width="49" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </switch>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="mBE-5v-sHT">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="mBE-5v-sHT">
                                 <rect key="frame" x="276" y="319" width="118" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </slider>
@@ -224,11 +220,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dcx-OL-6d2">
+                                <rect key="frame" x="331" y="252" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="mVw-HJ-p89"/>
                     </view>
                     <connections>
+                        <outlet property="anonymous" destination="Dcx-OL-6d2" id="L2L-qZ-2N3"/>
+                        <outlet property="comment" destination="GaY-wi-jFJ" id="0qJ-Tw-fUX"/>
+                        <outlet property="liveAgain" destination="lxu-hD-CyG" id="7gC-2l-LCr"/>
+                        <outlet property="rating" destination="mBE-5v-sHT" id="RZW-FD-mIL"/>
                         <segue destination="49e-Tb-3d3" kind="presentation" identifier="writeToHome" id="ahG-8u-YDn"/>
                     </connections>
                 </viewController>

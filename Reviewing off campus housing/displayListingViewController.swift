@@ -34,6 +34,7 @@ class displayListingViewController: UIViewController {
                 //print(review)
                 self.label.text = address as! String
                 print(address)
+                self.mk = address as! String
             } else {
                 print("Document does not exist")
             }
@@ -55,11 +56,20 @@ class displayListingViewController: UIViewController {
 //
 
     }
-    
+    var mk:String = ""
     var info:String = ""
     
     @IBAction func reviewListing(_ sender: UIButton) {
         performSegue(withIdentifier: "listingToWrite", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is WriteReviewViewController
+        {
+            let vc = segue.destination as? WriteReviewViewController
+            vc?.info = mk
+        }
     }
     
     /*

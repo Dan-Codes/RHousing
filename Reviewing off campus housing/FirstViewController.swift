@@ -41,10 +41,10 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                         let long = point.longitude
                         let address = document.get("address")!
                         
-                        print(lat,long)
-                        
-                        print("**********************")
-                        print("\(document.documentID) => \(document.data())")
+//                        print(lat,long)
+//                        
+//                        print("**********************")
+//                        print("\(document.documentID) => \(document.data())")
                         
                         let position = CLLocationCoordinate2D(latitude: lat, longitude: long)
                         
