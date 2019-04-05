@@ -11,12 +11,38 @@ import Firebase
 import FirebaseAuth
 import FirebaseUI
 
-class LoginViewController: UIViewController {
+
+extension UIViewController{
+    func hideKeyboardWhenTap(){
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKey))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKey(){
+        view.endEditing(true)
+    }
+}
+
+class LoginViewController: UIViewController, UITextFieldDelegate {
+    
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        emailText.delegate = self
+        passText.delegate = self
+        firstName.delegate = self
+        lastName.delegate = self
+        
+        self.hideKeyboardWhenTap()  
         // Do any additional setup after loading the view.
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
    
     @IBOutlet weak var emailText: UITextField!
@@ -85,7 +111,6 @@ class LoginViewController: UIViewController {
             }        }
     }
 }
-    
 
 extension LoginViewController: FUIAuthDelegate{
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {

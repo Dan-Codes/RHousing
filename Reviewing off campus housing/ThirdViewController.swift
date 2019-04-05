@@ -11,7 +11,7 @@ import CoreLocation
 import Firebase
 import FirebaseUI
 
-class ThirdViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     let myPickerData = [String](arrayLiteral: "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA",
@@ -27,7 +27,17 @@ class ThirdViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         thePicker.delegate = self
         state.inputView = thePicker
         
+        adrs1.delegate = self
+        adrs2.delegate = self
+        city.delegate = self
+        zipcd.delegate = self
         
+        self.hideKeyboardWhenTap()  
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
     
     @IBOutlet weak var adrs1: UITextField!
