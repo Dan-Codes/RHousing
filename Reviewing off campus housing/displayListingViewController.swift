@@ -140,6 +140,11 @@ class displayListingViewController: UIViewController { // , UITableViewDataSourc
     }
     
     
+    @IBAction func reportProblem(_ sender: UIButton) {
+        performSegue(withIdentifier: "displayToReport", sender: self)
+    }
+    
+    
 //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return 10 // data.count
 //

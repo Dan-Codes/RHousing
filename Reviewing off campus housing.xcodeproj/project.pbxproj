@@ -19,6 +19,7 @@
 		E3F21CF52229DD16005B5D15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F21CF42229DD16005B5D15 /* Assets.xcassets */; };
 		E3F21CF82229DD16005B5D15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F21CF62229DD16005B5D15 /* LaunchScreen.storyboard */; };
 		E716A31F22587074001008BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E716A31E22587074001008BB /* GoogleService-Info.plist */; };
+		E7E359AF2258FB5000CBA815 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E359AE2258FB5000CBA815 /* ReportViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		E3F21CF72229DD16005B5D15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3F21CF92229DD16005B5D15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E716A31E22587074001008BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E7E359AE2258FB5000CBA815 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		E9D1C8F91BAC2DF119C51E77 /* Pods_Reviewing_off_campus_housing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reviewing_off_campus_housing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -96,6 +98,7 @@
 				341DCC2422569E6800774A19 /* WriteReviewViewController.swift */,
 				E3F21CEF2229DD15005B5D15 /* SecondViewController.swift */,
 				E3F21CF12229DD15005B5D15 /* Main.storyboard */,
+				E7E359AE2258FB5000CBA815 /* ReportViewController.swift */,
 				03B918F82242B2DF006AB87D /* ThirdViewController.swift */,
 				D969AB71222A46CD00CA9773 /* LoginViewController.swift */,
 				E716A31E22587074001008BB /* GoogleService-Info.plist */,
@@ -274,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7E359AF2258FB5000CBA815 /* ReportViewController.swift in Sources */,
 				D969AB72222A46CD00CA9773 /* LoginViewController.swift in Sources */,
 				E3F21CF02229DD15005B5D15 /* SecondViewController.swift in Sources */,
 				3452F6982253FB8400BCDF89 /* displayListingViewController.swift in Sources */,
