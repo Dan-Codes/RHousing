@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseUI
 
 class SecondViewController: UIViewController {
 
@@ -16,7 +19,18 @@ class SecondViewController: UIViewController {
        // tabBarController?.selectedIndex = 1
         
     }
+    
+    @IBAction func logoutButton(_ sender: UIButton) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            performSegue(withIdentifier: "logout2", sender: (Any).self)
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
 
+    }
+    
 
 }
 

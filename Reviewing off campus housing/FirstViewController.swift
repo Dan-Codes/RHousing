@@ -86,11 +86,10 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
-            performSegue(withIdentifier: "logOut", sender: self)
+            performSegue(withIdentifier: "logout2", sender: (Any).self)
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
     }
-    
     
 }
