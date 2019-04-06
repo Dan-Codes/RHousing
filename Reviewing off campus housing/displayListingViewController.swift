@@ -24,7 +24,7 @@ class displayListingViewController: UIViewController { // , UITableViewDataSourc
     
     //@IBOutlet weak var reviewTable: UITableView!
     
-
+    @IBAction func unwindToDsiplay(segue: UIStoryboardSegue) {}
     
     
     override func viewDidLoad() {
@@ -99,9 +99,6 @@ class displayListingViewController: UIViewController { // , UITableViewDataSourc
                 // TROUBLE: how to set label with an int? rent is an int, and swift is complaining.
                 //let newrent = rent as! String
                 //self.label3.text = newrent as! String
-
-
-                self.mk = address as! String
             } else {
                 print("Document does not exist")
             }
@@ -123,7 +120,6 @@ class displayListingViewController: UIViewController { // , UITableViewDataSourc
 
 
     }
-    var mk:String = ""
     var info:String = ""
     
     @IBAction func reviewListing(_ sender: UIButton) {
@@ -135,7 +131,12 @@ class displayListingViewController: UIViewController { // , UITableViewDataSourc
         if segue.destination is WriteReviewViewController
         {
             let vc = segue.destination as? WriteReviewViewController
-            vc?.info = mk
+            vc?.info = info
+        }
+        if segue.destination is ReportViewController
+        {
+            let vc = segue.destination as? ReportViewController
+            vc?.str = info
         }
     }
     

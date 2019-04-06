@@ -24,7 +24,6 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         printPin()
     }
     
-    
     func printPin(){
         let camera = GMSCameraPosition.camera(withLatitude: 43.038710, longitude: -76.134265, zoom: 15)
         let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
