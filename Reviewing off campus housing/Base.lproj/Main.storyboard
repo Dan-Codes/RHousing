@@ -574,7 +574,7 @@
                                     <segment title="LOG IN"/>
                                     <segment title="SIGN UP"/>
                                 </segments>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.49803921568627452" green="0.50196078431372548" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="signInChange:" destination="lSM-uc-KCa" eventType="valueChanged" id="vmQ-kR-No2"/>
                                 </connections>
