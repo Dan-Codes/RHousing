@@ -11,6 +11,7 @@
 		310DEB88FC129CD8C8D6A54E /* Pods_Reviewing_off_campus_housing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D1C8F91BAC2DF119C51E77 /* Pods_Reviewing_off_campus_housing.framework */; };
 		341DCC2522569E6800774A19 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DCC2422569E6800774A19 /* WriteReviewViewController.swift */; };
 		3452F6982253FB8400BCDF89 /* displayListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3452F6972253FB8400BCDF89 /* displayListingViewController.swift */; };
+		3453217C225929AD00DB7D5E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3453217B225929AD00DB7D5E /* GoogleService-Info.plist */; };
 		D969AB72222A46CD00CA9773 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D969AB71222A46CD00CA9773 /* LoginViewController.swift */; };
 		E3F21CEC2229DD15005B5D15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F21CEB2229DD15005B5D15 /* AppDelegate.swift */; };
 		E3F21CEE2229DD15005B5D15 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F21CED2229DD15005B5D15 /* FirstViewController.swift */; };
@@ -18,7 +19,6 @@
 		E3F21CF32229DD15005B5D15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F21CF12229DD15005B5D15 /* Main.storyboard */; };
 		E3F21CF52229DD16005B5D15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F21CF42229DD16005B5D15 /* Assets.xcassets */; };
 		E3F21CF82229DD16005B5D15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F21CF62229DD16005B5D15 /* LaunchScreen.storyboard */; };
-		E716A31F22587074001008BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E716A31E22587074001008BB /* GoogleService-Info.plist */; };
 		E7E359AF2258FB5000CBA815 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E359AE2258FB5000CBA815 /* ReportViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +27,7 @@
 		1382C2AA33F905E1C1AF4BAC /* Pods-Reviewing off campus housing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reviewing off campus housing.debug.xcconfig"; path = "Target Support Files/Pods-Reviewing off campus housing/Pods-Reviewing off campus housing.debug.xcconfig"; sourceTree = "<group>"; };
 		341DCC2422569E6800774A19 /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
 		3452F6972253FB8400BCDF89 /* displayListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = displayListingViewController.swift; sourceTree = "<group>"; };
+		3453217B225929AD00DB7D5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5CA0FEBF347C3C0EFE492930 /* Pods-Reviewing off campus housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reviewing off campus housing.release.xcconfig"; path = "Target Support Files/Pods-Reviewing off campus housing/Pods-Reviewing off campus housing.release.xcconfig"; sourceTree = "<group>"; };
 		D969AB71222A46CD00CA9773 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E3F21CE82229DD15005B5D15 /* Reviewing off campus housing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reviewing off campus housing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,7 +38,6 @@
 		E3F21CF42229DD16005B5D15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3F21CF72229DD16005B5D15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3F21CF92229DD16005B5D15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E716A31E22587074001008BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7E359AE2258FB5000CBA815 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		E9D1C8F91BAC2DF119C51E77 /* Pods_Reviewing_off_campus_housing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reviewing_off_campus_housing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -101,9 +101,9 @@
 				E7E359AE2258FB5000CBA815 /* ReportViewController.swift */,
 				03B918F82242B2DF006AB87D /* ThirdViewController.swift */,
 				D969AB71222A46CD00CA9773 /* LoginViewController.swift */,
-				E716A31E22587074001008BB /* GoogleService-Info.plist */,
 				E3F21CF42229DD16005B5D15 /* Assets.xcassets */,
 				E3F21CF62229DD16005B5D15 /* LaunchScreen.storyboard */,
+				3453217B225929AD00DB7D5E /* GoogleService-Info.plist */,
 				E3F21CF92229DD16005B5D15 /* Info.plist */,
 			);
 			path = "Reviewing off campus housing";
@@ -171,7 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3F21CF82229DD16005B5D15 /* LaunchScreen.storyboard in Resources */,
-				E716A31F22587074001008BB /* GoogleService-Info.plist in Resources */,
+				3453217C225929AD00DB7D5E /* GoogleService-Info.plist in Resources */,
 				E3F21CF52229DD16005B5D15 /* Assets.xcassets in Resources */,
 				E3F21CF32229DD15005B5D15 /* Main.storyboard in Resources */,
 			);
