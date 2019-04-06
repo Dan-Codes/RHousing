@@ -16,7 +16,11 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        comment.delegate = self
+        comment.delegate = self as? UITextViewDelegate
+        let borderColor : UIColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
+        comment.layer.borderColor = borderColor.cgColor
+        comment.layer.borderWidth = 0.5
+        comment.layer.cornerRadius = 5.0
         
         self.hideKeyboardWhenTap()  
         // Do any additional setup after loading the view.
@@ -30,7 +34,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var anonymous: UISwitch!
     @IBOutlet weak var liveAgain: UISwitch!
     @IBOutlet weak var rating: UISlider!
-    @IBOutlet weak var comment: UITextField!
+    @IBOutlet weak var comment: UITextView!
     @IBOutlet weak var ratingValue: UILabel!
     @IBAction func slideRate(_ sender: UISlider) {
         ratingValue.text = String(format: "%.1f", sender.value)
