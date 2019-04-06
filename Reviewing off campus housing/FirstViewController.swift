@@ -20,7 +20,10 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         GMSServices.provideAPIKey("AIzaSyAcN8tyZ3brV52PRFzqbhQd5wuWnWgd_MQ")
         GMSPlacesClient.provideAPIKey("AIzaSyAcN8tyZ3brV52PRFzqbhQd5wuWnWgd_MQ")
         
-        
+        let camera = GMSCameraPosition.camera(withLatitude: 43.038710, longitude: -76.134265, zoom: 15)
+        let mapView = GMSMapView.map(withFrame: self.view.bounds, camera: camera)
+        view = mapView
+        //mapView.delegate=self
         printPin()
     }
     
@@ -33,7 +36,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                print("*****")
+                //print("*****")
                 for document in querySnapshot!.documents {
                     if let coords = document.get("geopoint"){
                         let point = coords as! GeoPoint
@@ -47,13 +50,13 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
 //                        print("\(document.documentID) => \(document.data())")
                         
                         let position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                        let customRedMarker = UIColor(rgb: 0x820B1D)
+                        let customRedMarker = UIColor(rgb: 0x820B1D) //changes the color
                         let marker = GMSMarker(position: position)
                         marker.icon = GMSMarker.markerImage(with: customRedMarker)
                         marker.title = "\(String(describing: address))"
                         marker.map = mapView
                         marker.snippet = "Tap to see more details!"
-                        mapView.delegate=self
+                        mapView.delegate=self //makes the pinpoint tappable in the futre
                     }
                 }
                 
