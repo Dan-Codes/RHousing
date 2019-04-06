@@ -69,16 +69,10 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.contentMode = .scaleAspectFit
             imageView.image = pickedImage
-            //print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-            //print(pickedImage)
-           // var data = Data()
-            //let houseImage = storageRef.child("\(pickedImage)")
             
             
-            
-        }
         
-       
+        }
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("Cancelled")
