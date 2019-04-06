@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
+
 class WriteReviewViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
@@ -30,6 +31,18 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var liveAgain: UISwitch!
     @IBOutlet weak var rating: UISlider!
     @IBOutlet weak var comment: UITextField!
+    @IBOutlet weak var ratingValue: UILabel!
+    @IBAction func slideRate(_ sender: UISlider) {
+        ratingValue.text = String(format: "%.1f", sender.value)
+        //ratingValue.setValue(Float(), forKey: String(format: "%.1f", sender.value))
+        if sender.value < 2.5 {
+            liveAgain.setOn(false, animated: true)
+        }
+        else{
+            liveAgain.setOn(true, animated: true)
+        }
+    }
+    
     
     
     
@@ -45,6 +58,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
             Em = email!
             
             print(Em)
+            print(info)
             // ...
             
         }
@@ -83,3 +97,5 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     */
 
 }
+
+

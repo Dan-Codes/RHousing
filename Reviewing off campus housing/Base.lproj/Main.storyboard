@@ -245,6 +245,9 @@
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="mBE-5v-sHT">
                                 <rect key="frame" x="276" y="319" width="118" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="slideRate:" destination="f9A-nx-Yau" eventType="valueChanged" id="Eqb-Z9-A4n"/>
+                                </connections>
                             </slider>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lxu-hD-CyG">
                                 <rect key="frame" x="331" y="372" width="49" height="31"/>
@@ -264,10 +267,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dcx-OL-6d2">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dcx-OL-6d2">
                                 <rect key="frame" x="331" y="252" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mue-Qd-TDS">
+                                <rect key="frame" x="212" y="323" width="36" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="mVw-HJ-p89"/>
@@ -277,6 +287,7 @@
                         <outlet property="comment" destination="GaY-wi-jFJ" id="0qJ-Tw-fUX"/>
                         <outlet property="liveAgain" destination="lxu-hD-CyG" id="7gC-2l-LCr"/>
                         <outlet property="rating" destination="mBE-5v-sHT" id="RZW-FD-mIL"/>
+                        <outlet property="ratingValue" destination="mue-Qd-TDS" id="bNB-fF-g46"/>
                         <segue destination="49e-Tb-3d3" kind="presentation" identifier="writeToHome" id="ahG-8u-YDn"/>
                     </connections>
                 </viewController>
@@ -564,11 +575,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="25694" width="32" height="32"/>
+        <image name="25694" width="23" height="23"/>
         <image name="icon" width="32" height="32"/>
         <image name="settings_black_192x192" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vjc-PQ-KVe"/>
+        <segue reference="ahG-8u-YDn"/>
     </inferredMetricsTieBreakers>
 </document>
