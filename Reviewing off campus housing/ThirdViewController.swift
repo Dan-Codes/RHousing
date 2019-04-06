@@ -10,18 +10,18 @@ import UIKit
 import CoreLocation
 import Firebase
 import FirebaseUI
+import FirebaseStorage
 
-class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-    
+class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let myPickerData = [String](arrayLiteral: "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA",
                                 "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN",
                                 "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK",
                                 "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY")
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         let thePicker = UIPickerView()
         thePicker.delegate = self
@@ -31,20 +31,59 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         adrs2.delegate = self
         city.delegate = self
         zipcd.delegate = self
+        imagePicker.delegate = self
         
-        self.hideKeyboardWhenTap()  
+        self.hideKeyboardWhenTap()
     }
+        
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            self.view.endEditing(true)
+            return true
+        }
+        
+        
+        
+        @IBOutlet weak var adrs1: UITextField!
+        @IBOutlet weak var adrs2: UITextField!
+        @IBOutlet weak var city: UITextField!
+        @IBOutlet weak var state: UITextField!
+        @IBOutlet weak var zipcd: UITextField!
+        @IBOutlet weak var landlord: UITextField!
+        
+        @IBOutlet weak var uploadButton: UIButton!
+        @IBOutlet weak var fileName: UILabel!
+        @IBOutlet weak var imageView: UIImageView!
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true
+    
+        let imagePicker = UIImagePickerController()
+    
+        @IBAction func uploadPushed(_ sender: UIButton) {
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = .photoLibrary
+            present(imagePicker, animated: true, completion: nil)
+        }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        dismiss(animated: true, completion: nil)
+        
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            imageView.contentMode = .scaleAspectFit
+            imageView.image = pickedImage
+            //print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            //print(pickedImage)
+           // var data = Data()
+            //let houseImage = storageRef.child("\(pickedImage)")
+            
+            
+            
+        }
+        
+       
     }
-    
-    @IBOutlet weak var adrs1: UITextField!
-    @IBOutlet weak var adrs2: UITextField!
-    @IBOutlet weak var city: UITextField!
-    @IBOutlet weak var state: UITextField!
-    @IBOutlet weak var zipcd: UITextField!
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("Cancelled")
+        dismiss(animated: true, completion: nil)
+    }
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
