@@ -365,7 +365,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.18049424886703491" green="0.17661067843437195" blue="0.16822171211242676" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.27069312334060669" green="0.26688280701637268" blue="0.25431978702545166" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="jFh-Dh-WlU"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="settings_black_192x192" id="Esq-yp-02x"/>
