@@ -47,18 +47,18 @@ class displayListingViewController: UIViewController {
                 let rent = (document.get("rent"))
                 let landlordName = document.get("landlordName") ?? "No Landlord Information"
                 
-                // COMMENT THIS SECTION OF CODE OUT UNTIL THE CODE FOR ADDING AN EMPTY MAP WHEN SUBMITTING A NEW LISTING IS ADDED
-                ///////////////////////////////////////////////////////////////////////////////////////////////////
+                 //COMMENT THIS SECTION OF CODE OUT UNTIL THE CODE FOR ADDING AN EMPTY MAP WHEN SUBMITTING A NEW LISTING IS ADDED
+                /////////////////////////////////////////////////////////////////////////////////////////////////
                 
-                // let review = document.get("reviews") as! NSDictionary
-                
-                // currently this gives a fatal error when a house w/ no reviews is clicked,
-                // but we should make sure that every listing comes with an NSDictionary (aka review map)
-                // when created.
-
-                // Retreiving values from map of maps (reviews)
-                // Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
-                
+//                let review = document.get("reviews") as! NSDictionary
+//
+//                //currently this gives a fatal error when a house w/ no reviews is clicked,
+//                //but we should make sure that every listing comes with an NSDictionary (aka review map)
+//                //when created.
+//
+//                //Retreiving values from map of maps (reviews)
+//                //Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
+//
 //                var reviewString = "" // current method of displaying reviews: a long chain of text
 //
 //                for (reviewer, reviewMap) in review {
@@ -98,11 +98,11 @@ class displayListingViewController: UIViewController {
 //                if reviewString == "" { reviewString = "There are no reviews." }
 //                self.reviewText.text = reviewString
                 
-                ///////////////////////////////////////////////////////////////////////////////////////////////////
-                // END COMMENT BLOCK
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                //END COMMENT BLOCK
 
-                self.label.text = address as! String // label for address
-                self.label2.text = landlordName as! String // label for landlord
+                self.label.text = (address as! String) // label for address
+                self.label2.text = (landlordName as! String) // label for landlord
                 
                 if(rent != nil){
                     self.label3.text = String(format: "%@", rent as! CVarArg) // label for rent
