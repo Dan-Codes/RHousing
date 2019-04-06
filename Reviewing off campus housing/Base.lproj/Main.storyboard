@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lSM-uc-KCa">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -120,42 +120,70 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQY-Vu-iYh">
-                                <rect key="frame" x="10" y="216" width="394" height="113"/>
+                                <rect key="frame" x="20" y="134" width="364" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eqw-U3-szi">
-                                <rect key="frame" x="8" y="314" width="52" height="21"/>
+                                <rect key="frame" x="21" y="204" width="52" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qw-My-vJb">
+                                <rect key="frame" x="155" y="662" width="98" height="137"/>
+                                <state key="normal" title="Review Listing"/>
+                                <connections>
+                                    <action selector="reviewListing:" destination="cBg-Eb-cFg" eventType="touchUpInside" id="g5w-HJ-qHb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPl-qL-OMe">
+                                <rect key="frame" x="10" y="105" width="63" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Landlord" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah1-f9-2Gn">
+                                <rect key="frame" x="10" y="175" width="68" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rent Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAC-rd-kHB">
+                                <rect key="frame" x="10" y="244" width="79" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovM-ea-2fy">
-                                <rect key="frame" x="13" y="360" width="52" height="21"/>
+                                <rect key="frame" x="21" y="273" width="52" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qw-My-vJb">
-                                <rect key="frame" x="155" y="541" width="105" height="137"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Review Listing"/>
-                                <connections>
-                                    <action selector="reviewListing:" destination="cBg-Eb-cFg" eventType="touchUpInside" id="g5w-HJ-qHb"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9Qw-My-vJb" firstAttribute="top" secondItem="KAt-df-rnm" secondAttribute="top" constant="574" id="MCq-HT-tRj"/>
+                            <constraint firstItem="9Qw-My-vJb" firstAttribute="leading" secondItem="KAt-df-rnm" secondAttribute="leading" constant="155" id="i2e-IW-VVg"/>
+                            <constraint firstItem="KAt-df-rnm" firstAttribute="bottom" secondItem="9Qw-My-vJb" secondAttribute="bottom" constant="14" id="y28-yF-t3L"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="KAt-df-rnm"/>
                     </view>
                     <connections>
+                        <outlet property="AddressLabel" destination="UPl-qL-OMe" id="SJh-T8-jwu"/>
                         <outlet property="label" destination="RQY-Vu-iYh" id="2Kx-6h-zBB"/>
                         <outlet property="label2" destination="Eqw-U3-szi" id="EcC-WN-6de"/>
                         <outlet property="label3" destination="ovM-ea-2fy" id="AsE-YW-Xg2"/>
+                        <outlet property="landlordLabel" destination="ah1-f9-2Gn" id="LNe-lx-1Ez"/>
+                        <outlet property="rentPriceLabel" destination="mAC-rd-kHB" id="fXs-8k-kfj"/>
                         <segue destination="f9A-nx-Yau" kind="show" identifier="listingToWrite" id="w3s-hh-diq"/>
                     </connections>
                 </viewController>
@@ -541,6 +569,6 @@
         <image name="settings_black_192x192" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="6q9-sl-G8x"/>
+        <segue reference="vjc-PQ-KVe"/>
     </inferredMetricsTieBreakers>
 </document>
