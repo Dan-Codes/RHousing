@@ -48,7 +48,8 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func submit(_ sender: UIButton) {
         performSegue(withIdentifier: "writeToHome", sender: self)
-        
+        let time = Timestamp(date: Date())
+        print(time)
         let user = Auth.auth().currentUser
         if let user = user {
             // The user's ID, unique to the Firebase project.
@@ -71,7 +72,8 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                     "isAnonymous" : anonymous.isOn,
                     "isEdited" : false,
                     "rating" : rating.value,
-                    "willLiveAgain" : liveAgain.isOn
+                    "willLiveAgain" : liveAgain.isOn,
+                    "timeStamp" : time
                     ]
                 ]
         ], merge: true)
