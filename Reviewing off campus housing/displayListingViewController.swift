@@ -53,53 +53,53 @@ class displayListingViewController: UIViewController {
                  //COMMENT THIS SECTION OF CODE OUT UNTIL THE CODE FOR ADDING AN EMPTY MAP WHEN SUBMITTING A NEW LISTING IS ADDED
                 /////////////////////////////////////////////////////////////////////////////////////////////////
                 
-//                let review = document.get("reviews") as! NSDictionary
-//
-//                //currently this gives a fatal error when a house w/ no reviews is clicked,
-//                //but we should make sure that every listing comes with an NSDictionary (aka review map)
-//                //when created.
-//
-//                //Retreiving values from map of maps (reviews)
-//                //Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
-//
-//                var reviewString = "" // current method of displaying reviews: a long chain of text
-//
-//                for (reviewer, reviewMap) in review {
-//                    let reviewer = reviewer as! String
-//                    print("reviewer: " + reviewer)
-//
-//                    let reviewMap = reviewMap as! NSDictionary
-//
-//                    if reviewMap.count == 0 { // temporary fix. doesn't fix if some fields are missing, I think.
-//                        reviewString = "No review information for " + reviewer
-//                        break
-//                    }
-//
-//                    let comments = reviewMap.value(forKey: "comments") as! String
-//                    let rating = reviewMap.value(forKey: "rating") as! Float
-//                    let isAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
-//                    let isEdited = reviewMap.value(forKey: "isEdited") as! Bool
-//                    let willLiveAgain = reviewMap.value(forKey: "willLiveAgain") as! Bool
-//
-//                    print("comments: " + comments)
-//                    print("rating: " + String(rating))
-//                    print("isAnonymous: " + String(isAnonymous))
-//                    print("isEdited: " + String(isEdited))
-//                    print("willLiveAgain: " + String(willLiveAgain))
-//
-//                    print("\n")
-//
-//                    if isAnonymous == false {
-//                        reviewString = reviewString + "Reviewer: " + String(reviewer) + "\n"
-//                    }
-//                    reviewString = reviewString + "Rating: " + String(rating) + "\n"
-//                    reviewString = reviewString + "Comments: \n" + comments + "\n"
-//                    reviewString = reviewString + "Would live again? " + (willLiveAgain ? "Yes" : "No")
-//                    reviewString = reviewString + "\n\n"
-//                    }
-//
-//                if reviewString == "" { reviewString = "There are no reviews." }
-//                self.reviewText.text = reviewString
+                let review = document.get("reviews") as! NSDictionary
+
+                //currently this gives a fatal error when a house w/ no reviews is clicked,
+                //but we should make sure that every listing comes with an NSDictionary (aka review map)
+                //when created.
+
+                //Retreiving values from map of maps (reviews)
+                //Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
+
+                var reviewString = "" // current method of displaying reviews: a long chain of text
+
+                for (reviewer, reviewMap) in review {
+                    let reviewer = reviewer as! String
+                    print("reviewer: " + reviewer)
+
+                    let reviewMap = reviewMap as! NSDictionary
+
+                    if reviewMap.count == 0 { // temporary fix. doesn't fix if some fields are missing, I think.
+                        reviewString = "No review information for " + reviewer
+                        break
+                    }
+
+                    let comments = reviewMap.value(forKey: "comments") as! String
+                    let rating = reviewMap.value(forKey: "rating") as! Float
+                    let isAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
+                    let isEdited = reviewMap.value(forKey: "isEdited") as! Bool
+                    let willLiveAgain = reviewMap.value(forKey: "willLiveAgain") as! Bool
+
+                    print("comments: " + comments)
+                    print("rating: " + String(rating))
+                    print("isAnonymous: " + String(isAnonymous))
+                    print("isEdited: " + String(isEdited))
+                    print("willLiveAgain: " + String(willLiveAgain))
+
+                    print("\n")
+
+                    if isAnonymous == false {
+                        reviewString = reviewString + "Reviewer: " + String(reviewer) + "\n"
+                    }
+                    reviewString = reviewString + "Rating: " + String(rating) + "\n"
+                    reviewString = reviewString + "Comments: \n" + comments + "\n"
+                    reviewString = reviewString + "Would live again? " + (willLiveAgain ? "Yes" : "No")
+                    reviewString = reviewString + "\n\n"
+                    }
+
+                if reviewString == "" { reviewString = "There are no reviews." }
+                self.reviewText.text = reviewString
                 
                 /////////////////////////////////////////////////////////////////////////////////////////////////
                 //END COMMENT BLOCK
@@ -114,21 +114,9 @@ class displayListingViewController: UIViewController {
                     self.label3.text = "No Rent Information" // case of nothing
                 }
 
-                self.mk = address as! String
+                //self.mk = address as! String
             }
-            
             else {
-//                }
-
-
-
-                self.label.text = address as! String
-                self.label2.text = landlordName as! String
-
-                // TROUBLE: how to set label with an int? rent is an int, and swift is complaining.
-                //let newrent = rent as! String
-                //self.label3.text = newrent as! String
-            } else {
                 print("Document does not exist")
             }
         }
