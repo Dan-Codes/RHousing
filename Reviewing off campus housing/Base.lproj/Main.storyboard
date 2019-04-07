@@ -542,6 +542,7 @@
         <image name="submitButton" width="1920" height="542"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="mn0-Ze-tEj"/>
         <segue reference="jMM-kj-xyt"/>
         <segue reference="vjc-PQ-KVe"/>
     </inferredMetricsTieBreakers>
