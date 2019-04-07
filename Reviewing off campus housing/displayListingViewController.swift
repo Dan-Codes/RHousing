@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class displayListingViewController: UIViewController { // , UITableViewDataSource, UITableViewDelegate
 
@@ -121,9 +123,48 @@ class displayListingViewController: UIViewController { // , UITableViewDataSourc
 
     }
     var info:String = ""
+    var Em:String = ""
     
     @IBAction func reviewListing(_ sender: UIButton) {
+        let user = Auth.auth().currentUser
+        if let user = user {
+            // The user's ID, unique to the Firebase project.
+            // Do NOT use this value to authenticate with your backend server,
+            // if you have one. Use getTokenWithCompletion:completion: instead.
+            let email = user.email
+            Em = email!
+            // ...
+            
+        }
+        
         performSegue(withIdentifier: "listingToWrite", sender: self)
+        
+        let docRef = db.collection("listings").document(info)
+        docRef.getDocument { (document,error) in
+            if let document = document, document.exists {
+                var emailExists:Bool = false
+                let review = document.get("reviews") as! NSDictionary
+                
+                for (reviewer, _) in review {
+                    let reviewer = reviewer as! String
+                    if (reviewer == self.Em) {
+                        emailExists = true
+                    }
+                }
+                
+                if (emailExists) {
+                    let alert = UIAlertController(title: "Careful!", message: "You have already written reviews before! New post will overwrite!", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    
+                }
+                
+                
+            }
+        }
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

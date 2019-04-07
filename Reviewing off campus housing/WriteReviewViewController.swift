@@ -51,7 +51,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func submit(_ sender: UIButton) {
-        performSegue(withIdentifier: "writeToHome", sender: self)
+        //performSegue(withIdentifier: "writeToHome", sender: self)
         let time = Timestamp(date: Date())
         print(time)
         let user = Auth.auth().currentUser
@@ -61,33 +61,95 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
             // if you have one. Use getTokenWithCompletion:completion: instead.
             let email = user.email
             Em = email!
-            
-            print(Em)
-            print(info)
             // ...
             
         }
         
-        var docRef = db.collection("listings").document(info)
-        docRef.setData([
-            "reviews" : [
-              "\(Em)" : [
-                    "comments" : comment.text!,
-                    "isAnonymous" : anonymous.isOn,
-                    "isEdited" : false,
-                    "rating" : rating.value,
-                    "willLiveAgain" : liveAgain.isOn,
-                    "timeStamp" : time
-                    ]
-                ]
-        ], merge: true)
-            { err in
-            if let err = err {
-                print("Error updating document: \(err)")
-            } else {
-                print("Document successfully updated")
+        let docRef = db.collection("listings").document(info)
+
+        
+
+            docRef.getDocument{ (document, error) in
+                if let document = document, document.exists {
+                    
+                    var emailExist:Bool = false
+                    let review = document.get("reviews") as! NSDictionary
+                    for (reviewer, _) in review {
+                        let reviewer = reviewer as! String
+                        print(reviewer)
+                        print(self.Em + "---")
+
+                        if (reviewer == self.Em){
+                            emailExist = true
+                            break
+                        }
+                    }
+                    
+                    print (emailExist)
+                    
+                    if(emailExist == false){
+                        
+                        let alert = UIAlertController(title: "Nice!", message: "Your review has successfully posted!", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { action -> Void in
+                            self.performSegue(withIdentifier: "unwindToDisplay", sender: self)
+                        }))
+                        
+                        self.present(alert, animated: true)
+                        
+                        print(".....")
+                        docRef.setData([
+                            "reviews" : [
+                                "\(self.Em)" : [
+                                    "comments" : self.comment.text!,
+                                    "isAnonymous" : self.anonymous.isOn,
+                                    "isEdited" : false,
+                                    "rating" : self.rating.value,
+                                    "willLiveAgain" : self.liveAgain.isOn,
+                                    "timeStamp" : time
+                                ]
+                            ]
+                            ], merge: true)
+                        { err in
+                            if let err = err {
+                                print("Error updating document: \(err)")
+                            } else {
+                                print("Document successfully updated")
+                            }
+                        }
+                    }
+                        
+                    else if (emailExist == true){
+                        let alert = UIAlertController(title: "Success", message: "", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { action -> Void in
+                            self.performSegue(withIdentifier: "unwindToDisplay", sender: self)
+                        }))
+                        
+                        self.present(alert, animated: true)
+                        
+                        docRef.setData([
+                            "reviews" : [
+                                "\(self.Em)" : [
+                                    "comments" : self.comment.text!,
+                                    "isAnonymous" : self.anonymous.isOn,
+                                    "isEdited" : true,
+                                    "rating" : self.rating.value,
+                                    "willLiveAgain" : self.liveAgain.isOn,
+                                    "timeStamp" : time
+                                ]
+                            ]
+                            ], merge: true)
+                        { err in
+                            if let err = err {
+                                print("Error updating document: \(err)")
+                            } else {
+                                print("Document successfully updated")
+                            }
+                        }
+                    }
+                }
             }
-        }
     }
     
     var info:String = ""
