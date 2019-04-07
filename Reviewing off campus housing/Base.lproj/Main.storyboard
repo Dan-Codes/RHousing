@@ -698,16 +698,17 @@
         </scene>
     </scenes>
     <resources>
-        <image name="25694" width="32" height="32"/>
+        <image name="25694" width="30" height="30"/>
         <image name="addNewProperty" width="960" height="224"/>
-        <image name="icon" width="32" height="32"/>
+        <image name="icon" width="30" height="30"/>
         <image name="loginLogo" width="475" height="475"/>
-        <image name="settings_black_192x192" width="32" height="32"/>
+        <image name="settings_black_192x192" width="30" height="30"/>
         <image name="signMeIn" width="960" height="252"/>
         <image name="submit" width="960" height="271"/>
         <image name="uploadAnImage-1" width="960" height="133"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="mn0-Ze-tEj"/>
         <segue reference="EIT-Rl-WiB"/>
         <segue reference="vjc-PQ-KVe"/>
     </inferredMetricsTieBreakers>
