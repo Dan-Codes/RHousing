@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class displayListingViewController: UIViewController {
 
@@ -23,6 +25,7 @@ class displayListingViewController: UIViewController {
     @IBOutlet weak var scrollReview: UIScrollView!
     @IBOutlet weak var reviewText: UITextView!
     
+    @IBAction func unwindToDsiplay(segue: UIStoryboardSegue) {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,6 +118,17 @@ class displayListingViewController: UIViewController {
             }
             
             else {
+//                }
+
+
+
+                self.label.text = address as! String
+                self.label2.text = landlordName as! String
+
+                // TROUBLE: how to set label with an int? rent is an int, and swift is complaining.
+                //let newrent = rent as! String
+                //self.label3.text = newrent as! String
+            } else {
                 print("Document does not exist")
             }
         }
@@ -135,11 +149,49 @@ class displayListingViewController: UIViewController {
 
 
     }
-    var mk:String = ""
     var info:String = ""
+    var Em:String = ""
     
     @IBAction func reviewListing(_ sender: UIButton) {
+        let user = Auth.auth().currentUser
+        if let user = user {
+            // The user's ID, unique to the Firebase project.
+            // Do NOT use this value to authenticate with your backend server,
+            // if you have one. Use getTokenWithCompletion:completion: instead.
+            let email = user.email
+            Em = email!
+            // ...
+            
+        }
+        
         performSegue(withIdentifier: "listingToWrite", sender: self)
+        
+        let docRef = db.collection("listings").document(info)
+        docRef.getDocument { (document,error) in
+            if let document = document, document.exists {
+                var emailExists:Bool = false
+                let review = document.get("reviews") as! NSDictionary
+                
+                for (reviewer, _) in review {
+                    let reviewer = reviewer as! String
+                    if (reviewer == self.Em) {
+                        emailExists = true
+                    }
+                }
+                
+                if (emailExists) {
+                    let alert = UIAlertController(title: "Careful!", message: "You have already written reviews before! New post will overwrite!", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    
+                }
+                
+                
+            }
+        }
+        
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -147,9 +199,13 @@ class displayListingViewController: UIViewController {
         if segue.destination is WriteReviewViewController
         {
             let vc = segue.destination as? WriteReviewViewController
-            vc?.info = mk
+            vc?.info = info
         }
-    }
+        if segue.destination is ReportViewController
+        {
+            let vc = segue.destination as? ReportViewController
+            vc?.str = info
+        }    }
     
     
     @IBAction func reportProblem(_ sender: UIButton) {

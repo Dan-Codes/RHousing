@@ -16,6 +16,9 @@ PODS:
   - Firebase/Firestore (5.17.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (= 1.0.1)
+  - Firebase/Storage (5.17.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (= 3.1.0)
   - FirebaseAnalytics (5.6.0):
     - FirebaseCore (~> 5.3)
     - FirebaseInstanceID (~> 3.5)
@@ -52,6 +55,10 @@ PODS:
     - FirebaseCore (~> 5.3)
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseStorage (3.1.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseUI/Auth (6.1.1):
     - Firebase/Auth (~> 5.0)
     - GoogleUtilities/UserDefaults
@@ -129,6 +136,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
+  - Firebase/Storage
   - FirebaseUI/Auth
   - FirebaseUI/Google
   - GoogleMaps
@@ -144,6 +152,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseFirestore
     - FirebaseInstanceID
+    - FirebaseStorage
     - FirebaseUI
     - GoogleAppMeasurement
     - GoogleMaps
@@ -167,6 +176,7 @@ SPEC CHECKSUMS:
   FirebaseCore: c0c4befb82374d6aef64d800e569f47625352edc
   FirebaseFirestore: e95af4fe30552092d6e72a8f97ea475d93891b75
   FirebaseInstanceID: 4522aad88f69297622062c0e9ffccdee3dd9b151
+  FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
   FirebaseUI: 1345f778d53f9484f21474c7b10bba313b28a76b
   GoogleAppMeasurement: 008e04ecd8efedd97a693aea8634aefe220bd26e
   GoogleMaps: fd5c9fa58871781b9fb94d4936f19c69fe60ce32
@@ -181,6 +191,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
-PODFILE CHECKSUM: c59a1e65561c3101c68788fa44a9297ab7a4d6e9
+PODFILE CHECKSUM: 1ca725ed0de27acb1d61ec665fee4514ae621ea5
 
 COCOAPODS: 1.6.1

@@ -25,9 +25,6 @@ extension UIViewController{
 }
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-    
-    
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +34,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         firstName.delegate = self
         lastName.delegate = self
         
-        self.hideKeyboardWhenTap()  
+        self.hideKeyboardWhenTap()
+        
         // Do any additional setup after loading the view.
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
