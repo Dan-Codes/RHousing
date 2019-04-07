@@ -10,11 +10,9 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class displayListingViewController: UIViewController { // , UITableViewDataSource, UITableViewDelegate
+class displayListingViewController: UIViewController {
 
     // adding a comment here from kevin
-    
-    
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var label2: UILabel!
@@ -22,11 +20,11 @@ class displayListingViewController: UIViewController { // , UITableViewDataSourc
     @IBOutlet weak var AddressLabel: UILabel!
     @IBOutlet weak var landlordLabel: UILabel!
     @IBOutlet weak var rentPriceLabel: UILabel!
-    
-    
-    //@IBOutlet weak var reviewTable: UITableView!
-    
 
+    
+    @IBOutlet weak var scrollReview: UIScrollView!
+    @IBOutlet weak var reviewText: UITextView!
+    
     @IBAction func unwindToDsiplay(segue: UIStoryboardSegue) {}
     
     override func viewDidLoad() {
@@ -35,51 +33,50 @@ class displayListingViewController: UIViewController { // , UITableViewDataSourc
         AddressLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
         landlordLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
         rentPriceLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+        
+        scrollReview.contentLayoutGuide.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
 
         // Do any additional setup after loading the view.
-        //print("displayu")
-        //print(info)
-
 
         let docRef = db.collection("listings").document(info)
 
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
 
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 //print("Document data: \(dataDescription)")
 
                 let address = document.get("address") ?? ""
                 let rent = (document.get("rent"))
-                let landlordName = document.get("landlordName") ?? ""
-                //let review = document.get("reviews") as! NSDictionary //NSMapTable<AnyObject, AnyObject>
-                // currently this gives a fatal error when a house w/ no reviews is clicked,
-                // but we should make sure that every listing comes with an NSDictionary (aka review map)
-                // when created.
-
-
-                //for (key,val) in review {
-                //    print(key)
-                //    print("\n\n")
-                //    let newVal = val as! NSDictionary
-                //    for (key2, val2) in newVal {
-                //        print(key2)
-                //        print(val2)
-                //    }
-                //}
-
-
-                // Retreiving values from map of maps (reviews)
-
-                // make sure all fields in map are present and valid to present fatal errors.
-
+                let landlordName = document.get("landlordName") ?? "No Landlord Information"
+                
+                 //COMMENT THIS SECTION OF CODE OUT UNTIL THE CODE FOR ADDING AN EMPTY MAP WHEN SUBMITTING A NEW LISTING IS ADDED
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                
+//                let review = document.get("reviews") as! NSDictionary
+//
+//                //currently this gives a fatal error when a house w/ no reviews is clicked,
+//                //but we should make sure that every listing comes with an NSDictionary (aka review map)
+//                //when created.
+//
+//                //Retreiving values from map of maps (reviews)
+//                //Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
+//
+//                var reviewString = "" // current method of displaying reviews: a long chain of text
+//
 //                for (reviewer, reviewMap) in review {
 //                    let reviewer = reviewer as! String
 //                    print("reviewer: " + reviewer)
 //
 //                    let reviewMap = reviewMap as! NSDictionary
+//
+//                    if reviewMap.count == 0 { // temporary fix. doesn't fix if some fields are missing, I think.
+//                        reviewString = "No review information for " + reviewer
+//                        break
+//                    }
+//
 //                    let comments = reviewMap.value(forKey: "comments") as! String
-//                    let rating = reviewMap.value(forKey: "rating") as! Int
+//                    let rating = reviewMap.value(forKey: "rating") as! Float
 //                    let isAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
 //                    let isEdited = reviewMap.value(forKey: "isEdited") as! Bool
 //                    let willLiveAgain = reviewMap.value(forKey: "willLiveAgain") as! Bool
@@ -91,6 +88,36 @@ class displayListingViewController: UIViewController { // , UITableViewDataSourc
 //                    print("willLiveAgain: " + String(willLiveAgain))
 //
 //                    print("\n")
+//
+//                    if isAnonymous == false {
+//                        reviewString = reviewString + "Reviewer: " + String(reviewer) + "\n"
+//                    }
+//                    reviewString = reviewString + "Rating: " + String(rating) + "\n"
+//                    reviewString = reviewString + "Comments: \n" + comments + "\n"
+//                    reviewString = reviewString + "Would live again? " + (willLiveAgain ? "Yes" : "No")
+//                    reviewString = reviewString + "\n\n"
+//                    }
+//
+//                if reviewString == "" { reviewString = "There are no reviews." }
+//                self.reviewText.text = reviewString
+                
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                //END COMMENT BLOCK
+
+                self.label.text = (address as! String) // label for address
+                self.label2.text = (landlordName as! String) // label for landlord
+                
+                if(rent != nil){
+                    self.label3.text = String(format: "%@", rent as! CVarArg) // label for rent
+                }
+                else {
+                    self.label3.text = "No Rent Information" // case of nothing
+                }
+
+                self.mk = address as! String
+            }
+            
+            else {
 //                }
 
 
@@ -186,17 +213,6 @@ class displayListingViewController: UIViewController { // , UITableViewDataSourc
     }
     
     
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10 // data.count
-//
-//    }
-//
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//        // cell.textLabel?.text = data[indexPath.row]
-//        return cell
-//    }
     
     /*
     // MARK: - Navigation
