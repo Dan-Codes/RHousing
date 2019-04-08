@@ -20,6 +20,12 @@ class SecondViewController: UIViewController {
         
     }
     
+    
+    @IBAction func darkMode(_ sender: UISwitch) {
+        if !sender.isOn {
+
+    }
+    }
     @IBAction func logoutButton(_ sender: UIButton) {
         let firebaseAuth = Auth.auth()
         do {

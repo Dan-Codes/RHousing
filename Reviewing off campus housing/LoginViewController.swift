@@ -50,7 +50,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
     
-    
+   
     var isSignIn:Bool = true
     
     @IBAction func signInChange(_ sender: UISegmentedControl) {
@@ -90,16 +90,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     //go Home
                     self.performSegue(withIdentifier: "goHome", sender: self)
                     
-                    var ref: DocumentReference? = nil
-                    ref = db.collection("Users").addDocument(data: [
+//                    var ref: DocumentReference? = nil
+//                    ref = db.collection("Users").addDocument(data: [
+//                        "Email": self.emailText.text!,
+//                        "First Name" : self.firstName.text!,
+//                        "Last Name" : self.lastName.text!
+//                    ]) { err in
+//                        if let err = err {
+//                            print("Error adding document: \(err)")
+//                        } else {
+//                            print("Document added with ID: \(ref!.documentID)")
+//                        }
+//                    }
+                    
+                    db.collection("Users").document(self.emailText.text!).setData([
                         "Email": self.emailText.text!,
                         "First Name" : self.firstName.text!,
                         "Last Name" : self.lastName.text!
                     ]) { err in
                         if let err = err {
-                            print("Error adding document: \(err)")
+                            print("Error writing document: \(err)")
                         } else {
-                            print("Document added with ID: \(ref!.documentID)")
+                            print("Document successfully written!")
                         }
                     }
                 }

@@ -116,7 +116,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             
             let adData: [String:Any] = [
                 "address": str,
-                "geopoint": GeoPoint(latitude: lat!, longitude: lon!)
+                "geopoint": GeoPoint(latitude: lat!, longitude: lon!),
+                "reviews": ([:])
             ]
             
             db.collection("listings").document(str).setData(adData) { err in

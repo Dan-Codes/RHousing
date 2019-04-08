@@ -92,7 +92,7 @@ class displayListingViewController: UIViewController {
                     if isAnonymous == false {
                         reviewString = reviewString + "Reviewer: " + String(reviewer) + "\n"
                     }
-                    reviewString = reviewString + "Rating: " + String(rating) + "\n"
+                    reviewString = reviewString + "Rating: " + String(format: "%.1f",rating) + "\n"
                     reviewString = reviewString + "Comments: \n" + comments + "\n"
                     reviewString = reviewString + "Would live again? " + (willLiveAgain ? "Yes" : "No")
                     reviewString = reviewString + "\n\n"
