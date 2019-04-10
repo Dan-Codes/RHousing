@@ -329,7 +329,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-D9-zab">
-                                <rect key="frame" x="186" y="209" width="62" height="21"/>
+                                <rect key="frame" x="45" y="209" width="333" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -404,6 +404,7 @@
                         <viewLayoutGuide key="safeArea" id="mVw-HJ-p89"/>
                     </view>
                     <connections>
+                        <outlet property="address" destination="OVH-D9-zab" id="f4Y-YJ-o0q"/>
                         <outlet property="anonymous" destination="Dcx-OL-6d2" id="L2L-qZ-2N3"/>
                         <outlet property="comment" destination="90I-dw-7f8" id="yZM-v8-SDi"/>
                         <outlet property="liveAgain" destination="lxu-hD-CyG" id="7gC-2l-LCr"/>

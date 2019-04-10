@@ -13,9 +13,10 @@ import FirebaseAuth
 
 class WriteReviewViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var address: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        address.text = info
         comment.delegate = self as? UITextViewDelegate
         let borderColor : UIColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
         comment.layer.borderColor = borderColor.cgColor
