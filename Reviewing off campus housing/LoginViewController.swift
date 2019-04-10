@@ -25,6 +25,15 @@ extension UIViewController{
 }
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        print("EMAIL")
+        print(emailID)
+        let vc = segue.destination as? SecondViewController
+        vc?.email = emailID
+        let vc2 = segue.destination as? FirstViewController
+        vc2?.emailID = emailID
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +58,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
-    
+    var emailID:String = ""
    
     var isSignIn:Bool = true
     
@@ -74,6 +83,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             Auth.auth().signIn(withEmail: emailText.text!, password: passText.text!) { [weak self] user, error in
                 //guard let strongSelf = self else { return }
                 if user != nil{
+                self?.emailID = self?.emailText.text ?? ""
                 self?.performSegue(withIdentifier: "goHome", sender: self)
                 }
                 else{
@@ -120,6 +130,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             }        }
     }
+    
+    
 }
 
 extension LoginViewController: FUIAuthDelegate{
@@ -133,4 +145,5 @@ extension LoginViewController: FUIAuthDelegate{
 
         performSegue(withIdentifier: "goHome", sender: self)
     }
+    
 }

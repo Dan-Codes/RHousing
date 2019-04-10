@@ -20,11 +20,14 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
     var resultView: UITextView?
+    var camera:GMSCameraPosition!
+    var mapView: GMSMapView!
+    var emailID:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        print(emailID)
         GMSServices.provideAPIKey("AIzaSyAcN8tyZ3brV52PRFzqbhQd5wuWnWgd_MQ")
         GMSPlacesClient.provideAPIKey("AIzaSyAcN8tyZ3brV52PRFzqbhQd5wuWnWgd_MQ")
         //createMapView()
@@ -49,14 +52,9 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         printPin()
     }
     
-    func createMapView(){
-        let camera = GMSCameraPosition.camera(withLatitude: 43.038710, longitude: -76.134265, zoom: 15)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        view = mapView
-    }
     func printPin(){
-        let camera = GMSCameraPosition.camera(withLatitude: 43.038710, longitude: -76.134265, zoom: 15)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        camera = GMSCameraPosition.camera(withLatitude: 43.038710, longitude: -76.134265, zoom: 15)
+        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
         do {
             // Set the map style by passing the URL of the local file.
@@ -90,9 +88,9 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                         let marker = GMSMarker(position: position)
                         marker.icon = GMSMarker.markerImage(with: customRedMarker)
                         marker.title = "\(String(describing: address))"
-                        marker.map = mapView
+                        marker.map = self.mapView
                         marker.snippet = "Tap to see more details!"
-                        mapView.delegate=self
+                        self.mapView.delegate=self
                     }
                 }
                 
@@ -134,6 +132,8 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         {
             let vc = segue.destination as? displayListingViewController
             vc?.info = mk!
+            let vc2 = segue.destination as? SecondViewController
+            vc2?.email = emailID
         }
     }
     

@@ -12,19 +12,39 @@ import FirebaseAuth
 import FirebaseUI
 
 class SecondViewController: UIViewController {
+    var email:String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
        // tabBarController?.selectedIndex = 1
-        
+        print(email)
     }
-    
     
     @IBAction func darkMode(_ sender: UISwitch) {
         if !sender.isOn {
-
-        }
+//            db.collection("Users").document(email).setData([
+//                "DarkMode": true
+//            ]) { err in
+//                if let err = err {
+//                    print("Error writing document: \(err)")
+//                } else {
+//                    print("Document successfully written!")
+//                }
+//            }
+//        }
+//        else{
+//            db.collection("Users").document(email).setData([
+//                "DarkMode": false
+//            ]) { err in
+//                if let err = err {
+//                    print("Error writing document: \(err)")
+//                } else {
+//                    print("Document successfully written!")
+//                }
+//        }
+//
+    }
     }
     
     @IBAction func logoutButton(_ sender: UIButton) {
