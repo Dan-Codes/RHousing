@@ -87,6 +87,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self?.performSegue(withIdentifier: "goHome", sender: self)
                 }
                 else{
+                    
+                    let alert = UIAlertController(title: "Oops!", message: "The account you entered does not exist, check your email password!", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                    self!.present(alert, animated: true)
                     return;
                     //error
                 }
