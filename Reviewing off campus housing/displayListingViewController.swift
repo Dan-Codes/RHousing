@@ -150,6 +150,13 @@ class displayListingViewController: UIViewController {
     var info:String = ""
     var Em:String = ""
     
+    @IBAction func deleteReview(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Are you sure you want to delete?", message: "yes or no", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in print("Delete")}))
+        self.present(alert, animated: true)
+        return;
+    }
     @IBAction func reviewListing(_ sender: UIButton) {
         let user = Auth.auth().currentUser
         if let user = user {
