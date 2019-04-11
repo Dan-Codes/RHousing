@@ -20,7 +20,11 @@ class displayListingViewController: UIViewController {
     @IBOutlet weak var AddressLabel: UILabel!
     @IBOutlet weak var landlordLabel: UILabel!
     @IBOutlet weak var rentPriceLabel: UILabel!
-
+    @IBOutlet weak var avgRating: UILabel!
+    var AverageRating:Double = 0
+    var countReviews:Double = 0
+    
+    
     
     @IBOutlet weak var scrollReview: UIScrollView!
     @IBOutlet weak var reviewText: UITextView!
@@ -77,6 +81,8 @@ class displayListingViewController: UIViewController {
 
                     let comments = reviewMap.value(forKey: "comments") as! String
                     let rating = reviewMap.value(forKey: "rating") as! Float
+                    self.AverageRating = self.AverageRating + Double(rating)
+                    self.countReviews = self.countReviews + 1
                     let isAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
                     let isEdited = reviewMap.value(forKey: "isEdited") as! Bool
                     let willLiveAgain = reviewMap.value(forKey: "willLiveAgain") as! Bool
@@ -118,6 +124,10 @@ class displayListingViewController: UIViewController {
             }
             else {
                 print("Document does not exist")
+            }
+            if (self.countReviews != 0) {
+            let avgrate = (self.AverageRating/self.countReviews)
+            self.avgRating.text = String(format: "%.1f", avgrate)
             }
         }
  

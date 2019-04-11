@@ -49,6 +49,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         @IBOutlet weak var state: UITextField!
         @IBOutlet weak var zipcd: UITextField!
         @IBOutlet weak var landlord: UITextField!
+    
         
         @IBOutlet weak var uploadButton: UIButton!
         @IBOutlet weak var fileName: UILabel!
@@ -105,6 +106,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
     
     @IBAction func uploadProperty(_ sender: UIButton) {
         let str = adrs1.text! + " " + city.text! + ", " + state.text! + " " + zipcd.text!
+        let landlordName = landlord.text!
+        print(landlordName)
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(str) {
             placemarks, error in
@@ -117,7 +120,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             let adData: [String:Any] = [
                 "address": str,
                 "geopoint": GeoPoint(latitude: lat!, longitude: lon!),
-                "reviews": ([:])
+                "reviews": ([:]),
+                "landlordName": landlordName
             ]
             
             db.collection("listings").document(str).setData(adData) { err in

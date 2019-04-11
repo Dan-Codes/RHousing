@@ -88,7 +88,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
                 else{
                     
-                    let alert = UIAlertController(title: "Oops!", message: "The account you entered does not exist, check your email password!", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Invalid Input", message: "Your email and password do not match our database.\nIf you do not have an account, please sign up.", preferredStyle: .alert)
                     
                     alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
                     self!.present(alert, animated: true)
@@ -131,7 +131,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
                 else{
-                    //error
+                    let alert = UIAlertController(title: "Invalid Input", message: "Please make sure you typed a valid email and your password is longer than six characters.", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                    return;
                 }
             }        }
     }
