@@ -14,6 +14,10 @@ import FirebaseStorage
 
 class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var varLat:Double = 0
+    var varLong:Double = 0
+    
+    
     let myPickerData = [String](arrayLiteral: "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA",
                                 "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN",
                                 "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK",
@@ -32,7 +36,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         city.delegate = self
         zipcd.delegate = self
         imagePicker.delegate = self
-        rent.delegate = self
+        //rent.delegate = self
         
         self.hideKeyboardWhenTap()
     }
@@ -104,6 +108,16 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         state.text = myPickerData[row]
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+//    {
+//        if segue.identifier == "ThirdtoTab" {
+//        let vc = segue.destination as? FirstViewController
+//        vc?.lat = varLat
+//        let vc2 = segue.destination as? FirstViewController
+//        vc2?.lat = varLong
+//        }
+//    }
+    
     
     @IBAction func uploadProperty(_ sender: UIButton) {
         let str = adrs1.text! + " " + city.text! + ", " + state.text! + " " + zipcd.text!
@@ -115,6 +129,10 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             let placemark = placemarks?.first
             let lat = placemark?.location?.coordinate.latitude
             let lon = placemark?.location?.coordinate.longitude
+            self.varLat = (lat)!
+            self.varLong = (lon)!
+            latlong().long = lon!
+            latlong().lat = lat!
             print("Lat: \(lat), Lon: \(lon)")
             
             
@@ -131,8 +149,9 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                     print("Error writing document: \(err)")
                 } else {
                     print("Document successfully written!")
-                    FirstViewController().printPin()
-                    self.performSegue(withIdentifier: "thirdtoTab", sender: self)                }
+                    self.performSegue(withIdentifier: "thirdtoTab", sender: self)
+                    
+                }
             }
 
         }

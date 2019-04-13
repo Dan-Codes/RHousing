@@ -548,7 +548,7 @@
                         <outlet property="rent" destination="Lz5-CE-5yP" id="rCu-9G-nwd"/>
                         <outlet property="state" destination="25e-j1-DfO" id="mNS-h8-0E0"/>
                         <outlet property="zipcd" destination="cUi-tx-jnc" id="KzF-gy-93e"/>
-                        <segue destination="49e-Tb-3d3" kind="showDetail" identifier="thirdtoTab" id="vjc-PQ-KVe"/>
+                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="thirdtoTab" id="vjc-PQ-KVe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YIL-YI-JAj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -752,13 +752,13 @@
     </scenes>
     <resources>
         <image name="25694" width="30" height="30"/>
-        <image name="addNewProperty" width="1920" height="448"/>
+        <image name="addNewProperty" width="960" height="224"/>
         <image name="icon" width="30" height="30"/>
-        <image name="loginLogo" width="951" height="951"/>
+        <image name="loginLogo" width="475" height="475"/>
         <image name="settings_black_192x192" width="30" height="30"/>
-        <image name="signMeIn" width="1920" height="505"/>
-        <image name="submit" width="1920" height="542"/>
-        <image name="uploadAnImage-1" width="1920" height="266"/>
+        <image name="signMeIn" width="960" height="252"/>
+        <image name="submit" width="960" height="271"/>
+        <image name="uploadAnImage-1" width="960" height="133"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jMM-kj-xyt"/>
