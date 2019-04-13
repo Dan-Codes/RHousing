@@ -31,7 +31,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         adrs2.delegate = self
         city.delegate = self
         zipcd.delegate = self
-        imagePicker.delegate = self
         rent.delegate = self
         
         self.hideKeyboardWhenTap()
@@ -41,9 +40,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             self.view.endEditing(true)
             return true
         }
-        
-        
-        
+    
         @IBOutlet weak var adrs1: UITextField!
         @IBOutlet weak var adrs2: UITextField!
         @IBOutlet weak var city: UITextField!
@@ -51,41 +48,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         @IBOutlet weak var zipcd: UITextField!
         @IBOutlet weak var landlord: UITextField!
         @IBOutlet weak var rent: UITextField!
-    
-    @IBOutlet weak var uploadButton: UIButton!
-        @IBOutlet weak var fileName: UILabel!
-        @IBOutlet weak var imageView: UIImageView!
-    
-    
-        let imagePicker = UIImagePickerController()
-    
-        @IBAction func uploadPushed(_ sender: UIButton) {
-            imagePicker.allowsEditing = false
-            imagePicker.sourceType = .photoLibrary
-            present(imagePicker, animated: true, completion: nil)
-        }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        dismiss(animated: true, completion: nil)
-        
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            imageView.contentMode = .scaleAspectFit
-            imageView.image = pickedImage
-            //print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-            //print(pickedImage)
-           // var data = Data()
-            //let houseImage = storageRef.child("\(pickedImage)")
-            
-            
-            
-        }
-        
-       
-    }
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("Cancelled")
-        dismiss(animated: true, completion: nil)
-    }
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
