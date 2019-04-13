@@ -15,7 +15,12 @@ class SecondViewController: UIViewController {
 
     var email:String = ""
     
-
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var firstName: UILabel!
+    @IBOutlet weak var lastName: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var displayEmail: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -26,7 +31,6 @@ class SecondViewController: UIViewController {
             // The user's ID, unique to the Firebase project.
             // Do NOT use this value to authenticate with your backend server,
             // if you have one. Use getTokenWithCompletion:completion: instead.
-            
             email = user.email!
             
         }
@@ -36,6 +40,14 @@ class SecondViewController: UIViewController {
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 print("Document data: \(dataDescription)")
+                
+                let fN = document.get("First Name") ?? ""
+                self.firstName.text = (fN as! String)
+                let lN = document.get("Last Name") ?? ""
+                self.lastName.text = (lN as! String)
+                let getEmail = document.get("Email") ?? ""
+                self.displayEmail.text = (getEmail as! String)
+                
             } else {
                 print("Document does not exist")
             }

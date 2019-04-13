@@ -14,6 +14,10 @@ import FirebaseStorage
 
 class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var varLat:Double = 0
+    var varLong:Double = 0
+    
+    
     let myPickerData = [String](arrayLiteral: "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA",
                                 "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN",
                                 "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK",
@@ -31,8 +35,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         adrs2.delegate = self
         city.delegate = self
         zipcd.delegate = self
-        imagePicker.delegate = self
-        rent.delegate = self
         
         self.hideKeyboardWhenTap()
     }
@@ -41,52 +43,21 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             self.view.endEditing(true)
             return true
         }
-        
-        
-        
+    
+        @IBOutlet weak var address1Label: UILabel!
         @IBOutlet weak var adrs1: UITextField!
+        @IBOutlet weak var address2Label: UILabel!
         @IBOutlet weak var adrs2: UITextField!
+        @IBOutlet weak var cityLabel: UILabel!
         @IBOutlet weak var city: UITextField!
+        @IBOutlet weak var stateLabel: UILabel!
         @IBOutlet weak var state: UITextField!
+        @IBOutlet weak var zipCodeLabel: UILabel!
         @IBOutlet weak var zipcd: UITextField!
+        @IBOutlet weak var landlordLabel: UILabel!
         @IBOutlet weak var landlord: UITextField!
-        @IBOutlet weak var rent: UITextField!
-    
-    @IBOutlet weak var uploadButton: UIButton!
-        @IBOutlet weak var fileName: UILabel!
-        @IBOutlet weak var imageView: UIImageView!
-    
-    
-        let imagePicker = UIImagePickerController()
-    
-        @IBAction func uploadPushed(_ sender: UIButton) {
-            imagePicker.allowsEditing = false
-            imagePicker.sourceType = .photoLibrary
-            present(imagePicker, animated: true, completion: nil)
-        }
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        dismiss(animated: true, completion: nil)
-        
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            imageView.contentMode = .scaleAspectFit
-            imageView.image = pickedImage
-            //print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-            //print(pickedImage)
-           // var data = Data()
-            //let houseImage = storageRef.child("\(pickedImage)")
-            
-            
-            
-        }
-        
-       
-    }
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("Cancelled")
-        dismiss(animated: true, completion: nil)
-    }
-    
+        @IBOutlet weak var rentCostLabel: UILabel!
+        @IBOutlet weak var rentCost: UITextField!
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -104,10 +75,21 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         state.text = myPickerData[row]
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+//    {
+//        if segue.identifier == "ThirdtoTab" {
+//        let vc = segue.destination as? FirstViewController
+//        vc?.lat = varLat
+//        let vc2 = segue.destination as? FirstViewController
+//        vc2?.lat = varLong
+//        }
+//    }
+    
     
     @IBAction func uploadProperty(_ sender: UIButton) {
         let str = adrs1.text! + " " + city.text! + ", " + state.text! + " " + zipcd.text!
         let landlordName = landlord.text!
+        let costOfRent = rentCost.text!
         print(landlordName)
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(str) {
@@ -115,6 +97,10 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             let placemark = placemarks?.first
             let lat = placemark?.location?.coordinate.latitude
             let lon = placemark?.location?.coordinate.longitude
+            self.varLat = (lat)!
+            self.varLong = (lon)!
+            latlong().long = lon!
+            latlong().lat = lat!
             print("Lat: \(lat), Lon: \(lon)")
             
             
@@ -122,8 +108,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                 "address": str,
                 "geopoint": GeoPoint(latitude: lat!, longitude: lon!),
                 "reviews": ([:]),
-                "landlordName": landlordName
-                // rent needed here
+                "landlordName": landlordName,
+                "rent": costOfRent
             ]
             
             db.collection("listings").document(str).setData(adData) { err in
@@ -131,8 +117,9 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                     print("Error writing document: \(err)")
                 } else {
                     print("Document successfully written!")
-                    FirstViewController().printPin()
-                    self.performSegue(withIdentifier: "thirdtoTab", sender: self)                }
+                    self.performSegue(withIdentifier: "thirdtoTab", sender: self)
+                    
+                }
             }
 
         }

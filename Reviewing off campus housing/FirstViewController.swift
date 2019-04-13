@@ -10,8 +10,12 @@ import Firebase
 import GoogleMaps
 import GooglePlaces
 
-var objgVC = FirstViewController()
+class latlong {
+    var lat = 43.038710
+    var long = -76.134265
+}
 
+var objgVC = FirstViewController()
 class FirstViewController: UIViewController, GMSMapViewDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -24,10 +28,12 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
     var mapView: GMSMapView!
     var emailID:String = ""
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(emailID)
+        //print(emailID)
         GMSServices.provideAPIKey("AIzaSyAcN8tyZ3brV52PRFzqbhQd5wuWnWgd_MQ")
         GMSPlacesClient.provideAPIKey("AIzaSyAcN8tyZ3brV52PRFzqbhQd5wuWnWgd_MQ")
         //createMapView()
@@ -50,10 +56,12 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         // Prevent the navigation bar from being hidden when searching.
         searchController?.hidesNavigationBarDuringPresentation = false
         printPin()
+       
     }
     
+    
     func printPin(){
-        camera = GMSCameraPosition.camera(withLatitude: 43.038710, longitude: -76.134265, zoom: 15)
+        camera = GMSCameraPosition.camera(withLatitude: latlong().lat, longitude: latlong().long, zoom: 15)
         mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
         do {
@@ -84,7 +92,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
 //                        print("\(document.documentID) => \(document.data())")
                         
                         let position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                        let customRedMarker = UIColor(rgb: 0x820B1D)
+                        let customRedMarker = UIColor(rgb: 0x085972)
                         let marker = GMSMarker(position: position)
                         marker.icon = GMSMarker.markerImage(with: customRedMarker)
                         marker.title = "\(String(describing: address))"
