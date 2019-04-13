@@ -123,6 +123,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                 "geopoint": GeoPoint(latitude: lat!, longitude: lon!),
                 "reviews": ([:]),
                 "landlordName": landlordName
+                // rent needed here
             ]
             
             db.collection("listings").document(str).setData(adData) { err in
