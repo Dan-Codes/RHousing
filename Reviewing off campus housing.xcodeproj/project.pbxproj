@@ -11,8 +11,8 @@
 		03B918F92242B2DF006AB87D /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B918F82242B2DF006AB87D /* ThirdViewController.swift */; };
 		310DEB88FC129CD8C8D6A54E /* Pods_Reviewing_off_campus_housing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D1C8F91BAC2DF119C51E77 /* Pods_Reviewing_off_campus_housing.framework */; };
 		341DCC2522569E6800774A19 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DCC2422569E6800774A19 /* WriteReviewViewController.swift */; };
-		3441BE502262700600D4779F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3441BE4F2262700600D4779F /* GoogleService-Info.plist */; };
 		3452F6982253FB8400BCDF89 /* displayListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3452F6972253FB8400BCDF89 /* displayListingViewController.swift */; };
+		BE551ED222628300004EFB86 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE551ED122628300004EFB86 /* GoogleService-Info.plist */; };
 		D969AB72222A46CD00CA9773 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D969AB71222A46CD00CA9773 /* LoginViewController.swift */; };
 		E3F21CEC2229DD15005B5D15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F21CEB2229DD15005B5D15 /* AppDelegate.swift */; };
 		E3F21CEE2229DD15005B5D15 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F21CED2229DD15005B5D15 /* FirstViewController.swift */; };
@@ -28,9 +28,9 @@
 		03B918F82242B2DF006AB87D /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		1382C2AA33F905E1C1AF4BAC /* Pods-Reviewing off campus housing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reviewing off campus housing.debug.xcconfig"; path = "Target Support Files/Pods-Reviewing off campus housing/Pods-Reviewing off campus housing.debug.xcconfig"; sourceTree = "<group>"; };
 		341DCC2422569E6800774A19 /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
-		3441BE4F2262700600D4779F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3452F6972253FB8400BCDF89 /* displayListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = displayListingViewController.swift; sourceTree = "<group>"; };
 		5CA0FEBF347C3C0EFE492930 /* Pods-Reviewing off campus housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reviewing off campus housing.release.xcconfig"; path = "Target Support Files/Pods-Reviewing off campus housing/Pods-Reviewing off campus housing.release.xcconfig"; sourceTree = "<group>"; };
+		BE551ED122628300004EFB86 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D969AB71222A46CD00CA9773 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E3F21CE82229DD15005B5D15 /* Reviewing off campus housing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reviewing off campus housing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3F21CEB2229DD15005B5D15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,10 +104,10 @@
 				E7E359AE2258FB5000CBA815 /* ReportViewController.swift */,
 				03B918F82242B2DF006AB87D /* ThirdViewController.swift */,
 				D969AB71222A46CD00CA9773 /* LoginViewController.swift */,
+				BE551ED122628300004EFB86 /* GoogleService-Info.plist */,
 				E3F21CF42229DD16005B5D15 /* Assets.xcassets */,
 				E3F21CF62229DD16005B5D15 /* LaunchScreen.storyboard */,
 				E3F21CF92229DD16005B5D15 /* Info.plist */,
-				3441BE4F2262700600D4779F /* GoogleService-Info.plist */,
 			);
 			path = "Reviewing off campus housing";
 			sourceTree = "<group>";
@@ -175,7 +175,7 @@
 			files = (
 				E3F21CF82229DD16005B5D15 /* LaunchScreen.storyboard in Resources */,
 				031203C2225E74B0006ADCDA /* dark.json in Resources */,
-				3441BE502262700600D4779F /* GoogleService-Info.plist in Resources */,
+				BE551ED222628300004EFB86 /* GoogleService-Info.plist in Resources */,
 				E3F21CF52229DD16005B5D15 /* Assets.xcassets in Resources */,
 				E3F21CF32229DD15005B5D15 /* Main.storyboard in Resources */,
 			);
