@@ -35,12 +35,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         adrs2.delegate = self
         city.delegate = self
         zipcd.delegate = self
-<<<<<<< HEAD
         rent.delegate = self
-=======
-        imagePicker.delegate = self
-        //rent.delegate = self
->>>>>>> 618a8edcf820a44c203e67350b90a51dba51a323
         
         self.hideKeyboardWhenTap()
     }
