@@ -77,32 +77,40 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signIn(_ sender: UIButton) {
-        //check if signed in or register
-        if isSignIn{
-            //sign in
+        
+        // check if signed in or register
+        if isSignIn {
+            
+            // sign in
             Auth.auth().signIn(withEmail: emailText.text!, password: passText.text!) { [weak self] user, error in
-                //guard let strongSelf = self else { return }
-                if user != nil{
-                self?.emailID = self?.emailText.text ?? ""
-                self?.performSegue(withIdentifier: "goHome", sender: self)
-                }
-                else{
-                    
-                    let alert = UIAlertController(title: "Invalid Input", message: "Your email and password do not match our database.\nIf you do not have an account, please sign up.", preferredStyle: .alert)
-                    
+                
+                // guard let strongSelf = self else { return }
+                if user != nil {
+                    self?.emailID = self?.emailText.text ?? ""
+                    self?.performSegue(withIdentifier: "goHome", sender: self)
+                
+                } else {
+                    let alert = UIAlertController(title: "Invalid input", message: "Your email and password do not match your account credentials. If you do not have an account, please sign up.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
                     self!.present(alert, animated: true)
                     return;
                     //error
                 }
-                }
+                
+            }
             
         }
-        else{
-            //Register
+            
+        else {
+            
+            // register new user
             Auth.auth().createUser(withEmail: emailText.text!, password: passText.text!) { authResult, error in
-                if authResult != nil{
-                    //go Home
+                
+                let last7 = String(self.emailText.text!.suffix(7))
+                
+                if authResult != nil && last7 == "syr.edu" {
+                    
+                    // goHome
                     self.performSegue(withIdentifier: "goHome", sender: self)
                     
 //                    var ref: DocumentReference? = nil
@@ -119,9 +127,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //                    }
                     
                     db.collection("Users").document(self.emailText.text!).setData([
-                        "Email": self.emailText.text!,
-                        "First Name" : self.firstName.text!,
-                        "Last Name" : self.lastName.text!
+                        "E-mail": self.emailText.text!,
+                        "First name" : self.firstName.text!,
+                        "Last name" : self.lastName.text!
                     ]) { err in
                         if let err = err {
                             print("Error writing document: \(err)")
@@ -129,16 +137,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             print("Document successfully written!")
                         }
                     }
-                }
-                else{
-                    let alert = UIAlertController(title: "Invalid Input", message: "Please make sure you typed a valid email and your password is longer than six characters.", preferredStyle: .alert)
-                    
+                
+                } else {
+                    let alert = UIAlertController(title: "Invalid input", message: "Please make sure you typed a valid SU email and your password is longer than six characters. If you already have an account, click log in.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
                     self.present(alert, animated: true)
                     return;
                 }
-            }        }
-    }
+                
+            }  // end Auth.auth().createUser()
+
+        }  // end else
+        
+    }  // end func signIn()
     
     func getEmail() -> String{
         return emailID

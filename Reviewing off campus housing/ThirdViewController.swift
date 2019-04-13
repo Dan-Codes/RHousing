@@ -35,7 +35,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         adrs2.delegate = self
         city.delegate = self
         zipcd.delegate = self
-        rent.delegate = self
         
         self.hideKeyboardWhenTap()
     }
@@ -45,14 +44,20 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             return true
         }
     
+        @IBOutlet weak var address1Label: UILabel!
         @IBOutlet weak var adrs1: UITextField!
+        @IBOutlet weak var address2Label: UILabel!
         @IBOutlet weak var adrs2: UITextField!
+        @IBOutlet weak var cityLabel: UILabel!
         @IBOutlet weak var city: UITextField!
+        @IBOutlet weak var stateLabel: UILabel!
         @IBOutlet weak var state: UITextField!
+        @IBOutlet weak var zipCodeLabel: UILabel!
         @IBOutlet weak var zipcd: UITextField!
+        @IBOutlet weak var landlordLabel: UILabel!
         @IBOutlet weak var landlord: UITextField!
-        @IBOutlet weak var rent: UITextField!
-    
+        @IBOutlet weak var rentCostLabel: UILabel!
+        @IBOutlet weak var rentCost: UITextField!
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -84,6 +89,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
     @IBAction func uploadProperty(_ sender: UIButton) {
         let str = adrs1.text! + " " + city.text! + ", " + state.text! + " " + zipcd.text!
         let landlordName = landlord.text!
+        let costOfRent = rentCost.text!
         print(landlordName)
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(str) {
@@ -102,8 +108,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                 "address": str,
                 "geopoint": GeoPoint(latitude: lat!, longitude: lon!),
                 "reviews": ([:]),
-                "landlordName": landlordName
-                // rent needed here
+                "landlordName": landlordName,
+                "rent": costOfRent
             ]
             
             db.collection("listings").document(str).setData(adData) { err in

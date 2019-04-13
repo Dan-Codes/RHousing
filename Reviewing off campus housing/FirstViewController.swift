@@ -93,7 +93,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
 //                        print("\(document.documentID) => \(document.data())")
                         
                         let position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                        let customRedMarker = UIColor(rgb: 0x820B1D)
+                        let customRedMarker = UIColor(rgb: 0x085972)
                         let marker = GMSMarker(position: position)
                         marker.icon = GMSMarker.markerImage(with: customRedMarker)
                         marker.title = "\(String(describing: address))"
