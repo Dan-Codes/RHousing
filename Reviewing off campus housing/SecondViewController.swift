@@ -12,7 +12,9 @@ import FirebaseAuth
 import FirebaseUI
 
 class SecondViewController: UIViewController {
+
     var email:String = ""
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,8 @@ class SecondViewController: UIViewController {
        // tabBarController?.selectedIndex = 1
         print(email)
     }
+    
+    
     
     @IBAction func darkMode(_ sender: UISwitch) {
         if !sender.isOn {

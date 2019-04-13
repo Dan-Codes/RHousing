@@ -32,6 +32,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         city.delegate = self
         zipcd.delegate = self
         imagePicker.delegate = self
+        rent.delegate = self
         
         self.hideKeyboardWhenTap()
     }
@@ -49,9 +50,9 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         @IBOutlet weak var state: UITextField!
         @IBOutlet weak var zipcd: UITextField!
         @IBOutlet weak var landlord: UITextField!
+        @IBOutlet weak var rent: UITextField!
     
-        
-        @IBOutlet weak var uploadButton: UIButton!
+    @IBOutlet weak var uploadButton: UIButton!
         @IBOutlet weak var fileName: UILabel!
         @IBOutlet weak var imageView: UIImageView!
     
