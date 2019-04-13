@@ -93,8 +93,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             let lon = placemark?.location?.coordinate.longitude
             self.varLat = (lat)!
             self.varLong = (lon)!
-            latlong().long = lon!
-            latlong().lat = lat!
+            AppState.shared.long = lon!
+            AppState.shared.lat = lat!
             print("Lat: \(lat), Lon: \(lon)")
             
             
