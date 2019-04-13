@@ -20,7 +20,26 @@ class SecondViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
        // tabBarController?.selectedIndex = 1
-        print(email)
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+            // The user's ID, unique to the Firebase project.
+            // Do NOT use this value to authenticate with your backend server,
+            // if you have one. Use getTokenWithCompletion:completion: instead.
+            
+            email = user.email!
+            
+        }
+        let docRef = db.collection("Users").document(email)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     
@@ -49,7 +68,11 @@ class SecondViewController: UIViewController {
 //        }
 //
     }
+        
+       
     }
+    
+  
     
     @IBAction func logoutButton(_ sender: UIButton) {
         let firebaseAuth = Auth.auth()

@@ -140,7 +140,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }        }
     }
     
-    
+    func getEmail() -> String{
+        return emailID
+    }
 }
 
 extension LoginViewController: FUIAuthDelegate{
