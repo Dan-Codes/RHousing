@@ -67,8 +67,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
         }
         
         let docRef = db.collection("listings").document(info)
-
-        
+        let docUserRef = db.collection("Users").document(Em)
 
             docRef.getDocument{ (document, error) in
                 if let document = document, document.exists {
@@ -147,6 +146,25 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                             } else {
                                 print("Document successfully updated")
                             }
+                        }
+                    }
+                    
+                    docUserRef.setData([
+                        "Review History" : [
+                            "\(self.info)" : [
+                                "comments" : self.comment.text!,
+                                "isAnonymous" : self.anonymous.isOn,
+                                "rating" : self.rating.value,
+                                "willLiveAgain" : self.liveAgain.isOn,
+                                "timeStamp" : time
+                            ]
+                        ]
+                        ], merge: true)
+                    { err in
+                        if let err = err {
+                            print("Error updating document: \(err)")
+                        } else {
+                            print("Document successfully updated")
                         }
                     }
                 }
