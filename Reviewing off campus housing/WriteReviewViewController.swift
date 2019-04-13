@@ -169,6 +169,8 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
             }
+        
+        
     }
     
     var info:String = ""
