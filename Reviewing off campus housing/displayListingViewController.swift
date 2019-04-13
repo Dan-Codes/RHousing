@@ -10,12 +10,14 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class displayListingViewController: UIViewController {
+class displayListingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     // adding a comment here from kevin
     
     var AverageRating:Double = 0
     var countReviews:Double = 0
+    var reviewArr:[String] = []
+    let testArr = ["this is a long string that i am typing to see if the string goes to the second line yay", "def", "ghi"]
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var label2: UILabel!
@@ -25,46 +27,55 @@ class displayListingViewController: UIViewController {
     @IBOutlet weak var rentPriceLabel: UILabel!
     @IBOutlet weak var avgRating: UILabel!
     
+    @IBOutlet weak var reviewTable: UITableView!
     
     @IBOutlet weak var scrollReview: UIScrollView!
     @IBOutlet weak var reviewText: UITextView!
     
     @IBAction func unwindToDsiplay(segue: UIStoryboardSegue) {}
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         
         AddressLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
         landlordLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
         rentPriceLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
         avgRating.font = UIFont.boldSystemFont(ofSize: 16.0)
         
-        scrollReview.contentLayoutGuide.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
+        //scrollReview.contentLayoutGuide.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
 
         // Do any additional setup after loading the view.
 
         showReviews()
-        db.collection("listings").document(info)
-            .addSnapshotListener { documentSnapshot, error in
-                guard let document = documentSnapshot else {
-                    print("Error fetching document: \(error!)")
-                    return
-                }
-                guard let data = document.data() else {
-                    print("Document data was empty.")
-                    return
-                }
-                //print("Current data: \(data)")
-                self.showReviews()
-        }
+//        db.collection("listings").document(info)
+//            .addSnapshotListener { documentSnapshot, error in
+//                guard let document = documentSnapshot else {
+//                    print("Error fetching document: \(error!)")
+//                    return
+//                }
+//                guard let data = document.data() else {
+//                    print("Document data was empty.")
+//                    return
+//                }
+//                //print("Current data: \(data)")
+//                self.showReviews()
+//        }
+        
+        print("call from viewDidLoad")
+        print(reviewArr)
+        print("sandwich")
+        reviewTable.dataSource = self
 
     } //  end of viewDidLoad
     
     var info:String = ""
     var Em:String = ""
     
-    func showReviews(){
+    
+    
+    func showReviews() {
         let docRef = db.collection("listings").document(info)
         
         docRef.getDocument { (document, error) in
@@ -82,25 +93,22 @@ class displayListingViewController: UIViewController {
                 
                 let review = document.get("reviews") as! NSDictionary
                 
-                //currently this gives a fatal error when a house w/ no reviews is clicked,
-                //but we should make sure that every listing comes with an NSDictionary (aka review map)
-                //when created.
-                
                 //Retreiving values from map of maps (reviews)
                 //Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
                 
-                var reviewString = "" // current method of displaying reviews: a long chain of text
                 
                 for (reviewer, reviewMap) in review {
+                    var reviewString = ""
+                    
                     let reviewer = reviewer as! String
                     //print("reviewer: " + reviewer)
                     
                     let reviewMap = reviewMap as! NSDictionary
                     
-                    if reviewMap.count == 0 { // temporary fix. doesn't fix if some fields are missing, I think.
-                        reviewString = "No review information for " + reviewer
-                        break
-                    }
+//                    if reviewMap.count == 0 { // temporary fix. doesn't fix if some fields are missing, I think.
+//                        reviewString = "No review information for " + reviewer
+//                        break
+//                    }
                     
                     let comments = reviewMap.value(forKey: "comments") as! String
                     let rating = reviewMap.value(forKey: "rating") as! Float
@@ -115,20 +123,33 @@ class displayListingViewController: UIViewController {
                     print("isAnonymous: " + String(isAnonymous))
                     print("isEdited: " + String(isEdited))
                     print("willLiveAgain: " + String(willLiveAgain))
-                    
                     print("\n")
                     
-                    if isAnonymous == false {
-                        reviewString = reviewString + "Reviewer: " + String(reviewer) + "\n"
-                    }
+                    //if isAnonymous == false {
+                    reviewString = reviewString + "Reviewer: " + String(reviewer) + "\n" // account for anonymity!!!
+                    //}
                     reviewString = reviewString + "Rating: " + String(format: "%.1f",rating) + "\n"
                     reviewString = reviewString + "Comments: \n" + comments + "\n"
                     reviewString = reviewString + "Would live again? " + (willLiveAgain ? "Yes" : "No")
                     reviewString = reviewString + "\n\n"
+                    
+                    self.reviewArr.append(reviewString)
                 }
                 
-                if reviewString == "" { reviewString = "There are no reviews." }
-                self.reviewText.text = reviewString
+                print("test here")
+                print(self.reviewArr)
+                
+                print("call from showReviews")
+                print(self.reviewArr)
+                
+                
+                //if reviewString == "" { reviewString = "There are no reviews." }
+                //if self.reviewArr.count == 0 {}
+                
+                //////// self.reviewText.text = reviewString
+                
+                
+                
                 
                 // IMPORTANT NOTE TO SELF
                 // need to: for each review, put it in an array as its own element.
@@ -147,6 +168,8 @@ class displayListingViewController: UIViewController {
                     self.label3.text = "No Rent Information" // case of nothing
                 }
                 
+                
+                
                 //self.mk = address as! String
             }
             else {
@@ -158,13 +181,33 @@ class displayListingViewController: UIViewController {
                 self.avgRating.text = String(format: "%.1f", avgrate)
                 
             }
+            
+            
         }
+
         
+    } // end showReviews
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("count:" + String(self.reviewArr.count))
+        print("reviewArr:")
+        print(self.reviewArr)
+        return reviewArr.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("HELLO")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier")
+        let text = reviewArr[indexPath.row]
+        cell?.textLabel?.text = text
         
-        
-        
-        
-        
+        return cell!
+    }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     @IBAction func deleteReview(_ sender: UIButton) {
