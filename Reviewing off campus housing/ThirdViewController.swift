@@ -77,7 +77,9 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
     }
     
     func checkDidAdd(lat: Double, long: Double) -> Bool{
-        var isAdded:Bool = false
+        struct check{
+        static var isAdded:Bool = false
+        }
         db.collection("listings").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -89,7 +91,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                         let lat = point.latitude
                         let long = point.longitude
                         if abs(lat - self.varLat) < 0.000001 || abs(long - self.varLong) < 0.000001{
-                            isAdded = true
+                            check.isAdded = true
                             print("changed to true")
                             break
                         }
@@ -97,8 +99,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                 }
             }
         }
-        print("returning " + String(isAdded))
-        return isAdded
+        print("returning " + String(check.isAdded))
+        return check.isAdded
     }
     
     
@@ -121,7 +123,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             let check = self.checkDidAdd(lat: self.varLat, long: self.varLong)
             print("check")
             print(check)
-            if check != false {
+            if check  {
             let alert = UIAlertController(title: "Location already added", message: "", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
@@ -135,7 +137,9 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                 "landlordName": landlordName,
                 "rent": costOfRent
             ]
-            if check != false{
+            print("this is database Check")
+            print(check)
+            if !check{
             db.collection("listings").document(str).setData(adData) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
