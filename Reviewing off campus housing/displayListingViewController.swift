@@ -169,7 +169,7 @@ class displayListingViewController: UIViewController {
     }
     
     @IBAction func deleteReview(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Are you sure you want to delete?", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in db.collection("listings").document(self.info).delete() { err in
             if let err = err {
@@ -211,7 +211,7 @@ class displayListingViewController: UIViewController {
                 }
                 
                 if (emailExists) {
-                    let alert = UIAlertController(title: "Careful!", message: "You have already written reviews before! New post will overwrite!", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Warning", message: "You have already rated this property before. If you post another review, your previous review will be overwritten.", preferredStyle: .alert)
                     
                     alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
                     self.present(alert, animated: true)
