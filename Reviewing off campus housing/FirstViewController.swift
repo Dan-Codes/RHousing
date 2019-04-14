@@ -59,7 +59,6 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
        
     }
     
-    
     func printPin(){
         camera = GMSCameraPosition.camera(withLatitude: latlong().lat, longitude: latlong().long, zoom: 15)
         mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
@@ -92,12 +91,13 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
 //                        print("\(document.documentID) => \(document.data())")
                         
                         let position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                        let customRedMarker = UIColor(rgb: 0x085972)
+                        //let customRedMarker = UIColor(rgb: 0x085972)  // comment out if using custom icon
                         let marker = GMSMarker(position: position)
-                        marker.icon = GMSMarker.markerImage(with: customRedMarker)
+                        marker.icon = UIImage(named: "cribbhouse") //GMSMarker.markerImage(with: customRedMarker)
+                        marker.setIconSize(scaledToSize: .init(width: 40, height: 40))
                         marker.title = "\(String(describing: address))"
                         marker.map = self.mapView
-                        marker.snippet = "Tap to see more details!"
+                        marker.snippet = "Tap to see what people think of this property!"
                         self.mapView.delegate=self
                     }
                 }
@@ -157,6 +157,17 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
     
     
     
+}
+
+// for custom pin/marker icon
+extension GMSMarker {
+    func setIconSize(scaledToSize newSize: CGSize) {
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        icon?.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        icon = newImage
+    }
 }
 
 // Handle the user's selection.
