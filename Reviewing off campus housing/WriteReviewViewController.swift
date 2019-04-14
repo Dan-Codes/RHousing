@@ -16,7 +16,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var address: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        address.text = info
+        address.text = info + "!"
         comment.delegate = self as? UITextViewDelegate
         let borderColor : UIColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
         comment.layer.borderColor = borderColor.cgColor
@@ -37,20 +37,15 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var rating: UISlider!
     @IBOutlet weak var comment: UITextView!
     @IBOutlet weak var ratingValue: UILabel!
+    
     @IBAction func slideRate(_ sender: UISlider) {
         ratingValue.text = String(format: "%.1f", sender.value)
         //ratingValue.setValue(Float(), forKey: String(format: "%.1f", sender.value))
-        if sender.value < 2.5 {
-            liveAgain.setOn(false, animated: true)
-        }
-        else{
-            liveAgain.setOn(true, animated: true)
-        }
+        if sender.value < 2.5 { liveAgain.setOn(false, animated: true) }
+        else                  { liveAgain.setOn(true, animated: true) }
     }
     
-    
-    
-    
+
     @IBAction func submit(_ sender: UIButton) {
         //performSegue(withIdentifier: "writeToHome", sender: self)
         let time = Timestamp(date: Date())

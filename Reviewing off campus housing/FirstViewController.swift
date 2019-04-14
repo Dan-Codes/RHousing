@@ -98,6 +98,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                         marker.icon = UIImage(named: "cribbhouse") //GMSMarker.markerImage(with: customRedMarker)
                         marker.setIconSize(scaledToSize: .init(width: 40, height: 40))
                         marker.title = "\(String(describing: address))"
+                        marker.infoWindowAnchor = CGPoint(x: 0.5, y: 0.5)
                         marker.map = self.mapView
                         marker.snippet = "Tap to see what people think of this property!"
                         self.mapView.delegate=self
