@@ -16,6 +16,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
     
     var varLat:Double = 0
     var varLong:Double = 0
+    //var didAdd:Bool = false
     
     
     let myPickerData = [String](arrayLiteral: "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA",
@@ -75,15 +76,30 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         state.text = myPickerData[row]
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-//    {
-//        if segue.identifier == "ThirdtoTab" {
-//        let vc = segue.destination as? FirstViewController
-//        vc?.lat = varLat
-//        let vc2 = segue.destination as? FirstViewController
-//        vc2?.lat = varLong
-//        }
-//    }
+    func checkDidAdd(lat: Double, long: Double) -> Bool{
+        var isAdded:Bool = false
+        db.collection("listings").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    if let geopoint = document.get("geopoint"){
+                        let point = geopoint as! GeoPoint
+                        print(point)
+                        let lat = point.latitude
+                        let long = point.longitude
+                        if abs(lat - self.varLat) < 0.000001 || abs(long - self.varLong) < 0.000001{
+                            isAdded = true
+                            print("changed to true")
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        print("returning " + String(isAdded))
+        return isAdded
+    }
     
     
     @IBAction func uploadProperty(_ sender: UIButton) {
@@ -102,8 +118,16 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             AppState.shared.long = lon!
             AppState.shared.lat = lat!
             print("Lat: \(lat), Lon: \(lon)")
+            let check = self.checkDidAdd(lat: self.varLat, long: self.varLong)
+            print("check")
+            print(check)
+            if check != false {
+            let alert = UIAlertController(title: "Location already added", message: "", preferredStyle: .alert)
             
-            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
+            }))
+            self.present(alert, animated: true)
+            }
             let adData: [String:Any] = [
                 "address": str,
                 "geopoint": GeoPoint(latitude: lat!, longitude: lon!),
@@ -111,7 +135,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                 "landlordName": landlordName,
                 "rent": costOfRent
             ]
-            
+            if check != false{
             db.collection("listings").document(str).setData(adData) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
@@ -120,8 +144,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                     self.performSegue(withIdentifier: "thirdtoTab", sender: self)
                     
                 }
-            }
-
+            }//end of write db
+            }//end of check if
         }
     /*
     // MARK: - Navigation

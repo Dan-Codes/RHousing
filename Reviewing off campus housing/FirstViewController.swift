@@ -13,6 +13,7 @@ import GooglePlaces
 public class AppState {
     public var lat = 43.038710
     public var long = -76.134265
+    public var didAdd = false
     public static let shared = AppState()
 }
 

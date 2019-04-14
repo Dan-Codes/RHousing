@@ -12,6 +12,7 @@ import FirebaseAuth
 
 class displayListingViewController: UIViewController {
 
+    
     // adding a comment here from kevin
     
     var AverageRating:Double = 0
@@ -170,7 +171,14 @@ class displayListingViewController: UIViewController {
     @IBAction func deleteReview(_ sender: UIButton) {
         let alert = UIAlertController(title: "Are you sure you want to delete?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in print("Delete")}))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in db.collection("listings").document(self.info).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+                print(self.Em)
+            }
+            }}))
         self.present(alert, animated: true)
         return;
     }
