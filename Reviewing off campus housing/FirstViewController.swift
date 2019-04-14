@@ -10,9 +10,11 @@ import Firebase
 import GoogleMaps
 import GooglePlaces
 
-class latlong {
-    var lat = 43.038710
-    var long = -76.134265
+public class AppState {
+    public var lat = 43.038710
+    public var long = -76.134265
+    public var didAdd = false
+    public static let shared = AppState()
 }
 
 var objgVC = FirstViewController()
@@ -60,7 +62,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
     }
     
     func printPin(){
-        camera = GMSCameraPosition.camera(withLatitude: latlong().lat, longitude: latlong().long, zoom: 15)
+        camera = GMSCameraPosition.camera(withLatitude: AppState.shared.lat, longitude: AppState.shared.long, zoom: 15)
         mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
         do {

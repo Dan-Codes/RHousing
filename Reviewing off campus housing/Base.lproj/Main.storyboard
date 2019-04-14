@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lSM-uc-KCa">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,14 +19,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="First View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
-                                <rect key="frame" x="131.5" y="426.5" width="151" height="43"/>
+                                <rect key="frame" x="131.66666666666666" y="426.66666666666669" width="150.99999999999997" height="43"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loaded by FirstViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5M-7J-77L">
-                                <rect key="frame" x="109.5" y="477.5" width="195" height="17"/>
+                                <rect key="frame" x="109.66666666666669" y="477.66666666666669" width="195" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -533,7 +533,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1EQ-4t-Zvl">
-                                <rect key="frame" x="152.5" y="651" width="109" height="31"/>
+                                <rect key="frame" x="152.66666666666666" y="651" width="108.99999999999997" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="5QN-Yf-QHi"/>
                                     <constraint firstAttribute="width" constant="109" id="vKD-ka-0hQ"/>
@@ -783,7 +783,7 @@
                                 </constraints>
                             </imageView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f1c-5J-rPw">
-                                <rect key="frame" x="139.5" y="168" width="135" height="29"/>
+                                <rect key="frame" x="139.66666666666666" y="168" width="134.99999999999997" height="29"/>
                                 <segments>
                                     <segment title="LOG IN"/>
                                     <segment title="SIGN UP"/>
@@ -794,7 +794,7 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lpi-rL-gOU">
-                                <rect key="frame" x="141.5" y="690" width="131" height="35"/>
+                                <rect key="frame" x="141.66666666666666" y="690" width="130.99999999999997" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Gms-gP-KA2"/>
                                     <constraint firstAttribute="width" constant="131" id="qfY-8m-iyz"/>
@@ -861,7 +861,7 @@
     </scenes>
     <resources>
         <image name="25694" width="30" height="30"/>
-        <image name="addNewProperty" width="960" height="55"/>
+        <image name="addNewProperty" width="640" height="37"/>
         <image name="icon" width="30" height="30"/>
         <image name="loginLogo" width="475" height="475"/>
         <image name="reportAnIssue2" width="436" height="131"/>
