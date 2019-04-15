@@ -41,8 +41,8 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     @IBAction func slideRate(_ sender: UISlider) {
         ratingValue.text = String(format: "%.1f", sender.value)
         //ratingValue.setValue(Float(), forKey: String(format: "%.1f", sender.value))
-        if sender.value < 2.5 { liveAgain.setOn(false, animated: true) }
-        else                  { liveAgain.setOn(true, animated: true) }
+        //if sender.value < 2.5 { liveAgain.setOn(false, animated: true) }
+        //else                  { liveAgain.setOn(true, animated: true) }
     }
     
 

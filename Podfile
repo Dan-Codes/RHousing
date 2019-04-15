@@ -10,10 +10,14 @@ target 'Reviewing off campus housing' do
   pod 'Firebase/Core'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
-source 'https://github.com/CocoaPods/Specs.git'
+    source 'https://github.com/CocoaPods/Specs.git'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+
+  # for star rating i/o functionality, as taken from https://github.com/evgenyneu/Cosmos
+  
+  pod 'Cosmos', '~> 18.0'
 
 end

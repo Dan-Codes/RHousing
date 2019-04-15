@@ -36,12 +36,12 @@ class displayListingViewController: UIViewController {
         super.viewDidLoad()
     
         
-        AddressLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-        landlordLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-        rentPriceLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-        avgRating.font = UIFont.boldSystemFont(ofSize: 16.0)
+        //AddressLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+        //landlordLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+        //rentPriceLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+        //avgRating.font = UIFont.boldSystemFont(ofSize: 16.0)
         
-        scrollReview.contentLayoutGuide.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
+        //scrollReview.contentLayoutGuide.bottomAnchor.constraint(equalTo: label.bottomAnchor).isActive = true
 
         // Do any additional setup after loading the view.
 
@@ -76,7 +76,7 @@ class displayListingViewController: UIViewController {
                 
                 let address = document.get("address") ?? ""
                 let rent = (document.get("rent"))
-                let landlordName = document.get("landlordName") ?? "No Landlord Information"
+                let landlordName = document.get("landlordName") ?? "Leasing manager unavailable"
                 
                 //COMMENT THIS SECTION OF CODE OUT UNTIL THE CODE FOR ADDING AN EMPTY MAP WHEN SUBMITTING A NEW LISTING IS ADDED
                 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,7 +129,7 @@ class displayListingViewController: UIViewController {
                 }
                 
                 if reviewString == "" { reviewString = "There are no reviews." }
-                self.reviewText.text = reviewString
+                //self.reviewText.text = reviewString
                 
                 // IMPORTANT NOTE TO SELF
                 // need to: for each review, put it in an array as its own element.
@@ -141,24 +141,19 @@ class displayListingViewController: UIViewController {
                 self.label.text = (address as! String) // label for address
                 self.label2.text = (landlordName as! String) // label for landlord
                 
-                if(rent != nil){
-                    self.label3.text = String(format: "%@", rent as! CVarArg) // label for rent
-                }
-                else {
-                    self.label3.text = "No Rent Information" // case of nothing
-                }
+                //if (rent != nil)  { self.label3.text = String(format: "%@", rent as! CVarArg) } // label for rent
+                //else              { self.label3.text = "No rent information" } // case of nothing
                 
                 //self.mk = address as! String
             }
+                
             else {
                 print("Document does not exist")
             }
             
             if (self.countReviews != 0) {
                 let avgrate = (self.AverageRating/self.countReviews)
-                self.avgRating.text = String(format: "%.1f", avgrate)
-                
-            }
+                self.avgRating.text = String(format: "%.1f", avgrate) }
         }
         
         
