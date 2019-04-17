@@ -5,11 +5,14 @@
 //  Created by Daniel Li on 4/4/19.
 //  Copyright © 2019 housing. All rights reserved.
 //
-
 import UIKit
 import Firebase
 import FirebaseAuth
-
+public class storeBool {
+    public var anonymousBool = true
+    public var liveagain = true
+    public static let shared = storeBool()
+}
 
 class WriteReviewViewController: UIViewController, UITextFieldDelegate {
 
@@ -32,7 +35,32 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    @IBOutlet weak var anonymous: UISwitch!
+    
+    @IBOutlet weak var anonymousOutlet: UISegmentedControl!
+    @IBAction func anonymousAction(_ sender: Any) {
+        switch anonymousOutlet.selectedSegmentIndex {
+        case 0:
+            storeBool.shared.anonymousBool = false
+        case 1:
+            storeBool.shared.anonymousBool = true
+        default:
+            break
+        }
+    }
+    
+    @IBOutlet weak var liveagainOutlet: UISegmentedControl!
+    @IBAction func liveagainAction(_ sender: Any) {
+        switch liveagainOutlet.selectedSegmentIndex {
+        case 0:
+            storeBool.shared.liveagain = true
+        case 1:
+            storeBool.shared.liveagain = false
+        default:
+            break
+        }
+    }
+    
+    
     @IBOutlet weak var liveAgain: UISwitch!
     @IBOutlet weak var rating: UISlider!
     @IBOutlet weak var comment: UITextView!
@@ -41,8 +69,14 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     @IBAction func slideRate(_ sender: UISlider) {
         ratingValue.text = String(format: "%.1f", sender.value)
         //ratingValue.setValue(Float(), forKey: String(format: "%.1f", sender.value))
-        //if sender.value < 2.5 { liveAgain.setOn(false, animated: true) }
-        //else                  { liveAgain.setOn(true, animated: true) }
+        if sender.value < 2.5 {
+            liveagainOutlet.selectedSegmentIndex = 1
+            storeBool.shared.liveagain = false
+        }
+       else{
+            liveagainOutlet.selectedSegmentIndex = 0
+            storeBool.shared.liveagain = true
+        }
     }
     
 
@@ -97,10 +131,10 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                             "reviews" : [
                                 "\(self.Em)" : [
                                     "comments" : self.comment.text!,
-                                    "isAnonymous" : self.anonymous.isOn,
+                                    "isAnonymous" : storeBool.shared.anonymousBool,
                                     "isEdited" : false,
                                     "rating" : self.rating.value,
-                                    "willLiveAgain" : self.liveAgain.isOn,
+                                    "willLiveAgain" : storeBool.shared.liveagain,
                                     "timeStamp" : time
                                 ]
                             ]
@@ -127,10 +161,10 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                             "reviews" : [
                                 "\(self.Em)" : [
                                     "comments" : self.comment.text!,
-                                    "isAnonymous" : self.anonymous.isOn,
+                                    "isAnonymous" : storeBool.shared.anonymousBool,
                                     "isEdited" : true,
                                     "rating" : self.rating.value,
-                                    "willLiveAgain" : self.liveAgain.isOn,
+                                    "willLiveAgain" : storeBool.shared.liveagain,
                                     "timeStamp" : time
                                 ]
                             ]
@@ -148,9 +182,9 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                         "Review History" : [
                             "\(self.info)" : [
                                 "comments" : self.comment.text!,
-                                "isAnonymous" : self.anonymous.isOn,
+                                "isAnonymous" : storeBool.shared.anonymousBool,
                                 "rating" : self.rating.value,
-                                "willLiveAgain" : self.liveAgain.isOn,
+                                "willLiveAgain" : storeBool.shared.liveagain,
                                 "timeStamp" : time
                             ]
                         ]

@@ -76,7 +76,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         state.text = myPickerData[row]
     }
     
-    func checkDidAdd(lat: Double, long: Double) -> Bool{
+    func checkDidAdd(lat: Double, long: Double) -> Bool {
         struct check{
         static var isAdded:Bool = false
         }
@@ -97,10 +97,12 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                         }
                     }
                 }
+                print("prereturning " + String(check.isAdded))
             }
         }
-        print("returning " + String(check.isAdded))
-        return check.isAdded
+    print("returning " + String(check.isAdded))
+    return check.isAdded
+        
     }
     
     
@@ -120,16 +122,16 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             AppState.shared.long = lon!
             AppState.shared.lat = lat!
             print("Lat: \(lat), Lon: \(lon)")
-            let check = self.checkDidAdd(lat: self.varLat, long: self.varLong)
+            if false{//!self.checkDidAdd(lat: self.varLat, long: self.varLong) {
             print("check")
-            print(check)
-            if check  {
+            //print(check)
             let alert = UIAlertController(title: "Location already added", message: "", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
             }))
             self.present(alert, animated: true)
             }
+            else{
             let adData: [String:Any] = [
                 "address": str,
                 "geopoint": GeoPoint(latitude: lat!, longitude: lon!),
@@ -137,9 +139,9 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                 "landlordName": landlordName,
                 "rent": costOfRent
             ]
-            print("this is database Check")
-            print(check)
-            if !check{
+            //print("this is database Check")
+            //print(check)
+            
             db.collection("listings").document(str).setData(adData) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
@@ -149,7 +151,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                     
                 }
             }//end of write db
-            }//end of check if
+            }
         }
     /*
     // MARK: - Navigation
