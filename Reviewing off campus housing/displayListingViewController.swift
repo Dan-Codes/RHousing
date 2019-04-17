@@ -129,7 +129,7 @@ class displayListingViewController: UIViewController {
                 }
                 
                 if reviewString == "" { reviewString = "There are no reviews." }
-                //self.reviewText.text = reviewString
+                self.reviewText.text = reviewString
                 
                 // IMPORTANT NOTE TO SELF
                 // need to: for each review, put it in an array as its own element.
