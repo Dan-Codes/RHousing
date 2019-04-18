@@ -24,6 +24,7 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var lastName: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var displayEmail: UILabel!
+    @IBOutlet weak var darkModeSelect: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +52,13 @@ class SecondViewController: UIViewController {
                 self.lastName.text = (lN as! String)
                 let getEmail = document.get("Email") ?? ""
                 self.displayEmail.text = (getEmail as! String)
-                
+                let darkModeBool = document.get("DarkMode") as! Bool
+                if darkModeBool{
+                    self.darkModeSelect.isOn = true
+                }
+                else{
+                    self.darkModeSelect.isOn = false
+                }
             } else {
                 print("Document does not exist")
             }

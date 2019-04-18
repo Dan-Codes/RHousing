@@ -784,6 +784,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="darkModeSelect" destination="kcL-uJ-BJ1" id="Vp4-Gq-4gC"/>
                         <outlet property="displayEmail" destination="mb4-KS-ZMt" id="GrG-Fy-WnT"/>
                         <outlet property="emailLabel" destination="XHn-vR-MGB" id="LQ1-6K-iGf"/>
                         <outlet property="firstName" destination="wBc-yK-5n4" id="s4z-ay-cxj"/>
