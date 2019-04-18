@@ -67,6 +67,21 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
             let email = user.email
             emailID = email!
         }
+        let docRef = db.collection("Users").document(emailID)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+                let darkModeBool = document.get("DarkMode") as! Bool
+                SecState.shared.darkMode = darkModeBool
+                if (SecState.shared.darkMode){
+                    self.printPin()
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
         // Add a new document in collection "cities"
         db.collection("Users").document(emailID)
             .addSnapshotListener { documentSnapshot, error in
@@ -91,7 +106,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                 print("Listener detected changes")
                 self.printPin()
         }
-        printPin()
+        //printPin()
        
     }
     
