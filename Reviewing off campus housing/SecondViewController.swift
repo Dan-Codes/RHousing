@@ -67,30 +67,33 @@ class SecondViewController: UIViewController {
     
     
     
-    @IBAction func darkMode(_ sender: UISwitch) {
+   @IBAction func darkMode(_ sender: UISwitch) {
         if sender.isOn {
             SecState.shared.darkMode = true
-            db.collection("Users").document(email).setData([
+            let darkModeRef = db.collection("Users").document(email)
+            
+            darkModeRef.updateData([
                 "DarkMode": true
             ]) { err in
                 if let err = err {
-                    print("Error writing document: \(err)")
+                    print("Error updating document: \(err)")
                 } else {
-                    print("Document successfully written!")
+                    print("Document successfully updated")
                 }
             }
         }
         else{
             SecState.shared.darkMode = false
-            db.collection("Users").document(email).setData([
-                "DarkMode": false
+            let darkModeRef = db.collection("Users").document(email)
+            darkModeRef.updateData([
+                "DarkMode": true
             ]) { err in
                 if let err = err {
-                    print("Error writing document: \(err)")
+                    print("Error updating document: \(err)")
                 } else {
-                    print("Document successfully written!")
+                    print("Document successfully updated")
                 }
-        }
+            }
 
     }
         
