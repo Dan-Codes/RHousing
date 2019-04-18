@@ -14,6 +14,7 @@ public class AppState {
     public var lat = 43.038710
     public var long = -76.134265
     public var didAdd = false
+    public var darkMode = false
     public static let shared = AppState()
 }
 
@@ -57,6 +58,39 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         
         // Prevent the navigation bar from being hidden when searching.
         searchController?.hidesNavigationBarDuringPresentation = false
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+            // The user's ID, unique to the Firebase project.
+            // Do NOT use this value to authenticate with your backend server,
+            // if you have one. Use getTokenWithCompletion:completion: instead.
+            let email = user.email
+            emailID = email!
+        }
+        // Add a new document in collection "cities"
+        db.collection("Users").document(emailID)
+            .addSnapshotListener { documentSnapshot, error in
+                guard let document = documentSnapshot else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
+                guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                }
+                print("Dark mode changed")
+                self.printPin()
+        }
+        
+        db.collection("listings").whereField("property", isEqualTo: true)
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                print("Listener detected changes")
+                self.printPin()
+        }
         printPin()
        
     }
@@ -65,6 +99,8 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         camera = GMSCameraPosition.camera(withLatitude: AppState.shared.lat, longitude: AppState.shared.long, zoom: 15)
         mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
+        if SecState.shared.darkMode{
+            print("darkmode is " + String(AppState.shared.darkMode))
         do {
             // Set the map style by passing the URL of the local file.
             if let styleURL = Bundle.main.url(forResource: "dark", withExtension: "json") {
@@ -74,6 +110,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
             }
         } catch {
             NSLog("One or more of the map styles failed to load. \(error)")
+        }
         }
         db.collection("listings").getDocuments() { (querySnapshot, err) in
             if let err = err {

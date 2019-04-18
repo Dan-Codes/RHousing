@@ -321,6 +321,7 @@
                                 <rect key="frame" x="33" y="470" width="354" height="161"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" address="YES"/>
                             </textView>
@@ -770,7 +771,7 @@
                                 <rect key="frame" x="20" y="265" width="374" height="317"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </scrollView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kcL-uJ-BJ1">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kcL-uJ-BJ1">
                                 <rect key="frame" x="293" y="609" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
@@ -947,28 +948,29 @@
     </scenes>
     <resources>
         <image name="25694" width="30" height="30"/>
-        <image name="addNewProperty" width="640" height="37"/>
-        <image name="addReview" width="640" height="55"/>
+        <image name="addNewProperty" width="1920" height="111"/>
+        <image name="addReview" width="1920" height="166"/>
         <image name="amazing" width="107" height="15"/>
         <image name="amenities" width="125" height="15"/>
         <image name="deleteReview" width="1080" height="1080"/>
         <image name="horrible" width="107" height="15"/>
         <image name="icon" width="30" height="30"/>
         <image name="location" width="113" height="15"/>
-        <image name="loginLogo" width="317" height="317"/>
+        <image name="loginLogo" width="951" height="951"/>
         <image name="management" width="168" height="15"/>
         <image name="no3" width="648" height="284"/>
         <image name="postMyReview" width="1920" height="257"/>
-        <image name="reportAnIssue2" width="290" height="87"/>
+        <image name="reportAnIssue2" width="872" height="263"/>
         <image name="settings_black_192x192" width="30" height="30"/>
-        <image name="signMeIn" width="640" height="168"/>
-        <image name="submit" width="640" height="180"/>
-        <image name="submitReport" width="640" height="99"/>
+        <image name="signMeIn" width="1920" height="505"/>
+        <image name="submit" width="1920" height="542"/>
+        <image name="submitReport" width="1920" height="299"/>
         <image name="writeReport" width="1080" height="1080"/>
         <image name="writeReviewBlue" width="1080" height="1080"/>
         <image name="yes3" width="648" height="284"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="w3s-hh-diq"/>
         <segue reference="jMM-kj-xyt"/>
         <segue reference="ahG-8u-YDn"/>
     </inferredMetricsTieBreakers>

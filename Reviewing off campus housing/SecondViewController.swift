@@ -10,6 +10,10 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseUI
+public class SecState {
+    public var darkMode = false
+    public static let shared = SecState()
+}
 
 class SecondViewController: UIViewController {
 
@@ -57,28 +61,30 @@ class SecondViewController: UIViewController {
     
     
     @IBAction func darkMode(_ sender: UISwitch) {
-        if !sender.isOn {
-//            db.collection("Users").document(email).setData([
-//                "DarkMode": true
-//            ]) { err in
-//                if let err = err {
-//                    print("Error writing document: \(err)")
-//                } else {
-//                    print("Document successfully written!")
-//                }
-//            }
-//        }
-//        else{
-//            db.collection("Users").document(email).setData([
-//                "DarkMode": false
-//            ]) { err in
-//                if let err = err {
-//                    print("Error writing document: \(err)")
-//                } else {
-//                    print("Document successfully written!")
-//                }
-//        }
-//
+        if sender.isOn {
+            SecState.shared.darkMode = true
+            db.collection("Users").document(email).setData([
+                "DarkMode": true
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
+            }
+        }
+        else{
+            SecState.shared.darkMode = false
+            db.collection("Users").document(email).setData([
+                "DarkMode": false
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
+        }
+
     }
         
        

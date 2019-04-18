@@ -135,6 +135,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             let adData: [String:Any] = [
                 "address": str,
                 "geopoint": GeoPoint(latitude: lat!, longitude: lon!),
+                "property": true,
                 "reviews": ([:]),
                 "landlordName": landlordName,
                 "rent": costOfRent
