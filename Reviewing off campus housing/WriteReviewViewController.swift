@@ -8,6 +8,9 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import Cosmos
+
+
 public class storeBool {
     public var anonymousBool = true
     public var liveagain = true
@@ -25,6 +28,8 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
         comment.layer.borderColor = borderColor.cgColor
         comment.layer.borderWidth = 0.5
         comment.layer.cornerRadius = 5.0
+        
+        view.addSubview(cosmosView)
         
         self.hideKeyboardWhenTap()  
         // Do any additional setup after loading the view.
@@ -65,6 +70,26 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var rating: UISlider!
     @IBOutlet weak var comment: UITextView!
     @IBOutlet weak var ratingValue: UILabel!
+    @IBOutlet weak var locationTitle: UIImageView!
+    @IBOutlet weak var managementTitle: UIImageView!
+    @IBOutlet weak var amenitiesTitle: UIImageView!
+    @IBOutlet weak var locationCosmos: CosmosView!
+    @IBOutlet weak var managementCosmos: CosmosView!
+    @IBOutlet weak var amenitiesCosmos: CosmosView!
+    
+    var locationRating = 0.0
+    var managementRating = 0.0
+    var amentitiesRating = 0.0
+
+    lazy var cosmosView: CosmosView = {
+        var view = CosmosView()
+        
+        locationCosmos.didFinishTouchingCosmos = {rating in self.locationRating = rating}
+        managementCosmos.didFinishTouchingCosmos = {rating in self.managementRating = rating}
+        amenitiesCosmos.didFinishTouchingCosmos = {rating in self.amentitiesRating = rating }
+        return view
+    }()
+    
     
     @IBAction func slideRate(_ sender: UISlider) {
         ratingValue.text = String(format: "%.1f", sender.value)
@@ -125,7 +150,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                         }))
                         
                         self.present(alert, animated: true)
-                        
+                        //let lR = Int(storeBool.shared.locationRating)
                         print(".....")
                         docRef.setData([
                             "reviews" : [
@@ -135,7 +160,10 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                                     "isEdited" : false,
                                     "rating" : self.rating.value,
                                     "willLiveAgain" : storeBool.shared.liveagain,
-                                    "timeStamp" : time
+                                    "timeStamp" : time,
+                                    "locationRating" : self.locationRating,
+                                    "managementRating" : self.managementRating,
+                                    "amentitiesRating" : self.amentitiesRating
                                 ]
                             ]
                             ], merge: true)
@@ -165,7 +193,10 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                                     "isEdited" : true,
                                     "rating" : self.rating.value,
                                     "willLiveAgain" : storeBool.shared.liveagain,
-                                    "timeStamp" : time
+                                    "timeStamp" : time,
+                                    "locationRating" : self.locationRating,
+                                    "managementRating" : self.managementRating,
+                                    "amentitiesRating" : self.amentitiesRating
                                 ]
                             ]
                             ], merge: true)

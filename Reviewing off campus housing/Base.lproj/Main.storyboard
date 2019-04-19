@@ -493,9 +493,15 @@
                     </view>
                     <connections>
                         <outlet property="address" destination="OVH-D9-zab" id="f4Y-YJ-o0q"/>
+                        <outlet property="amenitiesCosmos" destination="Upo-XA-mA7" id="jPB-xu-Kr2"/>
+                        <outlet property="amenitiesTitle" destination="4a7-gM-hd4" id="orR-j8-oHg"/>
                         <outlet property="anonymousOutlet" destination="ZF6-Nc-Bmo" id="rbg-rh-tGx"/>
                         <outlet property="comment" destination="90I-dw-7f8" id="yZM-v8-SDi"/>
                         <outlet property="liveagainOutlet" destination="gTQ-Gw-5oQ" id="bot-M3-Gbf"/>
+                        <outlet property="locationCosmos" destination="m52-FU-oPF" id="WEB-zE-1MK"/>
+                        <outlet property="locationTitle" destination="Dce-zO-Kor" id="Gdf-Wa-2E9"/>
+                        <outlet property="managementCosmos" destination="id7-ya-QiT" id="6Qj-zV-5aN"/>
+                        <outlet property="managementTitle" destination="VeD-If-kWZ" id="5Gh-TH-GX9"/>
                         <outlet property="rating" destination="mBE-5v-sHT" id="RZW-FD-mIL"/>
                         <outlet property="ratingValue" destination="mue-Qd-TDS" id="bNB-fF-g46"/>
                         <segue destination="49e-Tb-3d3" kind="presentation" identifier="writeToHome" id="ahG-8u-YDn"/>
@@ -961,22 +967,22 @@
         <image name="great" width="85" height="15"/>
         <image name="icon" width="30" height="30"/>
         <image name="location" width="113" height="15"/>
-        <image name="loginLogo" width="317" height="317"/>
+        <image name="loginLogo" width="951" height="951"/>
         <image name="management" width="168" height="15"/>
         <image name="no3" width="648" height="284"/>
         <image name="postMyReview" width="1427" height="257"/>
         <image name="rateThisProperty" width="1265" height="166"/>
-        <image name="reportAnIssue2" width="290" height="87"/>
+        <image name="reportAnIssue2" width="872" height="263"/>
         <image name="settings_black_192x192" width="30" height="30"/>
-        <image name="signMeIn" width="640" height="168"/>
-        <image name="submit" width="640" height="180"/>
-        <image name="submitReport" width="640" height="99"/>
+        <image name="signMeIn" width="1920" height="505"/>
+        <image name="submit" width="1920" height="542"/>
+        <image name="submitReport" width="1920" height="299"/>
         <image name="writeReport" width="1080" height="1080"/>
         <image name="writeReviewBlue" width="1080" height="1080"/>
         <image name="yes3" width="648" height="284"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jMM-kj-xyt"/>
-        <segue reference="vjc-PQ-KVe"/>
+        <segue reference="ahG-8u-YDn"/>
     </inferredMetricsTieBreakers>
 </document>
