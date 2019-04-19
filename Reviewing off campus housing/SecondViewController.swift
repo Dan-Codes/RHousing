@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseUI
 public class SecState {
-    public var darkMode = false
+    public var darkMode = true
     public static let shared = SecState()
 }
 
