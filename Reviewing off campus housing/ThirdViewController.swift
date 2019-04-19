@@ -16,12 +16,13 @@ public class ThirdState {
     public var landlordName:String = ""
     public var costOfRent:String = ""
     public var isAdded = false
+    public var varLat = 0.0
+    public var varLong = 0.0
     public static let shared = ThirdState()
 }
 class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var varLat:Double = 0
-    var varLong:Double = 0
+    
     //var didAdd:Bool = false
     
     
@@ -94,7 +95,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                         print(point)
                         let lat = point.latitude
                         let long = point.longitude
-                        if abs(lat - self.varLat) < 0.000001 || abs(long - self.varLong) < 0.000001{
+                        if abs(lat - ThirdState.shared.varLat) < 0.000001 || abs(long - ThirdState.shared.varLong) < 0.000001{
                             ThirdState.shared.isAdded = true
                             print("changed to true")
                             let alert = UIAlertController(title: "Location already added", message: "", preferredStyle: .alert)
@@ -109,7 +110,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                 if !ThirdState.shared.isAdded{
                     let adData: [String:Any] = [
                         "address": ThirdState.shared.str,
-                        "geopoint": GeoPoint(latitude: self.varLat, longitude: self.varLong),
+                        "geopoint": GeoPoint(latitude: ThirdState.shared.varLat, longitude: ThirdState.shared.varLong),
                         "property": true,
                         "reviews": ([:]),
                         "landlordName": ThirdState.shared.landlordName,
@@ -123,6 +124,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                             print("Error writing document: \(err)")
                         } else {
                             print("Document successfully written!")
+                            AppState.shared.open = true
                             self.performSegue(withIdentifier: "thirdtoTab", sender: self)
                         }
                     }//end of write db
@@ -144,13 +146,13 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             let placemark = placemarks?.first
             let lat = placemark?.location?.coordinate.latitude
             let lon = placemark?.location?.coordinate.longitude
-            self.varLat = (lat)!
-            self.varLong = (lon)!
+            ThirdState.shared.varLat = (lat)!
+            ThirdState.shared.varLong = (lon)!
             AppState.shared.long = lon!
             AppState.shared.lat = lat!
             print("Lat: \(lat), Lon: \(lon)")
         }
-            if !self.checkDidAdd(lat: self.varLat, long: self.varLong) {
+            if !self.checkDidAdd(lat: ThirdState.shared.varLat, long: ThirdState.shared.varLong) {
                 print("DONE")
                 //print(check)
         }

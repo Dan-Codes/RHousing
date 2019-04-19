@@ -15,6 +15,7 @@ public class AppState {
     public var long = -76.134265
     public var didAdd = false
     public var darkMode = false
+    public var open = false
     public static let shared = AppState()
 }
 
@@ -154,6 +155,10 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                         marker.map = self.mapView
                         marker.snippet = "Tap to see what people think of this property!"
                         self.mapView.delegate=self
+                        if AppState.shared.open && (abs(lat - ThirdState.shared.varLat) < 0.000001 || abs(long - ThirdState.shared.varLong) < 0.000001){
+                            self.mapView.selectedMarker = marker
+                            AppState.shared.open = false
+                        }
                     }
                 }
                 
