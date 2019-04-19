@@ -20,6 +20,7 @@
 		E3F21CF32229DD15005B5D15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F21CF12229DD15005B5D15 /* Main.storyboard */; };
 		E3F21CF52229DD16005B5D15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F21CF42229DD16005B5D15 /* Assets.xcassets */; };
 		E3F21CF82229DD16005B5D15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F21CF62229DD16005B5D15 /* LaunchScreen.storyboard */; };
+		E3F8480D226A5B310016B37F /* adminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F8480C226A5B310016B37F /* adminViewController.swift */; };
 		E7E359AF2258FB5000CBA815 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E359AE2258FB5000CBA815 /* ReportViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		E3F21CF22229DD15005B5D15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E3F21CF42229DD16005B5D15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3F21CF72229DD16005B5D15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E3F8480C226A5B310016B37F /* adminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminViewController.swift; sourceTree = "<group>"; };
 		E7E359AE2258FB5000CBA815 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		E9D1C8F91BAC2DF119C51E77 /* Pods_Reviewing_off_campus_housing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reviewing_off_campus_housing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -108,6 +110,9 @@
 
 				E3F21CF92229DD16005B5D15 /* Info.plist */,
 				E0D0526822692F1D007EEFE3 /* GoogleService-Info.plist */,
+
+				E3F8480C226A5B310016B37F /* adminViewController.swift */,
+
 			);
 			path = "Reviewing off campus housing";
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 				03B918F92242B2DF006AB87D /* ThirdViewController.swift in Sources */,
 				E3F21CEC2229DD15005B5D15 /* AppDelegate.swift in Sources */,
 				E3F21CEE2229DD15005B5D15 /* FirstViewController.swift in Sources */,
+				E3F8480D226A5B310016B37F /* adminViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

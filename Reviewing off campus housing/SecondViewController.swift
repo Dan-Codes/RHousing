@@ -95,11 +95,12 @@ class SecondViewController: UIViewController {
             }
 
     }
-        
-       
     }
     
-  
+    
+    @IBAction func goAdmin(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToAdmin", sender: self)
+    }
     
     @IBAction func logoutButton(_ sender: UIButton) {
         let firebaseAuth = Auth.auth()
