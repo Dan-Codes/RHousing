@@ -148,16 +148,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nQ2-JJ-H3z">
-                                <rect key="frame" x="20" y="311" width="374" height="391"/>
+                                <rect key="frame" x="0.0" y="311" width="414" height="391"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" red="0.27058823529411763" green="0.26666666666666666" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="f09-Cz-YKt">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f09-Cz-YKt" id="Uoc-kT-noF">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" red="0.27058823529411763" green="0.26666666666666666" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.27058823529999998" green="0.2666666667" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -172,7 +177,7 @@
                             <constraint firstItem="Sci-Jf-6fz" firstAttribute="top" secondItem="nQ2-JJ-H3z" secondAttribute="bottom" constant="21" id="2K0-Eh-gIQ"/>
                             <constraint firstItem="KAt-df-rnm" firstAttribute="bottom" secondItem="9Qw-My-vJb" secondAttribute="bottom" constant="33" id="3W3-MI-gkG"/>
                             <constraint firstItem="9Qw-My-vJb" firstAttribute="top" secondItem="nQ2-JJ-H3z" secondAttribute="bottom" constant="18" id="61h-JY-AvD"/>
-                            <constraint firstItem="nQ2-JJ-H3z" firstAttribute="leading" secondItem="KAt-df-rnm" secondAttribute="leading" constant="20" id="BnG-mU-6SW"/>
+                            <constraint firstItem="nQ2-JJ-H3z" firstAttribute="trailing" secondItem="KAt-df-rnm" secondAttribute="trailing" id="6EI-50-fx0"/>
                             <constraint firstItem="9Qw-My-vJb" firstAttribute="centerX" secondItem="nQ2-JJ-H3z" secondAttribute="centerX" id="DeY-Mn-zRm"/>
                             <constraint firstItem="9Qw-My-vJb" firstAttribute="centerX" secondItem="RQY-Vu-iYh" secondAttribute="centerX" id="Eo5-kX-cQW"/>
                             <constraint firstItem="FW9-48-hIu" firstAttribute="leading" secondItem="KAt-df-rnm" secondAttribute="leading" constant="104" id="Eol-9D-5pG"/>
@@ -188,11 +193,11 @@
                             <constraint firstItem="9cU-OP-gvb" firstAttribute="top" secondItem="Eqw-U3-szi" secondAttribute="bottom" constant="72" id="Vqd-iU-bEO"/>
                             <constraint firstItem="RQY-Vu-iYh" firstAttribute="top" secondItem="KAt-df-rnm" secondAttribute="top" constant="40" id="ZuJ-WY-dln"/>
                             <constraint firstItem="Sci-Jf-6fz" firstAttribute="leading" secondItem="9Qw-My-vJb" secondAttribute="trailing" constant="25" id="aCa-Ws-eaU"/>
+                            <constraint firstItem="nQ2-JJ-H3z" firstAttribute="leading" secondItem="KAt-df-rnm" secondAttribute="leading" id="eSO-Kj-iR9"/>
                             <constraint firstItem="9Qw-My-vJb" firstAttribute="centerX" secondItem="Eqw-U3-szi" secondAttribute="centerX" id="k34-Tq-Qfm"/>
                             <constraint firstItem="Eqw-U3-szi" firstAttribute="leading" secondItem="RQY-Vu-iYh" secondAttribute="leading" id="kzw-kY-Foo"/>
                             <constraint firstItem="9Qw-My-vJb" firstAttribute="leading" secondItem="FW9-48-hIu" secondAttribute="trailing" constant="23" id="o9H-QH-45M"/>
                             <constraint firstItem="KAt-df-rnm" firstAttribute="trailing" secondItem="Sci-Jf-6fz" secondAttribute="trailing" constant="102" id="qrR-wb-Z1g"/>
-                            <constraint firstItem="KAt-df-rnm" firstAttribute="trailing" secondItem="nQ2-JJ-H3z" secondAttribute="trailing" constant="20" id="z7y-Tk-OKO"/>
                             <constraint firstItem="9Qw-My-vJb" firstAttribute="centerX" secondItem="2On-jg-Ff3" secondAttribute="centerX" id="zOr-n4-rNW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KAt-df-rnm"/>
