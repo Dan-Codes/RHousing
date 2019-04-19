@@ -11,7 +11,13 @@ import CoreLocation
 import Firebase
 import FirebaseUI
 import FirebaseStorage
-
+public class ThirdState {
+    public var str:String = ""
+    public var landlordName:String = ""
+    public var costOfRent:String = ""
+    public var isAdded = false
+    public static let shared = ThirdState()
+}
 class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var varLat:Double = 0
@@ -77,9 +83,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
     }
     
     func checkDidAdd(lat: Double, long: Double) -> Bool {
-        struct check{
-        static var isAdded:Bool = false
-        }
+        ThirdState.shared.isAdded = false
         db.collection("listings").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -91,28 +95,51 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                         let lat = point.latitude
                         let long = point.longitude
                         if abs(lat - self.varLat) < 0.000001 || abs(long - self.varLong) < 0.000001{
-                            check.isAdded = true
+                            ThirdState.shared.isAdded = true
                             print("changed to true")
+                            let alert = UIAlertController(title: "Location already added", message: "", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
+                            }))
+                            self.present(alert, animated: true)
                             break
                         }
                     }
                 }
-                print("prereturning " + String(check.isAdded))
+                print("prereturning " + String(ThirdState.shared.isAdded))
+                if !ThirdState.shared.isAdded{
+                    let adData: [String:Any] = [
+                        "address": ThirdState.shared.str,
+                        "geopoint": GeoPoint(latitude: self.varLat, longitude: self.varLong),
+                        "property": true,
+                        "reviews": ([:]),
+                        "landlordName": ThirdState.shared.landlordName,
+                        "rent": ThirdState.shared.costOfRent
+                    ]
+                    //print("this is database Check")
+                    //print(check)
+                    
+                    db.collection("listings").document(ThirdState.shared.str).setData(adData) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            print("Document successfully written!")
+                            self.performSegue(withIdentifier: "thirdtoTab", sender: self)
+                        }
+                    }//end of write db
+                }
             }
         }
-    print("returning " + String(check.isAdded))
-    return check.isAdded
-        
+        print("returning " + String(ThirdState.shared.isAdded))
+        return ThirdState.shared.isAdded
     }
     
-    
     @IBAction func uploadProperty(_ sender: UIButton) {
-        let str = adrs1.text! + " " + city.text! + ", " + state.text! + " " + zipcd.text!
-        let landlordName = landlord.text!
-        let costOfRent = rentCost.text!
-        print(landlordName)
+        ThirdState.shared.str = adrs1.text! + " " + city.text! + ", " + state.text! + " " + zipcd.text!
+        ThirdState.shared.landlordName = landlord.text!
+        ThirdState.shared.costOfRent = rentCost.text!
+        //print(landlordName)
         let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(str) {
+        geocoder.geocodeAddressString(ThirdState.shared.str) {
             placemarks, error in
             let placemark = placemarks?.first
             let lat = placemark?.location?.coordinate.latitude
@@ -122,47 +149,10 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             AppState.shared.long = lon!
             AppState.shared.lat = lat!
             print("Lat: \(lat), Lon: \(lon)")
-            if false{//!self.checkDidAdd(lat: self.varLat, long: self.varLong) {
-            print("check")
-            //print(check)
-            let alert = UIAlertController(title: "Location already added", message: "", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
-            }))
-            self.present(alert, animated: true)
-            }
-            else{
-            let adData: [String:Any] = [
-                "address": str,
-                "geopoint": GeoPoint(latitude: lat!, longitude: lon!),
-                "property": true,
-                "reviews": ([:]),
-                "landlordName": landlordName,
-                "rent": costOfRent
-            ]
-            //print("this is database Check")
-            //print(check)
-            
-            db.collection("listings").document(str).setData(adData) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Document successfully written!")
-                    self.performSegue(withIdentifier: "thirdtoTab", sender: self)
-                    
-                }
-            }//end of write db
-            }
         }
-    /*
-    // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+            if !self.checkDidAdd(lat: self.varLat, long: self.varLong) {
+                print("DONE")
+                //print(check)
+        }
     }
 }
