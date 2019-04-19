@@ -155,12 +155,6 @@ class displayListingViewController: UIViewController {
                 let avgrate = (self.AverageRating/self.countReviews)
                 self.avgRating.text = String(format: "%.1f", avgrate) }
         }
-        
-        
-        
-        
-        
-        
     }
     
     @IBAction func deleteReview(_ sender: UIButton) {
