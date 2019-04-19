@@ -79,9 +79,9 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var managementCosmos: CosmosView!
     @IBOutlet weak var amenitiesCosmos: CosmosView!
     
-    var locationRating = 0.0
-    var managementRating = 0.0
-    var amentitiesRating = 0.0
+    var locationRating = 5.0
+    var managementRating = 5.0
+    var amentitiesRating = 5.0
 
     lazy var cosmosView: CosmosView = {
         var view = CosmosView()

@@ -384,7 +384,7 @@
                                         <real key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                        <real key="value" value="5"/>
+                                        <real key="value" value="6"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
                                         <integer key="value" value="5"/>
@@ -412,7 +412,7 @@
                                         <real key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                        <real key="value" value="3"/>
+                                        <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
                                         <integer key="value" value="5"/>
@@ -440,7 +440,7 @@
                                         <real key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                        <real key="value" value="4"/>
+                                        <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
                                         <integer key="value" value="5"/>
@@ -1035,7 +1035,7 @@
     </scenes>
     <resources>
         <image name="25694" width="30" height="30"/>
-        <image name="addNewCribb" width="442" height="172"/>
+        <image name="addNewCribb" width="1326" height="516"/>
         <image name="amenities" width="125" height="15"/>
         <image name="awful" width="85" height="15"/>
         <image name="deleteReview" width="1080" height="1080"/>
@@ -1046,8 +1046,8 @@
         <image name="management" width="168" height="15"/>
         <image name="no3" width="648" height="284"/>
         <image name="postMyReview" width="1427" height="257"/>
-        <image name="rateThisCribb" width="421" height="55"/>
-        <image name="reportAnIssue2" width="290" height="87"/>
+        <image name="rateThisCribb" width="1265" height="166"/>
+        <image name="reportAnIssue2" width="872" height="263"/>
         <image name="settings_black_192x192" width="30" height="30"/>
         <image name="signMeIn" width="640" height="168"/>
         <image name="submit" width="640" height="180"/>
