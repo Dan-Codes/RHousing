@@ -9,7 +9,9 @@ import UIKit
 import Firebase
 import FirebaseAuth
 public class storeBool {
-    public var anonymousBool = true
+    public var anonymousBool = false
+    // button thingy needs to default to No on the storyboard.
+    
     public var liveagain = true
     public static let shared = storeBool()
 }
@@ -40,9 +42,9 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     @IBAction func anonymousAction(_ sender: Any) {
         switch anonymousOutlet.selectedSegmentIndex {
         case 0:
-            storeBool.shared.anonymousBool = false
-        case 1:
             storeBool.shared.anonymousBool = true
+        case 1:
+            storeBool.shared.anonymousBool = false
         default:
             break
         }
@@ -105,8 +107,8 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                     let review = document.get("reviews") as! NSDictionary
                     for (reviewer, _) in review {
                         let reviewer = reviewer as! String
-                        print(reviewer)
-                        print(self.Em + "---")
+                        //print(reviewer)
+                        //print(self.Em + "---")
 
                         if (reviewer == self.Em){
                             emailExist = true

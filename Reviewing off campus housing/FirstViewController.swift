@@ -170,7 +170,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
     var mk:String? = nil
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        print("test")
+        // print("test")
         mk = marker.title
         performSegue(withIdentifier: "displayListing" , sender: self)
         print(marker.title ?? "No longer valid!")
