@@ -71,7 +71,6 @@ class SecondViewController: UIViewController {
         if sender.isOn {
             SecState.shared.darkMode = true
             let darkModeRef = db.collection("Users").document(email)
-            
             darkModeRef.updateData([
                 "DarkMode": true
             ]) { err in
@@ -86,7 +85,7 @@ class SecondViewController: UIViewController {
             SecState.shared.darkMode = false
             let darkModeRef = db.collection("Users").document(email)
             darkModeRef.updateData([
-                "DarkMode": true
+                "DarkMode": false
             ]) { err in
                 if let err = err {
                     print("Error updating document: \(err)")
