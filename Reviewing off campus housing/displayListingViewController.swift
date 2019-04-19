@@ -154,6 +154,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
         
         // WANT TO IMPLEMENT:
         // if there are no reviews, don't display a blank table. rather, display a message "there are currently no reviews for this listing at this time."
+        /* https://stackoverflow.com/questions/28532926/if-no-table-view-results-display-no-results-on-screen */
         // (maybe implement: if there are some reviews, but not enough to fit whole section, then table size should only be as big as necessary.)
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
