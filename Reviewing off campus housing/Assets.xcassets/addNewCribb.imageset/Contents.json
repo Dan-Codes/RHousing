@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "uploadAnImage.png",
+      "filename" : "addNewCribb.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "uploadAnImage-1.png",
+      "filename" : "addNewCribb-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "uploadAnImage-2.png",
+      "filename" : "addNewCribb-2.png",
       "scale" : "3x"
     }
   ],

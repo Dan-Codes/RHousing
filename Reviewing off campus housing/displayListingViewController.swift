@@ -202,7 +202,7 @@ class displayListingViewController: UIViewController {
                 if (emailExists) {
                     let alert = UIAlertController(title: "Warning", message: "You have already rated this property before. If you post another review, your previous review will be overwritten.", preferredStyle: .alert)
                     
-                    alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Got it!", style: .cancel, handler: nil))
                     self.present(alert, animated: true)
                     
                 }
