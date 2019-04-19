@@ -70,6 +70,7 @@ class SecondViewController: UIViewController {
    @IBAction func darkMode(_ sender: UISwitch) {
         if sender.isOn {
             SecState.shared.darkMode = true
+            AppState.shared.darkMode = true
             let darkModeRef = db.collection("Users").document(email)
             darkModeRef.updateData([
                 "DarkMode": true
@@ -83,6 +84,7 @@ class SecondViewController: UIViewController {
         }
         else{
             SecState.shared.darkMode = false
+            AppState.shared.darkMode = false
             let darkModeRef = db.collection("Users").document(email)
             darkModeRef.updateData([
                 "DarkMode": false

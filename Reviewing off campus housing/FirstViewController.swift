@@ -76,7 +76,8 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                 print("Document data: \(dataDescription)")
                 let darkModeBool = document.get("DarkMode") as! Bool
                 SecState.shared.darkMode = darkModeBool
-                if (SecState.shared.darkMode){
+                AppState.shared.darkMode = darkModeBool
+                if (AppState.shared.darkMode){
                     self.printPin()
                 }
             } else {
@@ -115,7 +116,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         camera = GMSCameraPosition.camera(withLatitude: AppState.shared.lat, longitude: AppState.shared.long, zoom: 15)
         mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
-        if SecState.shared.darkMode{
+        if AppState.shared.darkMode{
             print("darkmode is " + String(AppState.shared.darkMode))
         do {
             // Set the map style by passing the URL of the local file.
