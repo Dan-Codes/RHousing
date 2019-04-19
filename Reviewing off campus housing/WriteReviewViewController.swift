@@ -118,7 +118,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                     
                     if(emailExist == false){
                         
-                        let alert = UIAlertController(title: "Nice!", message: "Your review has successfully posted!", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Success", message: "Your review has successfully been posted!", preferredStyle: .alert)
                         
                         alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { action -> Void in
                             self.performSegue(withIdentifier: "unwindToDisplay", sender: self)
