@@ -777,6 +777,9 @@
                                 <state key="normal" title="GO TO ADMIN VIEW">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="goAdmin:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="cJ7-gV-zz9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axx-Gz-TSJ">
                                 <rect key="frame" x="285" y="718" width="55" height="30"/>
@@ -790,7 +793,7 @@
                         <color key="backgroundColor" red="0.20784313725490194" green="0.20392156862745098" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="icon" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" id="UzF-7w-F8L"/>
                     <connections>
                         <outlet property="darkModeSelect" destination="kcL-uJ-BJ1" id="Vp4-Gq-4gC"/>
                         <outlet property="displayEmail" destination="mb4-KS-ZMt" id="GrG-Fy-WnT"/>
@@ -799,11 +802,27 @@
                         <outlet property="lastName" destination="NRq-h9-poP" id="Wak-hX-TQS"/>
                         <outlet property="userName" destination="LiA-n8-iFd" id="6Ol-G0-cZX"/>
                         <segue destination="lSM-uc-KCa" kind="showDetail" identifier="logout2" id="jMM-kj-xyt"/>
+                        <segue destination="cuK-fn-PAE" kind="show" identifier="goToAdmin" id="pxH-5X-LUZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1228.985507246377" y="314.73214285714283"/>
+            <point key="canvasLocation" x="2139.130434782609" y="314.73214285714283"/>
+        </scene>
+        <!--Admin View Controller-->
+        <scene sceneID="OdP-9S-JYA">
+            <objects>
+                <viewController id="cuK-fn-PAE" customClass="adminViewController" customModule="Reviewing_off_campus_housing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BS3-PI-oWe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="p2v-Ib-7iQ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8WI-TS-xbS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3035" y="315"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -817,7 +836,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="1ld-gH-gc1" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="xY1-PF-EHJ" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="Mt6-Dc-mjQ" kind="relationship" relationship="viewControllers" id="mn0-Ze-tEj"/>
                     </connections>
                 </tabBarController>
@@ -954,6 +973,25 @@
             </objects>
             <point key="canvasLocation" x="1228.985507246377" y="-419.19642857142856"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZFW-Ob-zpC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xY1-PF-EHJ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="icon" id="cPa-gy-q4n"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gz9-Jp-aZJ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="j8p-sE-jUo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jbs-L9-Kbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1228.985507246377" y="314.73214285714283"/>
+        </scene>
     </scenes>
     <resources>
         <image name="25694" width="30" height="30"/>
@@ -980,6 +1018,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jMM-kj-xyt"/>
-        <segue reference="ahG-8u-YDn"/>
+        <segue reference="vjc-PQ-KVe"/>
     </inferredMetricsTieBreakers>
 </document>
