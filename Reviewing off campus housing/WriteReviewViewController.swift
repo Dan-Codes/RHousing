@@ -216,6 +216,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                                 "comments" : self.comment.text!,
                                 "isAnonymous" : storeBool.shared.anonymousBool,
                                 "rating" : self.rating.value,
+                                // isEdited field needed??? -kevin
                                 "willLiveAgain" : storeBool.shared.liveagain,
                                 "timeStamp" : time,
                                 "locationRating" : self.locationRating,
