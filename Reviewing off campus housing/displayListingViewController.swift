@@ -31,6 +31,10 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     var averageAmenities:Double = 0.0
     var countNewListings:Double = 0.0
     
+    var info:String = ""
+    var Em:String = ""
+    var dollarSign = "$"
+    
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label3: UILabel!
@@ -68,36 +72,30 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     print("Document data was empty.")
                     return }
                 
-                self.showReviews()
+                self.showReviews() // where the juicy stuf happens
         }
-        
     } //  end of viewDidLoad
-    
-    var info:String = ""
-    var Em:String = ""
-    var dollarSign = "$"
     
     func showReviews(){
         
         let docRef = db.collection("listings").document(info)
         
         docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
+            if let document = document, document.exists { // go through the listings database
                 
                 //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 //print("Document data: \(dataDescription)")
-                
+
+                // retrieve database values for a listing (address, landord, rent, and its reviews)
                 let address = document.get("address") ?? ""
                 let landlordName = document.get("landlordName") ?? "Leasing manager unavailable"
                 let getRent = document.get("rent") ?? ""
-                
                 let review = document.get("reviews") as! NSDictionary
                 
-                //Retreiving values from map of maps (reviews)
-                //Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
-                
+                // this is the array that the reviews get put into for the table view to read from. it's global.
                 arr.shared.reviewArr = []
                 
+                // initialization of values for rating values
                 self.AverageRating = 0
                 self.countReviews = 0
                 self.averageLocation = 0.0
@@ -105,11 +103,15 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 self.averageAmenities = 0.0
                 self.countNewListings = 0.0
                 
-                for (reviewer, reviewMap) in review {
-                    var reviewString = ""
+                //Retreiving values from map of maps (reviews)
+                //Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
+                
+                for (reviewer, reviewMap) in review { // the "reviews" map for a listing contains another map: (key = reviewer, value = reviewMap)
+                    var reviewString = "" // the string that each review gets parsed into. initialized blank for each review.
                     
+                    // get values of a review from the reviewMap
                     let reviewer = reviewer as! String
-                    let reviewMap = reviewMap as! NSDictionary // potential problem if nothing in reviewMap? (like empty review thing)
+                    let reviewMap = reviewMap as! NSDictionary // potential problem if nothing in reviewMap? (like a empty review map)
                     let comments = reviewMap.value(forKey: "comments") as! String
                     let rating = reviewMap.value(forKey: "rating") as! Float
                     let isAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
@@ -120,6 +122,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     let mRating = reviewMap.value(forKey: "managementRating") as? Double
                     let aRating = reviewMap.value(forKey: "amenitiesRating") as? Double
 
+                    // calculation of average ratings
                     if (lRating != nil && mRating != nil && aRating != nil) {
                         self.countNewListings = self.countNewListings + 1
                         
@@ -143,6 +146,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
 //                    print("willLiveAgain: " + String(willLiveAgain))
 //                    print("\n")
                     
+                    // adding the review info for the review into the string
                     if isAnonymous == false { reviewString = reviewString + "Reviewer: " + String(reviewer) + "\n" }
                     else { reviewString = reviewString + "[This reviewer has made their review anonymous.]\n" }
                     
@@ -152,13 +156,14 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     
                     if isEdited { reviewString = reviewString + "\n\n[This comment has been edited.]" }
                     
-                    arr.shared.reviewArr.append(reviewString) // adding to the array of strings.
+                    // appending to the array of strings.
+                    arr.shared.reviewArr.append(reviewString)
                     
                 } // end for loop
                 
                 self.label.text = (address as! String) // label for address
                 self.label2.text = (landlordName as! String) // label for landlord
-                self.displayRent.text = (self.dollarSign + "\(getRent)")
+                self.displayRent.text = (self.dollarSign + "\(getRent)") // label for rent
                 
                 //Note to Kevin: check math
                 
@@ -177,9 +182,6 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     let avgrate3 = (self.averageAmenities/self.countNewListings)
                     self.rating3.text = String(format: "%.1f", avgrate3)
                 }
-                
-                //if (rent != nil)  { self.label3.text = String(format: "%@", rent as! CVarArg) } // label for rent
-                //else              { self.label3.text = "No rent information" } // case of nothing
                 
             } // end if document exists
                 
@@ -224,17 +226,29 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func deleteReview(_ sender: UIButton) {
+        let user = Auth.auth().currentUser
+        if let user = user {
+            // The user's ID, unique to the Firebase project.
+            // Do NOT use this value to authenticate with your backend server,
+            // if you have one. Use getTokenWithCompletion:completion: instead.
+            
+            let email = user.email
+            Em = email!
+            
+        } // end if
+        
         let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
 
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in db.collection("listings").document(self.info).delete() { err in
-            if let err = err { print("Error removing document: \(err)") }
-            else {
-                print("Document successfully removed!")
-                print(self.Em)
-            }
-
-            }}))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in
+            let docPropertyRef = db.collection("listings").document(self.info)
+            let propertyfp = FieldPath(["reviews", self.Em])
+            let docUserRef = db.collection("Users").document(self.Em)
+            let userfp = FieldPath(["Review History", self.info])
+            
+            docPropertyRef.updateData([propertyfp : FieldValue.delete()])
+            docUserRef.updateData([userfp : FieldValue.delete()])
+        }))
         self.present(alert, animated: true)
         return;
     }

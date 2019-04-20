@@ -166,6 +166,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     print("Error updating document: \(err)")
                 } else {
                     print("Document successfully updated")
+                    //FirstViewController().viewDidLoad()
                 }
             }
         }
@@ -180,6 +181,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     print("Error updating document: \(err)")
                 } else {
                     print("Document successfully updated")
+                    //FirstViewController().viewDidLoad()
                 }
             }
 
