@@ -224,17 +224,29 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func deleteReview(_ sender: UIButton) {
+        let user = Auth.auth().currentUser
+        if let user = user {
+            // The user's ID, unique to the Firebase project.
+            // Do NOT use this value to authenticate with your backend server,
+            // if you have one. Use getTokenWithCompletion:completion: instead.
+            
+            let email = user.email
+            Em = email!
+            
+        } // end if
+        
         let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
 
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in db.collection("listings").document(self.info).delete() { err in
-            if let err = err { print("Error removing document: \(err)") }
-            else {
-                print("Document successfully removed!")
-                print(self.Em)
-            }
-
-            }}))
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in
+            let docPropertyRef = db.collection("listings").document(self.info)
+            let propertyfp = FieldPath(["reviews", self.Em])
+            let docUserRef = db.collection("Users").document(self.Em)
+            let userfp = FieldPath(["Review History", self.info])
+            
+            docPropertyRef.updateData([propertyfp : FieldValue.delete()])
+            docUserRef.updateData([userfp : FieldValue.delete()])
+        }))
         self.present(alert, animated: true)
         return;
     }
