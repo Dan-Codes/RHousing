@@ -74,7 +74,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
+                //print("Document data: \(dataDescription)")
                 let darkModeBool = document.get("DarkMode") as! Bool
                 SecState.shared.darkMode = darkModeBool
                 AppState.shared.darkMode = darkModeBool

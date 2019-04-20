@@ -10,12 +10,96 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseUI
+
+var info:String = ""
+
+public class ReviewHistory {
+    var reviewHistories:[String] = []
+    public static let shared = ReviewHistory()
+}
+
 public class SecState {
     public var darkMode = true
     public static let shared = SecState()
 }
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ReviewHistory.shared.reviewHistories.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        
+        cell?.textLabel!.numberOfLines = 0
+        cell?.textLabel!.lineBreakMode = .byWordWrapping
+        cell?.textLabel!.font = UIFont.systemFont(ofSize: 14.0)
+        
+        let text = ReviewHistory.shared.reviewHistories[indexPath.row]
+        cell?.textLabel?.text = text
+        return cell!
+    }
+
+    var Em:String = ""
+    func showHistory() {
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+            let email = user.email
+            Em = email!
+        }
+        
+        let docRef = db.collection("Users").document(Em)
+        
+        docRef.getDocument { (document, error) in
+            
+            if let document = document, document.exists {
+                
+                //let firstName = document.get("First Name") as! String ?? ""
+                
+                let reviewHis = document.get("Review History") as! NSDictionary
+                ReviewHistory.shared.reviewHistories = []
+                
+                for (property, fields) in reviewHis {
+                    print(property)
+                    
+                    var thisReview = ""
+                    
+                    let fields = fields as! NSDictionary
+                    
+                    let address = property as! String
+                    let comments = fields.value(forKey: "comments") as! String
+                    let isAnonymous = fields.value(forKey: "isAnonymous") as! Bool
+                    let rating = fields.value(forKey: "rating") as! Float
+                    let willLiveAgain = fields.value(forKey: "willLiveAgain") as! Bool
+//                    let amenitiesRating = fields.value(forKey: "amenitiesRating") as! Int
+//                    let locationRating = fields.value(forKey: "locationRating") as! Int
+//                    let managementRating = fields.value(forKey: "managementRating") as! Int
+                    //let isEdited = fields.value(forKey: "isEdited") as! Bool
+                    // do time stamp field
+                    
+                    thisReview += "Property: " + address + "\n"
+                    thisReview += "Comments: " + comments + "\n"
+                    
+                    
+                    ReviewHistory.shared.reviewHistories.append(thisReview)
+                    
+                }  // end reviewHis loop
+                
+                
+            }  // end if document exists
+                
+            else { print("Document does not exist.") }
+            
+            // this line of code is critical because it makes sure the table view updates
+            self.reviewHistory.reloadData()
+            
+        }  // end get document
+        
+        reviewHistory.dataSource = self  // might not be necessary
+        
+    }  // end function showHistory
 
     var email:String = ""
     
@@ -25,6 +109,7 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var displayEmail: UILabel!
     @IBOutlet weak var darkModeSelect: UISwitch!
+    @IBOutlet weak var reviewHistory: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +124,15 @@ class SecondViewController: UIViewController {
             email = user.email!
             
         }
+        
+        showHistory()
+        
         let docRef = db.collection("Users").document(email)
         
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
+                //print("Document data: \(dataDescription)")
                 
                 let fN = document.get("First Name") ?? ""
                 self.firstName.text = (fN as! String)
