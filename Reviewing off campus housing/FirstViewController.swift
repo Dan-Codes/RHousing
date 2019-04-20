@@ -26,8 +26,11 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
     }
     
     var locationManager = CLLocationManager()
-    var resultsViewController: GMSAutocompleteResultsViewController?
+    var resultsViewController: GMSAutocompleteResultsViewController? // GMSAutocompleteResultsViewController provides an interface that displays place autocomplete predictions in a table view.
     var searchController: UISearchController?
+    
+    ///let searchController = UISearchController(searchResultsController: nil)
+    
     var resultView: UITextView?
     var camera:GMSCameraPosition!
     var placesClient: GMSPlacesClient!
@@ -50,6 +53,9 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
+        
+        // https://stackoverflow.com/questions/46832576/display-table-view-when-searchbar-from-searchcontroller-begin-edited-swift
+        // -kevin: look into this.
         
         // Put the search bar in the navigation bar.
         searchController?.searchBar.sizeToFit()

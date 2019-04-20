@@ -27,6 +27,8 @@ class ReportViewController: UIViewController {
     @IBOutlet weak var lived: UISwitch!
     @IBOutlet weak var report: UITextView!
     
+    // from kevin: "Currently live here" should be automatically false if "Lived here before?" is false.
+    
     @IBAction func submit(_ sender: UIButton) {
         let time = Timestamp(date: Date())
         

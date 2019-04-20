@@ -41,6 +41,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell?.textLabel?.text = text
         return cell!
     }
+    
+    // implement swipe to delete reviews??? -kevin
 
     var Em:String = ""
     func showHistory() {
