@@ -90,9 +90,6 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 let address = document.get("address") ?? ""
                 let landlordName = document.get("landlordName") ?? "Leasing manager unavailable"
                 let getRent = document.get("rent") ?? ""
-                self.displayRent.text = (self.dollarSign + "\(getRent)")
-                
-                
                 
                 let review = document.get("reviews") as! NSDictionary
                 
@@ -122,23 +119,9 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     let lRating = reviewMap.value(forKey: "locationRating") as? Double
                     let mRating = reviewMap.value(forKey: "managementRating") as? Double
                     let aRating = reviewMap.value(forKey: "amenitiesRating") as? Double
-                    print("SHOWWWWWWWWWW")
-                    print(aRating)
-                    print(mRating)
-                    print(lRating)
-                    
-//                    if aRating == nil {
-//                        aRating = 0
-//                    }
-//                    else{
-//                        aRating = aRating
-//                    }
-                    
-                    //if (lRating + mRating + aRating != 0) {
 
                     if (lRating != nil && mRating != nil && aRating != nil) {
                         self.countNewListings = self.countNewListings + 1
-                        
                         
                         self.averageLocation = self.averageLocation + lRating!
                         self.averageManagement = self.averageManagement + mRating!
@@ -175,6 +158,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 
                 self.label.text = (address as! String) // label for address
                 self.label2.text = (landlordName as! String) // label for landlord
+                self.displayRent.text = (self.dollarSign + "\(getRent)")
                 
                 //Note to Kevin: check math
                 
