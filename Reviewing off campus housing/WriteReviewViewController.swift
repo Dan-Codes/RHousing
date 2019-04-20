@@ -159,7 +159,6 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                                 "\(self.Em)" : [
                                     "comments" : self.comment.text!,
                                     "isAnonymous" : storeBool.shared.anonymousBool,
-                                    "isEdited" : false,
                                     "rating" : self.rating.value,
                                     "willLiveAgain" : storeBool.shared.liveagain,
                                     "timeStamp" : time,

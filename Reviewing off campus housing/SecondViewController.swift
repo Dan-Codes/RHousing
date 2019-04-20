@@ -34,6 +34,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell?.textLabel!.numberOfLines = 0
         cell?.textLabel!.lineBreakMode = .byWordWrapping
+        cell?.textLabel?.textColor = UIColor.white
         cell?.textLabel!.font = UIFont.systemFont(ofSize: 14.0)
         
         let text = ReviewHistory.shared.reviewHistories[indexPath.row]
@@ -73,15 +74,20 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let isAnonymous = fields.value(forKey: "isAnonymous") as! Bool
                     let rating = fields.value(forKey: "rating") as! Float
                     let willLiveAgain = fields.value(forKey: "willLiveAgain") as! Bool
-//                    let amenitiesRating = fields.value(forKey: "amenitiesRating") as! Int
-//                    let locationRating = fields.value(forKey: "locationRating") as! Int
-//                    let managementRating = fields.value(forKey: "managementRating") as! Int
-                    //let isEdited = fields.value(forKey: "isEdited") as! Bool
+                    let amenitiesRating = fields.value(forKey: "amenitiesRating") as? Double
+                    let locationRating = fields.value(forKey: "locationRating") as? Double
+                    let managementRating = fields.value(forKey: "managementRating") as? Double
+//                    let isEdited = fields.value(forKey: "isEdited") as? Bool
                     // do time stamp field
                     
-                    thisReview += "Property: " + address + "\n"
-                    thisReview += "Comments: " + comments + "\n"
+                    thisReview += address + "\n\n"
+                    thisReview += comments + "\n\n"
                     
+                    if isAnonymous { thisReview += "You posted this review anonymously.\n\n"    }
+                    else           { thisReview += "You included your name in this review.\n\n" }
+                    
+                    thisReview += "Overall: " + String(rating) + "\n"
+                    thisReview += "Would live again: " + (willLiveAgain ? "Yes" : "No")
                     
                     ReviewHistory.shared.reviewHistories.append(thisReview)
                     
