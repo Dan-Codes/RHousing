@@ -25,10 +25,12 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         return .lightContent
     }
     
+    var locationManager = CLLocationManager()
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
     var resultView: UITextView?
     var camera:GMSCameraPosition!
+    var placesClient: GMSPlacesClient!
     var mapView: GMSMapView!
     var emailID:String = ""
     
@@ -259,3 +261,4 @@ extension UIColor {
         )
     }
 }
+

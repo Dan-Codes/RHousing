@@ -127,11 +127,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //                    }
                     
                     db.collection("Users").document(self.emailText.text!).setData([
-                        "E-mail": self.emailText.text!,
+                        "Email": self.emailText.text!,
                         "DarkMode" : false,
                         "Admin" : false,
-                        "First name" : self.firstName.text!,
-                        "Last name" : self.lastName.text!
+                        "First Name" : self.firstName.text!,
+                        "Last Name" : self.lastName.text!
                     ]) { err in
                         if let err = err {
                             print("Error writing document: \(err)")
