@@ -101,6 +101,13 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 
                 arr.shared.reviewArr = []
                 
+                self.AverageRating = 0
+                self.countReviews = 0
+                self.averageLocation = 0.0
+                self.averageManagement = 0.0
+                self.averageAmenities = 0.0
+                self.countNewListings = 0.0
+                
                 for (reviewer, reviewMap) in review {
                     var reviewString = ""
                     
@@ -168,6 +175,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 
                 self.label.text = (address as! String) // label for address
                 self.label2.text = (landlordName as! String) // label for landlord
+                
+                //Note to Kevin: check math
                 
                 if (self.countReviews != 0) {
                     let avgrate = (self.AverageRating/self.countReviews)
