@@ -64,8 +64,7 @@ class SecondViewController: UIViewController {
             }
         }
     }
-    
-    
+
     
    @IBAction func darkMode(_ sender: UISwitch) {
         if sender.isOn {

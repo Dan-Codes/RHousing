@@ -26,14 +26,25 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     
     var AverageRating:Double = 0
     var countReviews:Double = 0
+    var averageLocation:Double = 0.0
+    var averageManagement:Double = 0.0
+    var averageAmenities:Double = 0.0
+    var countNewListings:Double = 0.0
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label3: UILabel!
     @IBOutlet weak var AddressLabel: UILabel!
     @IBOutlet weak var landlordLabel: UILabel!
-    @IBOutlet weak var rentPriceLabel: UILabel!
     @IBOutlet weak var avgRating: UILabel!
+    @IBOutlet weak var rentTitle: UILabel!
+    @IBOutlet weak var locationTitle: UILabel!
+    @IBOutlet weak var managementTitle: UILabel!
+    @IBOutlet weak var amenitiesTitle: UILabel!
+    @IBOutlet weak var displayRent: UILabel!
+    @IBOutlet weak var rating1: UILabel!
+    @IBOutlet weak var rating2: UILabel!
+    @IBOutlet weak var rating3: UILabel!
     
     @IBOutlet weak var reviewTable: UITableView!
     
@@ -64,6 +75,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     
     var info:String = ""
     var Em:String = ""
+    var dollarSign = "$"
     
     func showReviews(){
         
@@ -77,7 +89,10 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 
                 let address = document.get("address") ?? ""
                 let landlordName = document.get("landlordName") ?? "Leasing manager unavailable"
-                //let rent = (document.get("rent"))
+                let getRent = document.get("rent") ?? ""
+                self.displayRent.text = (self.dollarSign + "\(getRent)")
+                
+                
                 
                 let review = document.get("reviews") as! NSDictionary
                 
@@ -96,6 +111,36 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     let isAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
                     let isEdited = reviewMap.value(forKey: "isEdited") as! Bool
                     let willLiveAgain = reviewMap.value(forKey: "willLiveAgain") as! Bool
+                    
+                    let lRating = reviewMap.value(forKey: "locationRating") as? Double
+                    let mRating = reviewMap.value(forKey: "managementRating") as? Double
+                    let aRating = reviewMap.value(forKey: "amenitiesRating") as? Double
+                    print("SHOWWWWWWWWWW")
+                    print(aRating)
+                    print(mRating)
+                    print(lRating)
+                    
+//                    if aRating == nil {
+//                        aRating = 0
+//                    }
+//                    else{
+//                        aRating = aRating
+//                    }
+                    
+                    //if (lRating + mRating + aRating != 0) {
+
+                    if (lRating != nil && mRating != nil && aRating != nil) {
+                        self.countNewListings = self.countNewListings + 1
+                        
+                        
+                        self.averageLocation = self.averageLocation + lRating!
+                        self.averageManagement = self.averageManagement + mRating!
+                        self.averageAmenities = self.averageAmenities + aRating!
+                        
+                        print(self.averageLocation)
+                        print(self.averageManagement)
+                        print(self.averageAmenities)
+                    }
                     
                     self.AverageRating = self.AverageRating + Double(rating)
                     self.countReviews = self.countReviews + 1
@@ -124,17 +169,28 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 self.label.text = (address as! String) // label for address
                 self.label2.text = (landlordName as! String) // label for landlord
                 
+                if (self.countReviews != 0) {
+                    let avgrate = (self.AverageRating/self.countReviews)
+                    self.avgRating.text = String(format: "%.1f", avgrate)
+                } // end if
+                
+                if (self.countNewListings != 0) {
+                    let avgrate = (self.averageLocation/self.countNewListings)
+                    self.rating1.text = String(format: "%.1f", avgrate)
+                    
+                    let avgrate2 = (self.averageManagement/self.countNewListings)
+                    self.rating2.text = String(format: "%.1f", avgrate2)
+                    
+                    let avgrate3 = (self.averageAmenities/self.countNewListings)
+                    self.rating3.text = String(format: "%.1f", avgrate3)
+                }
+                
                 //if (rent != nil)  { self.label3.text = String(format: "%@", rent as! CVarArg) } // label for rent
                 //else              { self.label3.text = "No rent information" } // case of nothing
                 
             } // end if document exists
                 
             else { print("Document does not exist") } // end else
-            
-            if (self.countReviews != 0) {
-                let avgrate = (self.AverageRating/self.countReviews)
-                self.avgRating.text = String(format: "%.1f", avgrate)
-            } // end if
             
             // this line of code is critical! it makes sure the table view updates.
             self.reviewTable.reloadData()

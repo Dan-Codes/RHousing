@@ -81,14 +81,14 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     
     var locationRating = 5.0
     var managementRating = 5.0
-    var amentitiesRating = 5.0
+    var amenitiesRating = 5.0
 
     lazy var cosmosView: CosmosView = {
         var view = CosmosView()
         
         locationCosmos.didFinishTouchingCosmos = {rating in self.locationRating = rating}
         managementCosmos.didFinishTouchingCosmos = {rating in self.managementRating = rating}
-        amenitiesCosmos.didFinishTouchingCosmos = {rating in self.amentitiesRating = rating }
+        amenitiesCosmos.didFinishTouchingCosmos = {rating in self.amenitiesRating = rating }
         return view
     }()
     
@@ -165,7 +165,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                                     "timeStamp" : time,
                                     "locationRating" : self.locationRating,
                                     "managementRating" : self.managementRating,
-                                    "amentitiesRating" : self.amentitiesRating
+                                    "amenitiesRating" : self.amenitiesRating
                                 ]
                             ]
                             ], merge: true)
@@ -198,7 +198,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                                     "timeStamp" : time,
                                     "locationRating" : self.locationRating,
                                     "managementRating" : self.managementRating,
-                                    "amentitiesRating" : self.amentitiesRating
+                                    "amenitiesRating" : self.amenitiesRating
                                 ]
                             ]
                             ], merge: true)
@@ -218,7 +218,11 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                                 "isAnonymous" : storeBool.shared.anonymousBool,
                                 "rating" : self.rating.value,
                                 "willLiveAgain" : storeBool.shared.liveagain,
-                                "timeStamp" : time
+                                "timeStamp" : time,
+                                "locationRating" : self.locationRating,
+                                "managementRating" : self.managementRating,
+                                "amenitiesRating" : self.amenitiesRating
+                                
                             ]
                         ]
                         ], merge: true)
