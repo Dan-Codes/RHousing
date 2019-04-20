@@ -128,7 +128,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     
                     db.collection("Users").document(self.emailText.text!).setData([
                         "Email": self.emailText.text!,
-                        "DarkMode" : false,
+                        "DarkMode" : true,
                         "Admin" : false,
                         "First Name" : self.firstName.text!,
                         "Last Name" : self.lastName.text!
