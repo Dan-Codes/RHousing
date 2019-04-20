@@ -136,6 +136,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         showHistory()
         
+        // kevin's comment:
+        // consider putting the below code into a function? kinda like how showHistory is implemented here, or how I implemented showReviews in displayListings.
         let docRef = db.collection("Users").document(email)
         
         docRef.getDocument { (document, error) in
