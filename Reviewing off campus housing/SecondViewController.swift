@@ -87,6 +87,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     else           { thisReview += "You included your name in this review.\n\n" }
                     
                     thisReview += "Overall: " + String(rating) + "\n"
+                    thisReview += "Location: " + (locationRating == nil ? "N/A" : String(format: "%0.1f", locationRating!)) + "\n"
+                    thisReview += "Management: " + (managementRating == nil ? "N/A" : String(format: "%0.1f", managementRating!)) + "\n"
+                    thisReview += "Amenities: " + (amenitiesRating == nil ? "N/A" : String(format: "%0.1f", amenitiesRating!)) + "\n\n"
                     thisReview += "Would live again: " + (willLiveAgain ? "Yes" : "No")
                     
                     ReviewHistory.shared.reviewHistories.append(thisReview)
