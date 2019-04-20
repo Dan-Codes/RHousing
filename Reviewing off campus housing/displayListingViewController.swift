@@ -147,14 +147,18 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
 //                    print("\n")
                     
                     // adding the review info for the review into the string
-                    if isAnonymous == false { reviewString = reviewString + "Reviewer: " + String(reviewer) + "\n" }
-                    else { reviewString = reviewString + "[This reviewer has made their review anonymous.]\n" }
+                    if isAnonymous == false { reviewString += "Reviewer: " + String(reviewer) + "\n\n" }
+                    else { reviewString += "[This reviewer has made their review anonymous.]\n\n" }
                     
-                    reviewString = reviewString + "Rating: " + String(format: "%.1f",rating) + "\n"
-                    reviewString = reviewString + "\nComments: \n" + comments + "\n\n"
-                    reviewString = reviewString + "Would live again? " + (willLiveAgain ? "Yes" : "No")
+                    reviewString += "Overall Rating: " + String(format: "%.1f",rating) + "\n"
+                    reviewString += "Amenities Rating: " + (aRating == nil ? "N/A" : String(format: "%1.f",aRating!)) + "\n"
+                    reviewString += "Management Rating: " + (mRating == nil ? "N/A" : String(format: "%1.f",mRating!)) + "\n"
+                    reviewString += "Location Rating: " + (lRating == nil ? "N/A" : String(format: "%1.f",lRating!)) + "\n"
                     
-                    if isEdited { reviewString = reviewString + "\n\n[This comment has been edited.]" }
+                    reviewString += "\nComments: \n" + comments + "\n\n"
+                    reviewString += "Would live again? " + (willLiveAgain ? "Yes" : "No")
+                    
+                    if isEdited { reviewString += "\n\n[This comment has been edited.]" }
                     
                     // appending to the array of strings.
                     arr.shared.reviewArr.append(reviewString)
