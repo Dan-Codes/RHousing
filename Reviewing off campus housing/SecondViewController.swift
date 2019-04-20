@@ -78,6 +78,7 @@ class SecondViewController: UIViewController {
                     print("Error updating document: \(err)")
                 } else {
                     print("Document successfully updated")
+                    //FirstViewController().viewDidLoad()
                 }
             }
         }
@@ -92,6 +93,7 @@ class SecondViewController: UIViewController {
                     print("Error updating document: \(err)")
                 } else {
                     print("Document successfully updated")
+                    //FirstViewController().viewDidLoad()
                 }
             }
 

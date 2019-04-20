@@ -71,7 +71,6 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
             emailID = email!
         }
         let docRef = db.collection("Users").document(emailID)
-        
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
@@ -86,7 +85,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                 print("Document does not exist")
             }
         }
-        // Add a new document in collection "cities"
+         //Add a new document in collection "cities"
         db.collection("Users").document(emailID)
             .addSnapshotListener { documentSnapshot, error in
                 guard let document = documentSnapshot else {
@@ -101,15 +100,15 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                 self.printPin()
         }
         
-        db.collection("listings").whereField("property", isEqualTo: true)
-            .addSnapshotListener { querySnapshot, error in
-                guard let documents = querySnapshot?.documents else {
-                    print("Error fetching documents: \(error!)")
-                    return
-                }
-                print("Listener detected changes")
-                self.printPin()
-        }
+//        db.collection("listings").whereField("property", isEqualTo: true)
+//            .addSnapshotListener { querySnapshot, error in
+//                guard let documents = querySnapshot?.documents else {
+//                    print("Error fetching documents: \(error!)")
+//                    return
+//                }
+//                print("Listener detected changes")
+//                self.printPin()
+//        }
         //printPin()
        
     }
