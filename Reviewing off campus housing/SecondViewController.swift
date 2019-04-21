@@ -222,6 +222,14 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if adminCheck{
         performSegue(withIdentifier: "goToAdmin", sender: self)
         }
+        else{
+            let alert = UIAlertController(title: "You are not an admin", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
+                return
+            }))
+            self.present(alert, animated: true)
+            return
+        }
         
     }
     
