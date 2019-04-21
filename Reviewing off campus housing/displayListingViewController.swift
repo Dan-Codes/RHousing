@@ -88,9 +88,9 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 //print("Document data: \(dataDescription)")
 
                 // retrieve database values for a listing (address, landord, rent, and its reviews)
-                let address = document.get("address") ?? ""
+                let address = document.get("address") as? String ?? ""
                 let landlordName = document.get("landlordName") ?? "Leasing manager unavailable"
-                let getRent = document.get("rent") ?? ""
+                let getRent = document.get("rent") as? String ?? ""
                 let review = document.get("reviews") as! NSDictionary
                 
                 // this is the array that the reviews get put into for the table view to read from. it's global.
@@ -116,7 +116,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     let comments = reviewMap.value(forKey: "comments") as! String
                     let rating = reviewMap.value(forKey: "rating") as! Float
                     let isAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
-                    let isEdited = reviewMap.value(forKey: "isEdited") as! Bool
+                    let isEdited = reviewMap.value(forKey: "isEdited") as? Bool ?? false
                     let willLiveAgain = reviewMap.value(forKey: "willLiveAgain") as! Bool
                     let timestamp = reviewMap.value(forKey: "timeStamp") as? Timestamp ?? Timestamp(date: Date.init(timeInterval: -9999999999, since: Date()))
                     // error handler for no timestamp is literally going 999999999 seconds before current time.
@@ -159,17 +159,25 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     arr.shared.reviewArr.append(reviewString)
                     
                 } // end for loop
-                
-                self.label.text = (address as! String) // label for address
+                print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+                print(address.split(separator: " "))
+                self.label.text = (address) // label for address
                 self.label2.text = (landlordName as! String) // label for landlord
-                self.displayRent.text = (self.dollarSign + "\(getRent)") // label for rent
                 
+                if getRent.first == "$"{self.displayRent.text = getRent}
+                else{
+                self.displayRent.text = (self.dollarSign + "\(getRent)") // label for rent
+                }
                 //Note to Kevin: check math
                 
                 if (self.countReviews != 0) {
                     let avgrate = (self.AverageRating/self.countReviews)
                     self.avgRating.text = String(format: "%.1f", avgrate)
                 } // end if
+                else{
+                    self.avgRating.text = "N/A"
+                }
+
                 
                 if (self.countNewListings != 0) {
                     let avgrate = (self.averageLocation/self.countNewListings)
@@ -180,6 +188,11 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     
                     let avgrate3 = (self.averageAmenities/self.countNewListings)
                     self.rating3.text = String(format: "%.1f", avgrate3)
+                }
+                else{
+                    self.rating1.text = ""
+                    self.rating2.text = ""
+                    self.rating3.text = ""
                 }
                 
             } // end if document exists

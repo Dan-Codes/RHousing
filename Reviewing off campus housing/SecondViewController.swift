@@ -24,7 +24,7 @@ public class SecState {
 }
 
 class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+    var adminCheck:Bool = false
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ReviewHistory.shared.reviewHistories.count
     }
@@ -54,10 +54,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             if let document = document, document.exists {
                 
-                let reviewHis = document.get("Review History") as! NSDictionary
+                let reviewHis = document.get("Review History") as? NSDictionary
                 ReviewHistory.shared.reviewHistories = []
-                
-                for (property, fields) in reviewHis {
+                for (property, fields) in reviewHis ?? [:] {
                     
                     var thisReview = ""
                     
@@ -161,6 +160,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 //print("Document data: \(dataDescription)")
                 
+                self.adminCheck = (document.get("Admin") as? Bool ?? false)
                 let fN = document.get("First Name") ?? ""
                 let lN = document.get("Last Name") ?? ""
                 self.firstName.text = (fN as! String) + " " + (lN as! String)
@@ -219,7 +219,10 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @IBAction func goAdmin(_ sender: UIButton) {
+        if adminCheck{
         performSegue(withIdentifier: "goToAdmin", sender: self)
+        }
+        
     }
     
     @IBAction func logoutButton(_ sender: UIButton) {

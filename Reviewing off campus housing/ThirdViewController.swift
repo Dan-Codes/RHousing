@@ -95,7 +95,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                         print(point)
                         let lat = point.latitude
                         let long = point.longitude
-                        if abs(lat - ThirdState.shared.varLat) < 0.000001 || abs(long - ThirdState.shared.varLong) < 0.000001{
+                        if abs(lat - ThirdState.shared.varLat) < 0.000001 && abs(long - ThirdState.shared.varLong) < 0.000001{
                             ThirdState.shared.isAdded = true
                             print("changed to true")
                             let alert = UIAlertController(title: "Location already added", message: "", preferredStyle: .alert)
@@ -117,8 +117,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                         "rent": ThirdState.shared.costOfRent
                     ]
                     //print("this is database Check")
-                    //print(check)
-                    
                     db.collection("listings").document(ThirdState.shared.str).setData(adData) { err in
                         if let err = err {
                             print("Error writing document: \(err)")
@@ -137,6 +135,14 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
     
     @IBAction func uploadProperty(_ sender: UIButton) {
         ThirdState.shared.str = adrs1.text! + " " + city.text! + ", " + state.text! + " " + zipcd.text!
+        if adrs1.text!.isEmpty || city.text!.isEmpty || state.text!.isEmpty || zipcd.text!.isEmpty{
+            let alert = UIAlertController(title: "Must include proper address fields", message: "Address 2 is optional", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
+                return
+            }))
+            self.present(alert, animated: true)
+            return
+        }
         ThirdState.shared.landlordName = landlord.text!
         ThirdState.shared.costOfRent = rentCost.text!
         //print(landlordName)
@@ -146,11 +152,20 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             let placemark = placemarks?.first
             let lat = placemark?.location?.coordinate.latitude
             let lon = placemark?.location?.coordinate.longitude
+             print("Lat: \(lat), Lon: \(lon)")
+            if lat == nil || lon == nil{
+                let alert = UIAlertController(title: "This place does not exist", message: "Please check your input", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
+                    return
+                }))
+                self.present(alert, animated: true)
+                return
+            }
             ThirdState.shared.varLat = (lat)!
             ThirdState.shared.varLong = (lon)!
             AppState.shared.long = lon!
             AppState.shared.lat = lat!
-            print("Lat: \(lat), Lon: \(lon)")
+           
         }
             if !self.checkDidAdd(lat: ThirdState.shared.varLat, long: ThirdState.shared.varLong) {
                 print("DONE")
