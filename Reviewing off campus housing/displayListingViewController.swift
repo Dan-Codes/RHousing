@@ -59,6 +59,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var reviewTable: UITableView!
     
     @IBAction func unwindToDsiplay(segue: UIStoryboardSegue) {}
+
+
     
     override func viewDidLoad() {
         
@@ -107,6 +109,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 self.averageManagement = 0.0
                 self.averageAmenities = 0.0
                 self.countNewListings = 0.0
+                
+                self.rentTitle.font = UIFont.boldSystemFont(ofSize: self.rentTitle.font.pointSize)
                 
                 
                 //Retreiving values from map of maps (reviews)
@@ -189,15 +193,10 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     let avgrate = (self.AverageRating/self.countReviews)
                     self.avgRating.text = String(format: "%.1f", avgrate)
                     
-                    var cosmosView: CosmosView = {
-                        var view = CosmosView()
-                        
-                        self.displayAvgRating.settings.updateOnTouch = false
-                        self.displayAvgRating.settings.fillMode = .precise
-                        self.displayAvgRating.rating = avgrate
-                        
-                        return view
-                    }()
+                    self.displayAvgRating.settings.updateOnTouch = false
+                    self.displayAvgRating.settings.fillMode = .precise
+                    self.displayAvgRating.rating = avgrate
+                    
                 } // end if
                 else{
                     self.avgRating.text = "N/A"
