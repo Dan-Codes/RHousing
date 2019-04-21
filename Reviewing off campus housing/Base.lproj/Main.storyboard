@@ -130,7 +130,7 @@
                                 <rect key="frame" x="0.0" y="424" width="414" height="278"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.27058823529999998" green="0.2666666667" blue="0.25490196079999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="separatorColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.27058823529411763" green="0.26666666666666666" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -254,31 +254,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you currently live here?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qk7-xc-ksS">
-                                <rect key="frame" x="60.5" y="521" width="200" height="20.5"/>
+                                <rect key="frame" x="60.5" y="477" width="200" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have you lived here before?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sC-fz-zTa">
-                                <rect key="frame" x="60.5" y="563.5" width="209" height="20"/>
+                                <rect key="frame" x="60.5" y="519.5" width="209" height="20"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WwU-TF-wOm">
-                                <rect key="frame" x="304.5" y="517" width="51" height="31"/>
+                                <rect key="frame" x="304.5" y="473" width="51" height="31"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="onTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="thumbTintColor" red="0.031372549019607843" green="0.34901960784313724" blue="0.44705882352941173" alpha="1" colorSpace="calibratedRGB"/>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mRb-RE-xEN">
-                                <rect key="frame" x="304.5" y="561" width="51" height="31"/>
+                                <rect key="frame" x="304.5" y="517" width="51" height="31"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="onTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="thumbTintColor" red="0.031372549019607843" green="0.34901960784313724" blue="0.44705882352941173" alpha="1" colorSpace="calibratedRGB"/>
                             </switch>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="e.g. Some of the information posted for this property is incorrect, I see spam or malicious content in one of the reviews" translatesAutoresizingMaskIntoConstraints="NO" id="Bz1-QS-Igq">
-                                <rect key="frame" x="60.5" y="316" width="293" height="168"/>
+                                <rect key="frame" x="60.5" y="272" width="293" height="168"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -290,7 +290,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" returnKeyType="continue"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportAnIssue2" translatesAutoresizingMaskIntoConstraints="NO" id="gii-ee-HAh">
-                                <rect key="frame" x="103" y="172" width="208" height="60"/>
+                                <rect key="frame" x="103" y="128" width="208" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="oSJ-hu-toA"/>
                                     <constraint firstAttribute="width" constant="208" id="ypX-vL-xQe"/>
@@ -303,7 +303,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="06O-fj-LfT">
-                                <rect key="frame" x="106" y="641.5" width="202" height="31"/>
+                                <rect key="frame" x="106" y="597.5" width="202" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="202" id="CMk-dd-tXe"/>
                                     <constraint firstAttribute="height" constant="31" id="HDr-3b-5O3"/>
@@ -1196,6 +1196,7 @@
         <image name="yourAccount" width="1920" height="94"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="w3s-hh-diq"/>
         <segue reference="jMM-kj-xyt"/>
         <segue reference="ahG-8u-YDn"/>
     </inferredMetricsTieBreakers>
