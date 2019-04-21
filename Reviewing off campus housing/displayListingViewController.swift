@@ -55,8 +55,9 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var rating1: UILabel!
     @IBOutlet weak var rating2: UILabel!
     @IBOutlet weak var rating3: UILabel!
-    
     @IBOutlet weak var reviewTable: UITableView!
+    
+    
     
     @IBAction func unwindToDsiplay(segue: UIStoryboardSegue) {}
 
@@ -141,10 +142,6 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                         self.averageLocation = self.averageLocation + lRating!
                         self.averageManagement = self.averageManagement + mRating!
                         self.averageAmenities = self.averageAmenities + aRating!
-                        
-                        print(self.averageLocation)
-                        print(self.averageManagement)
-                        print(self.averageAmenities)
                     }
                     
                     self.AverageRating = self.AverageRating + Double(rating)

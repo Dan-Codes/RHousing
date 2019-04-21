@@ -19,13 +19,13 @@ public class storeBool {
     public static let shared = storeBool()
 }
 
-class WriteReviewViewController: UIViewController, UITextFieldDelegate {
+class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
 
     @IBOutlet weak var address: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         address.text = info + "!"
-        comment.delegate = self as? UITextViewDelegate
+        comment.delegate = self //as? UITextViewDelegate <- I don't think we need this
         let borderColor : UIColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
         comment.layer.borderColor = borderColor.cgColor
         comment.layer.borderWidth = 0.5
@@ -33,7 +33,10 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
         
         view.addSubview(cosmosView)
         
-        self.hideKeyboardWhenTap()  
+        self.hideKeyboardWhenTap()
+        
+        comment.text = "Living here has been.."
+        comment.textColor = UIColor.lightGray
         // Do any additional setup after loading the view.
     }
     
@@ -106,6 +109,20 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func textViewDidBeginEditing(_ comment: UITextView) {
+        if comment.textColor == UIColor.lightGray {
+            comment.text = ""
+            comment.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ comment: UITextView) {
+        if comment.text.isEmpty {
+            comment.text = "Living here has been..."
+            comment.textColor = UIColor.lightGray
+        }
+    }
+
 
     @IBAction func submit(_ sender: UIButton) {
         //performSegue(withIdentifier: "writeToHome", sender: self)
