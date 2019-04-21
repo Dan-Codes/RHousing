@@ -43,13 +43,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     var Em:String = ""
-    func showHistory() {
-        
-        let user = Auth.auth().currentUser
-        if let user = user {
-            let email = user.email
-            Em = email!
-        }
+    
+    func showHistory(Em: String) {
         
         let docRef = db.collection("Users").document(Em)
         
@@ -57,26 +52,23 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             if let document = document, document.exists {
                 
-                //let firstName = document.get("First Name") as! String ?? ""
-                
                 let reviewHis = document.get("Review History") as! NSDictionary
                 ReviewHistory.shared.reviewHistories = []
                 
                 for (property, fields) in reviewHis {
-                    print(property)
                     
                     var thisReview = ""
                     
                     let fields = fields as! NSDictionary
                     
-                    let address = property as! String
-                    let comments = fields.value(forKey: "comments") as! String
-                    let isAnonymous = fields.value(forKey: "isAnonymous") as! Bool
-                    let rating = fields.value(forKey: "rating") as! Float
-                    let willLiveAgain = fields.value(forKey: "willLiveAgain") as! Bool
-                    let amenitiesRating = fields.value(forKey: "amenitiesRating") as? Double
-                    let locationRating = fields.value(forKey: "locationRating") as? Double
-                    let managementRating = fields.value(forKey: "managementRating") as? Double
+                    let address             = property as! String
+                    let comments            = fields.value(forKey: "comments") as! String
+                    let isAnonymous         = fields.value(forKey: "isAnonymous") as! Bool
+                    let rating              = fields.value(forKey: "rating") as? Double
+                    let willLiveAgain       = fields.value(forKey: "willLiveAgain") as! Bool
+                    let amenitiesRating     = fields.value(forKey: "amenitiesRating") as? Double
+                    let locationRating      = fields.value(forKey: "locationRating") as? Double
+                    let managementRating    = fields.value(forKey: "managementRating") as? Double
 //                    let isEdited = fields.value(forKey: "isEdited") as? Bool
                     // do time stamp field
                     
@@ -86,11 +78,13 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if isAnonymous { thisReview += "You posted this review anonymously.\n\n"    }
                     else           { thisReview += "You included your name in this review.\n\n" }
                     
-                    thisReview += "Overall: " + String(rating) + "\n"
+                    thisReview += "Overall: " + String(format: "%0.1f", rating!) + "\n"
                     thisReview += "Location: " + (locationRating == nil ? "N/A" : String(format: "%0.1f", locationRating!)) + "\n"
                     thisReview += "Management: " + (managementRating == nil ? "N/A" : String(format: "%0.1f", managementRating!)) + "\n"
                     thisReview += "Amenities: " + (amenitiesRating == nil ? "N/A" : String(format: "%0.1f", amenitiesRating!)) + "\n\n"
-                    thisReview += "Would live again: " + (willLiveAgain ? "Yes" : "No")
+                    thisReview += "Would live again: " + (willLiveAgain ? "Yes\n" : "No\n")
+                    
+                    thisReview += "________________________________________________"
                     
                     ReviewHistory.shared.reviewHistories.append(thisReview)
                     
@@ -114,11 +108,13 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var firstName: UILabel!
-    @IBOutlet weak var lastName: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var displayEmail: UILabel!
     @IBOutlet weak var darkModeSelect: UISwitch!
     @IBOutlet weak var reviewHistory: UITableView!
+    @IBOutlet weak var googleMapsDarkMode: UIImageView!
+    @IBOutlet weak var accountBG: UIImageView!
+    @IBOutlet weak var historyBG: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,7 +130,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
         }
         
-        showHistory()
+        showHistory(Em: email)
         
         let docRef = db.collection("Users").document(email)
         
@@ -144,9 +140,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 //print("Document data: \(dataDescription)")
                 
                 let fN = document.get("First Name") ?? ""
-                self.firstName.text = (fN as! String)
                 let lN = document.get("Last Name") ?? ""
-                self.lastName.text = (lN as! String)
+                self.firstName.text = (fN as! String) + " " + (lN as! String)
                 let getEmail = document.get("Email") ?? ""
                 self.displayEmail.text = (getEmail as! String)
                 let darkModeBool = document.get("DarkMode") as! Bool
@@ -156,11 +151,14 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 else{
                     self.darkModeSelect.isOn = false
                 }
-            } else {
-                print("Document does not exist")
-            }
-        }
-    }
+            } else { print("Document does not exist") }
+        }  //  end getDocument
+        
+        view.sendSubviewToBack(googleMapsDarkMode)
+        view.sendSubviewToBack(accountBG)
+        view.sendSubviewToBack(historyBG)
+        
+    }  // end viewDidLoad()
 
     
    @IBAction func darkMode(_ sender: UISwitch) {
