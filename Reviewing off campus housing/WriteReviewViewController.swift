@@ -14,7 +14,7 @@ import Cosmos
 public class storeBool {
     public var anonymousBool = false
     // button thingy needs to default to No on the storyboard.
-    
+    public var edited = false
     public var liveagain = true
     public static let shared = storeBool()
 }
@@ -160,6 +160,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                                 "\(self.Em)" : [
                                     "comments" : self.comment.text!,
                                     "isAnonymous" : storeBool.shared.anonymousBool,
+                                    "isEdited" : false,
                                     "rating" : self.rating.value,
                                     "willLiveAgain" : storeBool.shared.liveagain,
                                     "timeStamp" : time,
@@ -174,6 +175,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                                 print("Error updating document: \(err)")
                             } else {
                                 print("Document successfully updated")
+                                storeBool.shared.edited = false
                             }
                         }
                     }
@@ -207,6 +209,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                                 print("Error updating document: \(err)")
                             } else {
                                 print("Document successfully updated")
+                                storeBool.shared.edited = true
                             }
                         }
                     }
@@ -217,7 +220,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
                                 "comments" : self.comment.text!,
                                 "isAnonymous" : storeBool.shared.anonymousBool,
                                 "rating" : self.rating.value,
-                                // isEdited field needed??? -kevin
+                                "isEdited" : storeBool.shared.edited,
                                 "willLiveAgain" : storeBool.shared.liveagain,
                                 "timeStamp" : time,
                                 "locationRating" : self.locationRating,

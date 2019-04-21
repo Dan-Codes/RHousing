@@ -71,14 +71,19 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let amenitiesRating     = fields.value(forKey: "amenitiesRating") as? Double
                     let locationRating      = fields.value(forKey: "locationRating") as? Double
                     let managementRating    = fields.value(forKey: "managementRating") as? Double
-//                    let isEdited = fields.value(forKey: "isEdited") as? Bool
+                    let isEdited = fields.value(forKey: "isEdited") as? Bool
                     // do time stamp field
                     
                     thisReview += address + "\n\n"
                     thisReview += comments + "\n\n"
                     
-                    if isAnonymous { thisReview += "You posted this review anonymously.\n\n"    }
-                    else           { thisReview += "You included your name in this review.\n\n" }
+                    if isAnonymous { thisReview += "You posted this review anonymously.\n"    }
+                    else           { thisReview += "You included your name in this review.\n" }
+                    
+                    if isEdited != nil {
+                       if isEdited! { thisReview += "Review was edited.\n\n" }
+                       else { thisReview += "This review hasn't been edited.\n\n" }
+                    }
                     
                     thisReview += "Overall: " + String(format: "%0.1f", rating!) + "\n"
                     thisReview += "Location: " + (locationRating == nil ? "N/A" : String(format: "%0.1f", locationRating!)) + "\n"
@@ -129,6 +134,19 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             // Do NOT use this value to authenticate with your backend server,
             // if you have one. Use getTokenWithCompletion:completion: instead.
             email = user.email!
+            db.collection("Users").document(email)
+                .addSnapshotListener { documentSnapshot, error in
+                    guard let document = documentSnapshot else {
+                        print("Error fetching document: \(error!)")
+                        return
+                    }
+                    guard let data = document.data() else {
+                        print("Document data was empty.")
+                        return
+                    }
+                    print("Refresh Table View")
+                    self.showHistory(Em: self.email)
+            }
             
         }
         
