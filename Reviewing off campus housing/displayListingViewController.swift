@@ -88,7 +88,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 //print("Document data: \(dataDescription)")
 
                 // retrieve database values for a listing (address, landord, rent, and its reviews)
-                let address = document.get("address") as? String ?? ""
+                var address = document.get("address") as? String ?? ""
                 let landlordName = document.get("landlordName") ?? "Leasing manager unavailable"
                 let getRent = document.get("rent") as? String ?? ""
                 let review = document.get("reviews") as! NSDictionary
@@ -161,7 +161,17 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 } // end for loop
                 print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
                 print(address.split(separator: " "))
-                self.label.text = (address) // label for address
+                var count = 0
+                var address1:String = ""
+                for str in address.split(separator: " "){
+                    if (str.last == ","){
+                        break
+                    }
+                    address1.append(contentsOf: str)
+                    address1.append(contentsOf: " ")
+                    count+=1
+                }
+                self.label.text = (address1) // label for address
                 self.label2.text = (landlordName as! String) // label for landlord
                 
                 if getRent.first == "$"{self.displayRent.text = getRent}
