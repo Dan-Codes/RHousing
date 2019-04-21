@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import Cosmos
 
 public class arr {
     // global stuff
@@ -45,6 +46,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var AddressLabel: UILabel!
     @IBOutlet weak var landlordLabel: UILabel!
     @IBOutlet weak var avgRating: UILabel!
+    @IBOutlet weak var displayAvgRating: CosmosView!
     @IBOutlet weak var rentTitle: UILabel!
     @IBOutlet weak var locationTitle: UILabel!
     @IBOutlet weak var managementTitle: UILabel!
@@ -59,6 +61,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func unwindToDsiplay(segue: UIStoryboardSegue) {}
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -72,6 +75,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 guard document.data() != nil else {
                     print("Document data was empty.")
                     return }
+            
                 
                 self.showReviews() // where the juicy stuf happens
         }
@@ -103,6 +107,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 self.averageManagement = 0.0
                 self.averageAmenities = 0.0
                 self.countNewListings = 0.0
+                
                 
                 //Retreiving values from map of maps (reviews)
                 //Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
@@ -178,15 +183,27 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 else{
                 self.displayRent.text = (self.dollarSign + "\(getRent)") // label for rent
                 }
-                //Note to Kevin: check math
+                
                 
                 if (self.countReviews != 0) {
                     let avgrate = (self.AverageRating/self.countReviews)
                     self.avgRating.text = String(format: "%.1f", avgrate)
+                    
+                    var cosmosView: CosmosView = {
+                        var view = CosmosView()
+                        
+                        self.displayAvgRating.settings.updateOnTouch = false
+                        self.displayAvgRating.settings.fillMode = .precise
+                        self.displayAvgRating.rating = avgrate
+                        
+                        return view
+                    }()
                 } // end if
                 else{
                     self.avgRating.text = "N/A"
                 }
+                
+
 
                 
                 if (self.countNewListings != 0) {
