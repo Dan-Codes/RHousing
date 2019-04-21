@@ -110,6 +110,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate {
     @IBAction func submit(_ sender: UIButton) {
         //performSegue(withIdentifier: "writeToHome", sender: self)
         let time = Timestamp(date: Date())
+        //let time = Date()
         print(time)
         let user = Auth.auth().currentUser
         if let user = user {

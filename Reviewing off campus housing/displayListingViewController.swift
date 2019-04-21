@@ -35,6 +35,10 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     var Em:String = ""
     var dollarSign = "$"
     
+    let date = Date()
+    let formatter = DateFormatter()
+    
+    
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var label2: UILabel!
     @IBOutlet weak var label3: UILabel!
@@ -58,10 +62,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        // don't really need this line of code below?
-        // showReviews()
-        
+
         // This is for auto-refresh (after writing a review). Even w/o writing a review, it still runs to show the reviews.
         db.collection("listings").document(info)
             .addSnapshotListener { documentSnapshot, error in
@@ -117,6 +118,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     let isAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
                     let isEdited = reviewMap.value(forKey: "isEdited") as! Bool
                     let willLiveAgain = reviewMap.value(forKey: "willLiveAgain") as! Bool
+                    let timestamp = reviewMap.value(forKey: "timeStamp") as? Timestamp ?? Timestamp(date: Date.init(timeInterval: -9999999999, since: Date()))
+                    // error handler for no timestamp is literally going 999999999 seconds before current time.
                     
                     let lRating = reviewMap.value(forKey: "locationRating") as? Double
                     let mRating = reviewMap.value(forKey: "managementRating") as? Double
@@ -138,18 +141,9 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     self.AverageRating = self.AverageRating + Double(rating)
                     self.countReviews = self.countReviews + 1
                     
-//                    print("reviewer: " + reviewer)
-//                    print("comments: " + comments)
-//                    print("rating: " + String(rating))
-//                    print("isAnonymous: " + String(isAnonymous))
-//                    print("isEdited: " + String(isEdited))
-//                    print("willLiveAgain: " + String(willLiveAgain))
-//                    print("\n")
-                    
                     // adding the review info for the review into the string
-                    if isAnonymous == false { reviewString += "Reviewer: " + String(reviewer) + "\n\n" }
-                    else { reviewString += "[This reviewer has made their review anonymous.]\n\n" }
-                    
+                    reviewString += (isAnonymous ? "[This reviewer has made their review anonymous.]\n\n" : "Reviewer: " + String(reviewer) + "\n\n")
+
                     reviewString += "Overall Rating: " + String(format: "%.1f",rating) + "\n"
                     reviewString += "Amenities Rating: " + (aRating == nil ? "N/A" : String(format: "%1.f",aRating!)) + "\n"
                     reviewString += "Management Rating: " + (mRating == nil ? "N/A" : String(format: "%1.f",mRating!)) + "\n"
@@ -158,7 +152,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     reviewString += "\nComments: \n" + comments + "\n\n"
                     reviewString += "Would live again? " + (willLiveAgain ? "Yes" : "No")
                     
-                    if isEdited { reviewString += "\n\n[This comment has been edited.]" }
+                    self.formatter.dateFormat = "MM/dd/yyyy"
+                    reviewString += "\n\n[This review " + (isEdited ? "last edited on: " : "was written on: ") + (self.formatter.string(from: timestamp.dateValue())) + "]"
                     
                     // appending to the array of strings.
                     arr.shared.reviewArr.append(reviewString)

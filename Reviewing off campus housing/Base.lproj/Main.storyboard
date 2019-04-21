@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lSM-uc-KCa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lSM-uc-KCa">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1025,7 +1025,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3kh-ve-lEF">
-                                <rect key="frame" x="106" y="462" width="202" height="30"/>
+                                <rect key="frame" x="106" y="506" width="202" height="30"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="202" id="g1Y-Xv-87d"/>
@@ -1035,7 +1035,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ooj-jg-EwI">
-                                <rect key="frame" x="106" y="512" width="202" height="30"/>
+                                <rect key="frame" x="106" y="556" width="202" height="30"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="202" id="NTl-xy-mj9"/>
@@ -1045,7 +1045,7 @@
                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" secureTextEntry="YES"/>
                             </textField>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="brM-I2-EXH">
-                                <rect key="frame" x="106" y="562" width="202" height="30"/>
+                                <rect key="frame" x="106" y="606" width="202" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="202" id="8Is-Tk-ZMb"/>
                                 </constraints>
@@ -1054,7 +1054,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert"/>
                             </textField>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jeZ-UD-4vL">
-                                <rect key="frame" x="106" y="612" width="202" height="30"/>
+                                <rect key="frame" x="106" y="656" width="202" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="202" id="rHd-H1-5Yz"/>
                                 </constraints>
@@ -1063,14 +1063,14 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="next"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginLogo" translatesAutoresizingMaskIntoConstraints="NO" id="B1x-XN-3Kq">
-                                <rect key="frame" x="33" y="246" width="348" height="161"/>
+                                <rect key="frame" x="33" y="290" width="348" height="161"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="348" id="TdT-6Y-XiS"/>
                                     <constraint firstAttribute="height" constant="161" id="gTW-gG-Xjb"/>
                                 </constraints>
                             </imageView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f1c-5J-rPw">
-                                <rect key="frame" x="139.5" y="168" width="135" height="29"/>
+                                <rect key="frame" x="139.5" y="212" width="135" height="29"/>
                                 <segments>
                                     <segment title="LOG IN"/>
                                     <segment title="SIGN UP"/>
@@ -1081,7 +1081,7 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lpi-rL-gOU">
-                                <rect key="frame" x="141.5" y="690" width="131" height="35"/>
+                                <rect key="frame" x="141.5" y="734" width="131" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Gms-gP-KA2"/>
                                     <constraint firstAttribute="width" constant="131" id="qfY-8m-iyz"/>
@@ -1182,21 +1182,21 @@
         <image name="management" width="168" height="15"/>
         <image name="no3" width="648" height="284"/>
         <image name="postMyReview" width="1427" height="257"/>
-        <image name="rateThisCribb" width="632.5" height="83"/>
-        <image name="reportAnIssue2" width="436" height="131.5"/>
+        <image name="rateThisCribb" width="632" height="83"/>
+        <image name="reportAnIssue2" width="436" height="131"/>
         <image name="reviewsYouveWritten" width="960" height="47"/>
         <image name="settings_black_192x192" width="30" height="30"/>
-        <image name="signMeIn" width="960" height="252.5"/>
+        <image name="signMeIn" width="960" height="252"/>
         <image name="submit" width="960" height="271"/>
-        <image name="submitReport" width="960" height="149.5"/>
+        <image name="submitReport" width="960" height="149"/>
         <image name="writeReport" width="1080" height="1080"/>
         <image name="writeReviewBlue" width="1080" height="1080"/>
         <image name="yes3" width="648" height="284"/>
         <image name="yourAccount" width="960" height="47"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jMM-kj-xyt"/>
-        <segue reference="6q9-sl-G8x"/>
+        <segue reference="EIT-Rl-WiB"/>
+        <segue reference="ahG-8u-YDn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

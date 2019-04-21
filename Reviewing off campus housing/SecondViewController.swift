@@ -41,6 +41,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell?.textLabel?.text = text
         return cell!
     }
+    
+    // implement swipe to delete reviews??? -kevin
 
     var Em:String = ""
     
@@ -132,6 +134,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         showHistory(Em: email)
         
+        // kevin's comment:
+        // consider putting the below code into a function? kinda like how showHistory is implemented here, or how I implemented showReviews in displayListings.
         let docRef = db.collection("Users").document(email)
         
         docRef.getDocument { (document, error) in
