@@ -14,7 +14,7 @@ import Cosmos
 public class arr {
     // global stuff
     // arr.shared.reviewArr
-    
+    public var didReview = false
     var reviewArr:[String] = []
     public static let shared = arr()
 }
@@ -138,7 +138,6 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     // calculation of average ratings
                     if (lRating != nil && mRating != nil && aRating != nil) {
                         self.countNewListings = self.countNewListings + 1
-                        
                         self.averageLocation = self.averageLocation + lRating!
                         self.averageManagement = self.averageManagement + mRating!
                         self.averageAmenities = self.averageAmenities + aRating!
@@ -165,8 +164,6 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     arr.shared.reviewArr.append(reviewString)
                     
                 } // end for loop
-                print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
-                print(address.split(separator: " "))
                 var count = 0
                 var address1:String = ""
                 for str in address.split(separator: " "){
@@ -289,41 +286,11 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func reviewListing(_ sender: UIButton) {
-        let user = Auth.auth().currentUser
-        if let user = user {
-            // The user's ID, unique to the Firebase project.
-            // Do NOT use this value to authenticate with your backend server,
-            // if you have one. Use getTokenWithCompletion:completion: instead.
-            
-            let email = user.email
-            Em = email!
-            
-        } // end if
+        
         
         performSegue(withIdentifier: "listingToWrite", sender: self)
         
-        let docRef = db.collection("listings").document(info)
-        docRef.getDocument { (document,error) in
-            if let document = document, document.exists {
-                var emailExists:Bool = false
-                let review = document.get("reviews") as! NSDictionary
-                
-                for (reviewer, _) in review {
-                    let reviewer = reviewer as! String
-                    if (reviewer == self.Em) {
-                        emailExists = true
-                    }
-                } // end for lop
-                
-                if (emailExists) {
-                    let alert = UIAlertController(title: "Warning", message: "You have already rated this property before. If you post another review, your previous review will be overwritten.", preferredStyle: .alert)
-                    
-                    alert.addAction(UIAlertAction(title: "Got it!", style: .cancel, handler: nil))
-                    self.present(alert, animated: true)
-                    
-                } // end if
-            } // end if let
-        } // end getDocument
+        
     } // end reviewListing func
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
