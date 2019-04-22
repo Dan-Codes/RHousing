@@ -111,7 +111,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     func textViewDidBeginEditing(_ comment: UITextView) {
         if comment.textColor == UIColor.lightGray {
-            comment.text = ""
+            comment.text = nil
             comment.textColor = UIColor.black
         }
     }

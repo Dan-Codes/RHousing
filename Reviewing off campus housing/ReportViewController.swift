@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ReportViewController: UIViewController {
+class ReportViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +18,9 @@ class ReportViewController: UIViewController {
         report.layer.borderColor = borderColor.cgColor
         report.layer.borderWidth = 0.5
         report.layer.cornerRadius = 5.0
+        report.delegate = self
+        report.text = "Some of the information posted for this property is incorrect, I see spam or malicious content in one of the reviews, etc."
+        report.textColor = UIColor.lightGray
         // Do any additional setup after loading the view.
     }
     var str:String = ""
@@ -26,6 +29,25 @@ class ReportViewController: UIViewController {
     @IBOutlet weak var living: UISwitch!
     @IBOutlet weak var lived: UISwitch!
     @IBOutlet weak var report: UITextView!
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    
+    func textViewDidBeginEditing(_ report: UITextView) {
+        if report.textColor == UIColor.lightGray {
+            report.text = nil
+            report.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ report: UITextView) {
+        if report.text.isEmpty {
+            report.text = "Some of the information posted for this property is incorrect, I see spam or malicious content in one of the reviews, etc."
+            report.textColor = UIColor.lightGray
+        }
+    }
     
     // from kevin: "Currently live here" should be automatically false if "Lived here before?" is false.
     
@@ -43,6 +65,7 @@ class ReportViewController: UIViewController {
             print(Em)
             print(str)
         }
+        
         
         let docRef = db.collection("Reports").document(str)
         docRef.setData([
