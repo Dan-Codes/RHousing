@@ -112,7 +112,7 @@
                                         <real key="value" value="30"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                        <real key="value" value="4"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
                                         <integer key="value" value="5"/>
@@ -1168,32 +1168,32 @@
     </scenes>
     <resources>
         <image name="25694" width="30" height="30"/>
-        <image name="addNewCribb" width="1326" height="516"/>
-        <image name="adminView" width="489" height="199"/>
+        <image name="addNewCribb" width="663" height="258"/>
+        <image name="adminView" width="244" height="99"/>
         <image name="amenities" width="125" height="15"/>
         <image name="awful" width="85" height="15"/>
-        <image name="darkModeButton" width="1082" height="254"/>
+        <image name="darkModeButton" width="541" height="127"/>
         <image name="deleteReview" width="1080" height="1080"/>
         <image name="great" width="85" height="15"/>
-        <image name="greybg" width="400" height="400"/>
+        <image name="greybg" width="200" height="200"/>
         <image name="icon" width="30" height="30"/>
         <image name="location" width="113" height="15"/>
-        <image name="loginLogo" width="951" height="951"/>
-        <image name="logout2" width="414" height="199"/>
+        <image name="loginLogo" width="475" height="475"/>
+        <image name="logout2" width="207" height="99"/>
         <image name="management" width="168" height="15"/>
         <image name="no3" width="648" height="284"/>
         <image name="postMyReview" width="1427" height="257"/>
-        <image name="rateThisCribb" width="1265" height="166"/>
-        <image name="reportAnIssue2" width="872" height="263"/>
-        <image name="reviewsYouveWritten" width="1920" height="94"/>
+        <image name="rateThisCribb" width="632" height="83"/>
+        <image name="reportAnIssue2" width="436" height="131"/>
+        <image name="reviewsYouveWritten" width="960" height="47"/>
         <image name="settings_black_192x192" width="30" height="30"/>
-        <image name="signMeIn" width="1920" height="505"/>
-        <image name="submit" width="1920" height="542"/>
-        <image name="submitReport" width="1920" height="299"/>
+        <image name="signMeIn" width="960" height="252"/>
+        <image name="submit" width="960" height="271"/>
+        <image name="submitReport" width="960" height="149"/>
         <image name="writeReport" width="1080" height="1080"/>
         <image name="writeReviewBlue" width="1080" height="1080"/>
         <image name="yes3" width="648" height="284"/>
-        <image name="yourAccount" width="1920" height="94"/>
+        <image name="yourAccount" width="960" height="47"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="w3s-hh-diq"/>

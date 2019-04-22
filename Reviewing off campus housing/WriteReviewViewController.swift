@@ -38,6 +38,55 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
         comment.text = "Living here has been.."
         comment.textColor = UIColor.lightGray
         // Do any additional setup after loading the view.
+        checkReview()
+    }
+    
+    func checkReview(){
+        let user = Auth.auth().currentUser
+        if let user = user {
+            // The user's ID, unique to the Firebase project.
+            // Do NOT use this value to authenticate with your backend server,
+            // if you have one. Use getTokenWithCompletion:completion: instead.
+            
+            let email = user.email
+            Em = email!
+            
+        } // end if
+        let docRef = db.collection("listings").document(info)
+        docRef.getDocument { (document,error) in
+            if let document = document, document.exists {
+                var emailExists:Bool = false
+                let review = document.get("reviews") as! NSDictionary
+                
+                for (reviewer, reviewMap) in review {
+                    let reviewer = reviewer as! String
+                    if (reviewer == self.Em) {
+                        emailExists = true
+                        let alert = UIAlertController(title: "Warning", message: "You have already rated this property before. If you post another review, your previous review will be overwritten.", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Got it!", style: .default, handler: {(action) in
+                            //write some code here
+                            let reviewMap = reviewMap as! NSDictionary
+                            let getComment = reviewMap.value(forKey: "comments") as! String
+                            self.comment.text = getComment
+                            let rating = reviewMap.value(forKey: "rating") as! Float
+                        }))
+                        self.present(alert, animated: true)
+                    }
+                } // end for lop
+                
+                if (emailExists) {
+                    let alert = UIAlertController(title: "Warning", message: "You have already rated this property before. If you post another review, your previous review will be overwritten.", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Got it!", style: .default, handler: {(action) in
+                        //write some code here
+                        //let reviewMap = reviewMap as! NSDictionary
+                    }))
+                    self.present(alert, animated: true)
+                    
+                } // end if
+            } // end if let
+        } // end getDocument
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
