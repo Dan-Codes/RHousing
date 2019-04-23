@@ -22,6 +22,7 @@ public class storeBool {
 class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
 
     @IBOutlet weak var address: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         address.text = info + "!"
@@ -39,6 +40,15 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
         comment.textColor = UIColor.lightGray
         // Do any additional setup after loading the view.
         checkReview()
+        
+        var count = 0
+        var shortAddress:String = ""
+        for str in info.split(separator: " "){
+            if (str.last == ",") { break }
+            shortAddress.append(contentsOf: " ")
+            shortAddress.append(contentsOf: str)
+            count += 1 }
+        address.text = shortAddress + "!" // label for address
     }
     
     func checkReview(){
@@ -225,7 +235,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                         
                         let alert = UIAlertController(title: "Success", message: "Your review has successfully been posted!", preferredStyle: .alert)
                         
-                        alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { action -> Void in
+                        alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { action -> Void in
                             self.performSegue(withIdentifier: "unwindToDisplay", sender: self)
                         }))
                         
@@ -258,9 +268,9 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                     }
                         
                     else if (emailExist == true){
-                        let alert = UIAlertController(title: "Success", message: "", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Success", message: "Your review has successfully been posted!", preferredStyle: .alert)
                         
-                        alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { action -> Void in
+                        alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { action -> Void in
                             self.performSegue(withIdentifier: "unwindToDisplay", sender: self)
                         }))
                         
