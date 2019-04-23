@@ -111,9 +111,6 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 self.averageAmenities = 0.0
                 self.countNewListings = 0.0
                 
-                self.rentTitle.font = UIFont.boldSystemFont(ofSize: self.rentTitle.font.pointSize)
-                
-                
                 //Retreiving values from map of maps (reviews)
                 //Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
                 
