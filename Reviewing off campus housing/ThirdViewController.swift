@@ -23,7 +23,7 @@ public class ThirdState {
 class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
-    //var didAdd:Bool = false
+    var emailID:String = ""
     
     
     let myPickerData = [String](arrayLiteral: "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA",
@@ -106,6 +106,14 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                         }
                     }
                 }
+                let user = Auth.auth().currentUser
+                if let user = user {
+                    // The user's ID, unique to the Firebase project.
+                    // Do NOT use this value to authenticate with your backend server,
+                    // if you have one. Use getTokenWithCompletion:completion: instead.
+                    let email = user.email
+                    self.emailID = email!
+                }
                 print("prereturning " + String(ThirdState.shared.isAdded))
                 if !ThirdState.shared.isAdded{
                     let adData: [String:Any] = [
@@ -114,7 +122,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                         "property": true,
                         "reviews": ([:]),
                         "landlordName": ThirdState.shared.landlordName,
-                        "rent": ThirdState.shared.costOfRent
+                        "rent": ThirdState.shared.costOfRent,
+                        "addedby" : String(self.emailID)
                     ]
                     //print("this is database Check")
                     db.collection("listings").document(ThirdState.shared.str).setData(adData) { err in
@@ -165,11 +174,12 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             ThirdState.shared.varLong = (lon)!
             AppState.shared.long = lon!
             AppState.shared.lat = lat!
-           
-        }
+            
             if !self.checkDidAdd(lat: ThirdState.shared.varLat, long: ThirdState.shared.varLong) {
                 print("DONE")
                 //print(check)
+            }
         }
+        
     }
 }

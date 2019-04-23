@@ -69,7 +69,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                             let reviewMap = reviewMap as! NSDictionary
                             let getComment = reviewMap.value(forKey: "comments") as! String
                             self.comment.text = getComment
-                            let rating = reviewMap.value(forKey: "rating") as! Float
+                            let rating = reviewMap.value(forKey: "rating") as! Float 
                         }))
                         self.present(alert, animated: true)
                     }
