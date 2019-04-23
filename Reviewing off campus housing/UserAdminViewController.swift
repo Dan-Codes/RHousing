@@ -1,14 +1,14 @@
 //
-//  adminViewController.swift
+//  UserAdminViewController.swift
 //  Reviewing off campus housing
 //
-//  Created by Silin Chen on 4/19/19.
+//  Created by Silin Chen on 4/23/19.
 //  Copyright © 2019 housing. All rights reserved.
 //
 
 import UIKit
 
-class adminViewController: UIViewController {
+class UserAdminViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
