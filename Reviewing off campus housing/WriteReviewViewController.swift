@@ -67,24 +67,36 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                         alert.addAction(UIAlertAction(title: "Got it!", style: .default, handler: {(action) in
                             //write some code here
                             let reviewMap = reviewMap as! NSDictionary
-                            let getComment = reviewMap.value(forKey: "comments") as! String
-                            self.comment.text = getComment
-                            let rating = reviewMap.value(forKey: "rating") as! Float 
+                            let getComment = reviewMap.value(forKey: "comments") as? String
+                            self.comment.text = getComment ?? ""
+                            let getRating = reviewMap.value(forKey: "rating") as? Float
+                            self.rating.value = getRating ?? 5
+                            self.ratingValue.text = (String(format: "%.1f", getRating ?? 5))
+                            let getLiveagain = reviewMap.value(forKey: "willLiveAgain") as! Bool
+                            self.liveagainOutlet.selectedSegmentIndex = getLiveagain ? 0 : 1
+                            let getisAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
+                            self.anonymousOutlet.selectedSegmentIndex = getisAnonymous ? 0 : 1
+                            let getAmenities = reviewMap.value(forKey: "amenitiesRating") as? Double
+                            self.amenitiesCosmos.rating = getAmenities ?? 0
+                            let getManage = reviewMap.value(forKey: "managementRating") as? Double
+                            self.managementCosmos.rating = getManage ?? 0
+                            let getLocationrating = reviewMap.value(forKey: "locationRating") as? Double
+                            self.locationCosmos.rating = getLocationrating ?? 0
                         }))
                         self.present(alert, animated: true)
                     }
                 } // end for lop
                 
-                if (emailExists) {
-                    let alert = UIAlertController(title: "Warning", message: "You have already rated this property before. If you post another review, your previous review will be overwritten.", preferredStyle: .alert)
-                    
-                    alert.addAction(UIAlertAction(title: "Got it!", style: .default, handler: {(action) in
-                        //write some code here
-                        //let reviewMap = reviewMap as! NSDictionary
-                    }))
-                    self.present(alert, animated: true)
-                    
-                } // end if
+//                if (emailExists) {
+//                    let alert = UIAlertController(title: "Warning", message: "You have already rated this property before. If you post another review, your previous review will be overwritten.", preferredStyle: .alert)
+//
+//                    alert.addAction(UIAlertAction(title: "Got it!", style: .default, handler: {(action) in
+//                        //write some code here
+//                        //let reviewMap = reviewMap as! NSDictionary
+//                    }))
+//                    self.present(alert, animated: true)
+//
+//                } // end if
             } // end if let
         } // end getDocument
     }
@@ -130,7 +142,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
     @IBOutlet weak var locationCosmos: CosmosView!
     @IBOutlet weak var managementCosmos: CosmosView!
     @IBOutlet weak var amenitiesCosmos: CosmosView!
-    
+
     var locationRating = 5.0
     var managementRating = 5.0
     var amenitiesRating = 5.0
@@ -186,7 +198,6 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
             let email = user.email
             Em = email!
             // ...
-            
         }
         
         let docRef = db.collection("listings").document(info)

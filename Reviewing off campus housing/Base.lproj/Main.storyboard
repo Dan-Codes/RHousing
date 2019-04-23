@@ -1168,32 +1168,32 @@
     </scenes>
     <resources>
         <image name="25694" width="30" height="30"/>
-        <image name="addNewCribb" width="663" height="258"/>
-        <image name="adminView" width="244" height="99"/>
+        <image name="addNewCribb" width="442" height="172"/>
+        <image name="adminView" width="163" height="66"/>
         <image name="amenities" width="125" height="15"/>
         <image name="awful" width="85" height="15"/>
-        <image name="darkModeButton" width="541" height="127"/>
+        <image name="darkModeButton" width="360" height="84"/>
         <image name="deleteReview" width="1080" height="1080"/>
         <image name="great" width="85" height="15"/>
-        <image name="greybg" width="200" height="200"/>
+        <image name="greybg" width="133" height="133"/>
         <image name="icon" width="30" height="30"/>
         <image name="location" width="113" height="15"/>
-        <image name="loginLogo" width="475" height="475"/>
-        <image name="logout2" width="207" height="99"/>
+        <image name="loginLogo" width="317" height="317"/>
+        <image name="logout2" width="138" height="66"/>
         <image name="management" width="168" height="15"/>
         <image name="no3" width="648" height="284"/>
         <image name="postMyReview" width="1427" height="257"/>
-        <image name="rateThisCribb" width="632" height="83"/>
-        <image name="reportAnIssue2" width="436" height="131"/>
-        <image name="reviewsYouveWritten" width="960" height="47"/>
+        <image name="rateThisCribb" width="421" height="55"/>
+        <image name="reportAnIssue2" width="290" height="87"/>
+        <image name="reviewsYouveWritten" width="640" height="31"/>
         <image name="settings_black_192x192" width="30" height="30"/>
-        <image name="signMeIn" width="960" height="252"/>
-        <image name="submit" width="960" height="271"/>
-        <image name="submitReport" width="960" height="149"/>
+        <image name="signMeIn" width="640" height="168"/>
+        <image name="submit" width="640" height="180"/>
+        <image name="submitReport" width="640" height="99"/>
         <image name="writeReport" width="1080" height="1080"/>
         <image name="writeReviewBlue" width="1080" height="1080"/>
         <image name="yes3" width="648" height="284"/>
-        <image name="yourAccount" width="960" height="47"/>
+        <image name="yourAccount" width="640" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jMM-kj-xyt"/>
