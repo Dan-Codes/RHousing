@@ -22,7 +22,9 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         report.text = "Some of the information posted for this property is incorrect, I see spam or malicious content in one of the reviews, etc."
         report.textColor = UIColor.lightGray
         // Do any additional setup after loading the view.
+        self.hideKeyboardWhenTap()
     }
+    
     var str:String = ""
     var Em:String = ""
     

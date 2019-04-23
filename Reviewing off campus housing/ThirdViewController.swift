@@ -20,6 +20,7 @@ public class ThirdState {
     public var varLong = 0.0
     public static let shared = ThirdState()
 }
+
 class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
