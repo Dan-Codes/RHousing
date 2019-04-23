@@ -80,7 +80,7 @@ class ReportViewController: UIViewController, UITextViewDelegate {
             ], merge: true)
         { err in
             if let err = err {
-                let alert = UIAlertController(title: "Oops!", message: "Your report can't be submitted at this time. Please try again later!", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Oops!", message: "Your report can't be submitted at this time. Please try again later.", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
                 self.present(alert, animated: true)
@@ -88,7 +88,7 @@ class ReportViewController: UIViewController, UITextViewDelegate {
             } else {
                 let alert = UIAlertController(title: "We hear you.", message: "Thank you for your report submission. We have received your issue and will work on it!", preferredStyle: .alert)
                 
-                alert.addAction(UIAlertAction(title: "Ok!", style: .default, handler: { action -> Void in
+                alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { action -> Void in
                     self.performSegue(withIdentifier: "unwindToDisplay", sender: self)
                 }))
                 
