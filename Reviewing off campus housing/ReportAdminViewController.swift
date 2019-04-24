@@ -22,6 +22,24 @@ class ReportAdminViewController: UIViewController, UITableViewDataSource, UITabl
 
         // Do any additional setup after loading the view.
         showReports()
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPress.minimumPressDuration = 2.0
+        reportTable.addGestureRecognizer(longPress)
+
+    }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer){
+        if sender.state == .began {
+            let touchPoint = sender.location(in: reportTable)
+            if let indexPath = reportTable.indexPathForRow(at: touchPoint) {
+                // your code here, get the row for the indexPath or do whatever you want
+                let alert = UIAlertController(title: "Are you sure you want to delete this report?", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
+                self.present(alert, animated: true)
+                print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+            }
+        }
     }
     
     func showReports(){
