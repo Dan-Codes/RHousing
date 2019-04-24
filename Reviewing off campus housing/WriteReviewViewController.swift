@@ -237,6 +237,10 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                         }
                     }
                     
+                    if self.comment.text == "Living here has been..." as String || self.comment.text == "" as String  {
+                        self.comment.text = "This user has decided not to write a review"
+                    }
+                    
                     print (emailExist)
                     
                     if(emailExist == false){
@@ -251,9 +255,9 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                         //let lR = Int(storeBool.shared.locationRating)
                         print(".....")
                         
-                        if self.comment.text == "Living here has been..." as String || self.comment.text == "" as String  {
-                            self.comment.text = "This user has decided not to write a review"
-                        }
+//                        if self.comment.text == "Living here has been..." as String || self.comment.text == "" as String  {
+//                            self.comment.text = "This user has decided not to write a review"
+//                        }
                         
                         
                         docRef.setData([
@@ -289,6 +293,10 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                         }))
                         
                         self.present(alert, animated: true)
+                        
+//                        if self.comment.text == "Living here has been..." as String || self.comment.text == "" as String  {
+//                            self.comment.text = "This user has decided not to write a review"
+//                        }
                         
                         docRef.setData([
                             "reviews" : [
