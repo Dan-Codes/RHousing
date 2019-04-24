@@ -56,6 +56,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var rating2: UILabel!
     @IBOutlet weak var rating3: UILabel!
     @IBOutlet weak var reviewTable: UITableView!
+    @IBOutlet weak var ReviewBG: UIImageView!
+    @IBOutlet weak var RentBG: UIImageView!
     
     
     
@@ -79,6 +81,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     print("Document data was empty.")
                     return }
             
+                self.view.sendSubviewToBack(self.ReviewBG)
+                self.view.sendSubviewToBack(self.RentBG)
                 
                 self.showReviews() // where the juicy stuf happens
         }
@@ -126,38 +130,44 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     let isEdited = reviewMap.value(forKey: "isEdited") as? Bool ?? false
                     let willLiveAgain = reviewMap.value(forKey: "willLiveAgain") as! Bool
                     let timestamp = reviewMap.value(forKey: "timeStamp") as? Timestamp ?? Timestamp(date: Date.init(timeInterval: -9999999999, since: Date()))
+                    
                     // error handler for no timestamp is literally going 999999999 seconds before current time.
                     
                     let lRating = reviewMap.value(forKey: "locationRating") as? Double
                     let mRating = reviewMap.value(forKey: "managementRating") as? Double
                     let aRating = reviewMap.value(forKey: "amenitiesRating") as? Double
 
-                    // calculation of average ratings
+                    // calculate average ratings
+                    
                     if (lRating != nil && mRating != nil && aRating != nil) {
-                        self.countNewListings = self.countNewListings + 1
-                        self.averageLocation = self.averageLocation + lRating!
-                        self.averageManagement = self.averageManagement + mRating!
-                        self.averageAmenities = self.averageAmenities + aRating!
-                    }
+                        self.countNewListings  += 1
+                        self.averageLocation   += lRating!
+                        self.averageManagement += mRating!
+                        self.averageAmenities  += aRating! }
                     
-                    self.AverageRating = self.AverageRating + Double(rating)
-                    self.countReviews = self.countReviews + 1
+                    self.AverageRating += Double(rating)
+                    self.countReviews  += 1
                     
-                    // adding the review info for the review into the string
-                    reviewString += (isAnonymous ? "[This reviewer has made their review anonymous.]\n\n" : "Reviewer: " + String(reviewer) + "\n\n")
-
-                    reviewString += "Overall Rating: " + String(format: "%.1f",rating) + "\n"
-                    reviewString += "Amenities Rating: " + (aRating == nil ? "N/A" : String(format: "%1.f",aRating!)) + "\n"
-                    reviewString += "Management Rating: " + (mRating == nil ? "N/A" : String(format: "%1.f",mRating!)) + "\n"
-                    reviewString += "Location Rating: " + (lRating == nil ? "N/A" : String(format: "%1.f",lRating!)) + "\n"
-                    
-                    reviewString += "\nComments: \n" + comments + "\n\n"
-                    reviewString += "Would live again? " + (willLiveAgain ? "Yes" : "No")
+                    // add the review info for the review into the string
                     
                     self.formatter.dateFormat = "MM/dd/yyyy"
-                    reviewString += "\n\n[This review " + (isEdited ? "last edited on: " : "was written on: ") + (self.formatter.string(from: timestamp.dateValue())) + "]"
                     
-                    // appending to the array of strings.
+                    reviewString += "\n\"" + comments + "\"\n\n"
+
+                    reviewString += "Would live again? " + ( willLiveAgain ? ("Yes\n\n") : ("No\n\n") )
+                    
+                    reviewString += ( lRating == nil ? ("") : (String(format: "%.1f Location\n", lRating!)) )
+                                    + ( aRating == nil ? ("") : (String(format: "%.1f Amenities\n", aRating!)) )
+                                    + ( mRating == nil ? ("") : (String(format: "%.1f Management\n", mRating!)) )
+                                    + String(format: "%.1f Overall Rating\n", rating)
+                                    + "\n"
+                    
+                    reviewString += ( isEdited ? ("Last edited ") : ("Posted ") ) + "by "
+                                    + ( isAnonymous ? ("anonymous") : (String(reviewer)) ) + " on "
+                                    + ( self.formatter.string(from: timestamp.dateValue()) ) + "\n"
+                    
+                    // append to the array of strings
+                    
                     arr.shared.reviewArr.append(reviewString)
                     
                 } // end for loop
@@ -165,16 +175,15 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 // parsing first part of the address
                 var count = 0
                 var address1:String = ""
+                
                 for str in address.split(separator: " "){
-                    if (str.last == ","){
-                        break
-                    }
+                    if (str.last == ",") { break }
                     address1.append(contentsOf: str)
                     address1.append(contentsOf: " ")
-                    count+=1
-                }
+                    count+=1 }
                 
                 self.label.text = (address1) // label for address
+                
                 self.label2.text = (landlordName as! String) // label for landlord
                 
                 if getRent.first == "$" {self.displayRent.text = getRent}
@@ -241,7 +250,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         cell?.textLabel!.numberOfLines = 0
         cell?.textLabel!.lineBreakMode = .byWordWrapping
-        cell?.textLabel!.font = UIFont.systemFont(ofSize: 14.0)
+        cell?.textLabel!.font = UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.ultraLight)
         cell?.textLabel?.textColor = UIColor.white
         let text = arr.shared.reviewArr[indexPath.row]
         cell?.textLabel?.text = text
