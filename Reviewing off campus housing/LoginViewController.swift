@@ -52,32 +52,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
    
-    @IBOutlet weak var emailText: UITextField!
-    @IBOutlet weak var passText: UITextField!
-    @IBOutlet weak var signInSelect: UISegmentedControl!
-    @IBOutlet weak var signInButton: UIButton!
-    @IBOutlet weak var firstName: UITextField!
-    @IBOutlet weak var lastName: UITextField!
     var emailID:String = ""
-   
     var isSignIn:Bool = true
     
-    @IBAction func signInChange(_ sender: UISegmentedControl) {
-        isSignIn = !isSignIn
-        if isSignIn{
-            signInButton.setTitle("Sign In", for: .normal)
-            firstName.isHidden = true
-            lastName.isHidden = true
-        }
-        else {
-            firstName.isHidden = false
-            lastName.isHidden = false
-            signInButton.setTitle("Register", for: .normal)
-        }
-    }
-    
-    @IBAction func signIn(_ sender: UIButton) {
-        
+    @IBOutlet weak var emailText: UITextField!
+    @IBOutlet weak var passText: UITextField!
+    @IBOutlet weak var firstName: UITextField!
+    @IBOutlet weak var lastName: UITextField!
+
+    @IBAction func signInButton(_ sender: UIButton) {
         // check if signed in or register
         if isSignIn {
             
@@ -88,7 +71,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 if user != nil {
                     self?.emailID = self?.emailText.text ?? ""
                     self?.performSegue(withIdentifier: "goHome", sender: self)
-                
+                    
                 } else {
                     let alert = UIAlertController(title: "Invalid input", message: "Your email and password do not match your account credentials. If you do not have an account, please sign up.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
@@ -113,19 +96,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     // goHome
                     self.performSegue(withIdentifier: "goHome", sender: self)
                     
-//                    var ref: DocumentReference? = nil
-//                    ref = db.collection("Users").addDocument(data: [
-//                        "Email": self.emailText.text!,
-//                        "First Name" : self.firstName.text!,
-//                        "Last Name" : self.lastName.text!
-//                    ]) { err in
-//                        if let err = err {
-//                            print("Error adding document: \(err)")
-//                        } else {
-//                            print("Document added with ID: \(ref!.documentID)")
-//                        }
-//                    }
-                    
                     db.collection("Users").document(self.emailText.text!).setData([
                         "Email": self.emailText.text!,
                         "DarkMode" : true,
@@ -139,7 +109,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             print("Document successfully written!")
                         }
                     }
-                
+                    
                 } else {
                     let alert = UIAlertController(title: "Invalid input", message: "Please make sure you typed a valid SU email and your password is longer than six characters. If you already have an account, click log in.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
@@ -148,10 +118,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
                 
             }  // end Auth.auth().createUser()
-
+            
         }  // end else
-        
-    }  // end func signIn()
+    }
+    
+    @IBAction func signInChange(_ sender: UISegmentedControl) {
+        isSignIn = !isSignIn
+        if isSignIn{
+            firstName.isHidden = true
+            lastName.isHidden = true
+        }
+        else {
+            firstName.isHidden = false
+            lastName.isHidden = false
+        }
+    }
     
     func getEmail() -> String{
         return emailID

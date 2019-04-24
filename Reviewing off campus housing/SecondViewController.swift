@@ -24,7 +24,12 @@ public class SecState {
 }
 
 class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     var adminCheck:Bool = false
+    
+    let date = Date()
+    let formatter = DateFormatter()
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ReviewHistory.shared.reviewHistories.count
     }
@@ -35,7 +40,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell?.textLabel!.numberOfLines = 0
         cell?.textLabel!.lineBreakMode = .byWordWrapping
         cell?.textLabel?.textColor = UIColor.white
-        cell?.textLabel!.font = UIFont.systemFont(ofSize: 14.0)
+        cell?.textLabel!.font = UIFont.systemFont(ofSize: 13.0, weight: UIFont.Weight.ultraLight)
         
         let text = ReviewHistory.shared.reviewHistories[indexPath.row]
         cell?.textLabel?.text = text
@@ -63,34 +68,53 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let fields = fields as! NSDictionary
                     
                     let address             = property as! String
-                    let comments            = fields.value(forKey: "comments") as! String
-                    let isAnonymous         = fields.value(forKey: "isAnonymous") as! Bool
-                    let rating              = fields.value(forKey: "rating") as? Double
-                    let willLiveAgain       = fields.value(forKey: "willLiveAgain") as! Bool
-                    let amenitiesRating     = fields.value(forKey: "amenitiesRating") as? Double
-                    let locationRating      = fields.value(forKey: "locationRating") as? Double
-                    let managementRating    = fields.value(forKey: "managementRating") as? Double
-                    let isEdited = fields.value(forKey: "isEdited") as? Bool
-                    // do time stamp field
+                    let comments            = fields.value(forKey: "comments")          as! String
+                    let isAnonymous         = fields.value(forKey: "isAnonymous")       as! Bool
+                    let rating              = fields.value(forKey: "rating")            as? Double
+                    let willLiveAgain       = fields.value(forKey: "willLiveAgain")     as! Bool
+                    let amenitiesRating     = fields.value(forKey: "amenitiesRating")   as? Double
+                    let locationRating      = fields.value(forKey: "locationRating")    as? Double
+                    let managementRating    = fields.value(forKey: "managementRating")  as? Double
+                    let isEdited            = fields.value(forKey: "isEdited")          as? Bool ?? false
+                    let timestamp           = reviewHis!.value(forKey: "timeStamp")     as? Timestamp ?? Timestamp(date: Date.init(timeInterval: -9999999999, since: Date()))
                     
-                    thisReview += address + "\n\n"
-                    thisReview += comments + "\n\n"
+                    // initialize date format
                     
-                    if isAnonymous { thisReview += "You posted this review anonymously.\n"    }
-                    else           { thisReview += "You included your name in this review.\n" }
+                    self.formatter.dateFormat = "MM/dd/yyyy"
                     
-                    if isEdited != nil {
-                       if isEdited! { thisReview += "Review was edited.\n\n" }
-                       else { thisReview += "This review hasn't been edited.\n\n" }
-                    }
+                    // retrieve only address 1 field from entire address string
                     
-                    thisReview += "Overall: " + String(format: "%0.1f", rating!) + "\n"
-                    thisReview += "Location: " + (locationRating == nil ? "N/A" : String(format: "%0.1f", locationRating!)) + "\n"
-                    thisReview += "Management: " + (managementRating == nil ? "N/A" : String(format: "%0.1f", managementRating!)) + "\n"
-                    thisReview += "Amenities: " + (amenitiesRating == nil ? "N/A" : String(format: "%0.1f", amenitiesRating!)) + "\n\n"
-                    thisReview += "Would live again: " + (willLiveAgain ? "Yes\n" : "No\n")
+                    var count = 0
+                    var shortAddress:String = ""
+                    
+                    for str in address.split(separator: " "){
+                        if (str.last == ",") { break }
+                        shortAddress.append(contentsOf: " ")
+                        shortAddress.append(contentsOf: str)
+                        count += 1 }
+                    
+                    // append each field to string 'thisReview,' to be passed in as a string
+                    // and printed out to each table view cell
+                    
+                    thisReview += "On " + shortAddress + ":\n\n"
+                    
+                    thisReview += "\"" + comments + "\"\n\n"
+                    
+                    thisReview += "Would live again? " + ( willLiveAgain ? ("Yes\n\n") : ("No\n\n") )
+                    
+                    thisReview += ( locationRating == nil ? ("") : (String(format: "Location — %.1f\n", locationRating!)) )
+                                  + ( amenitiesRating == nil ? ("") : (String(format: "Amenities — %.1f\n", amenitiesRating!)) )
+                                  + ( managementRating == nil ? ("") : (String(format: "Management — %.1f\n", managementRating!)) )
+                                  + String(format: "Overall Rating — %.1f\n", rating ?? "")
+                                  + "\n"
+                    
+                    thisReview += "You " + ( isEdited ? ("last edited ") : ("posted ") ) + "this review, "
+                    thisReview += ( isAnonymous ? ("anonymously, ") : ("including your name, ") )
+                    thisReview += "on " + ( self.formatter.string(from: timestamp.dateValue()) ) + ".\n"
                     
                     thisReview += "________________________________________________"
+                    
+                    // append this entire review as a string element to reviewHistories[]
                     
                     ReviewHistory.shared.reviewHistories.append(thisReview)
                     

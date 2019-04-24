@@ -84,8 +84,8 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "PropertyContent")
         cell?.textLabel!.numberOfLines = 0
         cell?.textLabel!.lineBreakMode = .byWordWrapping
+        cell?.textLabel?.textColor = UIColor.white
         cell?.textLabel!.font = UIFont.systemFont(ofSize: 12.0)
-//        cell?.textLabel?.textColor = UIColor.white
         let text = AdminState.shared.arr[indexPath.row]
         cell?.textLabel?.text = text
         
