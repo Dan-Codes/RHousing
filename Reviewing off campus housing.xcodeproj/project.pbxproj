@@ -17,6 +17,7 @@
 		3452F6982253FB8400BCDF89 /* displayListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3452F6972253FB8400BCDF89 /* displayListingViewController.swift */; };
 		34C8F330226FC9E9004C97B8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34C8F32F226FC9E9004C97B8 /* GoogleService-Info.plist */; };
 		D969AB72222A46CD00CA9773 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D969AB71222A46CD00CA9773 /* LoginViewController.swift */; };
+		E0E53E2A226FDAD600491582 /* SearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E53E29226FDAD600491582 /* SearchTable.swift */; };
 		E3F21CEC2229DD15005B5D15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F21CEB2229DD15005B5D15 /* AppDelegate.swift */; };
 		E3F21CEE2229DD15005B5D15 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F21CED2229DD15005B5D15 /* FirstViewController.swift */; };
 		E3F21CF02229DD15005B5D15 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F21CEF2229DD15005B5D15 /* SecondViewController.swift */; };
@@ -38,6 +39,7 @@
 		34C8F32F226FC9E9004C97B8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5CA0FEBF347C3C0EFE492930 /* Pods-Reviewing off campus housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reviewing off campus housing.release.xcconfig"; path = "Target Support Files/Pods-Reviewing off campus housing/Pods-Reviewing off campus housing.release.xcconfig"; sourceTree = "<group>"; };
 		D969AB71222A46CD00CA9773 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E0E53E29226FDAD600491582 /* SearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTable.swift; sourceTree = "<group>"; };
 		E3F21CE82229DD15005B5D15 /* Reviewing off campus housing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reviewing off campus housing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3F21CEB2229DD15005B5D15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3F21CED2229DD15005B5D15 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				E3F21CED2229DD15005B5D15 /* FirstViewController.swift */,
 				E3F21CEF2229DD15005B5D15 /* SecondViewController.swift */,
 				03B918F82242B2DF006AB87D /* ThirdViewController.swift */,
+				E0E53E29226FDAD600491582 /* SearchTable.swift */,
 				3452F6972253FB8400BCDF89 /* displayListingViewController.swift */,
 				341DCC2422569E6800774A19 /* WriteReviewViewController.swift */,
 				E7E359AE2258FB5000CBA815 /* ReportViewController.swift */,
@@ -292,6 +295,7 @@
 			files = (
 				03476A94226ED89500EA4B1F /* AdminViewController.swift in Sources */,
 				E7E359AF2258FB5000CBA815 /* ReportViewController.swift in Sources */,
+				E0E53E2A226FDAD600491582 /* SearchTable.swift in Sources */,
 				03476A90226ED61100EA4B1F /* ReportAdminViewController.swift in Sources */,
 				D969AB72222A46CD00CA9773 /* LoginViewController.swift in Sources */,
 				E3F21CF02229DD15005B5D15 /* SecondViewController.swift in Sources */,

@@ -161,6 +161,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     arr.shared.reviewArr.append(reviewString)
                     
                 } // end for loop
+                
+                // parsing first part of the address
                 var count = 0
                 var address1:String = ""
                 for str in address.split(separator: " "){
@@ -171,13 +173,12 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     address1.append(contentsOf: " ")
                     count+=1
                 }
+                
                 self.label.text = (address1) // label for address
                 self.label2.text = (landlordName as! String) // label for landlord
                 
-                if getRent.first == "$"{self.displayRent.text = getRent}
-                else{
-                self.displayRent.text = (self.dollarSign + "\(getRent)") // label for rent
-                }
+                if getRent.first == "$" {self.displayRent.text = getRent}
+                else                    { self.displayRent.text = (self.dollarSign + "\(getRent)") } // label for rent
                 
                 
                 if (self.countReviews != 0) {
