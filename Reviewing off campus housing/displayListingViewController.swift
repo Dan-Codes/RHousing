@@ -131,6 +131,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     let willLiveAgain = reviewMap.value(forKey: "willLiveAgain") as! Bool
                     let timestamp = reviewMap.value(forKey: "timeStamp") as? Timestamp ?? Timestamp(date: Date.init(timeInterval: -9999999999, since: Date()))
                     
+                    
+                    
                     // error handler for no timestamp is literally going 999999999 seconds before current time.
                     
                     let lRating = reviewMap.value(forKey: "locationRating") as? Double
@@ -162,13 +164,29 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                                     + String(format: "Overall Rating — %.1f\n", rating)
                                     + "\n"
                     
-                    reviewString += ( isEdited ? ("Last edited ") : ("Posted ") ) + "by "
-                                    + ( isAnonymous ? ("anonymous") : (String(reviewer)) ) + " on "
-                                    + ( self.formatter.string(from: timestamp.dateValue()) ) + "\n"
                     
-                    // append to the array of strings
                     
-                    arr.shared.reviewArr.append(reviewString)
+                    let docRef = db.collection("Users").document(reviewer)
+                    docRef.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                            print("Document data: \(dataDescription)")
+                            let firstName = document.get("First Name") as? String ?? reviewer
+                            let lastName = document.get("Last Name") as? String ?? " "
+                            let lName = String(lastName.first!)
+                            
+                            reviewString += ( isEdited ? ("Last edited ") : ("Posted ") ) + "by "
+                            reviewString += ( isAnonymous ? ("anonymous") : (firstName + " " + lName + ".") )
+                            reviewString += " on " + ( self.formatter.string(from: timestamp.dateValue()) ) + "\n"
+                            
+                            // append to the array of strings
+                            
+                            arr.shared.reviewArr.append(reviewString)
+                            self.reviewTable.reloadData()
+                        } else {
+                            print("Document does not exist")
+                        }
+                    }
                     
                 } // end for loop
                 
