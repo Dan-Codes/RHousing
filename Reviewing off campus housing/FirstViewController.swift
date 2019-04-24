@@ -21,13 +21,17 @@ public class AppState {
 
 var objgVC = FirstViewController()
 class FirstViewController: UIViewController, GMSMapViewDelegate {
+    @IBAction func searchButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "search", sender: self)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     var locationManager = CLLocationManager()
-    var resultsViewController: GMSAutocompleteResultsViewController? // GMSAutocompleteResultsViewController provides an interface that displays place autocomplete predictions in a table view.
-    var searchController: UISearchController?
+    //var resultsViewController: GMSAutocompleteResultsViewController? // GMSAutocompleteResultsViewController provides an interface that displays place autocomplete predictions in a table view.
+    //var searchController: UISearchController?
     
     ///let searchController = UISearchController(searchResultsController: nil)
     
@@ -48,25 +52,25 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         //createMapView()
         //darkMode()
     
-        resultsViewController = GMSAutocompleteResultsViewController()
-        resultsViewController?.delegate = self as? GMSAutocompleteResultsViewControllerDelegate
+        //resultsViewController = GMSAutocompleteResultsViewController()
+        //resultsViewController?.delegate = self as? GMSAutocompleteResultsViewControllerDelegate
         
-        searchController = UISearchController(searchResultsController: resultsViewController)
-        searchController?.searchResultsUpdater = resultsViewController
+       // searchController = UISearchController(searchResultsController: resultsViewController)
+        //searchController?.searchResultsUpdater = resultsViewController
         
         // https://stackoverflow.com/questions/46832576/display-table-view-when-searchbar-from-searchcontroller-begin-edited-swift
         // -kevin: look into this.
         
         // Put the search bar in the navigation bar.
-        searchController?.searchBar.sizeToFit()
-        navigationItem.titleView = searchController?.searchBar
+        //searchController?.searchBar.sizeToFit()
+        //navigationItem.titleView = searchController?.searchBar
         
         // When UISearchController presents the results view, present it in
         // this view controller, not one further up the chain.
-        definesPresentationContext = true
+        //definesPresentationContext = true
         
         // Prevent the navigation bar from being hidden when searching.
-        searchController?.hidesNavigationBarDuringPresentation = false
+        //searchController?.hidesNavigationBarDuringPresentation = false
         
         let user = Auth.auth().currentUser
         if let user = user {
@@ -226,7 +230,7 @@ extension GMSMarker {
 extension FirstViewController: GMSAutocompleteResultsViewControllerDelegate {
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
-        searchController?.isActive = false
+        //searchController?.isActive = false
         // Do something with the selected place.
         print("Place name: \(place.name)")
         print("Place address: \(place.formattedAddress)")
