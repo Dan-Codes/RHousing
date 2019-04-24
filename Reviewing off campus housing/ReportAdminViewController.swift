@@ -55,6 +55,9 @@ class ReportAdminViewController: UIViewController, UITableViewDataSource, UITabl
         // (maybe implement: if there are some reviews, but not enough to fit whole section, then table size should only be as big as necessary.)
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReportContent")
+        cell?.textLabel!.numberOfLines = 0
+        cell?.textLabel!.lineBreakMode = .byWordWrapping
+        cell?.textLabel!.font = UIFont.systemFont(ofSize: 12.0)
         let text = ReportState.shared.arr[indexPath.row]
         cell?.textLabel?.text = text
         
