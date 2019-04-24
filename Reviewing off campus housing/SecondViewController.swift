@@ -89,8 +89,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     for str in address.split(separator: " "){
                         if (str.last == ",") { break }
-                        shortAddress.append(contentsOf: str)
                         shortAddress.append(contentsOf: " ")
+                        shortAddress.append(contentsOf: str)
                         count += 1 }
                     
                     // append each field to string 'thisReview,' to be passed in as a string
@@ -102,10 +102,10 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     thisReview += "Would live again? " + ( willLiveAgain ? ("Yes\n\n") : ("No\n\n") )
                     
-                    thisReview += ( locationRating == nil ? ("") : (String(format: "%.1f Location\n", locationRating!)) )
-                                  + ( amenitiesRating == nil ? ("") : (String(format: "%.1f Amenities\n", amenitiesRating!)) )
-                                  + ( managementRating == nil ? ("") : (String(format: "%.1f Management\n", managementRating!)) )
-                                  + String(format: "%.1f Overall Rating\n", rating ?? "")
+                    thisReview += ( locationRating == nil ? ("") : (String(format: "Location — %.1f\n", locationRating!)) )
+                                  + ( amenitiesRating == nil ? ("") : (String(format: "Amenities — %.1f\n", amenitiesRating!)) )
+                                  + ( managementRating == nil ? ("") : (String(format: "Management — %.1f\n", managementRating!)) )
+                                  + String(format: "Overall Rating — %.1f\n", rating ?? "")
                                   + "\n"
                     
                     thisReview += "You " + ( isEdited ? ("last edited ") : ("posted ") ) + "this review, "

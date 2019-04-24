@@ -156,10 +156,10 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
 
                     reviewString += "Would live again? " + ( willLiveAgain ? ("Yes\n\n") : ("No\n\n") )
                     
-                    reviewString += ( lRating == nil ? ("") : (String(format: "%.1f Location\n", lRating!)) )
-                                    + ( aRating == nil ? ("") : (String(format: "%.1f Amenities\n", aRating!)) )
-                                    + ( mRating == nil ? ("") : (String(format: "%.1f Management\n", mRating!)) )
-                                    + String(format: "%.1f Overall Rating\n", rating)
+                    reviewString += ( lRating == nil ? ("") : (String(format: "Location — %.1f\n", lRating!)) )
+                                    + ( aRating == nil ? ("") : (String(format: "Amenities — %.1f\n", aRating!)) )
+                                    + ( mRating == nil ? ("") : (String(format: "Management — %.1f\n", mRating!)) )
+                                    + String(format: "Overall Rating — %.1f\n", rating)
                                     + "\n"
                     
                     reviewString += ( isEdited ? ("Last edited ") : ("Posted ") ) + "by "
