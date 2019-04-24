@@ -84,6 +84,18 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         state.text = myPickerData[row]
     }
     
+    func isValidRent(rentCost : String) -> Bool {
+        let checkRent = "[0-9]+[-]*[0-9]*"
+        
+        let testRent = NSPredicate(format:"SELF MATCHES ", checkRent)
+        
+        print("********************************************** IS VALID RENT")
+        print(testRent.evaluate(with: rentCost))
+        
+        return testRent.evaluate(with: rentCost)
+    }
+
+    
     func checkDidAdd(lat: Double, long: Double) -> Bool {
         ThirdState.shared.isAdded = false
         db.collection("listings").getDocuments() { (querySnapshot, err) in
@@ -115,6 +127,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                     let email = user.email
                     self.emailID = email!
                 }
+                
+                
                 print("prereturning " + String(ThirdState.shared.isAdded))
                 if !ThirdState.shared.isAdded{
                     let adData: [String:Any] = [
@@ -145,7 +159,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
     
     @IBAction func uploadProperty(_ sender: UIButton) {
         ThirdState.shared.str = adrs1.text! + " " + city.text! + ", " + state.text! + " " + zipcd.text!
-        if adrs1.text!.isEmpty || city.text!.isEmpty || state.text!.isEmpty || zipcd.text!.isEmpty{
+        if adrs1.text!.isEmpty || city.text!.isEmpty || state.text!.isEmpty || zipcd.text!.isEmpty || rentCost.text!.isEmpty  {
             let alert = UIAlertController(title: "Error", message: "You must include proper address fields.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
                 return
