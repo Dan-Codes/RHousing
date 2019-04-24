@@ -1041,9 +1041,38 @@
                     <view key="view" contentMode="scaleToFill" id="kab-kh-c57">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TNc-xD-SdN" userLabel="ReportTable">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReportContent" id="lME-t5-BUj">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lME-t5-BUj" id="Hg2-qF-7gk">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="XoR-uV-dr2" id="RsD-mL-TdT"/>
+                                    <outlet property="delegate" destination="XoR-uV-dr2" id="kJJ-17-J2S"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TNc-xD-SdN" firstAttribute="leading" secondItem="3De-mm-oDe" secondAttribute="leading" id="0Jk-4k-qcb"/>
+                            <constraint firstItem="3De-mm-oDe" firstAttribute="bottom" secondItem="TNc-xD-SdN" secondAttribute="bottom" id="Opi-2p-GPU"/>
+                            <constraint firstItem="TNc-xD-SdN" firstAttribute="top" secondItem="3De-mm-oDe" secondAttribute="top" id="Uxj-9W-tKp"/>
+                            <constraint firstItem="3De-mm-oDe" firstAttribute="trailing" secondItem="TNc-xD-SdN" secondAttribute="trailing" id="i30-A2-kaR"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="3De-mm-oDe"/>
                     </view>
+                    <connections>
+                        <outlet property="reportTable" destination="TNc-xD-SdN" id="p6m-kX-z9X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OSI-jy-luo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

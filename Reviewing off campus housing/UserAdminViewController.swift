@@ -17,11 +17,11 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var PropertyTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-showReviews()
+showProperties()
         
     }
     
-    func showReviews(){
+    func showProperties(){
         AdminState.shared.arr = []
         db.collection("listings").getDocuments() { (querySnapshot, err) in
             if let err = err {
