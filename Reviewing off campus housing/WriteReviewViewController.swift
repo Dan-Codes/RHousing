@@ -36,8 +36,15 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         self.hideKeyboardWhenTap()
         
-        comment.text = "Living here has been..."
-        comment.textColor = UIColor.lightGray
+        if comment.text == "Living here has been..." as String {
+            comment.textColor = UIColor.lightGray
+        }
+        else {
+            comment.textColor = UIColor.black
+        }
+        
+        //comment.text = "Living here has been..."
+        //comment.textColor = UIColor.lightGray
         // Do any additional setup after loading the view.
         checkReview()
         
@@ -94,6 +101,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                             self.locationCosmos.rating = getLocationrating ?? 0
                         }))
                         self.present(alert, animated: true)
+                        break
                     }
                 } // end for lop
                 
@@ -243,7 +251,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                         //let lR = Int(storeBool.shared.locationRating)
                         print(".....")
                         
-                        if self.comment.text == "Living here has been..." as String {
+                        if self.comment.text == "Living here has been..." as String || self.comment.text == "" as String  {
                             self.comment.text = "This user has decided not to write a review"
                         }
                         
