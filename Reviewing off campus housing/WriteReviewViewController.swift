@@ -36,7 +36,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         self.hideKeyboardWhenTap()
         
-        comment.text = "Living here has been.."
+        comment.text = "Living here has been..."
         comment.textColor = UIColor.lightGray
         // Do any additional setup after loading the view.
         checkReview()
@@ -242,6 +242,12 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                         self.present(alert, animated: true)
                         //let lR = Int(storeBool.shared.locationRating)
                         print(".....")
+                        
+                        if self.comment.text == "Living here has been..." as String {
+                            self.comment.text = "This user has decided not to write a review"
+                        }
+                        
+                        
                         docRef.setData([
                             "reviews" : [
                                 "\(self.Em)" : [
