@@ -86,13 +86,13 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                             //write some code here
                             let reviewMap = reviewMap as! NSDictionary
                             let getComment = reviewMap.value(forKey: "comments") as? String
-                            self.comment.text = getComment ?? ""
+                            self.comment.text = getComment ?? "No review in database"
                             let getRating = reviewMap.value(forKey: "rating") as? Float
                             self.rating.value = getRating ?? 5
                             self.ratingValue.text = (String(format: "%.1f", getRating ?? 5))
-                            let getLiveagain = reviewMap.value(forKey: "willLiveAgain") as! Bool
+                            let getLiveagain = reviewMap.value(forKey: "willLiveAgain") as? Bool ?? false
                             self.liveagainOutlet.selectedSegmentIndex = getLiveagain ? 0 : 1
-                            let getisAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
+                            let getisAnonymous = reviewMap.value(forKey: "isAnonymous") as? Bool ?? false
                             self.anonymousOutlet.selectedSegmentIndex = getisAnonymous ? 0 : 1
                             let getAmenities = reviewMap.value(forKey: "amenitiesRating") as? Double
                             self.amenitiesCosmos.rating = getAmenities ?? 0

@@ -124,11 +124,11 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     // get values of a review from the reviewMap
                     let reviewer = reviewer as! String
                     let reviewMap = reviewMap as! NSDictionary // potential problem if nothing in reviewMap? (like a empty review map)
-                    let comments = reviewMap.value(forKey: "comments") as! String
-                    let rating = reviewMap.value(forKey: "rating") as! Float
-                    let isAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
+                    let comments = reviewMap.value(forKey: "comments") as? String ?? "No review in database"
+                    let rating = reviewMap.value(forKey: "rating") as? Float ?? 0
+                    let isAnonymous = reviewMap.value(forKey: "isAnonymous") as? Bool ?? false
                     let isEdited = reviewMap.value(forKey: "isEdited") as? Bool ?? false
-                    let willLiveAgain = reviewMap.value(forKey: "willLiveAgain") as! Bool
+                    let willLiveAgain = reviewMap.value(forKey: "willLiveAgain") as? Bool ?? false
                     let timestamp = reviewMap.value(forKey: "timeStamp") as? Timestamp ?? Timestamp(date: Date.init(timeInterval: -9999999999, since: Date()))
                     
                     
@@ -224,7 +224,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
 
 
                 
-                if (self.countNewListings != 0) {
+                if (self.countNewListings != 0 ) {
                     let avgrate = (self.averageLocation/self.countNewListings)
                     self.rating1.text = String(format: "%.1f", avgrate)
                     

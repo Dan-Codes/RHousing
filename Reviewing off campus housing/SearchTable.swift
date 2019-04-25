@@ -29,7 +29,6 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         showProperties()
         
         // Setup the search controller
@@ -67,7 +66,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
         // properties.shared.prop.filter()
         print("hello")
         properties.shared.filterProp = properties.shared.prop.filter({ (prop : String) -> Bool in
-            return prop.lowercased().contains(searchText.lowercased())
+            return prop.lowercased().contains(searchText.lowercased()) 
         })
         
         propTable.reloadData()
