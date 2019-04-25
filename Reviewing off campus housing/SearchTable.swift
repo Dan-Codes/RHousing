@@ -11,17 +11,44 @@ import Firebase
 
 public class properties {
     var prop:[String] = []
+    var filterProp:[String] = []
     public static let shared = properties()
 }
 
-class SearchTable: UITableViewController {
+class SearchTable: UITableViewController, UISearchResultsUpdating {
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+    }
+    
 
     @IBOutlet var propTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         showProperties()
+        
+        // Setup the search controller
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search listings"
+        
+        //navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        searchController.searchBar.sizeToFit()
+        self.tableView.tableHeaderView = searchController.searchBar
+        
+        // set up scope bar
+        searchController.searchBar.scopeButtonTitles = ["test 1", "test 2", "test 3", "test 4"]
+        searchController.searchBar.delegate = self as? UISearchBarDelegate
+        
+        // setup the search footer
+        // tableView.tableFooterView = searchFooter
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -29,6 +56,20 @@ class SearchTable: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        // properties.shared.prop.filter()
+        print("hello")
+        properties.shared.filterProp = properties.shared.prop.filter({ (prop : String) -> Bool in
+            return prop.lowercased().contains(searchText.lowercased()) 
+        })
+        
+        propTable.reloadData()
     }
     
     func showProperties(){
@@ -54,8 +95,13 @@ class SearchTable: UITableViewController {
         
     } // end showProperties
 
+    func isFiltering() -> Bool {
+        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
+        return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
+    }
     
     // MARK: - Table view data source
+    
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -64,19 +110,31 @@ class SearchTable: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print(properties.shared.prop.count)
+        //print(properties.shared.prop.count)
+        if isFiltering() {
+            print("test2")
+            return properties.shared.filterProp.count
+        }
+        
         return properties.shared.prop.count
+        
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        let text = properties.shared.prop[indexPath.row]
-        cell?.textLabel?.text = text
-
-        // Configure the cell...
-        print(cell)
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        if isFiltering() {
+            print("test")
+            cell.textLabel?.text = properties.shared.filterProp[indexPath.row]
+            cell.detailTextLabel?.text = "detailed text here"
+            return cell
+        }
+        
+        // else...
+        cell.textLabel?.text = properties.shared.prop[indexPath.row]
+        cell.detailTextLabel?.text = "detailed text here"
+        return cell
     }
     
 

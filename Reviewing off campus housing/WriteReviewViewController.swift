@@ -25,6 +25,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        storeBool.shared.edited = false
         address.text = info + "!"
         comment.delegate = self
         let borderColor : UIColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
@@ -85,20 +86,23 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                             //write some code here
                             let reviewMap = reviewMap as! NSDictionary
                             let getComment = reviewMap.value(forKey: "comments") as? String
-                            self.comment.text = getComment ?? ""
+                            self.comment.text = getComment ?? "No review in database"
                             let getRating = reviewMap.value(forKey: "rating") as? Float
                             self.rating.value = getRating ?? 5
                             self.ratingValue.text = (String(format: "%.1f", getRating ?? 5))
-                            let getLiveagain = reviewMap.value(forKey: "willLiveAgain") as! Bool
+                            let getLiveagain = reviewMap.value(forKey: "willLiveAgain") as? Bool ?? false
                             self.liveagainOutlet.selectedSegmentIndex = getLiveagain ? 0 : 1
-                            let getisAnonymous = reviewMap.value(forKey: "isAnonymous") as! Bool
+                            let getisAnonymous = reviewMap.value(forKey: "isAnonymous") as? Bool ?? false
                             self.anonymousOutlet.selectedSegmentIndex = getisAnonymous ? 0 : 1
                             let getAmenities = reviewMap.value(forKey: "amenitiesRating") as? Double
                             self.amenitiesCosmos.rating = getAmenities ?? 0
+                            self.amenitiesRating = getAmenities ?? 0
                             let getManage = reviewMap.value(forKey: "managementRating") as? Double
                             self.managementCosmos.rating = getManage ?? 0
+                            self.managementRating = getManage ?? 0
                             let getLocationrating = reviewMap.value(forKey: "locationRating") as? Double
                             self.locationCosmos.rating = getLocationrating ?? 0
+                            self.locationRating = getLocationrating ?? 0
                         }))
                         self.present(alert, animated: true)
                         break
@@ -244,7 +248,6 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                     print (emailExist)
                     
                     if(emailExist == false){
-                        
                         let alert = UIAlertController(title: "Success", message: "Your review has successfully been posted!", preferredStyle: .alert)
                         
                         alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { action -> Void in
@@ -286,6 +289,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                     }
                         
                     else if (emailExist == true){
+                        storeBool.shared.edited = true
                         let alert = UIAlertController(title: "Success", message: "Your review has successfully been posted!", preferredStyle: .alert)
                         
                         alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { action -> Void in
@@ -318,7 +322,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                                 print("Error updating document: \(err)")
                             } else {
                                 print("Document successfully updated")
-                                storeBool.shared.edited = true
+                                
                             }
                         }
                     }

@@ -18,6 +18,7 @@
 		341DCC2522569E6800774A19 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DCC2422569E6800774A19 /* WriteReviewViewController.swift */; };
 		3452F6982253FB8400BCDF89 /* displayListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3452F6972253FB8400BCDF89 /* displayListingViewController.swift */; };
 		D969AB72222A46CD00CA9773 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D969AB71222A46CD00CA9773 /* LoginViewController.swift */; };
+		E09BE18922710CF000FC952E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E09BE18822710CF000FC952E /* GoogleService-Info.plist */; };
 		E0E53E2A226FDAD600491582 /* SearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E53E29226FDAD600491582 /* SearchTable.swift */; };
 		E3F21CEC2229DD15005B5D15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F21CEB2229DD15005B5D15 /* AppDelegate.swift */; };
 		E3F21CEE2229DD15005B5D15 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F21CED2229DD15005B5D15 /* FirstViewController.swift */; };
@@ -26,7 +27,6 @@
 		E3F21CF52229DD16005B5D15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3F21CF42229DD16005B5D15 /* Assets.xcassets */; };
 		E3F21CF82229DD16005B5D15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F21CF62229DD16005B5D15 /* LaunchScreen.storyboard */; };
 		E7E359AF2258FB5000CBA815 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E359AE2258FB5000CBA815 /* ReportViewController.swift */; };
-		FABB05D22270BFDC00D102F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FABB05D12270BFDB00D102F8 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +42,7 @@
 		3452F6972253FB8400BCDF89 /* displayListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = displayListingViewController.swift; sourceTree = "<group>"; };
 		5CA0FEBF347C3C0EFE492930 /* Pods-Reviewing off campus housing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reviewing off campus housing.release.xcconfig"; path = "Target Support Files/Pods-Reviewing off campus housing/Pods-Reviewing off campus housing.release.xcconfig"; sourceTree = "<group>"; };
 		D969AB71222A46CD00CA9773 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E09BE18822710CF000FC952E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E0E53E29226FDAD600491582 /* SearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTable.swift; sourceTree = "<group>"; };
 		E3F21CE82229DD15005B5D15 /* Reviewing off campus housing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reviewing off campus housing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3F21CEB2229DD15005B5D15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -52,7 +53,6 @@
 		E3F21CF72229DD16005B5D15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7E359AE2258FB5000CBA815 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		E9D1C8F91BAC2DF119C51E77 /* Pods_Reviewing_off_campus_housing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reviewing_off_campus_housing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FABB05D12270BFDB00D102F8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +121,7 @@
 				03476A8D226ED5FB00EA4B1F /* UserAdminViewController.swift */,
 				03476A8F226ED61100EA4B1F /* ReportAdminViewController.swift */,
 				03476A93226ED89500EA4B1F /* AdminViewController.swift */,
-				FABB05D12270BFDB00D102F8 /* GoogleService-Info.plist */,
+				E09BE18822710CF000FC952E /* GoogleService-Info.plist */,
 				E3F21CF42229DD16005B5D15 /* Assets.xcassets */,
 				E3F21CF62229DD16005B5D15 /* LaunchScreen.storyboard */,
 			);
@@ -191,7 +191,7 @@
 			files = (
 				E3F21CF82229DD16005B5D15 /* LaunchScreen.storyboard in Resources */,
 				031203C2225E74B0006ADCDA /* dark.json in Resources */,
-				FABB05D22270BFDC00D102F8 /* GoogleService-Info.plist in Resources */,
+				E09BE18922710CF000FC952E /* GoogleService-Info.plist in Resources */,
 				E3F21CF52229DD16005B5D15 /* Assets.xcassets in Resources */,
 				E3F21CF32229DD15005B5D15 /* Main.storyboard in Resources */,
 			);
@@ -215,6 +215,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SmartystreetsSDK/SmartystreetsSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -230,6 +231,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmartystreetsSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",

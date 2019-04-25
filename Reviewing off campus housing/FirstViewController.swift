@@ -85,7 +85,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 //print("Document data: \(dataDescription)")
-                let darkModeBool = document.get("DarkMode") as! Bool
+                let darkModeBool = document.get("DarkMode") as? Bool ?? false
                 SecState.shared.darkMode = darkModeBool
                 AppState.shared.darkMode = darkModeBool
                 if (AppState.shared.darkMode){
@@ -147,10 +147,10 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                 print("*****")
                 for document in querySnapshot!.documents {
                     if let coords = document.get("geopoint"){
-                        let point = coords as! GeoPoint
+                        let point = coords as? GeoPoint ?? GeoPoint.init(latitude: 0.0, longitude: 0.0)
                         let lat = point.latitude
                         let long = point.longitude
-                        let address = document.get("address")!
+                        let address = document.get("address") as? String ?? "Address"
                         
 //                        print(lat,long)
 //                        

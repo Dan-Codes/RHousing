@@ -76,7 +76,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let locationRating      = fields.value(forKey: "locationRating")    as? Double
                     let managementRating    = fields.value(forKey: "managementRating")  as? Double
                     let isEdited            = fields.value(forKey: "isEdited")          as? Bool ?? false
-                    let timestamp           = reviewHis!.value(forKey: "timeStamp")     as? Timestamp ?? Timestamp(date: Date.init(timeInterval: -9999999999, since: Date()))
+                    let timestamp           = fields.value(forKey: "timeStamp")     as? Timestamp ?? Timestamp(date: Date.init(timeInterval: -9999999999, since: Date()))
                     
                     // initialize date format
                     
