@@ -397,7 +397,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" returnKeyType="continue"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reportAnIssue2" translatesAutoresizingMaskIntoConstraints="NO" id="gii-ee-HAh">
-                                <rect key="frame" x="103" y="172" width="208" height="60"/>
+                                <rect key="frame" x="103" y="172" width="208" height="60.000000000000014"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="oSJ-hu-toA"/>
                                     <constraint firstAttribute="width" constant="208" id="ypX-vL-xQe"/>
@@ -706,11 +706,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableViewCellContentView>
-
                                         <connections>
                                             <segue destination="tCg-RF-9oO" kind="show" id="ESY-gk-bya"/>
                                         </connections>
-
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1184,11 +1182,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-
                                         <connections>
                                             <segue destination="y3n-Ak-Kit" kind="show" id="JGH-ox-biQ"/>
                                         </connections>
-
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1222,7 +1218,6 @@
             </objects>
             <point key="canvasLocation" x="3034.7826086956525" y="1027.9017857142858"/>
         </scene>
-
         <!--Manage Report View Controller-->
         <scene sceneID="wKi-ib-QV6">
             <objects>
@@ -1238,8 +1233,7 @@
             </objects>
             <point key="canvasLocation" x="3964" y="1028"/>
         </scene>
-        <!--Tab Bar Controller-->
-
+        <!--C R I B B-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController storyboardIdentifier="TabBarController" title="C R I B B" extendedLayoutIncludesOpaqueBars="YES" modalTransitionStyle="crossDissolve" id="49e-Tb-3d3" sceneMemberID="viewController">
@@ -1443,26 +1437,18 @@
         <image name="reportAnIssue2" width="290.66665649414062" height="87.666664123535156"/>
         <image name="reviewsYouveWritten" width="640" height="31.333333969116211"/>
         <image name="settings_black_192x192" width="30" height="30"/>
-
-        <image name="signMeIn" width="1920" height="505"/>
-        <image name="submit" width="1920" height="542"/>
-        <image name="submitReport" width="1920" height="299"/>
-        <image name="whatOthersHaveSaid" width="722" height="118"/>
-
+        <image name="signMeIn" width="640" height="168.33332824707031"/>
+        <image name="submit" width="640" height="180.66667175292969"/>
+        <image name="submitReport" width="640" height="99.666664123535156"/>
+        <image name="whatOthersHaveSaid" width="240.66667175292969" height="39.333332061767578"/>
         <image name="writeReport" width="1080" height="1080"/>
         <image name="writeReviewBlue" width="1080" height="1080"/>
         <image name="yes3" width="648" height="284"/>
         <image name="yourAccount" width="640" height="31.333333969116211"/>
     </resources>
     <inferredMetricsTieBreakers>
-
-        <segue reference="EIT-Rl-WiB"/>
-        <segue reference="ahG-8u-YDn"/>
-
-        <segue reference="mn0-Ze-tEj"/>
         <segue reference="jMM-kj-xyt"/>
         <segue reference="vjc-PQ-KVe"/>
-
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.26666666666666666" green="0.60392156862745094" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
 </document>
