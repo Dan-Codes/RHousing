@@ -160,7 +160,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleAspectFit" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9cU-OP-gvb" customClass="CosmosView" customModule="Cosmos">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="9cU-OP-gvb" customClass="CosmosView" customModule="Cosmos">
                                 <rect key="frame" x="22" y="222" width="120" height="20"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
@@ -263,7 +263,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="MANAGEMENT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWh-zh-MrQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MANAGEMENT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWh-zh-MrQ">
                                 <rect key="frame" x="57" y="265" width="109" height="20"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -287,7 +287,7 @@
                                 <color key="textColor" red="0.2666666667" green="0.60392156860000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkM-ZE-gE2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkM-ZE-gE2">
                                 <rect key="frame" x="118.33333333333333" y="279" width="47.666666666666671" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" red="0.2666666667" green="0.60392156860000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -722,11 +722,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableViewCellContentView>
-
                                         <connections>
                                             <segue destination="tCg-RF-9oO" kind="show" id="ESY-gk-bya"/>
                                         </connections>
-
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1200,11 +1198,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-
                                         <connections>
                                             <segue destination="y3n-Ak-Kit" kind="show" id="JGH-ox-biQ"/>
                                         </connections>
-
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1238,7 +1234,6 @@
             </objects>
             <point key="canvasLocation" x="3034.7826086956525" y="1027.9017857142858"/>
         </scene>
-
         <!--Manage Report View Controller-->
         <scene sceneID="wKi-ib-QV6">
             <objects>
@@ -1254,8 +1249,7 @@
             </objects>
             <point key="canvasLocation" x="3964" y="1028"/>
         </scene>
-        <!--Tab Bar Controller-->
-
+        <!--C R I B B-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController storyboardIdentifier="TabBarController" title="C R I B B" extendedLayoutIncludesOpaqueBars="YES" modalTransitionStyle="crossDissolve" id="49e-Tb-3d3" sceneMemberID="viewController">
@@ -1441,42 +1435,36 @@
     <resources>
         <image name="25694" width="30" height="30"/>
         <image name="addNewCribb" width="442" height="172"/>
-        <image name="adminView" width="163" height="66"/>
+        <image name="adminView" width="163" height="66.333335876464844"/>
         <image name="amenities" width="125" height="15"/>
         <image name="awful" width="85" height="15"/>
-        <image name="darkModeButton" width="360" height="84"/>
+        <image name="darkModeButton" width="360.66665649414062" height="84.666664123535156"/>
         <image name="deleteReview" width="1080" height="1080"/>
         <image name="great" width="85" height="15"/>
-        <image name="greybg" width="133" height="133"/>
+        <image name="greybg" width="133.33332824707031" height="133.33332824707031"/>
         <image name="icon" width="30" height="30"/>
         <image name="location" width="113" height="15"/>
         <image name="loginLogo" width="317" height="317"/>
-        <image name="logout2" width="138" height="66"/>
+        <image name="logout2" width="138" height="66.333335876464844"/>
         <image name="management" width="168" height="15"/>
         <image name="no3" width="648" height="284"/>
         <image name="postMyReview" width="1427" height="257"/>
-        <image name="rateThisCribb" width="421" height="55"/>
-        <image name="reportAnIssue2" width="290" height="87"/>
-        <image name="reviewsYouveWritten" width="640" height="31"/>
+        <image name="rateThisCribb" width="421.66665649414062" height="55.333332061767578"/>
+        <image name="reportAnIssue2" width="290.66665649414062" height="87.666664123535156"/>
+        <image name="reviewsYouveWritten" width="640" height="31.333333969116211"/>
         <image name="settings_black_192x192" width="30" height="30"/>
-        <image name="signMeIn" width="640" height="168"/>
-        <image name="submit" width="640" height="180"/>
-        <image name="submitReport" width="640" height="99"/>
-        <image name="whatOthersHaveSaid" width="240" height="39"/>
+        <image name="signMeIn" width="640" height="168.33332824707031"/>
+        <image name="submit" width="640" height="180.66667175292969"/>
+        <image name="submitReport" width="640" height="99.666664123535156"/>
+        <image name="whatOthersHaveSaid" width="240.66667175292969" height="39.333332061767578"/>
         <image name="writeReport" width="1080" height="1080"/>
         <image name="writeReviewBlue" width="1080" height="1080"/>
         <image name="yes3" width="648" height="284"/>
-        <image name="yourAccount" width="640" height="31"/>
+        <image name="yourAccount" width="640" height="31.333333969116211"/>
     </resources>
     <inferredMetricsTieBreakers>
-
-        <segue reference="EIT-Rl-WiB"/>
-        <segue reference="ahG-8u-YDn"/>
-
-        <segue reference="mn0-Ze-tEj"/>
         <segue reference="jMM-kj-xyt"/>
         <segue reference="vjc-PQ-KVe"/>
-
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.26666666666666666" green="0.60392156862745094" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
 </document>

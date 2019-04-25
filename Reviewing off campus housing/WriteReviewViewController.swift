@@ -25,6 +25,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        storeBool.shared.edited = false
         address.text = info + "!"
         comment.delegate = self
         let borderColor : UIColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
@@ -247,7 +248,6 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                     print (emailExist)
                     
                     if(emailExist == false){
-                        
                         let alert = UIAlertController(title: "Success", message: "Your review has successfully been posted!", preferredStyle: .alert)
                         
                         alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { action -> Void in
@@ -289,6 +289,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                     }
                         
                     else if (emailExist == true){
+                        storeBool.shared.edited = true
                         let alert = UIAlertController(title: "Success", message: "Your review has successfully been posted!", preferredStyle: .alert)
                         
                         alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { action -> Void in
@@ -321,7 +322,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                                 print("Error updating document: \(err)")
                             } else {
                                 print("Document successfully updated")
-                                storeBool.shared.edited = true
+                                
                             }
                         }
                     }
