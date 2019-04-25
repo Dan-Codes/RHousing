@@ -11,6 +11,7 @@ import CoreLocation
 import Firebase
 import FirebaseUI
 import FirebaseStorage
+import SmartystreetsSDK
 public class ThirdState {
     public var str:String = ""
     public var landlordName:String = ""
@@ -34,7 +35,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         let thePicker = UIPickerView()
         thePicker.delegate = self
@@ -94,6 +94,47 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         
         return testRent.evaluate(with: rentCost)
     }
+    
+    
+    func run(address1: String, city: String, state: String) -> String {
+//        let mobile = SSSharedCredentials(id: "3418379215808600", hostname: "Cribb")
+//        let client = SSClientBuilder(signer: mobile).buildUsStreetApiClient()
+                let client = SSClientBuilder(authId: "e364ec93-0e7e-2f4c-8b91-edc5c6168c98",
+                                                    authToken: "uMFMctU3tpuT7sJ2bY64").buildUsStreetApiClient()
+        
+        let lookup = SSUSStreetLookup()
+        lookup.street = address1
+        lookup.city = city
+        lookup.state = state
+        
+        do {
+            try client?.send(lookup)
+        } catch let error as NSError {
+            print(String(format: "Domain: %@", error.domain))
+            print(String(format: "Error Code: %i", error.code))
+            print(String(format: "Description: %@", error.localizedDescription))
+            return "Error sending request"
+        }
+        
+        let results = lookup.result
+        var output = String()
+        
+        if results?.count == 0 {
+            output += "Error. Address is not valid"
+            return output
+        }
+        
+        let candidate: SSUSStreetCandidate = results?[0] as! SSUSStreetCandidate
+        
+        output += "Address is valid"
+//        output += "\nZIP Code: " + candidate.components.zipCode
+//        output += "\nCounty: " + candidate.metadata.countyName
+//        output += "\nLatitude: " + String(format:"%f", candidate.metadata.latitude)
+//        output += "\nLongitude: " + String(format:"%f", candidate.metadata.longitude)
+        print("--------------" + output)
+        return output;
+    }
+    
 
     
     func checkDidAdd(lat: Double, long: Double) -> Bool {
@@ -177,7 +218,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             let lat = placemark?.location?.coordinate.latitude
             let lon = placemark?.location?.coordinate.longitude
              print("Lat: \(lat), Lon: \(lon)")
-            if lat == nil || lon == nil{
+            //if lat == nil || lon == nil{
+            if self.run(address1: self.adrs1.text!, city: self.city.text!, state: self.state.text!).first == "E"{
                 let alert = UIAlertController(title: "This place does not exist", message: "Please check your input", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
                     return

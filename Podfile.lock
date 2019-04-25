@@ -133,6 +133,7 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.6.1)
+  - SmartystreetsSDK (7.7.2)
 
 DEPENDENCIES:
   - Cosmos (~> 18.0)
@@ -143,6 +144,7 @@ DEPENDENCIES:
   - FirebaseUI/Google
   - GoogleMaps
   - GooglePlaces
+  - SmartystreetsSDK
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -169,6 +171,7 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - SmartystreetsSDK
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
@@ -194,7 +197,8 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  SmartystreetsSDK: ad9d447181a7c6d3ae1683d6b28e80ee378e38e4
 
-PODFILE CHECKSUM: 345ad7fecc6349363cfa2adb3b6f0d98202e38e5
+PODFILE CHECKSUM: 80001da899e60c845095cf23990e77a5149bd7c9
 
 COCOAPODS: 1.6.1

@@ -15,6 +15,7 @@ target 'Reviewing off campus housing' do
   pod 'GooglePlaces'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'SmartystreetsSDK'
 
   # for star rating i/o functionality, as taken from https://github.com/evgenyneu/Cosmos
   

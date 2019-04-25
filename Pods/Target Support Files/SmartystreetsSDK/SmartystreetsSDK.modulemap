@@ -1,0 +1,6 @@
+framework module SmartystreetsSDK {
+  umbrella header "SmartystreetsSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
