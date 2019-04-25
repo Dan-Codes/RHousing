@@ -13,13 +13,32 @@ public class AdminState {
     public var arr:[String] = []
     public static let shared = AdminState()
 }
-class UserAdminViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+
+class UserAdminViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     @IBOutlet weak var PropertyTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-showProperties()
+        showProperties()
         
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPress.minimumPressDuration = 2.0
+        PropertyTable.addGestureRecognizer(longPress)
     }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer){
+        if sender.state == .began {
+            let touchPoint = sender.location(in: PropertyTable)
+            if let indexPath = PropertyTable.indexPathForRow(at: touchPoint) {
+                // your code here, get the row for the indexPath or do whatever you want
+                let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
+                self.present(alert, animated: true)
+                print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+            }
+        }
+    }
+    
     
     func showProperties(){
         AdminState.shared.arr = []

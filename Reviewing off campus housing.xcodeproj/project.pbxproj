@@ -11,6 +11,8 @@
 		03476A8E226ED5FB00EA4B1F /* UserAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03476A8D226ED5FB00EA4B1F /* UserAdminViewController.swift */; };
 		03476A90226ED61100EA4B1F /* ReportAdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03476A8F226ED61100EA4B1F /* ReportAdminViewController.swift */; };
 		03476A94226ED89500EA4B1F /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03476A93226ED89500EA4B1F /* AdminViewController.swift */; };
+		03476A9822702F0B00EA4B1F /* ManageListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03476A9722702F0B00EA4B1F /* ManageListingViewController.swift */; };
+		03476A9A22703A5800EA4B1F /* ManageReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03476A9922703A5800EA4B1F /* ManageReportViewController.swift */; };
 		03B918F92242B2DF006AB87D /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B918F82242B2DF006AB87D /* ThirdViewController.swift */; };
 		310DEB88FC129CD8C8D6A54E /* Pods_Reviewing_off_campus_housing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D1C8F91BAC2DF119C51E77 /* Pods_Reviewing_off_campus_housing.framework */; };
 		341DCC2522569E6800774A19 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DCC2422569E6800774A19 /* WriteReviewViewController.swift */; };
@@ -32,6 +34,8 @@
 		03476A8D226ED5FB00EA4B1F /* UserAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAdminViewController.swift; sourceTree = "<group>"; };
 		03476A8F226ED61100EA4B1F /* ReportAdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAdminViewController.swift; sourceTree = "<group>"; };
 		03476A93226ED89500EA4B1F /* AdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
+		03476A9722702F0B00EA4B1F /* ManageListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageListingViewController.swift; sourceTree = "<group>"; };
+		03476A9922703A5800EA4B1F /* ManageReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageReportViewController.swift; sourceTree = "<group>"; };
 		03B918F82242B2DF006AB87D /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
 		1382C2AA33F905E1C1AF4BAC /* Pods-Reviewing off campus housing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reviewing off campus housing.debug.xcconfig"; path = "Target Support Files/Pods-Reviewing off campus housing/Pods-Reviewing off campus housing.debug.xcconfig"; sourceTree = "<group>"; };
 		341DCC2422569E6800774A19 /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
@@ -110,8 +114,10 @@
 				E0E53E29226FDAD600491582 /* SearchTable.swift */,
 				3452F6972253FB8400BCDF89 /* displayListingViewController.swift */,
 				341DCC2422569E6800774A19 /* WriteReviewViewController.swift */,
+				03476A9922703A5800EA4B1F /* ManageReportViewController.swift */,
 				E7E359AE2258FB5000CBA815 /* ReportViewController.swift */,
 				E3F21CF12229DD15005B5D15 /* Main.storyboard */,
+				03476A9722702F0B00EA4B1F /* ManageListingViewController.swift */,
 				03476A8D226ED5FB00EA4B1F /* UserAdminViewController.swift */,
 				03476A8F226ED61100EA4B1F /* ReportAdminViewController.swift */,
 				03476A93226ED89500EA4B1F /* AdminViewController.swift */,
@@ -299,11 +305,13 @@
 				03476A90226ED61100EA4B1F /* ReportAdminViewController.swift in Sources */,
 				D969AB72222A46CD00CA9773 /* LoginViewController.swift in Sources */,
 				E3F21CF02229DD15005B5D15 /* SecondViewController.swift in Sources */,
+				03476A9822702F0B00EA4B1F /* ManageListingViewController.swift in Sources */,
 				3452F6982253FB8400BCDF89 /* displayListingViewController.swift in Sources */,
 				341DCC2522569E6800774A19 /* WriteReviewViewController.swift in Sources */,
 				03476A8E226ED5FB00EA4B1F /* UserAdminViewController.swift in Sources */,
 				03B918F92242B2DF006AB87D /* ThirdViewController.swift in Sources */,
 				E3F21CEC2229DD15005B5D15 /* AppDelegate.swift in Sources */,
+				03476A9A22703A5800EA4B1F /* ManageReportViewController.swift in Sources */,
 				E3F21CEE2229DD15005B5D15 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

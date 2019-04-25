@@ -95,10 +95,13 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                             self.anonymousOutlet.selectedSegmentIndex = getisAnonymous ? 0 : 1
                             let getAmenities = reviewMap.value(forKey: "amenitiesRating") as? Double
                             self.amenitiesCosmos.rating = getAmenities ?? 0
+                            self.amenitiesRating = getAmenities ?? 0
                             let getManage = reviewMap.value(forKey: "managementRating") as? Double
                             self.managementCosmos.rating = getManage ?? 0
+                            self.managementRating = getManage ?? 0
                             let getLocationrating = reviewMap.value(forKey: "locationRating") as? Double
                             self.locationCosmos.rating = getLocationrating ?? 0
+                            self.locationRating = getLocationrating ?? 0
                         }))
                         self.present(alert, animated: true)
                         break
