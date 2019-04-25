@@ -75,7 +75,7 @@ class ReportAdminViewController: UIViewController, UITableViewDataSource, UITabl
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReportContent")
         cell?.textLabel!.numberOfLines = 0
         cell?.textLabel!.lineBreakMode = .byWordWrapping
-        cell?.textLabel?.textColor = UIColor.white
+        cell?.textLabel?.textColor = UIColor.black
         cell?.textLabel!.font = UIFont.systemFont(ofSize: 12.0)
         let text = ReportState.shared.arr[indexPath.row]
         cell?.textLabel?.text = text
