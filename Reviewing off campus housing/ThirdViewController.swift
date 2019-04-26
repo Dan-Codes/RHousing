@@ -209,8 +209,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             return
         }
         print(rentCost.text!.split(separator: "-")[0])
-        if Int(zipcd.text!) == nil{
-            let alert = UIAlertController(title: "Error", message: "Zipcode not valid", preferredStyle: .alert)
+        if Int(zipcd.text!) == nil || zipcd.text!.count != 5{
+            let alert = UIAlertController(title: "Error", message: "Zipcode not valid\nEnter a 5 digit zipcode", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
                 return
             }))
