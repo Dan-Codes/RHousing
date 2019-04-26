@@ -12,6 +12,8 @@ import Firebase
 public class properties {
     var prop:[String] = []
     var filterProp:[String] = []
+    var row:Int = 0
+    var isFiltering:Bool = false
     public static let shared = properties()
 }
 
@@ -65,6 +67,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         // properties.shared.prop.filter()
         print("hello")
+        properties.shared.isFiltering = false
         properties.shared.filterProp = properties.shared.prop.filter({ (prop : String) -> Bool in
             return prop.lowercased().contains(searchText.lowercased()) 
         })
@@ -113,6 +116,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
         //print(properties.shared.prop.count)
         if isFiltering() {
             print("test2")
+            properties.shared.isFiltering = true
             return properties.shared.filterProp.count
         }
         
@@ -126,6 +130,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
         
         if isFiltering() {
             print("test")
+            properties.shared.isFiltering = true
             cell.textLabel?.text = properties.shared.filterProp[indexPath.row]
             cell.detailTextLabel?.text = "detailed text here"
             return cell
@@ -135,6 +140,29 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
         cell.textLabel?.text = properties.shared.prop[indexPath.row]
         cell.detailTextLabel?.text = "detailed text here"
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !properties.shared.isFiltering{
+        properties.shared.row = indexPath.row
+        self.address = properties.shared.prop[properties.shared.row]
+        performSegue(withIdentifier: "searchToDisplay", sender: self)
+        }
+        else{
+            properties.shared.row = indexPath.row
+            self.address = properties.shared.filterProp[properties.shared.row]
+            performSegue(withIdentifier: "searchToDisplay", sender: self)
+        }
+    }
+    
+    var address:String = ""
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is displayListingViewController
+        {
+            let vc = segue.destination as? displayListingViewController
+            vc?.info = address
+        }
     }
     
 
