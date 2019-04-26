@@ -208,6 +208,33 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             self.present(alert, animated: true)
             return
         }
+        print(rentCost.text!.split(separator: "-")[0])
+        if Int(zipcd.text!) == nil{
+            let alert = UIAlertController(title: "Error", message: "Zipcode not valid", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
+                return
+            }))
+            self.present(alert, animated: true)
+            return
+        }
+        if Int(rentCost.text!) == nil{
+            if rentCost.text!.split(separator: "-").count == 1 {
+            let alert = UIAlertController(title: "Error", message: "Rent range must be in this form ie. 900-1000 or $900", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
+                return
+            }))
+            self.present(alert, animated: true)
+            return
+            }
+//            if rentCost.text!.split(separator: "-").count == 2 && (rentCost.text!.split(separator: "-")[0] == nil || rentCost.text!.split(separator: "-")[1] == nil){
+//                let alert = UIAlertController(title: "Error", message: "Rent range must be in this form ie. 900-1000 or $900", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
+//                    return
+//                }))
+//                self.present(alert, animated: true)
+//                return
+//            }
+        }
         ThirdState.shared.landlordName = landlord.text!
         ThirdState.shared.costOfRent = rentCost.text!
         //print(landlordName)
