@@ -56,6 +56,7 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
                             print("Error removing document: \(err)")
                         } else {
                             print("Document successfully removed!")
+                            print(ReviewState.shared.arr)
                         }
                     }
                     
@@ -98,8 +99,10 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         AdminState.shared.row = indexPath.row
+        ReviewState.shared.info = AdminState.shared.add[AdminState.shared.row]
         
-        print("\(AdminState.shared.row)" + "_______________________")
+        //print("\(AdminState.shared.row)" + "_______________________")
+        //print("\(AdminState.shared.add[AdminState.shared.row])" + "_______________________")
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

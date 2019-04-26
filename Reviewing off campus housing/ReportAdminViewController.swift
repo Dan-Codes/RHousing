@@ -18,6 +18,7 @@ class ReportAdminViewController: UIViewController, UITableViewDataSource, UITabl
 
     @IBOutlet weak var reportTable: UITableView!
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
