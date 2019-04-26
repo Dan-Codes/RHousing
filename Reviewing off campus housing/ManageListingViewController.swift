@@ -13,11 +13,15 @@ import FirebaseAuth
 public class ReviewState {
     public var arr:[String] = []
     public var info:String = ""
+    public var reviewer:[String] = []
+    public var select:Int = 0
     
     public static let shared = ReviewState()
 }
 
 class ManageListingViewController: UIViewController, UITableViewDelegate,  UITableViewDataSource{
+    @IBOutlet weak var newRent: UITextField!
+    @IBOutlet weak var newLandlord: UITextField!
     
     let date = Date()
     let formatter = DateFormatter()
@@ -27,13 +31,64 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        showReviews()
+        ReviewState.shared.info = AdminState.shared.add[AdminState.shared.row]
+        
+        let docRef = db.collection("listings").document(ReviewState.shared.info)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists { // go through the listings database
+                
+                self.newRent.text = document.get("rent") as? String ?? ""
+                self.newLandlord.text = document.get("landlordName") as? String ?? ""
+            }
+        }
+     
+        db.collection("listings").document(ReviewState.shared.info)
+            .addSnapshotListener { documentSnapshot, error in
+                guard let document = documentSnapshot else {
+                    print("Error fetching document: \(error!)")
+                    return }
+                guard document.data() != nil else {
+                    print("Document data was empty.")
+                    return }
+                self.showReviews() // where the juicy stuf happens
+        }
+
         // Do any additional setup after loading the view.
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPress.minimumPressDuration = 2.0
+        reviewTable.addGestureRecognizer(longPress)
+    }
+    
+    @objc func handleLongPress(sender: UILongPressGestureRecognizer){
+        if sender.state == .began {
+            let touchPoint = sender.location(in: reviewTable)
+            if let indexPath = reviewTable.indexPathForRow(at: touchPoint) {
+                print(indexPath)
+                // your code here, get the row for the indexPath or do whatever you want
+                let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
+                alert.addAction(UIAlertAction(title: "Confirm", style: .destructive, handler: {(action) in
+                    
+                    print(ReviewState.shared.reviewer[indexPath.row])
+                            let docPropertyRef = db.collection("listings").document(ReviewState.shared.info)
+                            let propertyfp = FieldPath(["reviews", ReviewState.shared.reviewer[indexPath.row]])
+                            let docUserRef = db.collection("Users").document(ReviewState.shared.reviewer[indexPath.row])
+                            let userfp = FieldPath(["Review History", ReviewState.shared.info])
+                    
+                            docPropertyRef.updateData([propertyfp : FieldValue.delete()])
+                            docUserRef.updateData([userfp : FieldValue.delete()])
+                    return;
+                }))
+                self.present(alert, animated: true)
+            }
+        }
     }
     
     func showReviews(){
-        print(AdminState.shared.add[AdminState.shared.row])
-        let docRef = db.collection("listings").document(AdminState.shared.add[AdminState.shared.row])
+        
+        ReviewState.shared.arr = []
+        let docRef = db.collection("listings").document(ReviewState.shared.info)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists { // go through the listings database
                 
@@ -41,13 +96,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                 //print("Document data: \(dataDescription)")
                 
                 // retrieve database values for a listing (address, landord, rent, and its reviews)
-                var address = document.get("address") as? String ?? ""
-                let landlordName = document.get("landlordName") ?? "Leasing manager unavailable"
-                let getRent = document.get("rent") as? String ?? ""
                 let review = document.get("reviews") as! NSDictionary
-                
-                // this is the array that the reviews get put into for the table view to read from. it's global.
-                ReviewState.shared.arr = []
                 
                 //Retreiving values from map of maps (reviews)
                 //Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
@@ -92,13 +141,13 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                         + String(format: "Overall Rating — %.1f\n", rating)
                         + "\n"
                     
-                    
+                    ReviewState.shared.reviewer.append(reviewer)
                     
                     let docRef = db.collection("Users").document(reviewer)
                     docRef.getDocument { (document, error) in
                         if let document = document, document.exists {
                             let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                            print("Document data: \(dataDescription)")
+                            
                             let firstName = document.get("First Name") as? String ?? reviewer
                             let lastName = document.get("Last Name") as? String ?? " "
                             let lName = String(lastName.first!)
@@ -155,5 +204,23 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
         return cell!
     }
 
-    
+    @IBAction func submit(_ sender: UIButton) {
+            let docRef = db.collection("listings").document(ReviewState.shared.info)
+            docRef.updateData([
+                "rent": newRent.text!,
+                "landlordName" : newLandlord.text!
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("Document successfully updated")
+                    let alert = UIAlertController(title: "Success", message: "Successfully update!", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { action -> Void in
+                        self.performSegue(withIdentifier: "unwindToListingAdmin", sender: self)
+                    }))
+                    self.present(alert, animated: true)
+                }
+            }
+    }
 }

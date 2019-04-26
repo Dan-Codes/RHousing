@@ -20,9 +20,22 @@ public class AdminState {
 
 class UserAdminViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     @IBOutlet weak var PropertyTable: UITableView!
+    
+    @IBAction func unwindToListingAdmin(segue: UIStoryboardSegue) {}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        showProperties()
+        
+        db.collection("listings").addSnapshotListener { querySnapshot, error in
+            guard (querySnapshot?.documents) != nil else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                
+                self.showProperties() // where the juicy stuf happens
+        }
+        
+        
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         longPress.minimumPressDuration = 2.0
@@ -35,10 +48,19 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
             if let indexPath = PropertyTable.indexPathForRow(at: touchPoint) {
                 print(indexPath)
                 // your code here, get the row for the indexPath or do whatever you want
-                let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Are you sure you want to delete this property?", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
+                alert.addAction(UIAlertAction(title: "Confirm", style: .destructive, handler: {(action) in
+                    db.collection("listings").document(AdminState.shared.add[indexPath.row]).delete() { err in
+                        if let err = err {
+                            print("Error removing document: \(err)")
+                        } else {
+                            print("Document successfully removed!")
+                        }
+                    }
+                    
+                }))
                 self.present(alert, animated: true)
-                print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
             }
         }
     }
@@ -76,8 +98,8 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         AdminState.shared.row = indexPath.row
-        ReviewState.shared.info = AdminState.shared.add[AdminState.shared.row]
-        print(ReviewState.shared.info + "_______________________")
+        
+        print("\(AdminState.shared.row)" + "_______________________")
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

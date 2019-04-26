@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lSM-uc-KCa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xY1-PF-EHJ">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -160,7 +160,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleAspectFit" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9cU-OP-gvb" customClass="CosmosView" customModule="Cosmos">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="9cU-OP-gvb" customClass="CosmosView" customModule="Cosmos">
                                 <rect key="frame" x="22" y="222" width="120" height="20"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
@@ -263,7 +263,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="MANAGEMENT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWh-zh-MrQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MANAGEMENT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWh-zh-MrQ">
                                 <rect key="frame" x="57" y="265" width="109" height="20"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -287,7 +287,7 @@
                                 <color key="textColor" red="0.2666666667" green="0.60392156860000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkM-ZE-gE2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkM-ZE-gE2">
                                 <rect key="frame" x="118.33333333333333" y="279" width="47.666666666666671" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" red="0.2666666667" green="0.60392156860000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -777,17 +777,57 @@
                                     <outlet property="delegate" destination="tCg-RF-9oO" id="4kS-Bd-Npy"/>
                                 </connections>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5e6-sS-uLe">
+                                <rect key="frame" x="46" y="134" width="161" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="amq-qG-WPw">
+                                <rect key="frame" x="46" y="238" width="161" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Change Rent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r7-CT-u68">
+                                <rect key="frame" x="46" y="209" width="99" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Change Landlord" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKL-ql-RNm">
+                                <rect key="frame" x="46" y="105" width="131" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uoF-gY-v4C">
+                                <rect key="frame" x="45" y="276" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submit:" destination="tCg-RF-9oO" eventType="touchUpInside" id="O0S-6l-AEz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="9rW-lz-5ep"/>
                     </view>
                     <connections>
+                        <outlet property="newLandlord" destination="5e6-sS-uLe" id="dKi-uT-yId"/>
+                        <outlet property="newRent" destination="amq-qG-WPw" id="nGh-5x-XTa"/>
                         <outlet property="reviewTable" destination="z32-9E-Kcd" id="0h4-V5-dAD"/>
+                        <segue destination="fy2-Vx-blg" kind="unwind" identifier="unwindToListingAdmin" unwindAction="unwindToListingAdminWithSegue:" id="uIn-vv-o18"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rOa-YQ-h2W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="fy2-Vx-blg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4913.04347826087" y="314.73214285714283"/>
+            <point key="canvasLocation" x="4899" y="315"/>
         </scene>
         <!--Third Scene-->
         <scene sceneID="Q4q-R3-CkY">
@@ -1459,32 +1499,32 @@
     <resources>
         <image name="25694" width="30" height="30"/>
         <image name="addNewCribb" width="442" height="172"/>
-        <image name="adminView" width="163" height="66"/>
+        <image name="adminView" width="163" height="66.333335876464844"/>
         <image name="amenities" width="125" height="15"/>
         <image name="awful" width="85" height="15"/>
-        <image name="darkModeButton" width="360" height="84"/>
+        <image name="darkModeButton" width="360.66665649414062" height="84.666664123535156"/>
         <image name="deleteReview" width="1080" height="1080"/>
         <image name="great" width="85" height="15"/>
-        <image name="greybg" width="133" height="133"/>
+        <image name="greybg" width="133.33332824707031" height="133.33332824707031"/>
         <image name="icon" width="30" height="30"/>
         <image name="location" width="113" height="15"/>
         <image name="loginLogo" width="317" height="317"/>
-        <image name="logout2" width="138" height="66"/>
+        <image name="logout2" width="138" height="66.333335876464844"/>
         <image name="management" width="168" height="15"/>
         <image name="no3" width="648" height="284"/>
         <image name="postMyReview" width="1427" height="257"/>
-        <image name="rateThisCribb" width="421" height="55"/>
-        <image name="reportAnIssue2" width="290" height="87"/>
-        <image name="reviewsYouveWritten" width="640" height="31"/>
+        <image name="rateThisCribb" width="421.66665649414062" height="55.333332061767578"/>
+        <image name="reportAnIssue2" width="290.66665649414062" height="87.666664123535156"/>
+        <image name="reviewsYouveWritten" width="640" height="31.333333969116211"/>
         <image name="settings_black_192x192" width="30" height="30"/>
-        <image name="signMeIn" width="640" height="168"/>
-        <image name="submit" width="640" height="180"/>
-        <image name="submitReport" width="640" height="99"/>
-        <image name="whatOthersHaveSaid" width="240" height="39"/>
+        <image name="signMeIn" width="640" height="168.33332824707031"/>
+        <image name="submit" width="640" height="180.66667175292969"/>
+        <image name="submitReport" width="640" height="99.666664123535156"/>
+        <image name="whatOthersHaveSaid" width="240.66667175292969" height="39.333332061767578"/>
         <image name="writeReport" width="1080" height="1080"/>
         <image name="writeReviewBlue" width="1080" height="1080"/>
         <image name="yes3" width="648" height="284"/>
-        <image name="yourAccount" width="640" height="31"/>
+        <image name="yourAccount" width="640" height="31.333333969116211"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jMM-kj-xyt"/>
