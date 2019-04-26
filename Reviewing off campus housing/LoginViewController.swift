@@ -55,6 +55,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var emailID:String = ""
     var isSignIn:Bool = true
     
+    
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var passText: UITextField!
     @IBOutlet weak var firstName: UITextField!

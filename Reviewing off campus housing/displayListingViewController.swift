@@ -329,7 +329,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
         {
             let vc = segue.destination as? ReportViewController
             vc?.str = info
-        }    }
+        }
+    }
     
     
     @IBAction func reportProblem(_ sender: UIButton) {

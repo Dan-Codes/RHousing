@@ -11,6 +11,9 @@ import Firebase
 
 public class AdminState {
     public var arr:[String] = []
+    public var add:[String] = []
+    public var address:String = ""
+    public var row:Int = 0
     public static let shared = AdminState()
 }
 
@@ -30,6 +33,7 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
         if sender.state == .began {
             let touchPoint = sender.location(in: PropertyTable)
             if let indexPath = PropertyTable.indexPathForRow(at: touchPoint) {
+                print(indexPath)
                 // your code here, get the row for the indexPath or do whatever you want
                 let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
@@ -42,6 +46,8 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func showProperties(){
         AdminState.shared.arr = []
+        AdminState.shared.address = ""
+        AdminState.shared.add = []
         db.collection("listings").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -49,21 +55,15 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     AdminState.shared.arr.append("\(document.documentID) => \(document.data())")
+                    let adrs = document.get("address") as? String ?? ""
+                    AdminState.shared.add.append(adrs)
+                    print("---------------" + adrs)
+                    
                 }
                 // this line of code is critical! it makes sure the table view updates.
                 self.PropertyTable.reloadData()
             }
         }
-    
-        
-        
-                
-
-        
-            
-        
-            
-     
         
         PropertyTable.dataSource = self // not sure if this line is necessary. it seems to work with or without.
         
@@ -73,6 +73,12 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
         //return arr.shared.reviewArr.count
         return AdminState.shared.arr.count
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        AdminState.shared.row = indexPath.row
+        ReviewState.shared.info = AdminState.shared.add[AdminState.shared.row]
+        print(ReviewState.shared.info + "_______________________")
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -80,17 +86,15 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
         // if there are no reviews, don't display a blank table. rather, display a message "there are currently no reviews for this listing at this time."
         /* https://stackoverflow.com/questions/28532926/if-no-table-view-results-display-no-results-on-screen */
         // (maybe implement: if there are some reviews, but not enough to fit whole section, then table size should only be as big as necessary.)
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "PropertyContent")
         cell?.textLabel!.numberOfLines = 0
         cell?.textLabel!.lineBreakMode = .byWordWrapping
-        cell?.textLabel?.textColor = UIColor.white
+        cell?.textLabel?.textColor = UIColor.black
         cell?.textLabel!.font = UIFont.systemFont(ofSize: 12.0)
         let text = AdminState.shared.arr[indexPath.row]
         cell?.textLabel?.text = text
         
         return cell!
     }
-
 
 }
