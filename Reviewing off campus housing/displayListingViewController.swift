@@ -154,7 +154,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     
                     self.formatter.dateFormat = "MM/dd/yyyy"
                     
-                    if (comments == "This user has decided not to write a review") { reviewString += "\n"   + comments + ".\n\n"   }
+                    if (comments == "This user has decided not to write a review") { reviewString += "\n"   + comments + ".\n\n"  }
                     else                                                           { reviewString += "\n\"" + comments + "\"\n\n" }
 
                     reviewString += "Would live again? " + ( willLiveAgain ? ("Yes\n\n") : ("No\n\n") )
@@ -174,10 +174,10 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                             // print("Document data: \(dataDescription)")
                             let firstName = document.get("First Name") as? String ?? reviewer
                             let lastName = document.get("Last Name") as? String ?? " "
-                            let lName = String(lastName.first!)
+                            let lName = String(lastName.first!) + "."
                             
                             reviewString += ( isEdited ? ("Last edited ") : ("Posted ") ) + "by "
-                            reviewString += ( isAnonymous ? ("Anonymous") : (firstName + " " + lName + ".") )
+                            reviewString += ( isAnonymous ? ("Anonymous") : (firstName + " " + lName) )
                             reviewString += " on " + ( self.formatter.string(from: timestamp.dateValue()) ) + "\n"
                             
                             // append to the array of strings

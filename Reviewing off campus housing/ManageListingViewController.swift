@@ -137,14 +137,15 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                     
                     self.formatter.dateFormat = "MM/dd/yyyy"
                     
-                    reviewString += "\n\"" + comments + "\"\n\n"
+                    if (comments == "This user has decided not to write a review") { reviewString += "\n"   + comments + ".\n\n"  }
+                    else                                                           { reviewString += "\n\"" + comments + "\"\n\n" }
                     
                     reviewString += "Would live again? " + ( willLiveAgain ? ("Yes\n\n") : ("No\n\n") )
                     
-                    reviewString += ( lRating == nil ? ("") : (String(format: "Location — %.1f\n", lRating!)) )
-                        + ( aRating == nil ? ("") : (String(format: "Amenities — %.1f\n", aRating!)) )
-                        + ( mRating == nil ? ("") : (String(format: "Management — %.1f\n", mRating!)) )
-                        + String(format: "Overall Rating — %.1f\n", rating)
+                    reviewString += ( lRating == nil ? ("") : (String(format: "Location: %.1f\n", lRating!)) )
+                        + ( aRating == nil ? ("") : (String(format: "Amenities: %.1f\n", aRating!)) )
+                        + ( mRating == nil ? ("") : (String(format: "Management: %.1f\n", mRating!)) )
+                        + String(format: "Overall Rating: %.1f\n", rating)
                         + "\n"
                     
                     ReviewState.shared.reviewer.append(reviewer)
@@ -156,10 +157,10 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                             
                             let firstName = document.get("First Name") as? String ?? reviewer
                             let lastName = document.get("Last Name") as? String ?? " "
-                            let lName = String(lastName.first!)
+                            let lName = String(lastName.first!) + "."
                             
                             reviewString += ( isEdited ? ("Last edited ") : ("Posted ") ) + "by "
-                            reviewString += ( isAnonymous ? ("anonymous") : (firstName + " " + lName + ".") )
+                            reviewString += ( isAnonymous ? ("Anonymous") : (firstName + " " + lName) )
                             reviewString += " on " + ( self.formatter.string(from: timestamp.dateValue()) ) + "\n"
                             
                             // append to the array of strings

@@ -150,7 +150,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     // append each field to string 'thisReview,' to be passed in as a string
                     // and printed out to each table view cell
                     
-                    thisReview += "On " + shortAddress + ":\n\n"
+                    thisReview += "On:" + shortAddress + ":\n\n"
                     
                     thisReview += "\"" + comments + "\"\n\n"
                     
