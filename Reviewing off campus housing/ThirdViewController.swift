@@ -12,6 +12,8 @@ import Firebase
 import FirebaseUI
 import FirebaseStorage
 import SmartystreetsSDK
+
+//global variables
 public class ThirdState {
     public var str:String = ""
     public var landlordName:String = ""
@@ -84,18 +86,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         state.text = myPickerData[row]
     }
     
-    func isValidRent(rentCost : String) -> Bool {
-        let checkRent = "[0-9]+[-]*[0-9]*"
-        
-        let testRent = NSPredicate(format:"SELF MATCHES ", checkRent)
-        
-        print("********************************************** IS VALID RENT")
-        print(testRent.evaluate(with: rentCost))
-        
-        return testRent.evaluate(with: rentCost)
-    }
     
-    
+    //Run fuction uses an API smartStreetSDK to see if it is an actual postal address
     func run(address1: String, city: String, state: String) -> String {
 //        let mobile = SSSharedCredentials(id: "3418379215808600", hostname: "Cribb")
 //        let client = SSClientBuilder(signer: mobile).buildUsStreetApiClient()
@@ -133,10 +125,10 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
 //        output += "\nLongitude: " + String(format:"%f", candidate.metadata.longitude)
         print("--------------" + output)
         return output;
-    }
+    } //end of run()
     
 
-    
+    //checks if the property is already in the database
     func checkDidAdd(lat: Double, long: Double) -> Bool {
         ThirdState.shared.isAdded = false
         db.collection("listings").getDocuments() { (querySnapshot, err) in
@@ -198,6 +190,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
         return ThirdState.shared.isAdded
     }
     
+    //When submit button is pressed
     @IBAction func uploadProperty(_ sender: UIButton) {
         ThirdState.shared.str = adrs1.text! + " " + city.text! + ", " + state.text! + " " + zipcd.text!
         if adrs1.text!.isEmpty || city.text!.isEmpty || state.text!.isEmpty || zipcd.text!.isEmpty || rentCost.text!.isEmpty  {
@@ -237,7 +230,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             }
         ThirdState.shared.landlordName = landlord.text!
         ThirdState.shared.costOfRent = rentCost.text!
-        //print(landlordName)
+        
+        //CLGeocorder converts a string address to lat and long
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(ThirdState.shared.str) {
             placemarks, error in
@@ -253,7 +247,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                 }))
                 self.present(alert, animated: true)
                 return
-            }
+                }
             ThirdState.shared.varLat = (lat)!
             ThirdState.shared.varLong = (lon)!
             AppState.shared.long = lon!
@@ -261,9 +255,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
             
             if !self.checkDidAdd(lat: ThirdState.shared.varLat, long: ThirdState.shared.varLong) {
                 print("DONE")
-                //print(check)
             }
-        }
+        } //end of geocoder
         
-    }
-}
+    }//end of uploadProperty
+} //end of class
