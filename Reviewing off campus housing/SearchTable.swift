@@ -209,6 +209,10 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         cell.detailTextLabel?.textColor = UIColor.white
         cell.detailTextLabel!.font = UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.ultraLight)
         
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 8.0/255.0, green: 89.0/255.0, blue: 114.0/255.0, alpha: 1.0)
+        cell.selectedBackgroundView = bgColorView
+        
         if isFiltering() && !searchBarIsEmpty() {
             cell.textLabel?.text = properties.shared.filterProp[indexPath.row].name
             cell.detailTextLabel?.text = "Number of Reviews: " + String(properties.shared.filterProp[indexPath.row].numReviews) + "  |  Rating: " + String(properties.shared.filterProp[indexPath.row].rating) + "  |  Price: " + properties.shared.filterProp[indexPath.row].price
