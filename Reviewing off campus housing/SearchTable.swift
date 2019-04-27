@@ -6,8 +6,21 @@
 //  Copyright © 2019 housing. All rights reserved.
 //
 
+
+// bugs:
+// - crashes "fatal index out of range". cannot recreate the bug.
+// - cells in table view sometimes all disappear/clear after pressing scope buttons, deleting search text and clicking on listings.
+//   cannot recreate the bug.
+
+
 import UIKit
 import Firebase
+
+//struct Listing {
+//    let numReviews : Int
+//    let rating : Float
+//    let price : Int
+//}
 
 public class properties {
     var prop:[String] = []
@@ -17,7 +30,7 @@ public class properties {
     public static let shared = properties()
 }
 
-class SearchTable: UITableViewController, UISearchResultsUpdating {
+class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate {
     let searchController = UISearchController(searchResultsController: nil)
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -25,7 +38,6 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         filterContentForSearchText(searchController.searchBar.text!, scope: scope)
     }
-    
 
     @IBOutlet var propTable: UITableView!
     
@@ -38,20 +50,17 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search listings"
+        searchController.delegate = self
         
-        //navigationItem.searchController = searchController
         definesPresentationContext = true
         
         searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
         
         // set up scope bar
-        searchController.searchBar.scopeButtonTitles = ["test 1", "test 2", "test 3", "test 4"]
+        searchController.searchBar.scopeButtonTitles = ["Alphabetical", "Overall Rating", "Price", "# of Reviews"]
         searchController.searchBar.delegate = self as? UISearchBarDelegate
-        
-        // setup the search footer
-        // tableView.tableFooterView = searchFooter
-        
+    
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -65,11 +74,9 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        // properties.shared.prop.filter()
-        print("hello")
         properties.shared.isFiltering = false
         properties.shared.filterProp = properties.shared.prop.filter({ (prop : String) -> Bool in
-            return prop.lowercased().contains(searchText.lowercased()) 
+            return prop.lowercased().contains(searchText.lowercased())
         })
         
         propTable.reloadData()
@@ -84,9 +91,6 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
                 properties.shared.prop = []
                 
                 for document in querySnapshot!.documents {
-                    //print("\(document.documentID) => \(document.data())")
-                    //print("\(document.documentID)")
-                    
                     properties.shared.prop.append(document.documentID)
                 } // end for
                 
@@ -113,9 +117,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        //print(properties.shared.prop.count)
         if isFiltering() {
-            print("test2")
             properties.shared.isFiltering = true
             return properties.shared.filterProp.count
         }
@@ -128,8 +130,9 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
+        
+        
         if isFiltering() {
-            print("test")
             properties.shared.isFiltering = true
             cell.textLabel?.text = properties.shared.filterProp[indexPath.row]
             cell.detailTextLabel?.text = "detailed text here"
@@ -142,11 +145,28 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
         return cell
     }
     
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        // resizes table header when search bar's scope buttons are exposed. previously, they would cover
+        // the first table cell. now, the first table cell will be visible.
+        
+        var headerHeight:CGFloat = 0.0
+        
+        if searchController.isActive { headerHeight = 46.0 }
+        else                         { headerHeight = 0.0 }
+        
+        return headerHeight
+    }
+ 
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //searchController.isActive = false
+        // if want to get rid of search results when clicked, uncomment out above line
+        
         if !properties.shared.isFiltering{
-        properties.shared.row = indexPath.row
-        self.address = properties.shared.prop[properties.shared.row]
-        performSegue(withIdentifier: "searchToDisplay", sender: self)
+            properties.shared.row = indexPath.row
+            self.address = properties.shared.prop[properties.shared.row]
+            performSegue(withIdentifier: "searchToDisplay", sender: self)
         }
         else{
             properties.shared.row = indexPath.row
@@ -164,6 +184,8 @@ class SearchTable: UITableViewController, UISearchResultsUpdating {
             vc?.info = address
         }
     }
+    
+    
     
 
     /*
