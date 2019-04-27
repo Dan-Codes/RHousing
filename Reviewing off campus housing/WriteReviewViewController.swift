@@ -105,7 +105,6 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                             self.locationRating = getLocationrating ?? 0
                         }))
                         self.present(alert, animated: true)
-                        break
                     }
                 } // end for lop
                 
