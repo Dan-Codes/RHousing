@@ -68,6 +68,8 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         self.searchController.searchBar.barTintColor = UIColor.black
         self.searchController.searchBar.tintColor = UIColor(red: 68.0/255.0, green: 154.0/255.0, blue: 178.0/255.0, alpha: 1.0) //(red: 8.0/255.0, green: 89.0/255.0, blue: 114.0/255.0, alpha: 1.0) //
         
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
         searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
         
