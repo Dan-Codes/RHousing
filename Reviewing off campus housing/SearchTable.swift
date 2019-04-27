@@ -154,7 +154,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
                     if list.price == "" { list.price = "None" } // for debugging purposes
                     
                     if reviewCount == 0.0 { list.rating = "0.0" }
-                    else                { list.rating = String(format: "%.1f", overallRating) as String }
+                    else                  { list.rating = String(format: "%.1f", overallRating) as String }
                     
                     properties.shared.prop.append(list)
                 } // end for
@@ -194,6 +194,12 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel!.font = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.semibold)
+        
+        cell.detailTextLabel?.textColor = UIColor.white
+        cell.detailTextLabel!.font = UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.ultraLight)
         
         if isFiltering() {
             properties.shared.isFiltering = true
