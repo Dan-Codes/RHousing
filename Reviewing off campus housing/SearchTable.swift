@@ -53,10 +53,10 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         
         definesPresentationContext = true
         
-        self.searchController.searchBar.isTranslucent = false
-        self.searchController.searchBar.searchBarStyle = UISearchBar.Style.prominent
-        self.searchController.searchBar.barTintColor = UIColor.black
-        self.searchController.searchBar.tintColor = UIColor(red: 68.0/255.0, green: 154.0/255.0, blue: 178.0/255.0, alpha: 1.0) //(red: 8.0/255.0, green: 89.0/255.0, blue: 114.0/255.0, alpha: 1.0) //
+        searchController.searchBar.isTranslucent = false
+        searchController.searchBar.searchBarStyle = UISearchBar.Style.prominent
+        searchController.searchBar.barTintColor = UIColor.black
+        searchController.searchBar.tintColor = UIColor(red: 8.0/255.0, green: 89.0/255.0, blue: 114.0/255.0, alpha: 1.0)
         
         //UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
@@ -195,10 +195,15 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.textColor = UIColor(red: 68.0/255.0, green: 154.0/255.0, blue: 178.0/255.0, alpha: 1.0)
         cell.textLabel!.font = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.semibold)
+        
         cell.detailTextLabel?.textColor = UIColor.white
         cell.detailTextLabel!.font = UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.ultraLight)
+        
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 8.0/255.0, green: 89.0/255.0, blue: 114.0/255.0, alpha: 1.0)
+        cell.selectedBackgroundView = bgColorView
         
         if isFiltering() && !searchBarIsEmpty() {
             cell.textLabel?.text = properties.shared.filterProp[indexPath.row].name
