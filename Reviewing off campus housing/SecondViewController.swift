@@ -294,7 +294,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         performSegue(withIdentifier: "goToAdmin", sender: self)
         }
         else{
-            let alert = UIAlertController(title: "You are not an admin", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Sorry!", message: "You are not authorized to enter admin view.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
                 return
             }))
