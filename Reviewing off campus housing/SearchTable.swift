@@ -54,11 +54,11 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         definesPresentationContext = true
         
         self.searchController.searchBar.isTranslucent = false
-        self.searchController.searchBar.searchBarStyle = UISearchBar.Style.minimal
+        self.searchController.searchBar.searchBarStyle = UISearchBar.Style.prominent
         self.searchController.searchBar.barTintColor = UIColor.black
         self.searchController.searchBar.tintColor = UIColor(red: 68.0/255.0, green: 154.0/255.0, blue: 178.0/255.0, alpha: 1.0) //(red: 8.0/255.0, green: 89.0/255.0, blue: 114.0/255.0, alpha: 1.0) //
         
-        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        //UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
@@ -226,13 +226,17 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         // the first table cell. now, the first table cell will be visible.
         
         var headerHeight:CGFloat = 0.0
-        
-        if searchController.isActive { headerHeight = 42.0 }
+
+        if searchController.isActive { headerHeight = 46.0 }
         else                         { headerHeight = 0.0 }
         
         return headerHeight
     }
  
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.backgroundView?.backgroundColor = .black
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //searchController.isActive = false
