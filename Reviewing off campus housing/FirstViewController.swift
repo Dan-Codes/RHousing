@@ -123,6 +123,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
        
     }
     
+    //literates through the database to place pinpoints on the google maps on the listings properties
     func printPin(){
         camera = GMSCameraPosition.camera(withLatitude: AppState.shared.lat, longitude: AppState.shared.long, zoom: 15)
         mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
@@ -172,12 +173,12 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                             AppState.shared.open = false
                         }
                     }
-                }
+                } //end of for loop
                 
-            }
-        }
+            } //end of else
+        } //end of db
         
-    }
+    } //end of printPin()
     
     var mk:String? = nil
     
@@ -201,19 +202,10 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
-    @IBAction func logOut(_ sender: Any) {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-            performSegue(withIdentifier: "logout2", sender: (Any).self)
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-    }
     
     
     
-}
+} //end of FirstViewController class
 
 // for custom pin/marker icon
 extension GMSMarker {
@@ -225,33 +217,6 @@ extension GMSMarker {
         icon = newImage
     }
 }
-
-// Handle the user's selection.
-extension FirstViewController: GMSAutocompleteResultsViewControllerDelegate {
-    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
-                           didAutocompleteWith place: GMSPlace) {
-        //searchController?.isActive = false
-        // Do something with the selected place.
-        print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
-    }
-    
-    func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
-                           didFailAutocompleteWithError error: Error){
-        // TODO: handle the error.
-        print("Error: ", error.localizedDescription)
-    }
-    
-    // Turn the network activity indicator on and off again.
-    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    }
-    
-    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
-} //end of FirstViewController class
 
 
 //Extension to quickly change the color of things in the storyboard
