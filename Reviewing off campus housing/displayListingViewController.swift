@@ -165,8 +165,6 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                                     + String(format: "Overall Rating: %.1f\n", rating)
                                     + "\n"
                     
-                    
-                    
                     let docRef = db.collection("Users").document(reviewer)
                     docRef.getDocument { (document, error) in
                         if let document = document, document.exists {
@@ -184,9 +182,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                             
                             arr.shared.reviewArr.append(reviewString)
                             self.reviewTable.reloadData()
-                        } else {
-                            print("Document does not exist")
-                        }
+                            
+                        } else { print("Document does not exist") }
                     }
                     
                 } // end for loop

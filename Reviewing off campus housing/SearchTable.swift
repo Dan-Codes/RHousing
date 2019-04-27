@@ -47,7 +47,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search listings"
+        searchController.searchBar.placeholder = "Search for a property.."
         searchController.delegate = self
         searchController.searchBar.sizeToFit()
         
@@ -207,13 +207,13 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         
         if isFiltering() && !searchBarIsEmpty() {
             cell.textLabel?.text = properties.shared.filterProp[indexPath.row].name
-            cell.detailTextLabel?.text = "Number of Reviews: " + String(properties.shared.filterProp[indexPath.row].numReviews) + "  |  Rating: " + String(properties.shared.filterProp[indexPath.row].rating) + "  |  Price: " + properties.shared.filterProp[indexPath.row].price
+            cell.detailTextLabel?.text = "Reviews: " + String(properties.shared.filterProp[indexPath.row].numReviews) + "  |  Rating: " + String(properties.shared.filterProp[indexPath.row].rating) + "  |  Price: $" + properties.shared.filterProp[indexPath.row].price
             return cell
         }
         
         // else...
         cell.textLabel?.text = properties.shared.prop[indexPath.row].name
-        cell.detailTextLabel?.text = "Number of Reviews: " + String(properties.shared.prop[indexPath.row].numReviews) + "  |  Rating: " + String(properties.shared.prop[indexPath.row].rating) + "  |  Price: " + properties.shared.prop[indexPath.row].price
+        cell.detailTextLabel?.text = "Reviews: " + String(properties.shared.prop[indexPath.row].numReviews) + "  |  Rating: " + String(properties.shared.prop[indexPath.row].rating) + "  |  Price: $" + properties.shared.prop[indexPath.row].price
         return cell
     }
     

@@ -200,15 +200,19 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
         /* https://stackoverflow.com/questions/28532926/if-no-table-view-results-display-no-results-on-screen */
         // (maybe implement: if there are some reviews, but not enough to fit whole section, then table size should only be as big as necessary.)
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewContent")
-        cell?.textLabel!.numberOfLines = 0
-        cell?.textLabel!.lineBreakMode = .byWordWrapping
-        cell?.textLabel?.textColor = UIColor.black
-        cell?.textLabel!.font = UIFont.systemFont(ofSize: 12.0)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewContent", for: indexPath)
+        cell.textLabel!.numberOfLines = 0
+        cell.textLabel!.lineBreakMode = .byWordWrapping
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel!.font = UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.ultraLight)
         let text = ReviewState.shared.arr[indexPath.row]
-        cell?.textLabel?.text = text
+        cell.textLabel?.text = text
         
-        return cell!
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 129.0/255.0, green: 10.0/255.0, blue: 28.0/255.0, alpha: 1.0)
+        cell.selectedBackgroundView = bgColorView
+        
+        return cell
     }
 
     @IBAction func submit(_ sender: UIButton) {
@@ -221,7 +225,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                 print("Error updating document: \(err)")
             } else {
                 print("Document successfully updated")
-                let alert = UIAlertController(title: "Success", message: "Successfully update!", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Success", message: "You have successfully updated the database data for this property.", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { action -> Void in
                     //self.performSegue(withIdentifier: "unwindToListingAdmin", sender: self)

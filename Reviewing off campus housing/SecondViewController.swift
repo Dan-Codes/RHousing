@@ -60,6 +60,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     var info:String = ""
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
                 let user = Auth.auth().currentUser
@@ -142,24 +143,24 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     // append each field to string 'thisReview,' to be passed in as a string
                     // and printed out to each table view cell
                     
-                    thisReview += "On:" + shortAddress + ":\n\n"
+                    thisReview += "On" + shortAddress + ":\n\n"
                     
                     thisReview += "\"" + comments + "\"\n\n"
                     
                     thisReview += "Would live again? " + ( willLiveAgain ? ("Yes\n\n") : ("No\n\n") )
                     
-                    thisReview += ( locationRating == nil ? ("") : (String(format: "Location — %.1f\n", locationRating!)) )
-                                  + ( amenitiesRating == nil ? ("") : (String(format: "Amenities — %.1f\n", amenitiesRating!)) )
-                                  + ( managementRating == nil ? ("") : (String(format: "Management — %.1f\n", managementRating!)) )
-                                  + String(format: "Overall Rating — %.1f\n", rating ?? "")
+                    thisReview += ( locationRating == nil ? ("") : (String(format: "Location: %.1f\n", locationRating!)) )
+                                  + ( amenitiesRating == nil ? ("") : (String(format: "Amenities: %.1f\n", amenitiesRating!)) )
+                                  + ( managementRating == nil ? ("") : (String(format: "Management: %.1f\n", managementRating!)) )
+                                  + String(format: "Overall Rating: %.1f\n", rating ?? "")
                                   + "\n"
                     
                     thisReview += "You " + ( isEdited ? ("last edited ") : ("posted ") ) + "this review, "
                     thisReview += ( isAnonymous ? ("anonymously, ") : ("including your name, ") )
                     thisReview += "on " + ( self.formatter.string(from: timestamp.dateValue()) ) + ".\n"
                     
-                    thisReview += "________________________________________________"
-                    
+                    thisReview += "___________________________________________________"
+                
                     // append this entire review as a string element to reviewHistories[]
                     
                     ReviewHistory.shared.reviewHistories.append(thisReview)
