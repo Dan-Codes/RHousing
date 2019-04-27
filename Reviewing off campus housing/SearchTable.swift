@@ -7,12 +7,12 @@
 //
 
 
-
-
 import UIKit
 import Firebase
 
-struct Listing : Comparable { // custom struct to create a Listing object
+struct Listing : Comparable {
+    // custom struct to create a Listing object
+    
     static func < (lhs: Listing, rhs: Listing) -> Bool {
         return lhs.name < rhs.name
     }
@@ -26,16 +26,16 @@ struct Listing : Comparable { // custom struct to create a Listing object
 }
 
 public class properties {
+    // global arrays
+    
     var prop = [Listing]()
     var filterProp = [Listing]()
-    
-    var row:Int = 0
     public static let shared = properties()
 }
 
 class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
+    
     let searchController = UISearchController(searchResultsController: nil)
-
     @IBOutlet var propTable: UITableView!
     
     override func viewDidLoad() {
@@ -65,13 +65,8 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         
         // set up scope bar
         searchController.searchBar.scopeButtonTitles = ["Default", "Overall Rating", "Rent Price", "No. of Reviews"]
-        searchController.searchBar.delegate = self as? UISearchBarDelegate
+        searchController.searchBar.delegate = self
     
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -81,7 +76,6 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         
         filterContentForSearchText(searchController.searchBar.text!, scope: scope)
-        
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -101,7 +95,6 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         
         updateSearchResults(for: searchController)
     }
-    
     
     
     func filterContentForSearchText(_ searchText: String, scope: String) {
@@ -124,7 +117,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
             } else {
                 properties.shared.prop = []
 
-                for document in querySnapshot!.documents {
+                for document in querySnapshot!.documents { // go through database, add Listing objects to array.
                     var list = Listing()
                     
                     let review = document.get("reviews") as! NSDictionary
@@ -158,9 +151,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
                 self.propTable.reloadData()
 
             } // end else
-
         } // end getDocuments
-        
     } // end showProperties
     
     func parsePrice(price : String) -> String {
@@ -182,10 +173,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
 
     func isFiltering() -> Bool {
         // this function checks if search bar is filtering
-        
-        //let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
-        
-        return searchController.isActive && (!searchBarIsEmpty()) // || searchBarScopeIsFiltering
+        return searchController.isActive && (!searchBarIsEmpty())
     }
     
     // MARK: - Table view data source
@@ -195,12 +183,16 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // makes proper number of rows in table view based on count of array
+        
         if isFiltering() && !searchBarIsEmpty() { return properties.shared.filterProp.count }
         return properties.shared.prop.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // puts stuff into table cells (depending on if isFiltering or not)
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         cell.textLabel?.textColor = UIColor(red: 68.0/255.0, green: 154.0/255.0, blue: 178.0/255.0, alpha: 1.0)
@@ -239,21 +231,23 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
     }
  
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        // makes header of table view black
+        
         let header = view as! UITableViewHeaderFooterView
         header.backgroundView?.backgroundColor = .black
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // function to segue to displayListingView
+        
         //searchController.isActive = false
         // if want to get rid of search results when clicked, uncomment out above line
         
-        if !isFiltering() {     //if !properties.shared.isFiltering
-            //properties.shared.row = indexPath.row
+        if !isFiltering() {
             self.address = properties.shared.prop[indexPath.row].name
             performSegue(withIdentifier: "searchToDisplay", sender: self)
         }
-        else{
-            //properties.shared.row = indexPath.row
+        else {
             self.address = properties.shared.filterProp[indexPath.row].name
             performSegue(withIdentifier: "searchToDisplay", sender: self)
         }
@@ -268,51 +262,5 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
             vc?.info = address
         }
     }
-    
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

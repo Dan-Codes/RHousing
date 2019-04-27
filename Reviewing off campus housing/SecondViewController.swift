@@ -49,8 +49,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell!
     }
     
-    // implement swipe to delete reviews??? -kevin
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ReviewHistory.shared.tableRow = indexPath.row
         print(ReviewHistory.shared.tableRow)
@@ -59,6 +57,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+    
     
     var info:String = ""
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -74,28 +73,21 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                 } // end if
             ReviewHistory.shared.tableRow = indexPath.row
-            print(ReviewHistory.shared.tableRow)
-            print(ReviewHistory.shared.address[ReviewHistory.shared.tableRow])
-                print("X")
                 let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("User did not delete review")}))
             
-                print("Y")
                 alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in
-                    print("hello")
                     let docPropertyRef = db.collection("listings").document(ReviewHistory.shared.address[ReviewHistory.shared.tableRow])
                     let propertyfp = FieldPath(["reviews", self.Em])
                     let docUserRef = db.collection("Users").document(self.Em)
                     let userfp = FieldPath(["Review History", ReviewHistory.shared.address[ReviewHistory.shared.tableRow]])
                     
-                    print("hey")
                     docPropertyRef.updateData([propertyfp : FieldValue.delete()])
                     docUserRef.updateData([userfp : FieldValue.delete()])
                     print("Review deleted Users")
                     self.reviewHistory.reloadData()
                 }))
                 self.present(alert, animated: true)
-                print("Z")
                 return;
             }
     }
