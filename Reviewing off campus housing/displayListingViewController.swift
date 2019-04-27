@@ -170,7 +170,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                     docRef.getDocument { (document, error) in
                         if let document = document, document.exists {
                             let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                            print("Document data: \(dataDescription)")
+                            // print("Document data: \(dataDescription)")
                             let firstName = document.get("First Name") as? String ?? reviewer
                             let lastName = document.get("Last Name") as? String ?? " "
                             let lName = String(lastName.first!)

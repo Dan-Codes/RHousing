@@ -7,10 +7,6 @@
 //
 
 
-// bugs:
-// - crashes "fatal index out of range". cannot recreate the bug.
-// - cells in table view sometimes all disappear/clear after pressing scope buttons, deleting search text and clicking on listings.
-//   cannot recreate the bug.
 
 
 import UIKit
@@ -24,7 +20,9 @@ struct Listing : Comparable { // custom struct to create a Listing object
     var name : String = ""
     var numReviews : Int = 0
     var rating : String = ""
+    
     var price : String = ""
+    var parsedPrice : String = ""
 }
 
 public class properties {
@@ -32,25 +30,17 @@ public class properties {
     var filterProp = [Listing]()
     
     var row:Int = 0
-    var isFiltering:Bool = false
     public static let shared = properties()
 }
 
 class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
     let searchController = UISearchController(searchResultsController: nil)
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-
-        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
-    
-    }
 
     @IBOutlet var propTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         showProperties()
         
         // Setup the search controller
@@ -59,17 +49,15 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search listings"
         searchController.delegate = self
+        searchController.searchBar.sizeToFit()
         
         definesPresentationContext = true
-        
-        searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
         
         // set up scope bar
         searchController.searchBar.scopeButtonTitles = ["Original", "Overall Rating", "Rent Price", "# of Reviews"]
-        searchController.searchBar.delegate = self as? UISearchBarDelegate
+        searchController.searchBar.delegate = self
     
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -77,42 +65,38 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
+    func updateSearchResults(for searchController: UISearchController) {
+        // this function gets called when something gets typed into search bar
+        
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+        
+    }
+    
     func searchBarIsEmpty() -> Bool {
+        // this function checks if search bar is empty
+        
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    /*
+    
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        // this function updates search bar when scope button changes on tap
+        
+        if selectedScope == 0       { properties.shared.prop.sort() } // regular built in sort
+        else if selectedScope == 1  { properties.shared.prop.sort { Float($0.rating)! > Float($1.rating)! } } // sorts based on rating
+        else if selectedScope == 2  { properties.shared.prop.sort { Int($0.parsedPrice)! > Int($1.parsedPrice)! } } // sorts based on parsedPrice
+        else                        { properties.shared.prop.sort { ($0.numReviews) > ($1.numReviews) } } // sorts based on numReviews
+        
         updateSearchResults(for: searchController)
     }
-    */
+    
     
     
     func filterContentForSearchText(_ searchText: String, scope: String) {
-        properties.shared.isFiltering = false
-        print(scope)
-        
-        // bug: in order to update results in real time, the above function needs to be commented out.
-        // however, if that function is commented out, then for whatever reason, the table view goes blank when pressing a scope button.
-        // Even with that function commented out, the table still goes blank, but requires typing a letter
-        // or pressing Cancel to activate the reload of the table view.
-        // is this even the right function to be doing the sorting in? should i update a view somewhere?
-        
-        // not totally working? idk
-        if scope == "Original" {
-            properties.shared.prop.sort() // regular built in sort
-        }
-        else if scope == "Overall Rating" {
-            properties.shared.prop.sort { Float($0.rating)! > Float($1.rating)! } // sorts based on rating
-        }
-        else if scope == "Rent Price" {
-            //properties.shared.prop.sort { Int($0.price)! < Int($1.price)! }
-            // won't work because price ranges fuck this up. this only works if it's all single numbers.
-        }
-        else {
-            properties.shared.prop.sort { ($0.numReviews) > ($1.numReviews) } // sorts based on numReviews
-        }
-        
+        // this function filters results according to what is typed in search bar. utilizes filterProp.
         
         properties.shared.filterProp = properties.shared.prop.filter({ (prop : Listing) -> Bool in
             return prop.name.lowercased().contains(searchText.lowercased())
@@ -123,6 +107,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
 
     
     func showProperties(){
+        // this function appends stuff from database to array, and shows it in the table.
         
         db.collection("listings").getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -151,7 +136,9 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
                     list.numReviews = review.count
                     
                     list.price = document.get("rent") as? String ?? "0"
-                    if list.price == "" { list.price = "None" } // for debugging purposes
+                    if list.price == "" { list.price = "0" } // for debugging purposes
+                    
+                    list.parsedPrice = self.parsePrice(price: list.price)
                     
                     if reviewCount == 0.0 { list.rating = "0.0" }
                     else                  { list.rating = String(format: "%.1f", overallRating) as String }
@@ -166,29 +153,41 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         } // end getDocuments
         
     } // end showProperties
+    
+    func parsePrice(price : String) -> String {
+        // this function gets a parsed version of the price. if the price was hyphenated, parsedPrice gets the first price before the hyphen.
+        // else, parsedPrice would be equal to price.
+        
+        var parsedPrice = "" as String
+        
+        for char in price {
+            if char != "-" && char != " " {
+                parsedPrice += String(char)
+            }
+            else { break }
+        }
+        
+        return parsedPrice
+        
+    }
 
     func isFiltering() -> Bool {
-        let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
-        return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
+        // this function checks if search bar is filtering
+        
+        //let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
+        
+        return searchController.isActive && (!searchBarIsEmpty()) // || searchBarScopeIsFiltering
     }
     
     // MARK: - Table view data source
-    
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        if isFiltering() {
-            properties.shared.isFiltering = true
-            return properties.shared.filterProp.count
-        }
-        
+        if isFiltering() && !searchBarIsEmpty() { return properties.shared.filterProp.count }
         return properties.shared.prop.count
-        
     }
 
     
@@ -197,12 +196,10 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         
         cell.textLabel?.textColor = UIColor.white
         cell.textLabel!.font = UIFont.systemFont(ofSize: 20.0, weight: UIFont.Weight.semibold)
-        
         cell.detailTextLabel?.textColor = UIColor.white
         cell.detailTextLabel!.font = UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.ultraLight)
         
-        if isFiltering() {
-            properties.shared.isFiltering = true
+        if isFiltering() && !searchBarIsEmpty() {
             cell.textLabel?.text = properties.shared.filterProp[indexPath.row].name
             cell.detailTextLabel?.text = "Number of Reviews: " + String(properties.shared.filterProp[indexPath.row].numReviews) + "  |  Rating: " + String(properties.shared.filterProp[indexPath.row].rating) + "  |  Price: " + properties.shared.filterProp[indexPath.row].price
             return cell
@@ -232,14 +229,14 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         //searchController.isActive = false
         // if want to get rid of search results when clicked, uncomment out above line
         
-        if !properties.shared.isFiltering{
-            properties.shared.row = indexPath.row
-            self.address = properties.shared.prop[properties.shared.row].name
+        if !isFiltering() {     //if !properties.shared.isFiltering
+            //properties.shared.row = indexPath.row
+            self.address = properties.shared.prop[indexPath.row].name
             performSegue(withIdentifier: "searchToDisplay", sender: self)
         }
         else{
-            properties.shared.row = indexPath.row
-            self.address = properties.shared.filterProp[properties.shared.row].name
+            //properties.shared.row = indexPath.row
+            self.address = properties.shared.filterProp[indexPath.row].name
             performSegue(withIdentifier: "searchToDisplay", sender: self)
         }
     }
@@ -255,8 +252,6 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
     }
     
     
-    
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
