@@ -251,8 +251,10 @@ extension FirstViewController: GMSAutocompleteResultsViewControllerDelegate {
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-}
+} //end of FirstViewController class
 
+
+//Extension to quickly change the color of things in the storyboard
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
