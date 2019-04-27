@@ -54,7 +54,6 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         definesPresentationContext = true
         
         self.searchController.searchBar.isTranslucent = false
-        //self.searchController.searchBar.backgroundColor = UIColor(red: 8.0/255.0, green: 89.0/255.0, blue: 114.0/255.0, alpha: 1.0)
         self.searchController.searchBar.searchBarStyle = UISearchBar.Style.minimal
         self.searchController.searchBar.barTintColor = UIColor.black
         self.searchController.searchBar.tintColor = UIColor(red: 68.0/255.0, green: 154.0/255.0, blue: 178.0/255.0, alpha: 1.0) //(red: 8.0/255.0, green: 89.0/255.0, blue: 114.0/255.0, alpha: 1.0) //
@@ -228,7 +227,7 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         
         var headerHeight:CGFloat = 0.0
         
-        if searchController.isActive { headerHeight = 46.0 }
+        if searchController.isActive { headerHeight = 42.0 }
         else                         { headerHeight = 0.0 }
         
         return headerHeight
