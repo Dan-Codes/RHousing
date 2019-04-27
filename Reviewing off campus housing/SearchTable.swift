@@ -16,27 +16,35 @@
 import UIKit
 import Firebase
 
-//struct Listing {
-//    let numReviews : Int
-//    let rating : Float
-//    let price : Int
-//}
+struct Listing : Comparable { // custom struct to create a Listing object
+    static func < (lhs: Listing, rhs: Listing) -> Bool {
+        return lhs.name < rhs.name
+    }
+    
+    var name : String = ""
+    var numReviews : Int = 0
+    var rating : String = ""
+    var price : String = ""
+}
 
 public class properties {
-    var prop:[String] = []
-    var filterProp:[String] = []
+    var prop = [Listing]()
+    var filterProp = [Listing]()
+    
     var row:Int = 0
     var isFiltering:Bool = false
     public static let shared = properties()
 }
 
-class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate {
+class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
     let searchController = UISearchController(searchResultsController: nil)
     
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+
         filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+    
     }
 
     @IBOutlet var propTable: UITableView!
@@ -58,10 +66,10 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         self.tableView.tableHeaderView = searchController.searchBar
         
         // set up scope bar
-        searchController.searchBar.scopeButtonTitles = ["Alphabetical", "Overall Rating", "Price", "# of Reviews"]
+        searchController.searchBar.scopeButtonTitles = ["Original", "Overall Rating", "Rent Price", "# of Reviews"]
         searchController.searchBar.delegate = self as? UISearchBarDelegate
     
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -73,14 +81,46 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+    /*
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        updateSearchResults(for: searchController)
+    }
+    */
+    
+    
+    func filterContentForSearchText(_ searchText: String, scope: String) {
         properties.shared.isFiltering = false
-        properties.shared.filterProp = properties.shared.prop.filter({ (prop : String) -> Bool in
-            return prop.lowercased().contains(searchText.lowercased())
+        print(scope)
+        
+        // bug: in order to update results in real time, the above function needs to be commented out.
+        // however, if that function is commented out, then for whatever reason, the table view goes blank when pressing a scope button.
+        // Even with that function commented out, the table still goes blank, but requires typing a letter
+        // or pressing Cancel to activate the reload of the table view.
+        // is this even the right function to be doing the sorting in? should i update a view somewhere?
+        
+        // not totally working? idk
+        if scope == "Original" {
+            properties.shared.prop.sort() // regular built in sort
+        }
+        else if scope == "Overall Rating" {
+            properties.shared.prop.sort { Float($0.rating)! > Float($1.rating)! } // sorts based on rating
+        }
+        else if scope == "Rent Price" {
+            //properties.shared.prop.sort { Int($0.price)! < Int($1.price)! }
+            // won't work because price ranges fuck this up. this only works if it's all single numbers.
+        }
+        else {
+            properties.shared.prop.sort { ($0.numReviews) > ($1.numReviews) } // sorts based on numReviews
+        }
+        
+        
+        properties.shared.filterProp = properties.shared.prop.filter({ (prop : Listing) -> Bool in
+            return prop.name.lowercased().contains(searchText.lowercased())
         })
         
         propTable.reloadData()
     }
+
     
     func showProperties(){
         
@@ -89,15 +129,40 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
                 print("Error getting documents: \(err)")
             } else {
                 properties.shared.prop = []
-                
+
                 for document in querySnapshot!.documents {
-                    properties.shared.prop.append(document.documentID)
+                    var list = Listing()
+                    
+                    let review = document.get("reviews") as! NSDictionary
+                    
+                    var totalRating = 0.0 as Float
+                    var reviewCount = 0.0 as Float
+                    for (_, reviewMap) in review {
+                        let reviewMap = reviewMap as! NSDictionary
+                    
+                        let rating = reviewMap.value(forKey: "rating") as? Float ?? 0.0
+                        totalRating += rating
+                        reviewCount += 1
+                    }
+                    
+                    let overallRating = totalRating / reviewCount
+                    
+                    list.name = document.get("address") as? String ?? "No name"
+                    list.numReviews = review.count
+                    
+                    list.price = document.get("rent") as? String ?? "0"
+                    if list.price == "" { list.price = "None" } // for debugging purposes
+                    
+                    if reviewCount == 0.0 { list.rating = "0.0" }
+                    else                { list.rating = String(format: "%.1f", overallRating) as String }
+                    
+                    properties.shared.prop.append(list)
                 } // end for
-                
+
                 self.propTable.reloadData()
-                
+
             } // end else
-            
+
         } // end getDocuments
         
     } // end showProperties
@@ -130,18 +195,16 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        
-        
         if isFiltering() {
             properties.shared.isFiltering = true
-            cell.textLabel?.text = properties.shared.filterProp[indexPath.row]
-            cell.detailTextLabel?.text = "detailed text here"
+            cell.textLabel?.text = properties.shared.filterProp[indexPath.row].name
+            cell.detailTextLabel?.text = "Number of Reviews: " + String(properties.shared.filterProp[indexPath.row].numReviews) + "  |  Rating: " + String(properties.shared.filterProp[indexPath.row].rating) + "  |  Price: " + properties.shared.filterProp[indexPath.row].price
             return cell
         }
         
         // else...
-        cell.textLabel?.text = properties.shared.prop[indexPath.row]
-        cell.detailTextLabel?.text = "detailed text here"
+        cell.textLabel?.text = properties.shared.prop[indexPath.row].name
+        cell.detailTextLabel?.text = "Number of Reviews: " + String(properties.shared.prop[indexPath.row].numReviews) + "  |  Rating: " + String(properties.shared.prop[indexPath.row].rating) + "  |  Price: " + properties.shared.prop[indexPath.row].price
         return cell
     }
     
@@ -165,12 +228,12 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         
         if !properties.shared.isFiltering{
             properties.shared.row = indexPath.row
-            self.address = properties.shared.prop[properties.shared.row]
+            self.address = properties.shared.prop[properties.shared.row].name
             performSegue(withIdentifier: "searchToDisplay", sender: self)
         }
         else{
             properties.shared.row = indexPath.row
-            self.address = properties.shared.filterProp[properties.shared.row]
+            self.address = properties.shared.filterProp[properties.shared.row].name
             performSegue(withIdentifier: "searchToDisplay", sender: self)
         }
     }
