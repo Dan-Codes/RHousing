@@ -15,6 +15,8 @@ var info:String = ""
 
 public class ReviewHistory {
     var reviewHistories:[String] = []
+    public var address:[String] = []
+    public var tableRow:Int = 0
     public static let shared = ReviewHistory()
 }
 
@@ -48,6 +50,56 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     // implement swipe to delete reviews??? -kevin
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ReviewHistory.shared.tableRow = indexPath.row
+        print(ReviewHistory.shared.tableRow)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    var info:String = ""
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+                let user = Auth.auth().currentUser
+                if let user = user {
+                    // The user's ID, unique to the Firebase project.
+                    // Do NOT use this value to authenticate with your backend server,
+                    // if you have one. Use getTokenWithCompletion:completion: instead.
+                    
+                    let email = user.email
+                    Em = email!
+                    
+                } // end if
+            ReviewHistory.shared.tableRow = indexPath.row
+            print(ReviewHistory.shared.tableRow)
+            print(ReviewHistory.shared.address[ReviewHistory.shared.tableRow])
+                print("X")
+                let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("User did not delete review")}))
+            
+                print("Y")
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in
+                    print("hello")
+                    let docPropertyRef = db.collection("listings").document(ReviewHistory.shared.address[ReviewHistory.shared.tableRow])
+                    let propertyfp = FieldPath(["reviews", self.Em])
+                    let docUserRef = db.collection("Users").document(self.Em)
+                    let userfp = FieldPath(["Review History", ReviewHistory.shared.address[ReviewHistory.shared.tableRow]])
+                    
+                    print("hey")
+                    docPropertyRef.updateData([propertyfp : FieldValue.delete()])
+                    docUserRef.updateData([userfp : FieldValue.delete()])
+                    print("Review deleted Users")
+                    self.reviewHistory.reloadData()
+                }))
+                self.present(alert, animated: true)
+                print("Z")
+                return;
+            }
+    }
+    
 
     var Em:String = ""
     
@@ -61,6 +113,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 let reviewHis = document.get("Review History") as? NSDictionary
                 ReviewHistory.shared.reviewHistories = []
+                ReviewHistory.shared.address = []
                 for (property, fields) in reviewHis ?? [:] {
                     
                     var thisReview = ""
@@ -77,6 +130,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let managementRating    = fields.value(forKey: "managementRating")  as? Double
                     let isEdited            = fields.value(forKey: "isEdited")          as? Bool ?? false
                     let timestamp           = fields.value(forKey: "timeStamp")     as? Timestamp ?? Timestamp(date: Date.init(timeInterval: -9999999999, since: Date()))
+                    
                     
                     // initialize date format
                     
@@ -117,6 +171,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     // append this entire review as a string element to reviewHistories[]
                     
                     ReviewHistory.shared.reviewHistories.append(thisReview)
+                    ReviewHistory.shared.address.append(address)
                     
                 }  // end reviewHis loop
                 
