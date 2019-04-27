@@ -25,6 +25,8 @@ extension UIViewController{
 }
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
+    
+    //function to transit variables from one controller to another
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         print("EMAIL")
@@ -47,6 +49,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // Do any additional setup after loading the view.
     }
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
