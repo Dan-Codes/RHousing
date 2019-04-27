@@ -62,11 +62,17 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         
         definesPresentationContext = true
         
+        self.searchController.searchBar.isTranslucent = false
+        //self.searchController.searchBar.backgroundColor = UIColor(red: 8.0/255.0, green: 89.0/255.0, blue: 114.0/255.0, alpha: 1.0)
+        self.searchController.searchBar.searchBarStyle = UISearchBar.Style.minimal
+        self.searchController.searchBar.barTintColor = UIColor.black
+        self.searchController.searchBar.tintColor = UIColor(red: 68.0/255.0, green: 154.0/255.0, blue: 178.0/255.0, alpha: 1.0) //(red: 8.0/255.0, green: 89.0/255.0, blue: 114.0/255.0, alpha: 1.0) //
+        
         searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
         
         // set up scope bar
-        searchController.searchBar.scopeButtonTitles = ["Original", "Overall Rating", "Rent Price", "# of Reviews"]
+        searchController.searchBar.scopeButtonTitles = ["Default", "Overall Rating", "Rent Price", "No. of Reviews"]
         searchController.searchBar.delegate = self as? UISearchBarDelegate
     
         
