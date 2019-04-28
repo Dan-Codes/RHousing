@@ -25,6 +25,7 @@ struct Listing : Comparable {
     var parsedPrice : String = ""
 }
 
+//global variables
 public class properties {
     // global arrays
     
@@ -263,4 +264,4 @@ class SearchTable: UITableViewController, UISearchResultsUpdating, UISearchContr
         }
     }
 
-}
+} //end of SearchTable class
