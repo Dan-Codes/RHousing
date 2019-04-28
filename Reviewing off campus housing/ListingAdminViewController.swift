@@ -108,15 +108,19 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
         // if there are no reviews, don't display a blank table. rather, display a message "there are currently no reviews for this listing at this time."
         /* https://stackoverflow.com/questions/28532926/if-no-table-view-results-display-no-results-on-screen */
         // (maybe implement: if there are some reviews, but not enough to fit whole section, then table size should only be as big as necessary.)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PropertyContent")
-        cell?.textLabel!.numberOfLines = 0
-        cell?.textLabel!.lineBreakMode = .byWordWrapping
-        cell?.textLabel?.textColor = UIColor.black
-        cell?.textLabel!.font = UIFont.systemFont(ofSize: 12.0)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PropertyContent", for: indexPath)
+        cell.textLabel!.numberOfLines = 0
+        cell.textLabel!.lineBreakMode = .byWordWrapping
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel!.font = UIFont.systemFont(ofSize: 12.0, weight: UIFont.Weight.ultraLight)
         let text = AdminState.shared.arr[indexPath.row]
-        cell?.textLabel?.text = text
+        cell.textLabel?.text = text
         
-        return cell!
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 129.0/255.0, green: 10.0/255.0, blue: 28.0/255.0, alpha: 1.0)
+        cell.selectedBackgroundView = bgColorView
+        
+        return cell
     }
 
 }

@@ -49,8 +49,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell!
     }
     
-    // implement swipe to delete reviews??? -kevin
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ReviewHistory.shared.tableRow = indexPath.row
         print(ReviewHistory.shared.tableRow)
@@ -60,7 +58,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return true
     }
     
+    
     var info:String = ""
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
                 let user = Auth.auth().currentUser
@@ -74,28 +74,21 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     
                 } // end if
             ReviewHistory.shared.tableRow = indexPath.row
-            print(ReviewHistory.shared.tableRow)
-            print(ReviewHistory.shared.address[ReviewHistory.shared.tableRow])
-                print("X")
                 let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("User did not delete review")}))
             
-                print("Y")
                 alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in
-                    print("hello")
                     let docPropertyRef = db.collection("listings").document(ReviewHistory.shared.address[ReviewHistory.shared.tableRow])
                     let propertyfp = FieldPath(["reviews", self.Em])
                     let docUserRef = db.collection("Users").document(self.Em)
                     let userfp = FieldPath(["Review History", ReviewHistory.shared.address[ReviewHistory.shared.tableRow]])
                     
-                    print("hey")
                     docPropertyRef.updateData([propertyfp : FieldValue.delete()])
                     docUserRef.updateData([userfp : FieldValue.delete()])
                     print("Review deleted Users")
                     self.reviewHistory.reloadData()
                 }))
                 self.present(alert, animated: true)
-                print("Z")
                 return;
             }
     }
@@ -150,24 +143,24 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     // append each field to string 'thisReview,' to be passed in as a string
                     // and printed out to each table view cell
                     
-                    thisReview += "On " + shortAddress + ":\n\n"
+                    thisReview += "On" + shortAddress + ":\n\n"
                     
                     thisReview += "\"" + comments + "\"\n\n"
                     
                     thisReview += "Would live again? " + ( willLiveAgain ? ("Yes\n\n") : ("No\n\n") )
                     
-                    thisReview += ( locationRating == nil ? ("") : (String(format: "Location — %.1f\n", locationRating!)) )
-                                  + ( amenitiesRating == nil ? ("") : (String(format: "Amenities — %.1f\n", amenitiesRating!)) )
-                                  + ( managementRating == nil ? ("") : (String(format: "Management — %.1f\n", managementRating!)) )
-                                  + String(format: "Overall Rating — %.1f\n", rating ?? "")
+                    thisReview += ( locationRating == nil ? ("") : (String(format: "Location: %.1f\n", locationRating!)) )
+                                  + ( amenitiesRating == nil ? ("") : (String(format: "Amenities: %.1f\n", amenitiesRating!)) )
+                                  + ( managementRating == nil ? ("") : (String(format: "Management: %.1f\n", managementRating!)) )
+                                  + String(format: "Overall Rating: %.1f\n", rating ?? "")
                                   + "\n"
                     
                     thisReview += "You " + ( isEdited ? ("last edited ") : ("posted ") ) + "this review, "
                     thisReview += ( isAnonymous ? ("anonymously, ") : ("including your name, ") )
                     thisReview += "on " + ( self.formatter.string(from: timestamp.dateValue()) ) + ".\n"
                     
-                    thisReview += "________________________________________________"
-                    
+                    thisReview += "___________________________________________________"
+                
                     // append this entire review as a string element to reviewHistories[]
                     
                     ReviewHistory.shared.reviewHistories.append(thisReview)
@@ -302,7 +295,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         performSegue(withIdentifier: "goToAdmin", sender: self)
         }
         else{
-            let alert = UIAlertController(title: "You are not an admin", message: "", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Sorry!", message: "You are not authorized to enter admin view.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
                 return
             }))

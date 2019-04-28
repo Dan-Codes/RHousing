@@ -25,6 +25,8 @@ extension UIViewController{
 }
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
+    
+    //function to transit variables from one controller to another
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         print("EMAIL")
@@ -47,6 +49,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // Do any additional setup after loading the view.
     }
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
@@ -60,7 +64,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passText: UITextField!
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
-
+    
+    
+    //User taps signinButton
     @IBAction func signInButton(_ sender: UIButton) {
         // check if signed in or register
         if isSignIn {
@@ -81,9 +87,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     //error
                 }
                 
-            }
+            } // end of auth
             
-        }
+        } //end of isSignIn
             
         else {
             
@@ -121,7 +127,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }  // end Auth.auth().createUser()
             
         }  // end else
-    }
+    } //end of SignInButton function
     
     @IBAction func signInChange(_ sender: UISegmentedControl) {
         isSignIn = !isSignIn
@@ -133,12 +139,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             firstName.isHidden = false
             lastName.isHidden = false
         }
-    }
+    } // end of signInChange function
     
     func getEmail() -> String{
         return emailID
     }
-}
+} // end of LoginViewController class
 
 extension LoginViewController: FUIAuthDelegate{
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {

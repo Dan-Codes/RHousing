@@ -135,14 +135,15 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                     
                     self.formatter.dateFormat = "MM/dd/yyyy"
                     
-                    reviewString += "\n\"" + comments + "\"\n\n"
+                    if (comments == "This user has decided not to write a review") { reviewString += "\n"   + comments + ".\n\n"  }
+                    else                                                           { reviewString += "\n\"" + comments + "\"\n\n" }
                     
                     reviewString += "Would live again? " + ( willLiveAgain ? ("Yes\n\n") : ("No\n\n") )
                     
-                    reviewString += ( lRating == nil ? ("") : (String(format: "Location — %.1f\n", lRating!)) )
-                        + ( aRating == nil ? ("") : (String(format: "Amenities — %.1f\n", aRating!)) )
-                        + ( mRating == nil ? ("") : (String(format: "Management — %.1f\n", mRating!)) )
-                        + String(format: "Overall Rating — %.1f\n", rating)
+                    reviewString += ( lRating == nil ? ("") : (String(format: "Location: %.1f\n", lRating!)) )
+                        + ( aRating == nil ? ("") : (String(format: "Amenities: %.1f\n", aRating!)) )
+                        + ( mRating == nil ? ("") : (String(format: "Management: %.1f\n", mRating!)) )
+                        + String(format: "Overall Rating: %.1f\n", rating)
                         + "\n"
                     
                     ReviewState.shared.reviewer.append(reviewer)
@@ -154,10 +155,10 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                             
                             let firstName = document.get("First Name") as? String ?? reviewer
                             let lastName = document.get("Last Name") as? String ?? " "
-                            let lName = String(lastName.first!)
+                            let lName = String(lastName.first!) + "."
                             
                             reviewString += ( isEdited ? ("Last edited ") : ("Posted ") ) + "by "
-                            reviewString += ( isAnonymous ? ("anonymous") : (firstName + " " + lName + ".") )
+                            reviewString += ( isAnonymous ? ("Anonymous") : (firstName + " " + lName) )
                             reviewString += " on " + ( self.formatter.string(from: timestamp.dateValue()) ) + "\n"
                             
                             // append to the array of strings
@@ -199,15 +200,19 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
         /* https://stackoverflow.com/questions/28532926/if-no-table-view-results-display-no-results-on-screen */
         // (maybe implement: if there are some reviews, but not enough to fit whole section, then table size should only be as big as necessary.)
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewContent")
-        cell?.textLabel!.numberOfLines = 0
-        cell?.textLabel!.lineBreakMode = .byWordWrapping
-        cell?.textLabel?.textColor = UIColor.black
-        cell?.textLabel!.font = UIFont.systemFont(ofSize: 12.0)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewContent", for: indexPath)
+        cell.textLabel!.numberOfLines = 0
+        cell.textLabel!.lineBreakMode = .byWordWrapping
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel!.font = UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.ultraLight)
         let text = ReviewState.shared.arr[indexPath.row]
-        cell?.textLabel?.text = text
+        cell.textLabel?.text = text
         
-        return cell!
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 129.0/255.0, green: 10.0/255.0, blue: 28.0/255.0, alpha: 1.0)
+        cell.selectedBackgroundView = bgColorView
+        
+        return cell
     }
 
     @IBAction func submit(_ sender: UIButton) {
@@ -220,7 +225,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                 print("Error updating document: \(err)")
             } else {
                 print("Document successfully updated")
-                let alert = UIAlertController(title: "Success", message: "Successfully update!", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Success", message: "You have successfully updated the database data for this property.", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { action -> Void in
                     //self.performSegue(withIdentifier: "unwindToListingAdmin", sender: self)
