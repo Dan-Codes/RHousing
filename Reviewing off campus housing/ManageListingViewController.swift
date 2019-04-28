@@ -27,11 +27,11 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
     
     @IBOutlet weak var reviewTable: UITableView!
     
+    //prints and initialize this screen, also uses a listener to reload the data that has been changed in the database
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ReviewState.shared.arr = []
-        print(ReviewState.shared.arr)
         ReviewState.shared.info = AdminState.shared.add[AdminState.shared.row]
         
         let docRef = db.collection("listings").document(ReviewState.shared.info)
@@ -60,7 +60,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         longPress.minimumPressDuration = 2.0
         reviewTable.addGestureRecognizer(longPress)
-    }
+    } //end of viewDidLoad()
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer){
         if sender.state == .began {
@@ -85,8 +85,9 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                 self.present(alert, animated: true)
             }
         }
-    }
+    } //end of handleLongPress()
     
+    //gets the database information and displays it on the screen
     func showReviews(){
         ReviewState.shared.arr = []
         let docRef = db.collection("listings").document(ReviewState.shared.info)
@@ -186,7 +187,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
         
         reviewTable.dataSource = self // not sure if this line is necessary. it seems to work with or without.
         
-    } // end showReviews
+    } // end of showReviews()
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return arr.shared.reviewArr.count
@@ -215,6 +216,8 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
         return cell
     }
 
+    
+    //When user hits submit, it will replace the values of rent and landlord
     @IBAction func submit(_ sender: UIButton) {
         let docRef = db.collection("listings").document(ReviewState.shared.info)
         docRef.updateData([
@@ -234,5 +237,5 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                 self.present(alert, animated: true)
             }
         }
-    }
-}
+    } //end of submit()
+} //end of ManageListingViewController class
