@@ -80,8 +80,8 @@ class ManageReportViewController: UIViewController, UITableViewDelegate, UITable
                     
                     var reportString = ""
                     
-                    reportString += "Reporter: " + reporter + "\n\n"
-                    reportString += report + "\n"
+                    reportString += "\"" + report + "\"\n\n"
+                    reportString += "Reported by " + reporter
                     
                     RpState.shared.reporter.append(reporter)
                     RpState.shared.arr.append(reportString) // append whatever you want.
@@ -108,14 +108,18 @@ class ManageReportViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ReportContent")
-        cell?.textLabel!.numberOfLines = 0
-        cell?.textLabel!.lineBreakMode = .byWordWrapping
-        cell?.textLabel?.textColor = UIColor.black
-        cell?.textLabel!.font = UIFont.systemFont(ofSize: 12.0)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReportContent", for: indexPath)
+        cell.textLabel!.numberOfLines = 0
+        cell.textLabel!.lineBreakMode = .byWordWrapping
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel!.font = UIFont.systemFont(ofSize: 12.0, weight: UIFont.Weight.ultraLight)
         let text = RpState.shared.arr[indexPath.row]
-        cell?.textLabel?.text = text
+        cell.textLabel?.text = text
         
-        return cell!
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 129.0/255.0, green: 10.0/255.0, blue: 28.0/255.0, alpha: 1.0)
+        cell.selectedBackgroundView = bgColorView
+        
+        return cell
     }
 } //end of ManageReportViewController

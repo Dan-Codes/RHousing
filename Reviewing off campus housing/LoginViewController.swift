@@ -98,7 +98,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 
                 let last7 = String(self.emailText.text!.suffix(7))
                 
-                if authResult != nil && last7 == "syr.edu" {
+                if authResult != nil && last7 == "syr.edu" &&
+                   !self.firstName.text!.isEmpty && !self.lastName.text!.isEmpty {
                     
                     // goHome
                     self.performSegue(withIdentifier: "goHome", sender: self)
