@@ -134,12 +134,10 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                 for document in querySnapshot!.documents {
                     if let geopoint = document.get("geopoint"){
                         let point = geopoint as! GeoPoint
-                        print(point)
                         let lat = point.latitude
                         let long = point.longitude
                         if abs(lat - ThirdState.shared.varLat) < 0.000001 && abs(long - ThirdState.shared.varLong) < 0.000001{
                             ThirdState.shared.isAdded = true
-                            print("changed to true")
                             let alert = UIAlertController(title: "Location already added", message: "", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
                             }))
@@ -180,9 +178,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
                 }
             }
         }
-        print("returning " + String(ThirdState.shared.isAdded))
         return ThirdState.shared.isAdded
-    }
+    } //end of checkDidAdd()
     
     //Uploads property to the database aka the submit button
     @IBAction func uploadProperty(_ sender: UIButton) {
