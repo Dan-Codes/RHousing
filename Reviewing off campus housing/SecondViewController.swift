@@ -51,7 +51,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ReviewHistory.shared.tableRow = indexPath.row
-        print(ReviewHistory.shared.tableRow)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -64,11 +63,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
                 let user = Auth.auth().currentUser
-                if let user = user {
-                    // The user's ID, unique to the Firebase project.
-                    // Do NOT use this value to authenticate with your backend server,
-                    // if you have one. Use getTokenWithCompletion:completion: instead.
-                    
+                if let user = user {               
                     let email = user.email
                     Em = email!
                     
@@ -91,11 +86,12 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.present(alert, animated: true)
                 return;
             }
-    }
+    } //end of func
     
 
     var Em:String = ""
     
+    //function that gets info from database and displays it on the table view cells
     func showHistory(Em: String) {
         
         let docRef = db.collection("Users").document(Em)
@@ -196,14 +192,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-       // tabBarController?.selectedIndex = 1
         
         let user = Auth.auth().currentUser
         if let user = user {
-            // The user's ID, unique to the Firebase project.
-            // Do NOT use this value to authenticate with your backend server,
-            // if you have one. Use getTokenWithCompletion:completion: instead.
             email = user.email!
             db.collection("Users").document(email)
                 .addSnapshotListener { documentSnapshot, error in
@@ -248,6 +239,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else { print("Document does not exist") }
         }  //  end getDocument
         
+        //sends this information to the first view controller to display properly
         view.sendSubviewToBack(googleMapsDarkMode)
         view.sendSubviewToBack(accountBG)
         view.sendSubviewToBack(historyBG)
@@ -255,10 +247,12 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }  // end viewDidLoad()
 
     
+    //when user selects darkmode, boolean is stored in the database and triggers darkmode on firstviewcontroller
    @IBAction func darkMode(_ sender: UISwitch) {
         if sender.isOn {
             SecState.shared.darkMode = true
             AppState.shared.darkMode = true
+            //checks database to see if users has darkmode enabled
             let darkModeRef = db.collection("Users").document(email)
             darkModeRef.updateData([
                 "DarkMode": true
@@ -267,7 +261,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     print("Error updating document: \(err)")
                 } else {
                     print("Document successfully updated")
-                    //FirstViewController().viewDidLoad()
                 }
             }
         }
@@ -282,15 +275,15 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     print("Error updating document: \(err)")
                 } else {
                     print("Document successfully updated")
-                    //FirstViewController().viewDidLoad()
                 }
             }
 
     }
-    }
+    } //end of darkMode()
     
-    
+    //segue to admin when button is tapped 
     @IBAction func goAdmin(_ sender: UIButton) {
+        //checks if the user is an admin
         if adminCheck{
         performSegue(withIdentifier: "goToAdmin", sender: self)
         }
@@ -317,5 +310,5 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
 
-}
+} //end of class
 
