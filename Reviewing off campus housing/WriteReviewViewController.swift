@@ -13,7 +13,6 @@ import Cosmos
 
 public class storeBool {
     public var anonymousBool = false
-    // button thingy needs to default to No on the storyboard.
     public var edited = false
     public var liveagain = true
     public static let shared = storeBool()
@@ -57,18 +56,15 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
             shortAddress.append(contentsOf: str)
             count += 1 }
         address.text = shortAddress + "!" // label for address
-    }
+    } //end of viewDidLoad()
     
+    //checks to see if a user has already written a review, if yes, will autofill information on the form
     func checkReview(){
+        //gets user's email through authentications
         let user = Auth.auth().currentUser
         if let user = user {
-            // The user's ID, unique to the Firebase project.
-            // Do NOT use this value to authenticate with your backend server,
-            // if you have one. Use getTokenWithCompletion:completion: instead.
-            
             let email = user.email
             Em = email!
-            
         } // end if
         let docRef = db.collection("listings").document(info)
         docRef.getDocument { (document,error) in
@@ -106,21 +102,10 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                         }))
                         self.present(alert, animated: true)
                     }
-                } // end for lop
-                
-//                if (emailExists) {
-//                    let alert = UIAlertController(title: "Warning", message: "You have already rated this property before. If you post another review, your previous review will be overwritten.", preferredStyle: .alert)
-//
-//                    alert.addAction(UIAlertAction(title: "Got it!", style: .default, handler: {(action) in
-//                        //write some code here
-//                        //let reviewMap = reviewMap as! NSDictionary
-//                    }))
-//                    self.present(alert, animated: true)
-//
-//                } // end if
+                } // end for loop
             } // end if let
         } // end getDocument
-    }
+    } //end of checkReview
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -178,6 +163,8 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
     }()
     
     
+    //if rating goes below 2.5, it is assumed that the rater doesn't want to live here anymore 
+    //and switches off the will live here again slider
     @IBAction func slideRate(_ sender: UISlider) {
         ratingValue.text = String(format: "%.1f", sender.value)
         //ratingValue.setValue(Float(), forKey: String(format: "%.1f", sender.value))
@@ -206,21 +193,16 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
 
 
+    //when submit is tapped, database will be overwritten in listings collection and Users collections
     @IBAction func submit(_ sender: UIButton) {
-        //performSegue(withIdentifier: "writeToHome", sender: self)
         let time = Timestamp(date: Date())
-        //let time = Date()
         print(time)
         let user = Auth.auth().currentUser
         if let user = user {
-            // The user's ID, unique to the Firebase project.
-            // Do NOT use this value to authenticate with your backend server,
-            // if you have one. Use getTokenWithCompletion:completion: instead.
             let email = user.email
             Em = email!
-            // ...
         }
-        
+     
         let docRef = db.collection("listings").document(info)
         let docUserRef = db.collection("Users").document(Em)
 
@@ -231,12 +213,10 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                     let review = document.get("reviews") as! NSDictionary
                     for (reviewer, _) in review {
                         let reviewer = reviewer as! String
-                        //print(reviewer)
-                        //print(self.Em + "---")
 
                         if (reviewer == self.Em){
                             emailExist = true
-                            break
+                            break //break when reviewer is found
                         }
                     }
                     
@@ -253,14 +233,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                             self.performSegue(withIdentifier: "unwindToDisplay", sender: self)
                         }))
                         
-                        self.present(alert, animated: true)
-                        //let lR = Int(storeBool.shared.locationRating)
-                        print(".....")
-                        
-//                        if self.comment.text == "Living here has been..." as String || self.comment.text == "" as String  {
-//                            self.comment.text = "This user has decided not to write a review"
-//                        }
-                        
+                        self.present(alert, animated: true)              
                         
                         docRef.setData([
                             "reviews" : [
@@ -297,10 +270,8 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                         
                         self.present(alert, animated: true)
                         
-//                        if self.comment.text == "Living here has been..." as String || self.comment.text == "" as String  {
-//                            self.comment.text = "This user has decided not to write a review"
-//                        }
-                        
+
+                        //set to a review of a users in the listings collection database
                         docRef.setData([
                             "reviews" : [
                                 "\(self.Em)" : [
@@ -326,6 +297,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                         }
                     }
                     
+                    //set values to be sent to Users collection in database
                     docUserRef.setData([
                         "Review History" : [
                             "\(self.info)" : [
@@ -353,20 +325,12 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
             }
         
         
-    }
+    } //end of submit()
     
     var info:String = ""
     var Em:String = ""
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
-}
+} //end of class
 
 
