@@ -11,6 +11,9 @@ import Firebase
 
 public class ReportState {
     public var arr:[String] = []
+    public var add:[String] = []
+    public var row:Int = 0
+    public var info:String = ""
     public static let shared = ReportState()
 }
 
@@ -23,24 +26,6 @@ class ReportAdminViewController: UIViewController, UITableViewDataSource, UITabl
 
         // Do any additional setup after loading the view.
         showReports()
-        
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        longPress.minimumPressDuration = 2.0
-        reportTable.addGestureRecognizer(longPress)
-
-    }
-    
-    @objc func handleLongPress(sender: UILongPressGestureRecognizer){
-        if sender.state == .began {
-            let touchPoint = sender.location(in: reportTable)
-            if let indexPath = reportTable.indexPathForRow(at: touchPoint) {
-                // your code here, get the row for the indexPath or do whatever you want
-                let alert = UIAlertController(title: "Are you sure you want to delete this report?", message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
-                self.present(alert, animated: true)
-                print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-            }
-        }
     }
     
     func showReports(){
@@ -51,8 +36,9 @@ class ReportAdminViewController: UIViewController, UITableViewDataSource, UITabl
             }
             else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
+                    //print("\(document.documentID) => \(document.data())")
                     ReportState.shared.arr.append("\(document.documentID) => \(document.data())")
+                    ReportState.shared.add.append("\(document.documentID)")
                 }
                 // this line of code is critical! it makes sure the table view updates.
                 self.reportTable.reloadData()
@@ -64,6 +50,11 @@ class ReportAdminViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ReportState.shared.arr.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ReportState.shared.row = indexPath.row
+        ReportState.shared.info = ReportState.shared.add[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

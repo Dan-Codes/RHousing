@@ -13,7 +13,6 @@ import FirebaseAuth
 public class ReviewState {
     public var arr:[String] = []
     public var info:String = ""
-    public var a:Int = 0
     public var reviewer:[String] = []
     
     public static let shared = ReviewState()
@@ -27,7 +26,6 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
     let formatter = DateFormatter()
     
     @IBOutlet weak var reviewTable: UITableView!
-    var detach:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +44,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
             }
         }
     
-        let listener = db.collection("listings").document(ReviewState.shared.info)
+        db.collection("listings").document(ReviewState.shared.info)
             .addSnapshotListener { documentSnapshot, error in
                 guard let document = documentSnapshot else {
                     print("Error fetching document: \(error!)")
@@ -163,8 +161,10 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                             reviewString += " on " + ( self.formatter.string(from: timestamp.dateValue()) ) + "\n"
                             
                             // append to the array of strings
-                            
                             ReviewState.shared.arr.append(reviewString)
+                            
+                            print(ReviewState.shared.arr)
+                            
                             self.reviewTable.reloadData()
                         } else {
                             print("Document does not exist")
@@ -172,7 +172,6 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                     }
                     
                 } // end for loop
-                
 
             } // end if document exists
                 
@@ -181,6 +180,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
             // this line of code is critical! it makes sure the table view updates.
             self.reviewTable.reloadData()
             ReviewState.shared.arr = []
+            
         } // end docRef.getDocument
         
         reviewTable.dataSource = self // not sure if this line is necessary. it seems to work with or without.

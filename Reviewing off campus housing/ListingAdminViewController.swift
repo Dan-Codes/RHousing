@@ -46,7 +46,7 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
         if sender.state == .began {
             let touchPoint = sender.location(in: PropertyTable)
             if let indexPath = PropertyTable.indexPathForRow(at: touchPoint) {
-                print(indexPath)
+                //print(indexPath)
                 // your code here, get the row for the indexPath or do whatever you want
                 let alert = UIAlertController(title: "Are you sure you want to delete this property?", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
@@ -56,7 +56,7 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
                             print("Error removing document: \(err)")
                         } else {
                             print("Document successfully removed!")
-                            print(ReviewState.shared.arr)
+                            //print(ReviewState.shared.arr)
                         }
                     }
                     
@@ -76,11 +76,11 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
+                    //print("\(document.documentID) => \(document.data())")
                     AdminState.shared.arr.append("\(document.documentID) => \(document.data())")
                     let adrs = document.get("address") as? String ?? ""
                     AdminState.shared.add.append(adrs)
-                    print("---------------" + adrs)
+                    //print("---------------" + adrs)
                     
                 }
                 // this line of code is critical! it makes sure the table view updates.
@@ -100,9 +100,6 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         AdminState.shared.row = indexPath.row
         ReviewState.shared.info = AdminState.shared.add[AdminState.shared.row]
-        
-        //print("\(AdminState.shared.row)" + "_______________________")
-        //print("\(AdminState.shared.add[AdminState.shared.row])" + "_______________________")
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
