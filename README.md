@@ -3,7 +3,7 @@
 open terminal
 
 if you have not installed cocopods this is how you do it
-type this into terminal: sudo gem install cocoapods
+open up your terminal and type this: sudo gem install cocoapods
 this will ask for password, type it in
 
 once it finishes, 
