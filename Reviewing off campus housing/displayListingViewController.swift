@@ -13,7 +13,6 @@ import Cosmos
 
 public class arr {
     // global stuff
-    // arr.shared.reviewArr
     public var didReview = false
     var reviewArr:[String] = []
     public static let shared = arr()
@@ -21,10 +20,7 @@ public class arr {
 
 
 
-class displayListingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    // adding a comment here from kevin
-    
+class displayListingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {    
     var AverageRating:Double = 0
     var countReviews:Double = 0
     var averageLocation:Double = 0.0
@@ -32,8 +28,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     var averageAmenities:Double = 0.0
     var countNewListings:Double = 0.0
     
-    var info:String = ""
-    var Em:String = ""
+    var info:String = "" //this is reference to a postal address
+    var Em:String = "" //reference to a User email
     var dollarSign = "$"
     
     let date = Date()
@@ -316,6 +312,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
         
     } // end reviewListing func
     
+    //sends postal address to the other controllers
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.destination is WriteReviewViewController
@@ -336,15 +333,5 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
+} //end of class
