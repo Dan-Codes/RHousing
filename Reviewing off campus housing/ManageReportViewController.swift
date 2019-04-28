@@ -40,13 +40,13 @@ class ManageReportViewController: UIViewController, UITableViewDelegate, UITable
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         longPress.minimumPressDuration = 2.0
         tableView.addGestureRecognizer(longPress)
-    }
+    } // end of viewDidLoad()
     
+    //ability to delete a report by longpressing
     @objc func handleLongPress(sender: UILongPressGestureRecognizer){
         if sender.state == .began {
             let touchPoint = sender.location(in: tableView)
             if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-                print(indexPath)
                 // your code here, get the row for the indexPath or do whatever you want
                 let alert = UIAlertController(title: "Deleting this report?", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
@@ -64,7 +64,8 @@ class ManageReportViewController: UIViewController, UITableViewDelegate, UITable
             }
         }
     }
-    
+  
+    //displays reports
     func showReports(){
         RpState.shared.arr = []
         
@@ -84,20 +85,20 @@ class ManageReportViewController: UIViewController, UITableViewDelegate, UITable
                     
                     RpState.shared.reporter.append(reporter)
                     RpState.shared.arr.append(reportString) // append whatever you want.
-                }
+                } //end of for loop
                 
-            }
+            } // end of if statement
             else {
                 print("oops")
             }
             
             self.tableView.reloadData()
             
-        }
+        } // end of get doc
         
         tableView.dataSource = self // not sure if this line is necessary. it seems to work with or without.
         
-    }
+    } // end of showReports()
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -117,4 +118,4 @@ class ManageReportViewController: UIViewController, UITableViewDelegate, UITable
         
         return cell!
     }
-}
+} //end of ManageReportViewController
