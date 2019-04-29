@@ -152,7 +152,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                         let lat = point.latitude
                         let long = point.longitude
                         let address = document.get("address") as? String ?? "Address"
-                        
+                        let mk = address
 //                        print(lat,long)
 //                        
 //                        print("**********************")
@@ -175,6 +175,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                             address1.append(contentsOf: " ")
                             count+=1 }
                         marker.title = address1
+                        marker.accessibilityHint = address
                         marker.infoWindowAnchor = CGPoint(x: 0.5, y: 0.5)
                         marker.map = self.mapView
                         marker.snippet = "Tap for reviews from others!"
@@ -192,9 +193,11 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
     } //end of printPin()
     
     var mk:String? = nil
+    var varAdd:String = ""
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         // print("test")
+        varAdd = marker.accessibilityHint!
         mk = marker.title
         performSegue(withIdentifier: "displayListing" , sender: self)
         print(marker.title ?? "No longer valid!")
@@ -207,7 +210,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         if segue.destination is displayListingViewController
         {
             let vc = segue.destination as? displayListingViewController
-            vc?.info = mk!
+            vc?.info = varAdd
             let vc2 = segue.destination as? SecondViewController
             vc2?.email = emailID
         }
