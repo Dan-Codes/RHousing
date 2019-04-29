@@ -178,7 +178,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                         marker.accessibilityHint = address
                         marker.infoWindowAnchor = CGPoint(x: 0.5, y: 0.5)
                         marker.map = self.mapView
-                        marker.snippet = "Tap for reviews from others!"
+                        marker.snippet = "Tap to see reviews!"
                         self.mapView.delegate=self
                         if AppState.shared.open && (abs(lat - ThirdState.shared.varLat) < 0.000001 || abs(long - ThirdState.shared.varLong) < 0.000001){
                             self.mapView.selectedMarker = marker
