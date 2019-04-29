@@ -75,20 +75,25 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
         if sender.state == .began {
             let touchPoint = sender.location(in: reviewTable)
             if let indexPath = reviewTable.indexPathForRow(at: touchPoint) {
-                print(indexPath)
                 // your code here, get the row for the indexPath or do whatever you want
                 let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
                 alert.addAction(UIAlertAction(title: "Confirm", style: .destructive, handler: {(action) in
                     
                     print(ReviewState.shared.reviewer[indexPath.row])
-                            let docPropertyRef = db.collection("listings").document(ReviewState.shared.info)
-                            let propertyfp = FieldPath(["reviews", ReviewState.shared.reviewer[indexPath.row]])
-                            let docUserRef = db.collection("Users").document(ReviewState.shared.reviewer[indexPath.row])
-                            let userfp = FieldPath(["Review History", ReviewState.shared.info])
+                    print(indexPath.row)
+                    print(ReviewState.shared.info)
+                    print(ReviewState.shared.arr[indexPath.row])
+                    print(ReviewState.shared.reviewer[indexPath.row])
+                    let docPropertyRef = db.collection("listings").document(ReviewState.shared.info)
+                    let propertyfp = FieldPath(["reviews", ReviewState.shared.reviewer[indexPath.row]])
+                    let docUserRef = db.collection("Users").document(ReviewState.shared.reviewer[indexPath.row])
+                    let userfp = FieldPath(["Review History", ReviewState.shared.info])
+
+                    docPropertyRef.updateData([propertyfp : FieldValue.delete()])
+                    docUserRef.updateData([userfp : FieldValue.delete()])
                     
-                            docPropertyRef.updateData([propertyfp : FieldValue.delete()])
-                            docUserRef.updateData([userfp : FieldValue.delete()])
+                    //self.reviewTable.reloadData()
                     return;
                 }))
                 self.present(alert, animated: true)
@@ -99,6 +104,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
     //gets the database information and displays it on the screen
     func showReviews(){
         ReviewState.shared.arr = []
+        ReviewState.shared.reviewer = []
         let docRef = db.collection("listings").document(ReviewState.shared.info)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists { // go through the listings database
@@ -111,11 +117,8 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                 
                 //Retreiving values from map of maps (reviews)
                 //Also! make sure all fields in map are present and valid to present fatal errors. (like comments, rating, isAnon, etc all must be present)
-                ReviewState.shared.arr = []
-                var a:Int = 0
+
                 for (reviewer, reviewMap) in review {// the "reviews" map for a listing contains another map: (key = reviewer, value = reviewMap)
-                    a += 1
-                    print(a)
                     var reviewString = "" // the string that each review gets parsed into. initialized blank for each review.
                     
                     // get values of a review from the reviewMap
@@ -137,10 +140,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                     let aRating = reviewMap.value(forKey: "amenitiesRating") as? Double
                     
                     // calculate average ratings
-                    
-                   
-                    
-                    
+
                     // add the review info for the review into the string
                     
                     self.formatter.dateFormat = "MM/dd/yyyy"
@@ -161,7 +161,6 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                     let docRef = db.collection("Users").document(reviewer)
                     docRef.getDocument { (document, error) in
                         if let document = document, document.exists {
-                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                             
                             let firstName = document.get("First Name") as? String ?? reviewer
                             let lastName = document.get("Last Name") as? String ?? " "
@@ -173,8 +172,6 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                             
                             // append to the array of strings
                             ReviewState.shared.arr.append(reviewString)
-                            
-                            print(ReviewState.shared.arr)
                             
                             self.reviewTable.reloadData()
                         } else {
@@ -241,7 +238,6 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                 
                 alert.addAction(UIAlertAction(title: "Got it", style: .default, handler: { action -> Void in
                     //self.performSegue(withIdentifier: "unwindToListingAdmin", sender: self)
-                    print(ReviewState.shared.arr)
                 }))
                 self.present(alert, animated: true)
             }
