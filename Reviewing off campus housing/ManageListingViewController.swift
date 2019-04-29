@@ -27,6 +27,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
     
     @IBOutlet weak var reviewTable: UITableView!
     
+    var listener:ListenerRegistration? = nil
     //prints and initialize this screen, also uses a listener to reload the data that has been changed in the database
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
             }
         }
     
-        db.collection("listings").document(ReviewState.shared.info)
+        listener = db.collection("listings").document(ReviewState.shared.info)
             .addSnapshotListener { documentSnapshot, error in
                 guard let document = documentSnapshot else {
                     print("Error fetching document: \(error!)")
@@ -61,6 +62,14 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
         longPress.minimumPressDuration = 2.0
         reviewTable.addGestureRecognizer(longPress)
     } //end of viewDidLoad()
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if self.isMovingFromParent {
+            listener!.remove()
+        }
+    }
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer){
         if sender.state == .began {
