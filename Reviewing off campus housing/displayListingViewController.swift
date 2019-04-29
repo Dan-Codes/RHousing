@@ -70,7 +70,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
 
         // This is for auto-refresh (after writing a review). Even w/o writing a review, it still runs to show the reviews.
         print(info)
-        db.collection("listings").document(info)
+        listener = db.collection("listings").document(info)
             .addSnapshotListener { documentSnapshot, error in
                 guard let document = documentSnapshot else {
                     print("Error fetching document: \(error!)")
