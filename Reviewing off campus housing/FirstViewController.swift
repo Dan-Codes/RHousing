@@ -158,15 +158,26 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
 //                        print("**********************")
 //                        print("\(document.documentID) => \(document.data())")
                         
+                        
+
+//                        // parsing first part of the address
+                        var count = 0
+                        var address1:String = ""
+
                         let position = CLLocationCoordinate2D(latitude: lat, longitude: long)
                         //let customRedMarker = UIColor(rgb: 0x085972)  // comment out if using custom icon
                         let marker = GMSMarker(position: position)
                         marker.icon = UIImage(named: "cribbhouse") //GMSMarker.markerImage(with: customRedMarker)
                         marker.setIconSize(scaledToSize: .init(width: 40, height: 40))
-                        marker.title = "\(String(describing: address))"
+                        for str in address.split(separator: " "){
+                            if (str.last == ",") { break }
+                            address1.append(contentsOf: str)
+                            address1.append(contentsOf: " ")
+                            count+=1 }
+                        marker.title = address1
                         marker.infoWindowAnchor = CGPoint(x: 0.5, y: 0.5)
                         marker.map = self.mapView
-                        marker.snippet = "Tap to see what people think of this property!"
+                        marker.snippet = "Tap for reviews from others!"
                         self.mapView.delegate=self
                         if AppState.shared.open && (abs(lat - ThirdState.shared.varLat) < 0.000001 || abs(long - ThirdState.shared.varLong) < 0.000001){
                             self.mapView.selectedMarker = marker
