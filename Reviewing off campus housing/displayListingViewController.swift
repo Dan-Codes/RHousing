@@ -35,6 +35,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     let date = Date()
     let formatter = DateFormatter()
     
+    var listener:ListenerRegistration? = nil
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var label2: UILabel!
@@ -84,6 +85,14 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 self.showReviews() // where the juicy stuf happens
         }
     } //  end of viewDidLoad
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if self.isMovingFromParent {
+            listener?.remove()
+        }
+    }
     
     func showReviews(){
         
