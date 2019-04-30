@@ -21,13 +21,6 @@ public class AppState {
 
 var objgVC = FirstViewController()
 class FirstViewController: UIViewController, GMSMapViewDelegate {
-    @IBAction func searchButton(_ sender: UIButton) {
-        performSegue(withIdentifier: "search", sender: self)
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
     
     var locationManager = CLLocationManager()
     //var resultsViewController: GMSAutocompleteResultsViewController? // GMSAutocompleteResultsViewController provides an interface that displays place autocomplete predictions in a table view.
@@ -40,6 +33,8 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
     var placesClient: GMSPlacesClient!
     var mapView: GMSMapView!
     var emailID:String = ""
+    var mk:String? = nil
+    var varAdd:String = ""
     
     
     
@@ -123,6 +118,14 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
        
     }
     
+    @IBAction func searchButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "search", sender: self)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     //literates through the database to place pinpoints on the google maps on the listings properties
     func printPin(){
         camera = GMSCameraPosition.camera(withLatitude: AppState.shared.lat, longitude: AppState.shared.long, zoom: 15)
@@ -192,8 +195,6 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         
     } //end of printPin()
     
-    var mk:String? = nil
-    var varAdd:String = ""
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         // print("test")

@@ -26,17 +26,14 @@ extension UIViewController{
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    //function to transit variables from one controller to another
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        print("EMAIL")
-        print(emailID)
-        let vc = segue.destination as? SecondViewController
-        vc?.email = emailID
-        let vc2 = segue.destination as? FirstViewController
-        vc2?.emailID = emailID
-    }
-
+    @IBOutlet weak var emailText: UITextField!
+    @IBOutlet weak var passText: UITextField!
+    @IBOutlet weak var firstName: UITextField!
+    @IBOutlet weak var lastName: UITextField!
+    
+    var emailID:String = ""
+    var isSignIn:Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,22 +47,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
+    //function to transit variables from one controller to another
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        print("EMAIL")
+        print(emailID)
+        let vc = segue.destination as? SecondViewController
+        vc?.email = emailID
+        let vc2 = segue.destination as? FirstViewController
+        vc2?.emailID = emailID
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
     }
-   
-    var emailID:String = ""
-    var isSignIn:Bool = true
-    
-    
-    @IBOutlet weak var emailText: UITextField!
-    @IBOutlet weak var passText: UITextField!
-    @IBOutlet weak var firstName: UITextField!
-    @IBOutlet weak var lastName: UITextField!
-    
-    
+
     //User taps signinButton
     @IBAction func signInButton(_ sender: UIButton) {
         // check if signed in or register
