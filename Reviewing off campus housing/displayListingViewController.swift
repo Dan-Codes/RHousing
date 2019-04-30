@@ -211,6 +211,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 else                    { self.displayRent.text = (self.dollarSign + "\(getRent)") } // label for rent
                 
                 
+                //Calculates average review
                 if (self.countReviews != 0) {
                     let avgrate = (self.AverageRating/self.countReviews)
                     self.avgRating.text = String(format: "%.1f", avgrate)
@@ -226,7 +227,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
                 
 
 
-                
+                //Checks if there are any listings. If there are, it calculates average for star ratings
                 if (self.countNewListings != 0 ) {
                     let avgrate = (self.averageLocation/self.countNewListings)
                     self.rating1.text = String(format: "%.1f", avgrate)
