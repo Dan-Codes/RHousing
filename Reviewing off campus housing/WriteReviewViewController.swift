@@ -10,6 +10,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+//for star rating i/o functionality, as taken from https://github.com/evgenyneu/Cosmos
 import Cosmos
 
 //Global variables
