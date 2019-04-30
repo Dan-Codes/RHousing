@@ -262,12 +262,7 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // WANT TO IMPLEMENT:
-        // if there are no reviews, don't display a blank table. rather, display a message "there are currently no reviews for this listing at this time."
-        /* https://stackoverflow.com/questions/28532926/if-no-table-view-results-display-no-results-on-screen */
-        // (maybe implement: if there are some reviews, but not enough to fit whole section, then table size should only be as big as necessary.)
-        
+        //Setup cells
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         cell?.textLabel!.numberOfLines = 0
         cell?.textLabel!.lineBreakMode = .byWordWrapping
@@ -301,6 +296,8 @@ class displayListingViewController: UIViewController, UITableViewDelegate, UITab
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
 
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {(action) in
+            // !!! Use FieldPath instead of using user email directly !!!
+            // !!! Because there is a dot in user email which will be recognized as dot notation by firestore!!!
             let docPropertyRef = db.collection("listings").document(self.info)
             let propertyfp = FieldPath(["reviews", self.Em])
             let docUserRef = db.collection("Users").document(self.Em)

@@ -27,7 +27,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
     
     @IBOutlet weak var reviewTable: UITableView!
     
-    var listener:ListenerRegistration? = nil
+    var listener:ListenerRegistration? = nil //creating listner outside viewDidLoad() enables us to detach it later
     //prints and initialize this screen, also uses a listener to reload the data that has been changed in the database
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +45,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
             }
         }
     
+        //Add a listener to database listening to any changes in "listings" collection
         listener = db.collection("listings").document(ReviewState.shared.info)
             .addSnapshotListener { documentSnapshot, error in
                 guard let document = documentSnapshot else {
@@ -53,13 +54,14 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                 guard document.data() != nil else {
                     print("Document data was empty.")
                     return }
+                //Excuete when listener is created and changes detacted
                 ReviewState.shared.arr = []
                 self.showReviews() // where the juicy stuf happens
                 }
         
-        // Do any additional setup after loading the view.
+        //The cells can revoginize long press
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        longPress.minimumPressDuration = 2.0
+        longPress.minimumPressDuration = 2.0 //long press recognizing duration
         reviewTable.addGestureRecognizer(longPress)
     } //end of viewDidLoad()
     
@@ -67,10 +69,12 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
         super.viewWillDisappear(animated)
         
         if self.isMovingFromParent {
-            listener!.remove()
+            //Excuete this when back button is clicked
+            listener!.remove() //detach listener otherwise there will be duplicate bugs
         }
     }
     
+    //objective-C function which handels long press
     @objc func handleLongPress(sender: UILongPressGestureRecognizer){
         if sender.state == .began {
             let touchPoint = sender.location(in: reviewTable)
@@ -79,12 +83,9 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
                 let alert = UIAlertController(title: "Are you sure you want to delete your review of this property?", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
                 alert.addAction(UIAlertAction(title: "Confirm", style: .destructive, handler: {(action) in
-                    
-                    print(ReviewState.shared.reviewer[indexPath.row])
-                    print(indexPath.row)
-                    print(ReviewState.shared.info)
-                    print(ReviewState.shared.arr[indexPath.row])
-                    print(ReviewState.shared.reviewer[indexPath.row])
+                    //When "Confirm" is selected, delete reviews both under property and user
+                    // !!! Use FieldPath instead of using user email directly !!!
+                    // !!! Because there is a dot in user email which will be recognized as dot notation by firestore!!!
                     let docPropertyRef = db.collection("listings").document(ReviewState.shared.info)
                     let propertyfp = FieldPath(["reviews", ReviewState.shared.reviewer[indexPath.row]])
                     let docUserRef = db.collection("Users").document(ReviewState.shared.reviewer[indexPath.row])
@@ -108,9 +109,6 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
         let docRef = db.collection("listings").document(ReviewState.shared.info)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists { // go through the listings database
-                
-                //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                //print("Document data: \(dataDescription)")
                 
                 // retrieve database values for a listing (address, landord, rent, and its reviews)
                 let review = document.get("reviews") as! NSDictionary
@@ -201,12 +199,7 @@ class ManageListingViewController: UIViewController, UITableViewDelegate,  UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // WANT TO IMPLEMENT:
-        // if there are no reviews, don't display a blank table. rather, display a message "there are currently no reviews for this listing at this time."
-        /* https://stackoverflow.com/questions/28532926/if-no-table-view-results-display-no-results-on-screen */
-        // (maybe implement: if there are some reviews, but not enough to fit whole section, then table size should only be as big as necessary.)
-        
+        //Setup cells
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewContent", for: indexPath)
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.lineBreakMode = .byWordWrapping

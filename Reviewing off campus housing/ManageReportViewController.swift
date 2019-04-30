@@ -24,6 +24,7 @@ class ManageReportViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         RpState.shared.info = ReportState.shared.info
+        //Add a listener to database listening to any changes in "Reports" collection
         db.collection("Reports").document(RpState.shared.info)
             .addSnapshotListener { documentSnapshot, error in
                 guard let document = documentSnapshot else {
@@ -32,13 +33,14 @@ class ManageReportViewController: UIViewController, UITableViewDelegate, UITable
                 guard document.data() != nil else {
                     print("Document data was empty.")
                     return }
+                //Excuete when listener is created and changes detacted
                 ReviewState.shared.arr = []
                 self.showReports() // where the juicy stuf happens
         }
         
         // Do any additional setup after loading the view.
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        longPress.minimumPressDuration = 2.0
+        longPress.minimumPressDuration = 2.0 //long press recognizing duration
         tableView.addGestureRecognizer(longPress)
     } // end of viewDidLoad()
     
@@ -51,8 +53,9 @@ class ManageReportViewController: UIViewController, UITableViewDelegate, UITable
                 let alert = UIAlertController(title: "Deleting this report?", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
                 alert.addAction(UIAlertAction(title: "Confirm", style: .destructive, handler: {(action) in
-                    
-                
+                    //When "Confirm" is selected, delete reviews both under property and user
+                    // !!! Use FieldPath instead of using user email directly !!!
+                    // !!! Because there is a dot in user email which will be recognized as dot notation by firestore!!!
                     let docPropertyRef = db.collection("Reports").document(RpState.shared.info)
                     let propertyfp = FieldPath([RpState.shared.reporter[indexPath.row]])
 
@@ -68,6 +71,7 @@ class ManageReportViewController: UIViewController, UITableViewDelegate, UITable
     //displays reports
     func showReports(){
         RpState.shared.arr = []
+        RpState.shared.reporter = []
         
         let docRef = db.collection("Reports").document(ReportState.shared.info) // read the desired document from Reports database
         
@@ -107,7 +111,7 @@ class ManageReportViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        //Setup cells
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReportContent", for: indexPath)
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.lineBreakMode = .byWordWrapping

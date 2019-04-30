@@ -26,29 +26,32 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Add a listener to database listening to any changes in "listings" collection
         db.collection("listings").addSnapshotListener { querySnapshot, error in
             guard (querySnapshot?.documents) != nil else {
                     print("Error fetching documents: \(error!)")
                     return
                 }
-                
+                //Excuete when listener is created and changes detacted
                 self.showProperties() // where the juicy stuf happens
         }
         
         
-        
+        //The cells can revoginize long press
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        longPress.minimumPressDuration = 2.0
+        longPress.minimumPressDuration = 2.0 //long press recognizing duration
         PropertyTable.addGestureRecognizer(longPress)
     }
     
+    //objective-C function which handels long press
     @objc func handleLongPress(sender: UILongPressGestureRecognizer){
         if sender.state == .began {
             let touchPoint = sender.location(in: PropertyTable)
             if let indexPath = PropertyTable.indexPathForRow(at: touchPoint) {
                 // your code here, get the row for the indexPath or do whatever you want
                 let alert = UIAlertController(title: "Are you sure you want to delete this property?", message: "", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: {(action) in print("Hello")}))
+                alert.addAction(UIAlertAction(title: "No", style: .cancel))
+                //When confirm is selected, delete the listing using Firebase functions
                 alert.addAction(UIAlertAction(title: "Confirm", style: .destructive, handler: {(action) in
                     db.collection("listings").document(AdminState.shared.add[indexPath.row]).delete() { err in
                         if let err = err {
@@ -60,16 +63,20 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
                     }
                     
                 }))
+                //Used to present alert popup
                 self.present(alert, animated: true)
             }
         }
     }
     
-    
+    //use function to loop through database and fill table cells
     func showProperties(){
+        //clear arrays and variable before each function call
         AdminState.shared.arr = []
         AdminState.shared.address = ""
         AdminState.shared.add = []
+        
+        //
         db.collection("listings").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -90,21 +97,17 @@ class UserAdminViewController: UIViewController, UITableViewDelegate, UITableVie
     } // end showReviews
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return arr.shared.reviewArr.count
         return AdminState.shared.arr.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Pass values to next viewController
         AdminState.shared.row = indexPath.row
         ReviewState.shared.info = AdminState.shared.add[AdminState.shared.row]
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // WANT TO IMPLEMENT:
-        // if there are no reviews, don't display a blank table. rather, display a message "there are currently no reviews for this listing at this time."
-        /* https://stackoverflow.com/questions/28532926/if-no-table-view-results-display-no-results-on-screen */
-        // (maybe implement: if there are some reviews, but not enough to fit whole section, then table size should only be as big as necessary.)
+        //Set up cells
         let cell = tableView.dequeueReusableCell(withIdentifier: "PropertyContent", for: indexPath)
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.lineBreakMode = .byWordWrapping

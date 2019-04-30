@@ -13,10 +13,9 @@ class AdminViewController: UIPageViewController, UIPageViewControllerDelegate, U
     
     var pageControl = UIPageControl()
     
-    // MARK: UIPageViewControllerDataSource
-    
+    //Link ListingAdmin viewController and ReportAdmin viewController as pages
     lazy var orderedViewControllers: [UIViewController] = {
-        return [self.newVc(viewController: "UserAdmin"),
+        return [self.newVc(viewController: "ListingAdmin"),
                 self.newVc(viewController: "ReportAdmin")]
     }()
     
@@ -74,7 +73,7 @@ class AdminViewController: UIPageViewController, UIPageViewControllerDelegate, U
         // the last view controller.
         guard previousIndex >= 0 else {
             return orderedViewControllers.last
-            // Uncommment the line below, remove the line above if you don't want the page control to loop.
+            // Uncommment the line below, remove the line above if don't want the page control to loop.
             // return nil
         }
         
@@ -97,7 +96,7 @@ class AdminViewController: UIPageViewController, UIPageViewControllerDelegate, U
         // the first view controller.
         guard orderedViewControllersCount != nextIndex else {
             return orderedViewControllers.first
-            // Uncommment the line below, remove the line above if you don't want the page control to loop.
+            // Uncommment the line below, remove the line above if don't want the page control to loop.
             // return nil
         }
         

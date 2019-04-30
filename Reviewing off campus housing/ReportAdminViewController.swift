@@ -17,17 +17,25 @@ public class ReportState {
     public static let shared = ReportState()
 }
 
-class ReportAdminViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ReportAdminViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var reportTable: UITableView!
     override func viewDidLoad() {
         
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        showReports()
+        //Add a listener to database listening to any changes in "Reports" collection
+        db.collection("Reports").addSnapshotListener { querySnapshot, error in
+            guard (querySnapshot?.documents) != nil else {
+                print("Error fetching documents: \(error!)")
+                return
+            }
+            //Excuete when listener is created and changes detacted
+            self.showReports() // where the juicy stuf happens
+        }
     }
     
+    //use function to loop through database and fill table cells
     func showReports(){
         ReportState.shared.arr = []
         db.collection("Reports").getDocuments() { (querySnapshot, err) in
@@ -53,17 +61,13 @@ class ReportAdminViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //Pass values to next viewController
         ReportState.shared.row = indexPath.row
         ReportState.shared.info = ReportState.shared.add[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // WANT TO IMPLEMENT:
-        // if there are no reviews, don't display a blank table. rather, display a message "there are currently no reviews for this listing at this time."
-        /* https://stackoverflow.com/questions/28532926/if-no-table-view-results-display-no-results-on-screen */
-        // (maybe implement: if there are some reviews, but not enough to fit whole section, then table size should only be as big as necessary.)
-        
+        //Setup cells
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReportContent", for: indexPath)
         cell.textLabel!.numberOfLines = 0
         cell.textLabel!.lineBreakMode = .byWordWrapping

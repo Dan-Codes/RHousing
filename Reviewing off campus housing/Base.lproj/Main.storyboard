@@ -760,7 +760,7 @@
         <!--User Admin View Controller-->
         <scene sceneID="iPi-Yb-HN7">
             <objects>
-                <viewController storyboardIdentifier="UserAdmin" id="kJv-Wb-tbB" customClass="UserAdminViewController" customModule="Reviewing_off_campus_housing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListingAdmin" id="kJv-Wb-tbB" customClass="UserAdminViewController" customModule="Reviewing_off_campus_housing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xtj-Oe-bD1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
