@@ -5,12 +5,14 @@
 //  Created by Daniel Li on 4/4/19.
 //  Copyright © 2019 housing. All rights reserved.
 //
+
+//Imports
 import UIKit
 import Firebase
 import FirebaseAuth
 import Cosmos
 
-
+//Global variables
 public class storeBool {
     public var anonymousBool = false
     public var edited = false
@@ -19,13 +21,44 @@ public class storeBool {
 }
 
 class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
-
+    
+    //Instatiate varaibles
+    @IBOutlet weak var liveAgain: UISwitch!
+    @IBOutlet weak var rating: UISlider!
+    @IBOutlet weak var comment: UITextView!
+    @IBOutlet weak var ratingValue: UILabel!
+    @IBOutlet weak var locationTitle: UIImageView!
+    @IBOutlet weak var managementTitle: UIImageView!
+    @IBOutlet weak var amenitiesTitle: UIImageView!
     @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var locationCosmos: CosmosView!
+    @IBOutlet weak var managementCosmos: CosmosView!
+    @IBOutlet weak var amenitiesCosmos: CosmosView!
+    var info:String = ""
+    var Em:String = ""
+    
+    //Set default ratings for stars
+    var locationRating = 5.0
+    var managementRating = 5.0
+    var amenitiesRating = 5.0
+    
+    //Changes rating when touched
+    lazy var cosmosView: CosmosView = {
+        var view = CosmosView()
+        
+        locationCosmos.didFinishTouchingCosmos = {rating in self.locationRating = rating}
+        managementCosmos.didFinishTouchingCosmos = {rating in self.managementRating = rating}
+        amenitiesCosmos.didFinishTouchingCosmos = {rating in self.amenitiesRating = rating }
+        return view
+    }()
+
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         storeBool.shared.edited = false
         address.text = info + "!"
+        //Comment box settings
         comment.delegate = self
         let borderColor : UIColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
         comment.layer.borderColor = borderColor.cgColor
@@ -36,6 +69,10 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         self.hideKeyboardWhenTap()
         
+        //Calls fucntion to see if review has already been written or not
+        checkReview()
+        
+        //Sets placeholder in textbox. Starts as grey if no previous review has been written
         if comment.text == "Living here has been..." as String {
             comment.textColor = UIColor.lightGray
         }
@@ -43,11 +80,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
             comment.textColor = UIColor.black
         }
         
-        //comment.text = "Living here has been..."
-        //comment.textColor = UIColor.lightGray
-        // Do any additional setup after loading the view.
-        checkReview()
-        
+        //Creates short address for display
         var count = 0
         var shortAddress:String = ""
         for str in info.split(separator: " "){
@@ -66,6 +99,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
             let email = user.email
             Em = email!
         } // end if
+        //Database reference
         let docRef = db.collection("listings").document(info)
         docRef.getDocument { (document,error) in
             if let document = document, document.exists {
@@ -77,9 +111,8 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                     if (reviewer == self.Em) {
                         emailExists = true
                         let alert = UIAlertController(title: "Warning", message: "You have already rated this property before. If you post another review, your previous review will be overwritten.", preferredStyle: .alert)
-                        
+                        //Loads previous review
                         alert.addAction(UIAlertAction(title: "Got it!", style: .default, handler: {(action) in
-                            //write some code here
                             let reviewMap = reviewMap as! NSDictionary
                             let getComment = reviewMap.value(forKey: "comments") as? String
                             self.comment.text = getComment ?? "No review in database"
@@ -107,61 +140,6 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
         } // end getDocument
     } //end of checkReview
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true
-    }
-    
-    
-    @IBOutlet weak var anonymousOutlet: UISegmentedControl!
-    @IBAction func anonymousAction(_ sender: Any) {
-        switch anonymousOutlet.selectedSegmentIndex {
-        case 0:
-            storeBool.shared.anonymousBool = true
-        case 1:
-            storeBool.shared.anonymousBool = false
-        default:
-            break
-        }
-    }
-    
-    @IBOutlet weak var liveagainOutlet: UISegmentedControl!
-    @IBAction func liveagainAction(_ sender: Any) {
-        switch liveagainOutlet.selectedSegmentIndex {
-        case 0:
-            storeBool.shared.liveagain = true
-        case 1:
-            storeBool.shared.liveagain = false
-        default:
-            break
-        }
-    }
-    
-    
-    @IBOutlet weak var liveAgain: UISwitch!
-    @IBOutlet weak var rating: UISlider!
-    @IBOutlet weak var comment: UITextView!
-    @IBOutlet weak var ratingValue: UILabel!
-    @IBOutlet weak var locationTitle: UIImageView!
-    @IBOutlet weak var managementTitle: UIImageView!
-    @IBOutlet weak var amenitiesTitle: UIImageView!
-    @IBOutlet weak var locationCosmos: CosmosView!
-    @IBOutlet weak var managementCosmos: CosmosView!
-    @IBOutlet weak var amenitiesCosmos: CosmosView!
-
-    var locationRating = 5.0
-    var managementRating = 5.0
-    var amenitiesRating = 5.0
-
-    lazy var cosmosView: CosmosView = {
-        var view = CosmosView()
-        
-        locationCosmos.didFinishTouchingCosmos = {rating in self.locationRating = rating}
-        managementCosmos.didFinishTouchingCosmos = {rating in self.managementRating = rating}
-        amenitiesCosmos.didFinishTouchingCosmos = {rating in self.amenitiesRating = rating }
-        return view
-    }()
-    
     
     //if rating goes below 2.5, it is assumed that the rater doesn't want to live here anymore 
     //and switches off the will live here again slider
@@ -178,6 +156,38 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
         }
     }
     
+    //Allows user to post review anonymously with toggle
+    @IBOutlet weak var anonymousOutlet: UISegmentedControl!
+    @IBAction func anonymousAction(_ sender: Any) {
+        switch anonymousOutlet.selectedSegmentIndex {
+        case 0:
+            storeBool.shared.anonymousBool = true
+        case 1:
+            storeBool.shared.anonymousBool = false
+        default:
+            break
+        }
+    }
+    
+    //Allows user to say if that would live there again or not with toggle
+    @IBOutlet weak var liveagainOutlet: UISegmentedControl!
+    @IBAction func liveagainAction(_ sender: Any) {
+        switch liveagainOutlet.selectedSegmentIndex {
+        case 0:
+            storeBool.shared.liveagain = true
+        case 1:
+            storeBool.shared.liveagain = false
+        default:
+            break
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    //Function that clears default text and turns text color black for user to write review
     func textViewDidBeginEditing(_ comment: UITextView) {
         if comment.textColor == UIColor.lightGray {
             comment.text = nil
@@ -185,6 +195,7 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
         }
     }
     
+    //Function that fills in default text and changes color if text field is empty
     func textViewDidEndEditing(_ comment: UITextView) {
         if comment.text.isEmpty {
             comment.text = "Living here has been..."
@@ -217,15 +228,16 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                         if (reviewer == self.Em){
                             emailExist = true
                             break //break when reviewer is found
-                        }
-                    }
+                        }//end if
+                    } //end for loop
                     
+                    //If comment is empty or the default text, it posts default comment that user didn't want to write review
                     if self.comment.text == "Living here has been..." as String || self.comment.text == "" as String  {
                         self.comment.text = "This user has decided not to write a review"
                     }
                     
-                    print (emailExist)
-                    
+                    //Checks if email already existed for that particular listing and sets Bool "isEdited" to false
+                    // and writes review to the database
                     if(emailExist == false){
                         let alert = UIAlertController(title: "Success", message: "Your review has successfully been posted!", preferredStyle: .alert)
                         
@@ -258,8 +270,10 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                                 storeBool.shared.edited = false
                             }
                         }
-                    }
-                        
+                    }//end if
+                    
+                    //Checks if email already exists for that particular listing and sets Bool "isEdited" to true
+                    // and writes review to the database
                     else if (emailExist == true){
                         storeBool.shared.edited = true
                         let alert = UIAlertController(title: "Success", message: "Your review has successfully been posted!", preferredStyle: .alert)
@@ -295,9 +309,9 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
                                 
                             }
                         }
-                    }
+                    } //end elseIf
                     
-                    //set values to be sent to Users collection in database
+                    //set values to be sent to Users collection in database for reviewHistory
                     docUserRef.setData([
                         "Review History" : [
                             "\(self.info)" : [
@@ -326,11 +340,6 @@ class WriteReviewViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         
     } //end of submit()
-    
-    var info:String = ""
-    var Em:String = ""
-
-
 } //end of class
 
 

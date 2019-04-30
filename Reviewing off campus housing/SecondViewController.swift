@@ -11,8 +11,6 @@ import Firebase
 import FirebaseAuth
 import FirebaseUI
 
-var info:String = ""
-
 public class ReviewHistory {
     var reviewHistories:[String] = []
     public var address:[String] = []
@@ -27,10 +25,78 @@ public class SecState {
 
 class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var firstName: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var displayEmail: UILabel!
+    @IBOutlet weak var darkModeSelect: UISwitch!
+    @IBOutlet weak var reviewHistory: UITableView!
+    @IBOutlet weak var googleMapsDarkMode: UIImageView!
+    @IBOutlet weak var accountBG: UIImageView!
+    @IBOutlet weak var historyBG: UIImageView!
     var adminCheck:Bool = false
+    var info:String = ""
+    var Em:String = ""
+    var email:String = ""
     
     let date = Date()
     let formatter = DateFormatter()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+            email = user.email!
+            db.collection("Users").document(email)
+                .addSnapshotListener { documentSnapshot, error in
+                    guard let document = documentSnapshot else {
+                        print("Error fetching document: \(error!)")
+                        return
+                    }
+                    guard let data = document.data() else {
+                        print("Document data was empty.")
+                        return
+                    }
+                    print("Refresh Table View")
+                    self.showHistory(Em: self.email)
+            }
+            
+        }
+        
+        showHistory(Em: email)
+        
+        // kevin's comment:
+        // consider putting the below code into a function? kinda like how showHistory is implemented here, or how I implemented showReviews in displayListings.
+        let docRef = db.collection("Users").document(email)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                //print("Document data: \(dataDescription)")
+                
+                self.adminCheck = (document.get("Admin") as? Bool ?? false)
+                let fN = document.get("First Name") ?? ""
+                let lN = document.get("Last Name") ?? ""
+                self.firstName.text = (fN as! String) + " " + (lN as! String)
+                let getEmail = document.get("Email") ?? ""
+                self.displayEmail.text = (getEmail as! String)
+                let darkModeBool = document.get("DarkMode") as! Bool
+                if darkModeBool{
+                    self.darkModeSelect.isOn = true
+                }
+                else{
+                    self.darkModeSelect.isOn = false
+                }
+            } else { print("Document does not exist") }
+        }  //  end getDocument
+        
+        //sends this information to the first view controller to display properly
+        view.sendSubviewToBack(googleMapsDarkMode)
+        view.sendSubviewToBack(accountBG)
+        view.sendSubviewToBack(historyBG)
+        
+    }  // end viewDidLoad()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ReviewHistory.shared.reviewHistories.count
@@ -56,9 +122,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
-    
-    var info:String = ""
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
@@ -89,8 +152,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     } //end of func
     
 
-    var Em:String = ""
-    
     //function that gets info from database and displays it on the table view cells
     func showHistory(Em: String) {
         
@@ -177,74 +238,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         reviewHistory.dataSource = self  // might not be necessary
         
     }  // end function showHistory
-
-    var email:String = ""
-    
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var firstName: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var displayEmail: UILabel!
-    @IBOutlet weak var darkModeSelect: UISwitch!
-    @IBOutlet weak var reviewHistory: UITableView!
-    @IBOutlet weak var googleMapsDarkMode: UIImageView!
-    @IBOutlet weak var accountBG: UIImageView!
-    @IBOutlet weak var historyBG: UIImageView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let user = Auth.auth().currentUser
-        if let user = user {
-            email = user.email!
-            db.collection("Users").document(email)
-                .addSnapshotListener { documentSnapshot, error in
-                    guard let document = documentSnapshot else {
-                        print("Error fetching document: \(error!)")
-                        return
-                    }
-                    guard let data = document.data() else {
-                        print("Document data was empty.")
-                        return
-                    }
-                    print("Refresh Table View")
-                    self.showHistory(Em: self.email)
-            }
-            
-        }
-        
-        showHistory(Em: email)
-        
-        // kevin's comment:
-        // consider putting the below code into a function? kinda like how showHistory is implemented here, or how I implemented showReviews in displayListings.
-        let docRef = db.collection("Users").document(email)
-        
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                //print("Document data: \(dataDescription)")
-                
-                self.adminCheck = (document.get("Admin") as? Bool ?? false)
-                let fN = document.get("First Name") ?? ""
-                let lN = document.get("Last Name") ?? ""
-                self.firstName.text = (fN as! String) + " " + (lN as! String)
-                let getEmail = document.get("Email") ?? ""
-                self.displayEmail.text = (getEmail as! String)
-                let darkModeBool = document.get("DarkMode") as! Bool
-                if darkModeBool{
-                    self.darkModeSelect.isOn = true
-                }
-                else{
-                    self.darkModeSelect.isOn = false
-                }
-            } else { print("Document does not exist") }
-        }  //  end getDocument
-        
-        //sends this information to the first view controller to display properly
-        view.sendSubviewToBack(googleMapsDarkMode)
-        view.sendSubviewToBack(accountBG)
-        view.sendSubviewToBack(historyBG)
-        
-    }  // end viewDidLoad()
 
     
     //when user selects darkmode, boolean is stored in the database and triggers darkmode on firstviewcontroller

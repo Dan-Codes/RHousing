@@ -11,6 +11,13 @@ import Firebase
 
 class ReportViewController: UIViewController, UITextViewDelegate {
     
+    var str:String = ""
+    var Em:String = ""
+    
+    @IBOutlet weak var living: UISwitch!
+    @IBOutlet weak var lived: UISwitch!
+    @IBOutlet weak var report: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,12 +32,7 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         self.hideKeyboardWhenTap()
     }
     
-    var str:String = ""
-    var Em:String = ""
-    
-    @IBOutlet weak var living: UISwitch!
-    @IBOutlet weak var lived: UISwitch!
-    @IBOutlet weak var report: UITextView!
+
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
