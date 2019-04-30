@@ -23,10 +23,6 @@ var objgVC = FirstViewController()
 class FirstViewController: UIViewController, GMSMapViewDelegate {
     
     var locationManager = CLLocationManager()
-    //var resultsViewController: GMSAutocompleteResultsViewController? // GMSAutocompleteResultsViewController provides an interface that displays place autocomplete predictions in a table view.
-    //var searchController: UISearchController?
-    
-    ///let searchController = UISearchController(searchResultsController: nil)
     
     var resultView: UITextView?
     var camera:GMSCameraPosition!
@@ -44,28 +40,6 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         //print(emailID)
         GMSServices.provideAPIKey("AIzaSyAcN8tyZ3brV52PRFzqbhQd5wuWnWgd_MQ")
         GMSPlacesClient.provideAPIKey("AIzaSyAcN8tyZ3brV52PRFzqbhQd5wuWnWgd_MQ")
-        //createMapView()
-        //darkMode()
-    
-        //resultsViewController = GMSAutocompleteResultsViewController()
-        //resultsViewController?.delegate = self as? GMSAutocompleteResultsViewControllerDelegate
-        
-       // searchController = UISearchController(searchResultsController: resultsViewController)
-        //searchController?.searchResultsUpdater = resultsViewController
-        
-        // https://stackoverflow.com/questions/46832576/display-table-view-when-searchbar-from-searchcontroller-begin-edited-swift
-        // -kevin: look into this.
-        
-        // Put the search bar in the navigation bar.
-        //searchController?.searchBar.sizeToFit()
-        //navigationItem.titleView = searchController?.searchBar
-        
-        // When UISearchController presents the results view, present it in
-        // this view controller, not one further up the chain.
-        //definesPresentationContext = true
-        
-        // Prevent the navigation bar from being hidden when searching.
-        //searchController?.hidesNavigationBarDuringPresentation = false
         
         let user = Auth.auth().currentUser
         if let user = user {
@@ -105,16 +79,6 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                 self.printPin()
         }
         
-//        db.collection("listings").whereField("property", isEqualTo: true)
-//            .addSnapshotListener { querySnapshot, error in
-//                guard let documents = querySnapshot?.documents else {
-//                    print("Error fetching documents: \(error!)")
-//                    return
-//                }
-//                print("Listener detected changes")
-//                self.printPin()
-//        }
-        //printPin()
        
     }
     
@@ -144,6 +108,8 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
             NSLog("One or more of the map styles failed to load. \(error)")
         }
         }
+        
+        //iterates through the database to place pinpoints on the map
         db.collection("listings").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -156,14 +122,7 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
                         let long = point.longitude
                         let address = document.get("address") as? String ?? "Address"
                         let mk = address
-//                        print(lat,long)
-//                        
-//                        print("**********************")
-//                        print("\(document.documentID) => \(document.data())")
-                        
-                        
 
-//                        // parsing first part of the address
                         var count = 0
                         var address1:String = ""
 
@@ -203,7 +162,6 @@ class FirstViewController: UIViewController, GMSMapViewDelegate {
         performSegue(withIdentifier: "displayListing" , sender: self)
         print(marker.title ?? "No longer valid!")
         
-        //addrsId = marker.title
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
