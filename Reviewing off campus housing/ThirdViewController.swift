@@ -185,8 +185,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, UIPickerViewDe
     @IBAction func uploadProperty(_ sender: UIButton) {
         //Checks if any of the proper fields are empty and returns message if not
         ThirdState.shared.str = adrs1.text! + " " + city.text! + ", " + state.text! + " " + zipcd.text!
-        if adrs1.text!.isEmpty || city.text!.isEmpty || state.text!.isEmpty || zipcd.text!.isEmpty || rentCost.text!.isEmpty  {
-            let alert = UIAlertController(title: "Error", message: "You must include proper address fields.", preferredStyle: .alert)
+        if adrs1.text!.isEmpty || city.text!.isEmpty || state.text!.isEmpty || zipcd.text!.isEmpty || rentCost.text!.isEmpty || landlord.text!.isEmpty  {
+            let alert = UIAlertController(title: "Error", message: "You must include all proper address fields.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action -> Void in
                 return
             }))
