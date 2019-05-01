@@ -5,6 +5,11 @@
 //  Created by Silin Chen on 3/1/19.
 //  Copyright © 2019 housing. All rights reserved.
 //
+
+// Google API Source and Documentation: https://developers.google.com/maps/documentation/
+// Smartstreet Source and Documentation: https://smartystreets.com/docs/sdk/ios
+// UI Color function source: https://stackoverflow.com/questions/24263007/how-to-use-hex-color-values?fbclid=IwAR0p-hKjj_Y7pEdeJkJ-6ynwc6N5ez7f5TRnLVekIkmSrR6qTvL2fID7sA8
+
 import UIKit
 import Firebase
 import GoogleMaps
