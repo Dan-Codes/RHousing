@@ -11,8 +11,6 @@ This will ask for computer password. Enter it and let cocoapods fully install
 
 Once it finishes
 
-In terminal:
-
 nav to the directory you want to clone the app
 
 type this: git clone https://github.com/Dan-Codes/RHousing.git
