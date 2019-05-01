@@ -2,7 +2,7 @@
 
 To run the Cribb app, follow these instructions carefully.
 
-1.  Open Terminal.
+1.  On a macOS device, open Terminal.
 2.  If you have not installed cocopods —
         — In Terminal, type "sudo gem install cocoapods"
         — This will ask for your computer password. Enter it and let cocoapods fully install.
