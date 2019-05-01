@@ -11,7 +11,7 @@ To run the Cribb app, follow these instructions carefully.
         — "git clone https://github.com/Dan-Codes/RHousing.git"
         — "cd RHousing/"
         — "pod install"
-5.  Open the .xworkspace file inside the RHousing folder.
+5.  Open the .xworkspace file inside the RHousing folder. This should trigger Xcode to start.
 6.  Ensure that the file GoogleService-Info.plist is not corrupted (i.e. displaying as red text) in the workspace. If it is, there is an additional GoogleService-Info.plist file in the RHousing directory; delete the corrupted instance and replace it with the working file.
 7.  Make sure you are in simulator mode, with iPhone XR or XS Max selected. The current version of the app is only optimized to work in these environments. Otherwise, the app will not work properly on any other iPhone model.
 8.  Press command + B (or click on the build button in Xcode). The build stage might take a while.
